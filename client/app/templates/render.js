@@ -31,11 +31,15 @@ function storeLoader(store) {
 */
 export default function renderFactory(store) {
   // Tell swig about the loader:
-  swig.setDefaults({ loader: storeLoader(store) });
+  swig.setDefaults({
+    loader: storeLoader(store),
+    cache: false //TODO pass in get & set object with our own cache logic
+  });
 
   var templatesCache = {}; // path: {renderF, template}
 
   function getRenderer(templateKey) {
+    console.log("getRenderer", templateKey)
     var cached = templatesCache[templateKey];
     var template = store.getState().getIn(['/templates', templateKey]).content;
 
@@ -44,6 +48,7 @@ export default function renderFactory(store) {
       return cached.renderF;
     }
 
+    console.log("compile template:", templateKey);
     //update cache and return new render function
     var renderF = swig.compileFile(templateKey);
 
