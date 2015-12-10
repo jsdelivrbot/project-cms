@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
 <head>
   <title>{{page.title}}</title>
@@ -13,12 +14,16 @@
   {% endif %}
 </head>
 <body>
-  {% block header %}{% endblock header %}
+  {% block header %}
+  {% include "/header.html" %}
+  {% endblock header %}
 
   {% block content %}
     {{content|safe}}
   {% endblock content %}
 
-  {% block footer %}{% endblock footer %}
+  {% block footer %}
+  {% include "/footer.html" %}
+  {% endblock footer %}
 </body>
 </html>

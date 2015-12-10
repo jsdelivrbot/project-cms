@@ -9,9 +9,10 @@ import swig from 'swig';
 function storeLoader(store) {
   return {
     resolve: function (to, from) {
-      console.log("resolve:", to, from);
-      if (!from) return to;
-      return path.resolve(from, to);
+      if (!from) from = '/';
+      var rPath = path.resolve(from, to);
+      console.log(`resolve: ${to} (${from}) => ${rPath}`);
+      return rPath;
     },
     load: function (identifier, cb) {
       var tpl = store.getState().getIn(['/templates', identifier]);

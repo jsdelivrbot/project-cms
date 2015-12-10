@@ -1,9 +1,13 @@
 import {Map} from 'immutable';
 
 import baseTemplate from './includedTemplates/base.html!text';
+import headerTemplate from './includedTemplates/header.html!text';
+import footerTemplate from './includedTemplates/footer.html!text';
 
 const INITIAL_STATE = Map({
-  'base.html': {path: 'base.html', content: baseTemplate}
+  '/base.html': {path: '/base.html', content: baseTemplate},
+  '/header.html': {path: '/header.html', content: headerTemplate},
+  '/footer.html': {path: '/footer.html', content: footerTemplate},
 });
 
 export default function templates(state = INITIAL_STATE, action) {
