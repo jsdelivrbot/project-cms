@@ -39,7 +39,7 @@ export default function TemplateApplicationFactory(baseUrl) {
         component: connect((state, props) => {
           return {
             baseUrl: baseUrl,
-            template: state.getIn([baseUrl, props.params.splat]),
+            template: state.getIn([baseUrl, '/'+props.params.splat]),
             path: props.params.splat
           }
         }, {

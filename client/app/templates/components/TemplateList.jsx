@@ -6,7 +6,7 @@ import {Link} from 'react-router';
 export default function TemplateList({baseUrl, templates}) {
   function TemplateRow({path}) {
     return <tr key={path}>
-      <td><Link to={`${baseUrl}/${path}`}>{path}</Link></td>
+      <td><Link to={`${baseUrl}${path}`}>{path}</Link></td>
     </tr>
   }
 
