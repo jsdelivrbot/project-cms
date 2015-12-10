@@ -1,5 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
+import Codemirror from 'react-codemirror';
+
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/mode/htmlmixed/htmlmixed';
+import 'codemirror/mode/css/css';
+import 'codemirror/mode/markdown/markdown';
 
 import RenderPreview from './RenderPreview.jsx';
 
@@ -8,6 +14,11 @@ export default class EditPage extends React.Component {
   constructor(props) {
     super(props) //{updatePage, page, path, render}
     this.state = _.clone(props.page);
+
+    this.updateContent = _.partial(this.updateCode, 'content');
+    this.updateHead = _.partial(this.updateCode, 'head');
+    this.updateCSS = _.partial(this.updateCode, 'css');
+    this.updateJavascript = _.partial(this.updateCode, 'javascript');
   }
 
   receiveSubmit = (event) => {
@@ -19,6 +30,13 @@ export default class EditPage extends React.Component {
   updateValue = (event) => {
     var changes = {};
     changes[event.target.name] = event.target.value;
+    this.setState(changes);
+  }
+
+  //for use with codemirror
+  updateCode = (name, code) => {
+    var changes = {};
+    changes[name] = code;
     this.setState(changes);
   }
 
@@ -52,7 +70,10 @@ export default class EditPage extends React.Component {
             <div className="form-group">
               <label className="control-label">Content</label>
               <span className="help-block">Write using <a href="https://help.github.com/articles/markdown-basics/">markdown</a>.</span>
-              <textarea name="content" className="form-control" value={page.content} required="required" onChange={this.updateValue}/>
+              <Codemirror value={page.content} onChange={this.updateContent} options={{
+                  mode: 'markdown',
+                  lineNumbers: true
+              }} />
             </div>
 
             <div className="form-group">
@@ -66,17 +87,23 @@ export default class EditPage extends React.Component {
                 <div className="form-group">
                   <label className="control-label">Head</label>
                   <span className="help-block">Put extra tags to be inserted into the &lt;head&gt; of the HTML document</span>
-                  <textarea name="head" className="form-control" value={page.head} onChange={this.updateValue}/>
+                  <Codemirror value={page.head} onChange={this.updateHead} options={{
+                      mode: 'htmlmixed'
+                  }} />
                 </div>
                 <div className="form-group">
                   <label className="control-label">Javascript</label>
                   <span className="help-block">Specify custom Javascript code to be executed on this page, automatically wrapped in a javascript tag</span>
-                  <textarea name="javascript" className="form-control" value={page.javascript} onChange={this.updateValue}/>
+                  <Codemirror value={page.javascript} onChange={this.updateJavascript} options={{
+                      mode: 'javascript'
+                  }} />
                 </div>
                 <div className="form-group">
                   <label className="control-label">CSS</label>
                   <span className="help-block">Specify custom CSS for this page, automatically wrapped in a style tag</span>
-                  <textarea name="css" className="form-control" value={page.css} onChange={this.updateValue}/>
+                  <Codemirror value={page.css} onChange={this.updateCSS} options={{
+                      mode: 'css'
+                  }} />
                 </div>
               </div>
             </div>

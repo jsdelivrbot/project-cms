@@ -29,6 +29,7 @@ System.config({
     "FileSaver.js": "github:eligrey/FileSaver.js@master",
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
+    "codemirror": "npm:codemirror@5.9.0",
     "core-js": "npm:core-js@1.2.6",
     "history": "npm:history@1.13.1",
     "immutable": "npm:immutable@3.7.5",
@@ -37,6 +38,7 @@ System.config({
     "lodash": "npm:lodash@3.10.1",
     "path": "npm:path@0.12.7",
     "react": "npm:react@0.14.3",
+    "react-codemirror": "npm:react-codemirror@0.2.2",
     "react-dom": "npm:react-dom@0.14.3",
     "react-redux": "npm:react-redux@4.0.0",
     "react-remarkable": "npm:react-remarkable@1.1.1",
@@ -55,7 +57,7 @@ System.config({
       "buffer": "npm:buffer@3.5.4"
     },
     "github:jspm/nodelibs-domain@0.1.0": {
-      "domain-browser": "npm:domain-browser@1.1.4"
+      "domain-browser": "npm:domain-browser@1.1.5"
     },
     "github:jspm/nodelibs-events@0.1.1": {
       "events": "npm:events@1.0.2"
@@ -104,6 +106,15 @@ System.config({
       "domain": "github:jspm/nodelibs-domain@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:assert-helpers@4.1.0": {
+      "ansicolors": "npm:ansicolors@0.3.2",
+      "assert": "github:jspm/nodelibs-assert@0.1.0",
+      "diff": "npm:diff@2.2.1",
+      "esnextguardian": "npm:esnextguardian@1.2.0",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "util": "github:jspm/nodelibs-util@0.1.0"
+    },
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"
     },
@@ -125,6 +136,15 @@ System.config({
       "isarray": "npm:isarray@0.0.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:classnames@2.2.1": {
+      "assert": "github:jspm/nodelibs-assert@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    },
+    "npm:codemirror@5.9.0": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:core-js@1.2.6": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
@@ -134,7 +154,11 @@ System.config({
     "npm:core-util-is@1.0.2": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
-    "npm:domain-browser@1.1.4": {
+    "npm:diff@2.2.1": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:domain-browser@1.1.5": {
+      "assert-helpers": "npm:assert-helpers@4.1.0",
       "events": "github:jspm/nodelibs-events@0.1.1"
     },
     "npm:envify@3.4.0": {
@@ -143,6 +167,9 @@ System.config({
       "through": "npm:through@2.3.8"
     },
     "npm:es6-promise@3.0.2": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:esnextguardian@1.2.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:esprima-fb@13001.1001.0-dev-harmony-fb": {
@@ -218,6 +245,12 @@ System.config({
     "npm:promise@7.0.4": {
       "asap": "npm:asap@2.0.3",
       "fs": "github:jspm/nodelibs-fs@0.1.2"
+    },
+    "npm:react-codemirror@0.2.2": {
+      "classnames": "npm:classnames@2.2.1",
+      "codemirror": "npm:codemirror@5.9.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "react": "npm:react@0.14.3"
     },
     "npm:react-dom@0.14.3": {
       "react": "npm:react@0.14.3"

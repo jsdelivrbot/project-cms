@@ -1,33 +1,52 @@
 import React from 'react';
+import _ from 'lodash';
+import Codemirror from 'react-codemirror';
 
-export default function EditTemplate({updateTemplate, template, path}) {
-  function receiveSubmit(event) {
-    event.preventDefault();
-    console.log("Submit:", event);
-    template.content = event.target.content.value;
-    console.log("New Page:", template)
-    updateTemplate(path, template)
+import 'codemirror/mode/jinja2/jinja2';
+
+
+export default class EditPage extends React.Component {
+  constructor(props) {
+    super(props) //{updateTemplate, template, path}
+    this.state = _.clone(props.template);
   }
 
-  return <div className="container-fluid">
-    <div className="row">
-      <div className="col-sm-12">
-        <h1>Editing Template: {path}</h1>
+  receiveSubmit = (event) => {
+    event.preventDefault();
+    this.props.updateTemplate(this.props.path, this.state);
+  }
+
+  updateContent = (code) => {
+    this.setState({content: code});
+  }
+
+  render() {
+    let path = this.props.path;
+    let template = this.state;
+
+    return <div className="container-fluid">
+      <div className="row">
+        <div className="col-sm-12">
+          <h1>Editing Template: {path}</h1>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-sm-12">
+          <form onSubmit={this.receiveSubmit}>
+            <div className="form-group">
+              <label className="control-label">Template</label>
+              <span className="help-block">Write the HTML layout using <a href="https://paularmstrong.github.io/swig/">swig</a></span>
+              <Codemirror value={template.content} onChange={this.updateContent} options={{
+                  mode: 'jinja2',
+                  lineNumbers: true
+              }} />
+            </div>
+            <div className="form-group">
+              <button type="submit" className="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-    <div className="row">
-      <div className="col-sm-12">
-        <form onSubmit={receiveSubmit}>
-          <div className="form-group">
-            <label className="control-label">Template</label>
-            <span className="help-block">Write the HTML layout using <a href="https://paularmstrong.github.io/swig/">swig</a></span>
-            <textarea name="content" className="form-control" defaultValue={template.content} required="required"/>
-          </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">Save</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+  }
 }
