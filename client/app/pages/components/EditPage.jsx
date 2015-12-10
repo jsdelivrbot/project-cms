@@ -32,10 +32,12 @@ export default class EditPage extends React.Component {
     let page = this.state;
     return <div className="container-fluid">
       <div className="row">
-        <h1>Editing Page: {page.title}</h1>
+        <div className="col-sm-12">
+          <h1>Editing Page: {page.title}</h1>
+        </div>
       </div>
       <div className="row">
-        <div className="col-md-6">
+        <div className="col-md-6 col-sm-12">
           <form onSubmit={this.receiveSubmit}>
             <div className="form-group">
               <label className="control-label">Title</label>
@@ -48,7 +50,8 @@ export default class EditPage extends React.Component {
               </select>
             </div>
             <div className="form-group">
-              <label className="control-label">Content (markdown)</label>
+              <label className="control-label">Content</label>
+              <span className="help-block">Write using <a href="https://help.github.com/articles/markdown-basics/">markdown</a>.</span>
               <textarea name="content" className="form-control" value={page.content} required="required" onChange={this.updateValue}/>
             </div>
 
@@ -62,25 +65,28 @@ export default class EditPage extends React.Component {
               <div className="well">
                 <div className="form-group">
                   <label className="control-label">Head</label>
+                  <span className="help-block">Put extra tags to be inserted into the &lt;head&gt; of the HTML document</span>
                   <textarea name="head" className="form-control" value={page.head} onChange={this.updateValue}/>
                 </div>
                 <div className="form-group">
                   <label className="control-label">Javascript</label>
+                  <span className="help-block">Specify custom Javascript code to be executed on this page, automatically wrapped in a javascript tag</span>
                   <textarea name="javascript" className="form-control" value={page.javascript} onChange={this.updateValue}/>
                 </div>
                 <div className="form-group">
                   <label className="control-label">CSS</label>
+                  <span className="help-block">Specify custom CSS for this page, automatically wrapped in a style tag</span>
                   <textarea name="css" className="form-control" value={page.css} onChange={this.updateValue}/>
                 </div>
               </div>
             </div>
 
             <div className="form-group">
-              <button type="submit" className="btn btn-primary">Submit</button>
+              <button type="submit" className="btn btn-primary">Save</button>
             </div>
           </form>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6 col-sm-12">
           <h3 key="title">Preview</h3>
           <RenderPreview page={page} render={this.props.render} key="preview"/>
         </div>

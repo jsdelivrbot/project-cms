@@ -11,22 +11,23 @@ export default function EditTemplate({updateTemplate, template, path}) {
 
   return <div className="container-fluid">
     <div className="row">
-      <h1>Editing Template: {path}</h1>
+      <div className="col-sm-12">
+        <h1>Editing Template: {path}</h1>
+      </div>
     </div>
     <div className="row">
-      <form className="form-horizontal" onSubmit={receiveSubmit}>
-        <div className="form-group">
-          <label className="col-sm-2 control-label">Template</label>
-          <div className="col-sm-10">
+      <div className="col-sm-12">
+        <form onSubmit={receiveSubmit}>
+          <div className="form-group">
+            <label className="control-label">Template</label>
+            <span className="help-block">Write the HTML layout using <a href="https://paularmstrong.github.io/swig/">swig</a></span>
             <textarea name="content" className="form-control" defaultValue={template.content} required="required"/>
           </div>
-        </div>
-        <div className="form-group">
-          <div className="col-sm-offset-2 col-sm-10">
-            <button type="submit" className="btn btn-default">Submit</button>
+          <div className="form-group">
+            <button type="submit" className="btn btn-primary">Save</button>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 }
