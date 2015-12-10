@@ -1,8 +1,24 @@
 <html>
 <head>
   <title>{{page.title}}</title>
+
+  {{page.head|safe}}
+
+  {% if page.css %}
+  <style>{{page.css}}</style>
+  {% endif %}
+
+  {% if page.javascript %}
+  <script type="application/javascript">{{page.javascript}}</script>
+  {% endif %}
 </head>
 <body>
-{{content|safe}}
+  {% block header %}{% endblock header %}
+
+  {% block content %}
+    {{content|safe}}
+  {% endblock content %}
+
+  {% block footer %}{% endblock footer %}
 </body>
 </html>
