@@ -1,7 +1,9 @@
 import {Map} from 'immutable';
 
+import baseTemplate from './includedTemplates/base.html!text';
+
 const INITIAL_STATE = Map({
-  'base.html': {path: 'base.html', content: '{{content|safe}}'}
+  'base.html': {path: 'base.html', content: baseTemplate}
 });
 
 export default function templates(state = INITIAL_STATE, action) {

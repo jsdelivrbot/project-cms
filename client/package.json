@@ -25,6 +25,7 @@
       "reflect-metadata": "npm:reflect-metadata@^0.1.2",
       "remarkable": "npm:remarkable@^1.6.1",
       "swig": "npm:swig@^1.4.2",
+      "text": "github:systemjs/plugin-text@^0.0.4",
       "zone.js": "npm:zone.js@^0.5.8"
     },
     "devDependencies": {

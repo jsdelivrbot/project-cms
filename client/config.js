@@ -26,10 +26,10 @@ System.config({
   },
 
   map: {
+    "FileSaver.js": "github:eligrey/FileSaver.js@master",
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "core-js": "npm:core-js@1.2.6",
-    "FileSaver.js": "github:eligrey/FileSaver.js@master",
     "history": "npm:history@1.13.1",
     "immutable": "npm:immutable@3.7.5",
     "jsx": "github:loggur/plugin-babel-jsx@1.0.5",
@@ -46,6 +46,7 @@ System.config({
     "reflect-metadata": "npm:reflect-metadata@0.1.2",
     "remarkable": "npm:remarkable@1.6.1",
     "swig": "npm:swig@1.4.2",
+    "text": "github:systemjs/plugin-text@0.0.4",
     "zone.js": "npm:zone.js@0.5.8",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
