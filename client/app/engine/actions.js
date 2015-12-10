@@ -19,10 +19,7 @@ export function pushContent(path, content, mimetype) {
     type: 'PUSH_CONTENT',
     path,
     content,
-    mimetype,
-    promise: new Promise(function(resolve, reject) {
-      setTimeout(resolve, 3000);
-    })
+    mimetype
   };
 }
 

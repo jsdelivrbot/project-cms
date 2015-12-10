@@ -14,7 +14,7 @@ import promiseMiddleware from './middleware/promiseMiddleware';
 import DashboardFactory from './dashboard/index';
 import Engine from './engine/index';
 import appsLoader from './appsLoader';
-import publishZip from './publishZip';
+import zipPublisher from './publishers/zipfile';
 
 
 var createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
@@ -60,7 +60,14 @@ appsLoader(appConfig).then(apps => {
 
   /* set up publishing */
   function publish() {
-    let pushContent = _.flow(Engine.actions.pushContent, store.dispatch);
+    let publisher = zipPublisher();
+    let pushContentAction = _.flow(Engine.actions.pushContent, store.dispatch);
+
+    function pushContent(path, content, mimetype) {
+      pushContentAction(path, content, mimetype);
+      return publisher.pushContent(path, content, mimetype);
+    }
+
     let state = store.getState();
 
     var appPublishes = _.filter(_.map(apps, app => {
@@ -68,19 +75,15 @@ appsLoader(appConfig).then(apps => {
         return app.publish(state, pushContent);
       }
       return null;
-    })).then(done => {
-      //directory is a hack so we can see what was pushed by the app publish
-      //this way we can publish to a zip file
-      //future versions should have a plugin for publishing backends by shorting pushContent above
-      var directory = store.getState().getIn(['engine', 'directory']);
-      publishZip(directory);
-    });
+    }));
 
     console.log("app publishes:", appPublishes);
 
     return store.dispatch({
       type: 'PUBLISH',
-      promise: Promise.all(appPublishes)
+      promise: Promise.all(appPublishes).then(done => {
+        return publisher.view();
+      })
     }).catch(error => {
       console.error(error);
       store.dispatch(dashboard.actions.addAlert('error', 'Publish failed: '+error))

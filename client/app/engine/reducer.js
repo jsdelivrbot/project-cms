@@ -1,8 +1,7 @@
 import {Map} from 'immutable';
 
 const INITIAL_STATE = Map({
-  publishing: false,
-  directory: Map(), //more for debuging currently, lets us see what got published without actualling publishing
+  publishing: false
 });
 
 export default function engine(state = INITIAL_STATE, action) {
@@ -19,7 +18,6 @@ export default function engine(state = INITIAL_STATE, action) {
       return state.set('publishing', false).set('publish_error', action.error);
     case 'PUSH_CONTENT':
       console.log("Content pushed", action);
-      return state.setIn(['directory', action.path], action.content);
     default:
       return state
   }

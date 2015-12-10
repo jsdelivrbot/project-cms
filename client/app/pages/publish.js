@@ -1,4 +1,5 @@
 import Remarkable from 'remarkable';
+import _ from 'lodash';
 
 let md = new Remarkable();
 
@@ -17,5 +18,5 @@ export default function publish(baseUrl, state, pushContent) {
     return pushContent(path, renderedPage, mimetype);
   }).toArray();
 
-  return Promise.all(promises);
+  return Promise.all(_.filter(promises));
 }
