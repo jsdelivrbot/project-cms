@@ -62,15 +62,15 @@ export default class EditPage extends React.Component {
               <div className="well">
                 <div className="form-group">
                   <label className="control-label">Head</label>
-                  <textarea name="head" className="form-control" value={page.head} required="required" onChange={this.updateValue}/>
+                  <textarea name="head" className="form-control" value={page.head} onChange={this.updateValue}/>
                 </div>
                 <div className="form-group">
                   <label className="control-label">Javascript</label>
-                  <textarea name="javascript" className="form-control" value={page.javascript} required="required" onChange={this.updateValue}/>
+                  <textarea name="javascript" className="form-control" value={page.javascript} onChange={this.updateValue}/>
                 </div>
                 <div className="form-group">
                   <label className="control-label">CSS</label>
-                  <textarea name="css" className="form-control" value={page.css} required="required" onChange={this.updateValue}/>
+                  <textarea name="css" className="form-control" value={page.css} onChange={this.updateValue}/>
                 </div>
               </div>
             </div>
