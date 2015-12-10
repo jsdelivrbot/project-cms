@@ -1,0 +1,27 @@
+client:
+  dockerfile: Dockerfile-client
+  build: ./
+  ports:
+    - "8080"
+  environment:
+    PORT: "8080"
+    BASE_URL: '/'
+  volumes:
+    - ./client:/opt/app
+    - ./common:/opt/common
+proxy:
+  dockerfile: Dockerfile-proxy
+  build: ./
+  links:
+    - api
+    - auth
+    - client
+  ports:
+    - "80:80"
+  environment:
+    DOCKER_ENABLED: "true"
+  volumes:
+    - ./proxy:/opt/app
+    - ./common:/opt/common
+    - ./public:/opt/public
+
