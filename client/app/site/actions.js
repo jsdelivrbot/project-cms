@@ -2,7 +2,8 @@
 export function updateSite(site) {
   return {
     type: 'UPDATE_SITE',
-    site
+    site,
+    updated_object: site
   };
 }
 

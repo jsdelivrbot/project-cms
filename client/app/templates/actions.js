@@ -3,14 +3,16 @@ export function addTemplate(path, template) {
   return {
     type: 'ADD_TEMPLATE',
     path,
-    template
+    template,
+    new_object: template
   };
 }
 
 export function removeTemplate(path) {
   return {
     type: 'REMOVE_TEMPLATE',
-    path
+    path,
+    removed_object: path
   };
 }
 
@@ -18,7 +20,8 @@ export function updateTemplate(path, template) {
   return {
     type: 'UPDATE_TEMPLATE',
     path,
-    template
+    template,
+    updated_object: template
   };
 }
 
