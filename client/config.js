@@ -81,7 +81,7 @@ System.config({
       "vm-browserify": "npm:vm-browserify@0.0.4"
     },
     "github:loggur/babel-plugin-react-hot@1.0.0": {
-      "react": "npm:react@0.13.3",
+      "react": "npm:react@0.14.3",
       "react-hot-api": "npm:react-hot-api@0.4.7"
     },
     "github:loggur/plugin-babel-jsx@1.0.5": {
@@ -206,7 +206,7 @@ System.config({
       "esprima-fb": "npm:esprima-fb@13001.1001.0-dev-harmony-fb",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "source-map": "npm:source-map@0.1.31"
+      "source-map": "npm:source-map@0.1.34"
     },
     "npm:jszip@2.5.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -276,11 +276,6 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "warning": "npm:warning@2.1.0"
     },
-    "npm:react@0.13.3": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "envify": "npm:envify@3.4.0",
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
     "npm:react@0.14.3": {
       "envify": "npm:envify@3.4.0",
       "fbjs": "npm:fbjs@0.3.2",
@@ -315,12 +310,6 @@ System.config({
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
-    },
-    "npm:source-map@0.1.31": {
-      "amdefine": "npm:amdefine@1.0.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:source-map@0.1.34": {
       "amdefine": "npm:amdefine@1.0.0",
