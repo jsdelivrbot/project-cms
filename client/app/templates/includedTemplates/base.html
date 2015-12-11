@@ -3,12 +3,19 @@
 <head>
   <title>{{page.title}}</title>
 
+  {{site.head|safe}}
   {{page.head|safe}}
 
+  {% if site.css %}
+  <style>{{site.css}}</style>
+  {% endif %}
   {% if page.css %}
   <style>{{page.css}}</style>
   {% endif %}
 
+  {% if site.javascript %}
+  <script type="application/javascript">{{site.javascript}}</script>
+  {% endif %}
   {% if page.javascript %}
   <script type="application/javascript">{{page.javascript}}</script>
   {% endif %}

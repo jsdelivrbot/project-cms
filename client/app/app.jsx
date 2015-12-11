@@ -23,6 +23,7 @@ var history = createHistory();
 
 //apps that have an admin presence
 var appConfig = {
+  '/site': './site/index',
   '/pages': './pages/index',
   '/templates': './templates/index',
 };
