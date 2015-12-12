@@ -12,8 +12,8 @@ function PublishButtonComponent({publishing, publish}) {
 
 var PublishButton = connect(state => {
   return {
-    publish: state.getIn(['engine', 'publisher']),
-    publishing: state.getIn(['engine', 'publishing'])
+    publish: state.getIn(['/engine', 'publisher']),
+    publishing: state.getIn(['/engine', 'publishing'])
   }
 })(PublishButtonComponent);
 

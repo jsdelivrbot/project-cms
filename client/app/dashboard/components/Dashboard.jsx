@@ -13,6 +13,8 @@ function MenuLink({to, children}) {
 
 
 function Dashboard({apps, children}) {
+  var subApps = _.filter(apps, app => app.baseUrl !== '/');
+
   return <div>
     <nav className="navbar navbar-default" key="navbar">
       <div className="container-fluid">
@@ -28,7 +30,7 @@ function Dashboard({apps, children}) {
 
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul className="nav navbar-nav navbar-left">
-            {_.map(apps, app => <li key={app.baseUrl}><Link to={app.baseUrl}>{app.title}</Link></li>)}
+            {_.map(subApps, app => <li key={app.baseUrl}><Link to={app.baseUrl}>{app.title}</Link></li>)}
           </ul>
 
           <ul className="nav navbar-nav navbar-right">

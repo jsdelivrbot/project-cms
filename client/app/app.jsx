@@ -11,8 +11,6 @@ import createHistory from 'history/lib/createHashHistory'
 
 import promiseMiddleware from './middleware/promiseMiddleware';
 
-import DashboardFactory from './dashboard/index';
-import Engine from './engine/index';
 import appsLoader from './appsLoader';
 import zipPublisher from './publishers/zipfile';
 
@@ -21,8 +19,11 @@ var createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
 
 var history = createHistory();
 
+//TODO have the engine app tell us what apps to load (dynamically loaded apps?)
 //apps that have an admin presence
 var appConfig = {
+  '/': './dashboard/index',
+  '/engine': './engine/index',
   '/site': './site/index',
   '/pages': './pages/index',
   '/templates': './templates/index',
@@ -32,37 +33,40 @@ var appConfig = {
 appsLoader(appConfig).then(apps => {
   console.log("apps:", apps);
 
-  var dashboard = DashboardFactory(apps);
+  function getApp(baseUrl) {
+    return _.find(apps, {baseUrl});
+  }
 
   /* set up reducer & store */
-  var reducers = {
-    dashboard: dashboard.reducer,
-    engine: Engine.reducer,
-  };
-
-  _.each(apps, app => {
-    reducers[app.baseUrl] = app.reducer;
-  });
+  var reducers = _.reduce(apps, (col, app) => {
+    col[app.baseUrl] = app.reducer;
+    return col;
+  }, {});
   console.log("reducers:", reducers)
   var reducer = combineReducers(reducers);
   var store = createStoreWithMiddleware(reducer, Map());
   //store.dispatch(Engine.actions.setApps(apps));
   console.log("store:", store);
 
+  var engine = getApp('/engine');
+  var dashboard = getApp('/')
+
+  store.dispatch(engine.actions.setApps(apps));
+
 
   //CONSIDER: we are storing core functions in the engine domain - probably not using the redux as intended
   //this is because publish & render need to access state to run
 
   /* set up renderer */
-  var renderer = _.find(apps, {baseUrl: '/templates'}).renderFactory(store);
+  var renderer = getApp('/templates').renderFactory(store);
   console.log("renderer:", renderer);
-  store.dispatch(Engine.actions.setRenderer(renderer));
+  store.dispatch(engine.actions.setRenderer(renderer));
 
 
   /* set up publishing */
   function publish() {
     let publisher = zipPublisher();
-    let pushContentAction = _.flow(Engine.actions.pushContent, store.dispatch);
+    let pushContentAction = _.flow(engine.actions.pushContent, store.dispatch);
 
     function pushContent(path, content, mimetype) {
       pushContentAction(path, content, mimetype);
@@ -90,26 +94,17 @@ appsLoader(appConfig).then(apps => {
       store.dispatch(dashboard.actions.addAlert('error', 'Publish failed: '+error))
     });
   }
-  store.dispatch(Engine.actions.setPublisher(publish));
+  store.dispatch(engine.actions.setPublisher(publish));
 
 
   /* mount application to DOM */
-  function AppDashboard(props) {
-    props = _.merge({apps}, props);
-    console.log("new props:", props)
-    var Dashboard = dashboard.component;
-    return <Provider store={store}>
-      <Dashboard {...props}/>
-    </Provider>
-  }
-
-  var rootRoute = {
-    component: AppDashboard,
-    childRoutes: _.map(apps, x => x.routes).concat([dashboard.routes])
-  }
+  var routes = dashboard.routes;
+  routes.childRoutes = _.map(_.filter(apps, x => x.baseUrl !== '/'), x => x.routes);
 
   ReactDOM.render(
-    <Router history={history} routes={rootRoute} />,
+    <Provider store={store}>
+      <Router history={history} routes={routes} />
+    </Provider>,
     document.getElementById('app')
   )
 });
@@ -144,6 +139,6 @@ pushContent(path, content, mimetype)
 setRenderer(renderF) // renderF(templateKey, context)
 
 //how do we internall access the renderer?
-store.get(['engine', renderer'])
+store.get(['/engine', renderer'])
 
 */

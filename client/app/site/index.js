@@ -10,6 +10,7 @@ export default function SiteApplicationFactory(baseUrl) {
   return {
     baseUrl,
     reducer,
+    actions,
     title: 'Site',
     routes: {
       path: baseUrl,

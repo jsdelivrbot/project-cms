@@ -13,6 +13,7 @@ export default function PagesApplicationFactory(baseUrl) {
   return {
     baseUrl,
     reducer,
+    actions,
     publish: _.partial(publish, baseUrl),
     title: 'Pages',
     routes: {
@@ -41,7 +42,7 @@ export default function PagesApplicationFactory(baseUrl) {
             page: state.getIn([baseUrl, props.params.splat]),
             path: props.params.splat,
             templates: state.get('/templates'),
-            render: state.getIn(['engine', 'renderer'])
+            render: state.getIn(['/engine', 'renderer'])
           }
         }, {
           updatePage: actions.updatePage,

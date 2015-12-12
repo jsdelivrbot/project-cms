@@ -20,7 +20,7 @@ function AlertsComponent({alerts, dismiss}) {
 
 var Alerts = connect(state => {
   return {
-    alerts: state.getIn(['dashboard', 'alerts'])
+    alerts: state.getIn(['/', 'alerts'])
   }
 }, {
   dismiss: dismissAlert

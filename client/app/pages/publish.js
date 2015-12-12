@@ -5,7 +5,7 @@ let md = new Remarkable();
 
 
 export default function publish(baseUrl, state, pushContent) {
-  let renderer = state.getIn(['engine', 'renderer']);
+  let renderer = state.getIn(['/engine', 'renderer']);
   let mimetype = 'text/html';
   let site = state.get('/site').toJS();
 

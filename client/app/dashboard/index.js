@@ -1,24 +1,24 @@
 import {connect} from 'react-redux'
 
-import DashboardComponent from './components/Dashboard.jsx';
+import Dashboard from './components/Dashboard.jsx';
 import Welcome from './components/Welcome.jsx';
 
 import reducer from './reducer';
 import actions from './actions';
 
-export default function DashboardApplicationFactory(apps) {
-  let Dashboard = connect(state => {
-    return {
-      apps
-    }
-  })(DashboardComponent);
-
+export default function DashboardApplicationFactory(baseUrl) {
   return {
     reducer,
-    component: Dashboard,
+    actions,
+    baseUrl,
     title: 'Dashboard',
     routes: {
-      path: '/',
+      path: baseUrl,
+      component: connect(state => {
+        return {
+          apps: state.getIn(['/engine', 'apps'])
+        }
+      })(Dashboard),
       indexRoute: {
         component: Welcome
       }

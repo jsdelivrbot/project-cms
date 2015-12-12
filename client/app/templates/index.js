@@ -14,6 +14,7 @@ export default function TemplateApplicationFactory(baseUrl) {
   return {
     baseUrl,
     reducer,
+    actions,
     renderFactory: renderFactory,
     title: 'Templates',
     routes: {
