@@ -25,12 +25,19 @@ export function pushContent(path, content, mimetype) {
 
 export function setApps(apps) {
   return {
-    //TODO apps should be a dictionary and should be ran through apps loader
-    //this would then have a promise property
-    //somehow on app set we replace the core reducer (black magic?)
     type: 'SET_APPS',
     apps
   }
 }
 
-export default {setRenderer, setPublisher, pushContent, setApps}
+export function setAppsConfig(apps) {
+  //TODO apps should be a dictionary and should be ran through apps loader
+  //this would then have a promise property
+  //somehow on app set we replace the core reducer (black magic?)
+  return {
+    type: 'SET_APPS_CONFIG',
+    apps
+  }
+}
+
+export default {setRenderer, setPublisher, pushContent, setApps, setAppsConfig}

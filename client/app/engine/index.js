@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 
-import EditSettings from './components/EditSettings.jsx';
+import AppsConfig from './components/AppsConfig.jsx';
 
 import reducer from './reducer';
 import actions from './actions';
@@ -11,17 +11,17 @@ export default function EngineFactory(baseUrl) {
     baseUrl,
     reducer,
     actions,
-    title: 'Settings',
+    title: 'Apps',
     routes: {
       path: baseUrl,
       component: connect(state => {
         return {
           baseUrl: baseUrl,
-          settings: state.getIn(['/engine', 'settings'])
+          appsConfig: state.getIn(['/engine', 'appsConfig'])
         }
       }, {
-        updateSettings: actions.updateSettings
-      })(EditSettings)
+        updateAppsConfig: actions.updateAppsConfig
+      })(AppsConfig)
     }
   }
 }
