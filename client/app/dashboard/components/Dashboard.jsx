@@ -13,7 +13,7 @@ function MenuLink({to, children}) {
 
 function NavBar({pathname, apps}) {
   var subApps = _.filter(apps, app => app.baseUrl !== '/');
-  var currentApp = _.find(apps, app => _.startsWith(app.baseUrl, pathname));
+  var currentApp = _.find(subApps, app => _.startsWith(pathname, app.baseUrl));
 
   return <nav className="navbar navbar-default" key="navbar">
     <div className="container-fluid">
