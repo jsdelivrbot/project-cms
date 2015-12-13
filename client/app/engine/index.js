@@ -20,7 +20,7 @@ export default function EngineFactory(baseUrl) {
           appsConfig: state.getIn(['/engine', 'appsConfig'])
         }
       }, {
-        updateAppsConfig: actions.updateAppsConfig
+        setAppsConfig: actions.setAppsConfig
       })(AppsConfig)
     }
   }

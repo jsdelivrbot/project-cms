@@ -14,7 +14,7 @@ export default class EditSite extends React.Component {
   receiveSubmit = (event) => {
     event.preventDefault();
     console.log("Submit:", event);
-    this.props.updateAppsConfig(this.state)
+    this.props.setAppsConfig(this.state.appsConfig)
   }
 
   updateValue = (event) => {
