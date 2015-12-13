@@ -60,3 +60,27 @@ export function readTable(baseUrl) {
       });
   });
 }
+
+export function destroy(callback) {
+  return localstorage.destroy('cms', callback)
+}
+
+export function purgeTable(baseUrl) {
+  return new Promise(function(resolve, reject) {
+    var table = getTable(baseUrl);
+    var ops = [];
+    table.createKeyStream()
+      .on('data', function(key) {
+        ops.push({ type: 'del', key });
+      })
+      .on('end', function () {
+        var batchJob = table.batch(ops, function(err) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        });
+      });
+  });
+}
