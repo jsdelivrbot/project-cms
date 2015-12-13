@@ -1,27 +1,33 @@
 
-export function addPage(path, page) {
+export function addPage(baseUrl, path, page) {
   return {
     type: 'ADD_PAGE',
     path,
     page,
-    new_object: page
+    new_object: page,
+    baseUrl,
+    object_id: path
   };
 }
 
-export function removePage(path) {
+export function removePage(baseUrl, path) {
   return {
     type: 'REMOVE_PAGE',
     path,
-    removed_object: path
+    remove_object: path,
+    baseUrl,
+    object_id: path
   };
 }
 
-export function updatePage(path, page) {
+export function updatePage(baseUrl, path, page) {
   return {
     type: 'UPDATE_PAGE',
     path,
     page,
-    updated_object: page
+    update_object: page,
+    baseUrl,
+    object_id: path
   };
 }
 

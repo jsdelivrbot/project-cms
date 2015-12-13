@@ -33,7 +33,9 @@ export default function PagesApplicationFactory(baseUrl) {
           return {
             baseUrl: baseUrl
           }
-        }, {addPage: actions.addPage})(AddPage)
+        }, {
+          addPage: _.partial(actions.addPage, baseUrl),
+        })(AddPage)
       }, {
         path: '**',
         component: connect((state, props) => {
@@ -45,8 +47,8 @@ export default function PagesApplicationFactory(baseUrl) {
             render: state.getIn(['/engine', 'renderer'])
           }
         }, {
-          updatePage: actions.updatePage,
-          removePage: actions.removePage
+          updatePage: _.partial(actions.updatePage, baseUrl),
+          removePage: _.partial(actions.removePage, baseUrl),
         })(EditPage)
       }]
     }

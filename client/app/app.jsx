@@ -9,13 +9,14 @@ import {combineReducers} from 'redux-immutablejs';
 import {Route, Router, Redirect} from 'react-router';
 import createHistory from 'history/lib/createHashHistory'
 
-import promiseMiddleware from './middleware/promiseMiddleware';
+import promiseMiddleware from './middleware/promise';
+import persistenceMiddleware, {readTable} from './middleware/persistence';
 
 import appsLoader from './appsLoader';
 import zipPublisher from './publishers/zipfile';
 
 
-var createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(createStore);
+var createStoreWithMiddleware = applyMiddleware(persistenceMiddleware, promiseMiddleware)(createStore);
 
 var history = createHistory();
 
@@ -33,19 +34,33 @@ var appConfig = {
 appsLoader(appConfig).then(apps => {
   console.log("apps:", apps);
 
+  var initialState = Map();
+  return Promise.all(_.map(apps, app => {
+    var baseUrl = app.baseUrl;
+    return readTable(baseUrl).then(tableState => {
+      if (tableState) {
+        initialState = initialState.set(baseUrl, tableState);
+      }
+    });
+  })).then(x => {
+    console.log("Initial State:", initialState.toJS());
+    return {apps, initialState};
+  });
+}).then(({apps, initialState}) => {
+
   function getApp(baseUrl) {
     return _.find(apps, {baseUrl});
   }
 
   /* set up reducer & store */
+
   var reducers = _.reduce(apps, (col, app) => {
     col[app.baseUrl] = app.reducer;
     return col;
   }, {});
   console.log("reducers:", reducers)
   var reducer = combineReducers(reducers);
-  var store = createStoreWithMiddleware(reducer, Map());
-  //store.dispatch(Engine.actions.setApps(apps));
+  var store = createStoreWithMiddleware(reducer, initialState);
   console.log("store:", store);
 
   var engine = getApp('/engine');

@@ -17,10 +17,10 @@ export default function SiteApplicationFactory(baseUrl) {
       component: connect(state => {
         return {
           baseUrl: baseUrl,
-          site: state.get(baseUrl).toJS()
+          site: state.getIn([baseUrl, 'site'])
         }
       }, {
-        updateSite: actions.updateSite
+        updateSite: _.partial(actions.updateSite, baseUrl),
       })(EditSite)
     }
   }

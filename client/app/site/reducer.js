@@ -1,13 +1,13 @@
 import {Map} from 'immutable';
 
 const INITIAL_STATE = Map({
-  'name': 'Demo Site'
+  'site': {'name': 'Demo Site'}
 });
 
 export default function site(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'UPDATE_SITE':
-      return Map(action.site);
+      return state.set('site', action.site);
     default:
       return state
   }

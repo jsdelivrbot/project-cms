@@ -1,27 +1,33 @@
 
-export function addTemplate(path, template) {
+export function addTemplate(baseUrl, path, template) {
   return {
     type: 'ADD_TEMPLATE',
     path,
     template,
-    new_object: template
+    new_object: template,
+    baseUrl,
+    object_id: path
   };
 }
 
-export function removeTemplate(path) {
+export function removeTemplate(baseUrl, path) {
   return {
     type: 'REMOVE_TEMPLATE',
     path,
-    removed_object: path
+    remove_object: path,
+    baseUrl,
+    object_id: path
   };
 }
 
-export function updateTemplate(path, template) {
+export function updateTemplate(baseUrl, path, template) {
   return {
     type: 'UPDATE_TEMPLATE',
     path,
     template,
-    updated_object: template
+    update_object: template,
+    baseUrl,
+    object_id: path
   };
 }
 

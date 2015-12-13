@@ -34,7 +34,9 @@ export default function TemplateApplicationFactory(baseUrl) {
           return {
             baseUrl: baseUrl
           }
-        }, {addTemplate: actions.addTemplate})(AddTemplate)
+        }, {
+          addTemplate: _.partial(actions.addTemplate, baseUrl),
+        })(AddTemplate)
       }, {
         path: '**',
         component: connect((state, props) => {
@@ -44,8 +46,8 @@ export default function TemplateApplicationFactory(baseUrl) {
             path: props.params.splat
           }
         }, {
-          updateTemplate: actions.updateTemplate,
-          removeTemplate: actions.removeTemplate
+          updateTemplate: _.partial(actions.updateTemplate, baseUrl),
+          removeTemplate: _.partial(actions.removeTemplate, baseUrl),
         })(EditTemplate)
       }]
     }

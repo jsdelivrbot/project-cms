@@ -1,9 +1,11 @@
 
-export function updateSite(site) {
+export function updateSite(baseUrl, site) {
   return {
     type: 'UPDATE_SITE',
     site,
-    updated_object: site
+    update_object: site,
+    baseUrl,
+    object_id: 'site'
   };
 }
 

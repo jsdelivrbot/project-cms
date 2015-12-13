@@ -11,7 +11,7 @@ function storeLoader(store) {
     resolve: function (to, from) {
       if (!from) from = '/';
       var rPath = path.resolve(from, to);
-      console.log(`resolve: ${to} (${from}) => ${rPath}`);
+      //console.log(`resolve: ${to} (${from}) => ${rPath}`);
       return rPath;
     },
     load: function (identifier, cb) {
@@ -40,7 +40,7 @@ export default function renderFactory(store) {
   var templatesCache = {}; // path: {renderF, template}
 
   function getRenderer(templateKey) {
-    console.log("getRenderer", templateKey)
+    //console.log("getRenderer", templateKey)
     var cached = templatesCache[templateKey];
     var template = store.getState().getIn(['/templates', templateKey]).content;
 
