@@ -6,7 +6,8 @@ export function addPage(baseUrl, path, page) {
     page,
     new_object: page,
     baseUrl,
-    object_id: path
+    object_id: path,
+    next_url: `${baseUrl}${path}`
   };
 }
 
@@ -16,7 +17,8 @@ export function removePage(baseUrl, path) {
     path,
     remove_object: path,
     baseUrl,
-    object_id: path
+    object_id: path,
+    next_url: `${baseUrl}`
   };
 }
 

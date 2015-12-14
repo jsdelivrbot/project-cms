@@ -41,10 +41,11 @@ export default function PagesApplicationFactory(baseUrl) {
       }, {
         path: '**',
         component: connect((state, props) => {
+          let path = '/'+props.params.splat;
           return {
             baseUrl: baseUrl,
-            page: state.getIn([baseUrl, props.params.splat]),
-            path: props.params.splat,
+            page: state.getIn([baseUrl, path]),
+            path,
             templates: state.get('/templates'),
             render: state.getIn(['/engine', 'renderer'])
           }

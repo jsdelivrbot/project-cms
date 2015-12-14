@@ -6,7 +6,7 @@ import {Link} from 'react-router';
 export default function PageList({baseUrl, pages}) {
   function PageRow({title, path}) {
     return <tr key={path}>
-      <td><Link to={`${baseUrl}/${path}`}>{title}</Link></td>
+      <td><Link to={`${baseUrl}${path}`}>{title}</Link></td>
       <td>{path}</td>
     </tr>
   }

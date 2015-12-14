@@ -33,6 +33,12 @@ export default class AddTemplate extends React.Component {
         <div className="col-sm-12">
           <form onSubmit={this.receiveSubmit}>
             <div className="form-group">
+              <label className="control-label">Path</label>
+              <span className="help-block">Must start with a / ; may contain alphanumerics, dashes, slashes and periods only</span>
+              <input name="path" className="form-control" value={template.path} required="required" onChange={this.updateValue}
+                pattern="^\/[a-z0-9-\/\.]+$" placeholder="/path.html"/>
+            </div>
+            <div className="form-group">
               <label className="control-label">Template</label>
               <span className="help-block">Write the HTML layout using <a href="https://paularmstrong.github.io/swig/">swig</a></span>
               <Codemirror value={template.content} onChange={this.updateContent} options={{

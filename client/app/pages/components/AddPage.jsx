@@ -57,7 +57,9 @@ export default class AddPage extends React.Component {
           <form onSubmit={this.receiveSubmit}>
             <div className="form-group">
               <label className="control-label">Path</label>
-              <input name="path" className="form-control" value={page.path} required="required" onChange={this.updateValue}/>
+              <span className="help-block">Must start with a / ; may contain alphanumerics, dashes, slashes and periods only</span>
+              <input name="path" className="form-control" value={page.path} required="required" onChange={this.updateValue}
+                pattern="^\/[a-z0-9-\/\.]+$" placeholder="/path.html"/>
             </div>
             <div className="form-group">
               <label className="control-label">Title</label>

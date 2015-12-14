@@ -1,7 +1,7 @@
 import {Map} from 'immutable';
 
 const INITIAL_STATE = Map({
-  'index.html': {path: 'index.html', title: 'Home Page', content: 'Hello World', template:'/base.html'}
+  '/index.html': {path: '/index.html', title: 'Home Page', content: 'Hello World', template:'/base.html'}
 });
 
 export default function pages(state = INITIAL_STATE, action) {

@@ -1,6 +1,7 @@
 import levelup from 'levelup';
 import localstorage from 'localstorage-down';
 import sublevel from 'level-sublevel';
+import _ from 'lodash';
 import {Map} from 'immutable';
 
 /*
@@ -40,6 +41,11 @@ export default function persistenceMiddleware() {
     } else if (remove_object) {
       table.del(object_id);
     }
+    //TODO seperate middleware
+    if (action.next_url) {
+      //TODO react router method instead
+      window.location.hash = action.next_url;
+    }
     next(action);
   };
 }
@@ -62,7 +68,11 @@ export function readTable(baseUrl) {
 }
 
 export function destroy(callback) {
-  return localstorage.destroy('cms', callback)
+  return Promise.all(_.map(tables, (table, baseUrl) => {
+    return purgeTable(baseUrl);
+  })).then(x => {
+    return localstorage.destroy('cms', callback);
+  });
 }
 
 export function purgeTable(baseUrl) {

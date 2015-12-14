@@ -40,10 +40,11 @@ export default function TemplateApplicationFactory(baseUrl) {
       }, {
         path: '**',
         component: connect((state, props) => {
+          let path = '/'+props.params.splat;
           return {
             baseUrl: baseUrl,
-            template: state.getIn([baseUrl, '/'+props.params.splat]),
-            path: props.params.splat
+            template: state.getIn([baseUrl, path]),
+            path
           }
         }, {
           updateTemplate: _.partial(actions.updateTemplate, baseUrl),

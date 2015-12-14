@@ -6,7 +6,8 @@ export function addTemplate(baseUrl, path, template) {
     template,
     new_object: template,
     baseUrl,
-    object_id: path
+    object_id: path,
+    next_url: `${baseUrl}${path}`
   };
 }
 
@@ -16,7 +17,8 @@ export function removeTemplate(baseUrl, path) {
     path,
     remove_object: path,
     baseUrl,
-    object_id: path
+    object_id: path,
+    next_url: `${baseUrl}`
   };
 }
 
