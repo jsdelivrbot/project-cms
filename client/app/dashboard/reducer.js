@@ -39,7 +39,7 @@ export default function dashboard(state = INITIAL_STATE, action) {
   if (action.update_object) {
     return craftAlert(state, 'success', `${stripName(action.type)} updated.`);
   }
-  if (action.delete_object) {
+  if (action.remove_object) {
     return craftAlert(state, 'success', `${stripName(action.type)} deleted.`);
   }
   return state;

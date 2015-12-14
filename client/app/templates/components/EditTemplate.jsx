@@ -20,6 +20,10 @@ export default class EditTemplate extends React.Component {
     this.setState({content: code});
   }
 
+  deleteTemplate = (event) => {
+    this.props.removeTemplate(this.props.path);
+  }
+
   render() {
     let path = this.props.path;
     let template = this.state;
@@ -42,7 +46,12 @@ export default class EditTemplate extends React.Component {
               }} />
             </div>
             <div className="form-group">
-              <button type="submit" className="btn btn-primary">Save</button>
+              <div className="col-sm-6">
+                <button type="submit" className="btn btn-primary">Save</button>
+              </div>
+              <div className="col-sm-6">
+                <button type="button" className="btn btn-danger" onClick={this.deleteTemplate}>Delete</button>
+              </div>
             </div>
           </form>
         </div>

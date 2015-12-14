@@ -40,6 +40,10 @@ export default class EditPage extends React.Component {
     this.setState(changes);
   }
 
+  deletePage = (event) => {
+    this.props.removePage(this.props.path);
+  }
+
   renderTemplateOptions() {
     return this.props.templates.map((template, path) => {
       return <option key={path} value={path}>{path}</option>
@@ -109,7 +113,12 @@ export default class EditPage extends React.Component {
             </div>
 
             <div className="form-group">
-              <button type="submit" className="btn btn-primary">Save</button>
+              <div className="col-sm-3">
+                <button type="submit" className="btn btn-primary">Save</button>
+              </div>
+              <div className="col-sm-3">
+                <button type="button" className="btn btn-danger" onClick={this.deletePage}>Delete</button>
+              </div>
             </div>
           </form>
         </div>
