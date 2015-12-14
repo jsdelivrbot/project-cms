@@ -4,9 +4,10 @@ import {Link} from 'react-router';
 
 
 export default function TemplateList({baseUrl, templates}) {
-  function TemplateRow({path}) {
+  function TemplateRow({path, type}) {
     return <tr key={path}>
       <td><Link to={`${baseUrl}${path}`}>{path}</Link></td>
+      <td>{type}</td>
     </tr>
   }
 
@@ -24,6 +25,7 @@ export default function TemplateList({baseUrl, templates}) {
         <thead>
           <tr>
             <th>Path</th>
+            <th>Type</th>
           </tr>
         </thead>
         <tbody>

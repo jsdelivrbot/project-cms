@@ -32,7 +32,7 @@ export default function PagesApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            templates: state.get('/templates'),
+            templates: state.get('/templates').filter(({type}) => type === 'page'),
             render: state.getIn(['/engine', 'renderer'])
           }
         }, {
@@ -46,7 +46,7 @@ export default function PagesApplicationFactory(baseUrl) {
             baseUrl: baseUrl,
             page: state.getIn([baseUrl, path]),
             path,
-            templates: state.get('/templates'),
+            templates: state.get('/templates').filter(({type}) => type === 'page'),
             render: state.getIn(['/engine', 'renderer'])
           }
         }, {

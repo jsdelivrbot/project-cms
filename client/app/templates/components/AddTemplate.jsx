@@ -39,6 +39,16 @@ export default class AddTemplate extends React.Component {
                 pattern="^\/[a-z0-9-\/\.]+$" placeholder="/path.html"/>
             </div>
             <div className="form-group">
+              <label className="control-label">Type</label>
+              <span className="help-block">Layout is for being extended by pages, partial is for including, and page is a complete template to be rendered</span>
+              <select name="type" className="form-control" value={template.type} required="required" onChange={this.updateValue}>
+                <option>Select template type</option>
+                <option value="layout">Layout</option>
+                <option value="partial">Partial</option>
+                <option value="page">Page</option>
+              </select>
+            </div>
+            <div className="form-group">
               <label className="control-label">Template</label>
               <span className="help-block">Write the HTML layout using <a href="https://paularmstrong.github.io/swig/">swig</a></span>
               <Codemirror value={template.content} onChange={this.updateContent} options={{

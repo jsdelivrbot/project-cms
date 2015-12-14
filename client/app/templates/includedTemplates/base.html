@@ -1,24 +1,18 @@
 <!doctype html>
 <html>
 <head>
-  <title>{{page.title}}</title>
-
   {{site.head|safe}}
-  {{page.head|safe}}
 
   {% if site.css %}
   <style>{{site.css}}</style>
   {% endif %}
-  {% if page.css %}
-  <style>{{page.css}}</style>
-  {% endif %}
-
+  
   {% if site.javascript %}
   <script type="application/javascript">{{site.javascript}}</script>
   {% endif %}
-  {% if page.javascript %}
-  <script type="application/javascript">{{page.javascript}}</script>
-  {% endif %}
+
+  {% block head %}
+  {% endblock head %}
 </head>
 <body>
   {% block header %}
@@ -26,9 +20,7 @@
   {% endblock header %}
 
   {% block content %}
-  <div id="content">
-    {{content|safe}}
-  </div>
+
   {% endblock content %}
 
   {% block footer %}

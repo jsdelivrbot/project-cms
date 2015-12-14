@@ -1,0 +1,21 @@
+{% extends "/base.html" %}
+
+{% block head %}
+<title>{{page.title}}</title>
+
+{{page.head|safe}}
+
+{% if page.css %}
+<style>{{page.css}}</style>
+{% endif %}
+
+{% if page.javascript %}
+<script type="application/javascript">{{page.javascript}}</script>
+{% endif %}
+{% endblock head %}
+
+{% block content %}
+<div id="content">
+  {{content|safe}}
+</div>
+{% endblock content %}
