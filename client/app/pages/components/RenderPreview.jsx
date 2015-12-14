@@ -2,7 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Remarkable from 'remarkable';
 
-let md = new Remarkable();
+let md = new Remarkable({
+  html: true,
+  breaks: true,
+  linkify: true,
+  typographer: true
+});
 
 export default class RenderPreview extends React.Component {
   componentDidMount() {
