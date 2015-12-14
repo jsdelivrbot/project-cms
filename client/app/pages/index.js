@@ -31,7 +31,9 @@ export default function PagesApplicationFactory(baseUrl) {
         path: 'add',
         component: connect(state => {
           return {
-            baseUrl: baseUrl
+            baseUrl: baseUrl,
+            templates: state.get('/templates'),
+            render: state.getIn(['/engine', 'renderer'])
           }
         }, {
           addPage: _.partial(actions.addPage, baseUrl),
