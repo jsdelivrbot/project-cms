@@ -1,5 +1,6 @@
 import path from 'path';
 import swig from 'swig';
+import {markdownFilter} from './filters';
 
 /*
   Swig renderer tied to our template store
@@ -36,6 +37,8 @@ export default function renderFactory(store) {
     loader: storeLoader(store),
     cache: false //TODO pass in get & set object with our own cache logic
   });
+
+  swig.setFilter('markdown', markdownFilter);
 
   var templatesCache = {}; // path: {renderF, template}
 

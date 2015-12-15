@@ -1,13 +1,4 @@
-import Remarkable from 'remarkable';
 import _ from 'lodash';
-
-let md = new Remarkable({
-  html: true,
-  breaks: true,
-  linkify: true,
-  typographer: true
-});
-
 
 export default function publish(baseUrl, state, pushContent) {
   let renderer = state.getIn(['/engine', 'renderer']);
@@ -15,10 +6,8 @@ export default function publish(baseUrl, state, pushContent) {
   let site = state.get('/site').toJS();
 
   var promises = state.get(baseUrl).map((page, path) => {
-    var content = md.render(page.content);
     var context = {
       site,
-      content,
       page
     };
     var renderedPage = renderer(page.template, context);

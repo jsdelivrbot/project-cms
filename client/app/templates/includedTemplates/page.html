@@ -16,6 +16,6 @@
 
 {% block content %}
 <div id="content">
-  {{content|safe}}
+  {{page.content|markdown}}
 </div>
 {% endblock content %}
