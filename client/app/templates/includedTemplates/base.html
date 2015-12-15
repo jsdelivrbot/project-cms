@@ -1,12 +1,18 @@
 <!doctype html>
 <html>
 <head>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" key="bootstrap-css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" data-noprefix='' key="site-fonts"/>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript" key="jquery"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" type="text/javascript" key="bootstrap-js"></script>
+  
   {{site.head|safe}}
 
   {% if site.css %}
   <style>{{site.css}}</style>
   {% endif %}
-  
+
   {% if site.javascript %}
   <script type="application/javascript">{{site.javascript}}</script>
   {% endif %}

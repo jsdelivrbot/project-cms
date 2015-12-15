@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Remarkable from 'remarkable';
+import {connect} from 'react-redux'
 
 let md = new Remarkable({
   html: true,
@@ -9,7 +10,7 @@ let md = new Remarkable({
   typographer: true
 });
 
-export default class RenderPreview extends React.Component {
+class RenderPreview extends React.Component {
   componentDidMount() {
     this.renderFrameContents();
   }
@@ -18,9 +19,9 @@ export default class RenderPreview extends React.Component {
     var doc = ReactDOM.findDOMNode(this).contentDocument;
     if(doc && doc.readyState === 'complete') {
       let page = this.props.page;
-      var content = md.render(page.content);
+      let site = this.props.site;
       var context = {
-        content,
+        site,
         page
       };
       var renderedPage = this.props.render(page.template, context);
@@ -33,11 +34,20 @@ export default class RenderPreview extends React.Component {
 
   componentDidUpdate() {
     var doc = ReactDOM.findDOMNode(this).contentDocument;
+    var contentBlock = doc.getElementById("content");
+    if (!contentBlock) return;
     var content = md.render(this.props.page.content);
-    doc.getElementById("content").innerHTML = content;
+    contentBlock.innerHTML = content;
   }
 
   render() {
-    return <iframe/>
+    return <iframe style={{width: '100%'}}/>
   }
 }
+
+
+export default connect((state, props) => {
+  return {
+    site: state.get('/site')
+  };
+})(RenderPreview);

@@ -15,7 +15,11 @@
 {% endblock head %}
 
 {% block content %}
-<div id="content">
-  {{page.content|markdown}}
+<div class="container-fluid">
+  <div class="row">
+    <div id="content" class="col-md-12">
+      {{page.content|markdown}}
+    </div>
+  </div>
 </div>
 {% endblock content %}
