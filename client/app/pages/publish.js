@@ -5,7 +5,8 @@ export default function publish(baseUrl, state, pushContent) {
   let mimetype = 'text/html';
   let site = state.get('/site').toJS();
 
-  var promises = state.get(baseUrl).map((page, path) => {
+  var promises = state.get(baseUrl).map((immutablePage, path) => {
+    let page = immutablePage.toJS();
     var context = {
       site,
       page
