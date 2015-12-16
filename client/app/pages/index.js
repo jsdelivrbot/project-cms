@@ -8,12 +8,14 @@ import EditPage from './components/EditPage.jsx';
 import reducer from './reducer';
 import actions from './actions';
 import publish from './publish';
+import fixtures from './fixtures';
 
 export default function PagesApplicationFactory(baseUrl) {
   return {
     baseUrl,
     reducer,
     actions,
+    fixtures,
     publish: _.partial(publish, baseUrl),
     title: 'Pages',
     routes: {
@@ -23,7 +25,7 @@ export default function PagesApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            pages: state.get(baseUrl)
+            pages: state.get(baseUrl).toJS()
           }
         })(PageList)
       },
@@ -32,7 +34,7 @@ export default function PagesApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            templates: state.get('/templates').filter(({type}) => type === 'page'),
+            templates: state.get('/templates').filter(tmp => tmp.get('type') === 'page'),
             render: state.getIn(['/engine', 'renderer'])
           }
         }, {
@@ -44,9 +46,9 @@ export default function PagesApplicationFactory(baseUrl) {
           let path = '/'+props.params.splat;
           return {
             baseUrl: baseUrl,
-            page: state.getIn([baseUrl, path]),
+            page: state.getIn([baseUrl, path]).toJS(),
             path,
-            templates: state.get('/templates').filter(({type}) => type === 'page'),
+            templates: state.get('/templates').filter(tmp => tmp.get('type') === 'page'),
             render: state.getIn(['/engine', 'renderer'])
           }
         }, {

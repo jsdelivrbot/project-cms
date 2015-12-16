@@ -16,10 +16,10 @@ function storeLoader(store) {
       return rPath;
     },
     load: function (identifier, cb) {
-      var tpl = store.getState().getIn(['/templates', identifier]);
+      var tpl = store.getState().getIn(['/templates', identifier, 'content']);
       if (tpl) {
-        if (cb) return cb(null, tpl.content);
-        return tpl.content
+        if (cb) return cb(null, tpl);
+        return tpl;
       } else {
         if (cb) return cb(new Error('Template not found'));
         throw new Error('Template not found');
@@ -45,7 +45,7 @@ export default function renderFactory(store) {
   function getRenderer(templateKey) {
     //console.log("getRenderer", templateKey)
     var cached = templatesCache[templateKey];
-    var template = store.getState().getIn(['/templates', templateKey]).content;
+    var template = store.getState().getIn(['/templates', templateKey, 'content']);
 
     //if cache is up to date, return cached render
     if (cached && cached.template === template) {

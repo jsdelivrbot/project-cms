@@ -29,7 +29,7 @@ export default function PageList({baseUrl, pages}) {
           </tr>
         </thead>
         <tbody>
-          {pages.map(PageRow).toArray()}
+          {_.map(pages, PageRow)}
         </tbody>
       </table>
     </div>

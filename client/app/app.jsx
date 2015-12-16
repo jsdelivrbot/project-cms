@@ -37,13 +37,19 @@ appsLoader(appConfig).then(apps => {
   var initialState = Map();
   return Promise.all(_.map(apps, app => {
     var baseUrl = app.baseUrl;
+    //restore state from storage
     return readTable(baseUrl).then(tableState => {
       if (tableState) {
-        initialState = initialState.set(baseUrl, tableState);
+        initialState = initialState.update(baseUrl, Map(), appState => appState.merge(tableState));
+      } else if (app.fixtures && app.fixtures.initial){
+        //or load state from fixtures
+        return app.fixtures.initial(null, baseUrl).then(topState => {
+          initialState = initialState.mergeDeep(topState);
+        });
       }
     });
   })).then(x => {
-    console.log("Initial State:", initialState.toJS());
+    console.log("Initial State:", initialState);
     return {apps, initialState};
   });
 }).then(({apps, initialState}) => {

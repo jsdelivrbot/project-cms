@@ -29,7 +29,7 @@ export default function TemplateList({baseUrl, templates}) {
           </tr>
         </thead>
         <tbody>
-          {templates.map(TemplateRow).toArray()}
+          {_.map(templates, TemplateRow)}
         </tbody>
       </table>
     </div>

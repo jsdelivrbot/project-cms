@@ -8,6 +8,7 @@ import EditTemplate from './components/EditTemplate.jsx';
 import reducer from './reducer';
 import actions from './actions';
 import renderFactory from './render';
+import fixtures from './fixtures';
 
 export default function TemplateApplicationFactory(baseUrl) {
 
@@ -15,6 +16,7 @@ export default function TemplateApplicationFactory(baseUrl) {
     baseUrl,
     reducer,
     actions,
+    fixtures,
     renderFactory: renderFactory,
     title: 'Templates',
     routes: {
@@ -24,7 +26,7 @@ export default function TemplateApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            templates: state.get(baseUrl)
+            templates: state.get(baseUrl).toJS()
           }
         })(TemplateList)
       },
@@ -43,7 +45,7 @@ export default function TemplateApplicationFactory(baseUrl) {
           let path = '/'+props.params.splat;
           return {
             baseUrl: baseUrl,
-            template: state.getIn([baseUrl, path]),
+            template: state.getIn([baseUrl, path]).toJS(),
             path
           }
         }, {
