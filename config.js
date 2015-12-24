@@ -1,5 +1,5 @@
 System.config({
-  baseURL: "/",
+  baseURL: "/project-cms",
   defaultJSExtensions: true,
   transpiler: "babel",
   babelOptions: {
