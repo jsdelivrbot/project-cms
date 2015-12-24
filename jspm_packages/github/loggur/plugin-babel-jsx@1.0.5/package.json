@@ -1,0 +1,36 @@
+{
+  "name": "plugin-babel-jsx",
+  "version": "1.0.5",
+  "description": "SystemJS plugin that uses Babel for jsx transformation.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loggur/plugin-babel-jsx.git"
+  },
+  "keywords": [
+    "babel",
+    "plugin",
+    "jsx",
+    "react",
+    "hot",
+    "reload"
+  ],
+  "author": "timbur",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/loggur/plugin-babel-jsx/issues"
+  },
+  "homepage": "https://github.com/loggur/plugin-babel-jsx#readme",
+  "dependencies": {
+    "babel-plugin-react-hot": "^1.0.0"
+  },
+  "jspm": {
+    "directories": {},
+    "dependencies": {
+      "babel-plugin-react-hot": "github:loggur/babel-plugin-react-hot@1.0.0"
+    }
+  }
+}

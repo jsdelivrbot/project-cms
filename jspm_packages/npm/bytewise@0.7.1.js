@@ -1,0 +1,1 @@
+module.exports = require("npm:bytewise@0.7.1/bytewise");
