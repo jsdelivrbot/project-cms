@@ -41,11 +41,6 @@ export default function persistenceMiddleware() {
     } else if (remove_object) {
       table.del(object_id);
     }
-    //TODO seperate middleware
-    if (action.next_url) {
-      //TODO react router method instead
-      window.location.hash = action.next_url;
-    }
     next(action);
   };
 }

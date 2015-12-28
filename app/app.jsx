@@ -11,13 +11,14 @@ import createHistory from 'history/lib/createHashHistory'
 
 import promiseMiddleware from './middleware/promise';
 import persistenceMiddleware, {readTable} from './middleware/persistence';
+import nextUrlMiddleware from './middleware/next_url';
 
 import appsLoader from './appsLoader';
 import zipPublisher from './publishers/zipfile';
 import publish from './publishers/index';
 
 
-var createStoreWithMiddleware = applyMiddleware(persistenceMiddleware, promiseMiddleware)(createStore);
+var createStoreWithMiddleware = applyMiddleware(persistenceMiddleware, nextUrlMiddleware, promiseMiddleware)(createStore);
 
 var history = createHistory();
 
