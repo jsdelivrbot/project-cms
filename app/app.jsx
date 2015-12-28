@@ -29,6 +29,7 @@ var appConfig = {
   '/site': './site/index',
   '/pages': './pages/index',
   '/templates': './templates/index',
+  '/media': './media/index',
 };
 
 
@@ -62,7 +63,15 @@ appsLoader(appConfig).then(apps => {
   /* set up reducer & store */
 
   var reducers = _.reduce(apps, (col, app) => {
-    col[app.baseUrl] = app.reducer;
+    if (app.reducer) {
+      col[app.baseUrl] = app.reducer;
+    }
+    return col;
+  }, {});
+  var dashboardPlugins = _.reduce(apps, (col, app) => {
+    if (app.dashboardPlugins) {
+      _.assign(col, app.dashboardPlugins);
+    }
     return col;
   }, {});
   console.log("reducers:", reducers)
@@ -74,6 +83,7 @@ appsLoader(appConfig).then(apps => {
   var dashboard = getApp('/');
 
   store.dispatch(engine.actions.setApps(apps));
+  store.dispatch(dashboard.actions.setPlugins(dashboardPlugins));
 
 
   //CONSIDER: we are storing core functions in the engine domain - probably not using the redux as intended
@@ -103,6 +113,9 @@ appsLoader(appConfig).then(apps => {
     </Provider>,
     document.getElementById('app')
   )
+}).catch(error => {
+  console.log("Error starting application:");
+  console.error(error);
 });
 
 

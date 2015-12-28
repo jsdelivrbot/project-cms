@@ -20,4 +20,11 @@ export function pageTransition(path) {
   };
 }
 
-export default {addAlert, dismissAlert, pageTransition}
+export function setPlugins(plugins) {
+  return {
+    type: 'DASHBOARD_PLUGINS',
+    plugins
+  }
+}
+
+export default {addAlert, dismissAlert, pageTransition, setPlugins}

@@ -2,7 +2,8 @@ import {Map} from 'immutable';
 import _ from 'lodash';
 
 const INITIAL_STATE = Map({
-  'alerts': Map()
+  'alerts': Map(),
+  'plugins': Map(),
 });
 
 function craftAlert(state, type, message) {
@@ -26,7 +27,9 @@ export default function dashboard(state = INITIAL_STATE, action) {
     case 'DISMISS_ALERT':
       return state.removeIn(['alerts', action.key]);
     case 'PAGE_TRANSITION':
-      return state.set('alerts', Map())
+      return state.set('alerts', Map());
+    case 'DASHBOARD_PLUGINS':
+      return state.set('plugins', Map(action.plugins));
   }
 
   //auto detect alerts
