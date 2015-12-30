@@ -2,7 +2,7 @@ import levelup from 'levelup';
 import localstorage from 'localstorage-down';
 import sublevel from 'level-sublevel';
 import _ from 'lodash';
-import {Map} from 'immutable';
+import {Map, fromJS} from 'immutable';
 
 /*
 detect
@@ -34,9 +34,11 @@ export default function persistenceMiddleware() {
     const table = getTable(baseUrl);
     if (new_object) {
       console.log("New object:", baseUrl, object_id)
+      //if (_.isFunction(new_object.toJS)) new_object = new_object.toJS();
       table.put(object_id, new_object);
     } else if (update_object) {
       console.log("Update object:", baseUrl, object_id)
+      //if (_.isFunction(update_object.toJS)) update_object = update_object.toJS();
       table.put(object_id, update_object);
     } else if (remove_object) {
       table.del(object_id);
@@ -53,7 +55,7 @@ export function readTable(baseUrl) {
       .on('data', function(data) {
         if (typeof data.value !== 'undefined') {
           if (!key_values) key_values = Map();
-          key_values = key_values.set(data.key, data.value);
+          key_values = key_values.set(data.key, fromJS(data.value));
         }
       })
       .on('end', function () {
