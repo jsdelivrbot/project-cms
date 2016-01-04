@@ -8,6 +8,7 @@ import actions from './actions';
 
 export default function EngineFactory(baseUrl) {
   return {
+    type: 'application',
     baseUrl,
     reducer,
     actions,

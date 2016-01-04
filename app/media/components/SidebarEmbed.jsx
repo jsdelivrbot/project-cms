@@ -3,5 +3,7 @@ import _ from 'lodash';
 
 
 export default function SidebarEmbed({providers}) {
-  return <div/>
+  console.log("media providers:", providers);
+  return <div>
+  </div>
 }

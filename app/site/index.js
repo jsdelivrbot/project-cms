@@ -10,6 +10,7 @@ import fixtures from './fixtures';
 export default function SiteApplicationFactory(baseUrl) {
   return {
     baseUrl,
+    type: 'application',
     reducer,
     actions,
     fixtures,

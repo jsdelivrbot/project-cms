@@ -20,6 +20,12 @@ export default class AddTemplate extends React.Component {
     this.setState({content: code});
   }
 
+  updateValue = (event) => {
+    var changes = {};
+    changes[event.target.name] = event.target.value;
+    this.setState(changes);
+  }
+
   render() {
     let template = this.state;
 

@@ -13,6 +13,7 @@ export default function MediaApplicationFactory(baseUrl) {
 
   return {
     baseUrl,
+    type: 'application',
     title: 'Media',
     dashboardPlugins: {
       mediaPicker: connect(state => {

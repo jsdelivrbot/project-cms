@@ -14,6 +14,7 @@ export default function TemplateApplicationFactory(baseUrl) {
 
   return {
     baseUrl,
+    type: 'application',
     reducer,
     actions,
     fixtures,

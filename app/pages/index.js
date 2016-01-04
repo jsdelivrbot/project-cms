@@ -13,6 +13,7 @@ import fixtures from './fixtures';
 export default function PagesApplicationFactory(baseUrl) {
   return {
     baseUrl,
+    type: 'application',
     reducer,
     actions,
     fixtures,

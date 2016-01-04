@@ -31,6 +31,7 @@ var appConfig = {
   '/pages': './pages/index',
   '/templates': './templates/index',
   '/media': './media/index',
+  '/media/links': './media/contrib/links/index',
 };
 
 
@@ -107,6 +108,7 @@ appsLoader(appConfig).then(apps => {
   /* mount application to DOM */
   var routes = dashboard.routes;
   routes.childRoutes = _.map(_.filter(apps, x => x.baseUrl !== '/'), x => x.routes);
+  //TODO media.childRoutes = media apps
 
   ReactDOM.render(
     <Provider store={store}>

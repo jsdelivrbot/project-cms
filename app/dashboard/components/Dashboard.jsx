@@ -12,7 +12,7 @@ function MenuLink({to, children}) {
 }
 
 function NavBar({pathname, apps}) {
-  var subApps = _.filter(apps, app => app.baseUrl !== '/');
+  var subApps = _.filter(apps, {type: 'application'});
   var currentApp = _.find(subApps, app => _.startsWith(pathname, app.baseUrl));
 
   return <nav className="navbar navbar-default" key="navbar">
@@ -40,11 +40,23 @@ function NavBar({pathname, apps}) {
   </nav>
 }
 
-function Dashboard({location, apps, children}) {
+function Plugins({plugins}) {
+  console.log("plugins:", plugins.toJS());
+  let renderedPlugins = plugins.map((PluginComponent, key) => {
+    return <PluginComponent key={key}/>
+  }).toArray();
+  return <div>
+    {renderedPlugins}
+  </div>
+}
+
+function Dashboard({location, apps, plugins, children}) {
   return <div>
     <NavBar key="nav" pathname={location.pathname} apps={apps}/>
 
     <Alerts key="alerts"/>
+
+    <Plugins key="plugins" plugins={plugins}/>
 
     <div key="current-app" className="current-app">
       {children}

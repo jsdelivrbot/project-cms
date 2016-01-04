@@ -16,7 +16,8 @@ export default function DashboardApplicationFactory(baseUrl) {
       path: baseUrl,
       component: connect(state => {
         return {
-          apps: state.getIn(['/engine', 'apps'])
+          apps: state.getIn(['/engine', 'apps']),
+          plugins: state.getIn(['/', 'plugins']),
         }
       })(Dashboard),
       indexRoute: {
