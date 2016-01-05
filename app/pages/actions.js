@@ -4,9 +4,11 @@ export function addPage(baseUrl, path, page) {
     type: 'ADD_PAGE',
     path,
     page,
-    new_object: page,
-    baseUrl,
-    object_id: path,
+    record_change: {
+      new_object: page,
+      table_name: baseUrl,
+      object_id: path,
+    },
     next_url: `${baseUrl}${path}`
   };
 }
@@ -15,9 +17,11 @@ export function removePage(baseUrl, path) {
   return {
     type: 'REMOVE_PAGE',
     path,
-    remove_object: path,
-    baseUrl,
-    object_id: path,
+    record_change: {
+      remove_object: path,
+      table_name: baseUrl,
+      object_id: path
+    },
     next_url: `${baseUrl}`
   };
 }
@@ -27,9 +31,11 @@ export function updatePage(baseUrl, path, page) {
     type: 'UPDATE_PAGE',
     path,
     page,
-    update_object: page,
-    baseUrl,
-    object_id: path
+    record_change: {
+      update_object: page,
+      table_name: baseUrl,
+      object_id: path
+    }
   };
 }
 

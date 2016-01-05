@@ -27,17 +27,18 @@ export function getTable(baseUrl) {
 
 export default function persistenceMiddleware() {
   return (next) => (action) => {
-    const { new_object, update_object, remove_object, baseUrl, object_id } = action;
-    if (!baseUrl || !object_id) {
+    const {record_change} = action;
+    if (!record_change) {
       return next(action);
     }
-    const table = getTable(baseUrl);
+    const { new_object, update_object, remove_object, table_name, object_id } = record_change;
+    const table = getTable(table_name);
     if (new_object) {
-      console.log("New object:", baseUrl, object_id)
+      console.log("New object:", table_name, object_id)
       //if (_.isFunction(new_object.toJS)) new_object = new_object.toJS();
       table.put(object_id, new_object);
     } else if (update_object) {
-      console.log("Update object:", baseUrl, object_id)
+      console.log("Update object:", table_name, object_id)
       //if (_.isFunction(update_object.toJS)) update_object = update_object.toJS();
       table.put(object_id, update_object);
     } else if (remove_object) {
@@ -47,11 +48,11 @@ export default function persistenceMiddleware() {
   };
 }
 
-export function readTable(baseUrl) {
+export function readTable(tableName) {
   return new Promise(function(resolve, reject) {
     var key_values;
 
-    getTable(baseUrl).createReadStream()
+    getTable(tableName).createReadStream()
       .on('data', function(data) {
         if (typeof data.value !== 'undefined') {
           if (!key_values) key_values = Map();
@@ -65,16 +66,16 @@ export function readTable(baseUrl) {
 }
 
 export function destroy(callback) {
-  return Promise.all(_.map(tables, (table, baseUrl) => {
-    return purgeTable(baseUrl);
+  return Promise.all(_.map(tables, (table, table_name) => {
+    return purgeTable(table_name);
   })).then(x => {
     return localstorage.destroy('cms', callback);
   });
 }
 
-export function purgeTable(baseUrl) {
+export function purgeTable(table_name) {
   return new Promise(function(resolve, reject) {
-    var table = getTable(baseUrl);
+    var table = getTable(table_name);
     var ops = [];
     table.createKeyStream()
       .on('data', function(key) {

@@ -4,9 +4,11 @@ export function addTemplate(baseUrl, path, template) {
     type: 'ADD_TEMPLATE',
     path,
     template,
-    new_object: template,
-    baseUrl,
-    object_id: path,
+    record_change: {
+      new_object: template,
+      table_name: baseUrl,
+      object_id: path,
+    },
     next_url: `${baseUrl}${path}`
   };
 }
@@ -15,9 +17,11 @@ export function removeTemplate(baseUrl, path) {
   return {
     type: 'REMOVE_TEMPLATE',
     path,
-    remove_object: path,
-    baseUrl,
-    object_id: path,
+    record_change: {
+      remove_object: path,
+      table_name: baseUrl,
+      object_id: path
+    },
     next_url: `${baseUrl}`
   };
 }
@@ -27,9 +31,11 @@ export function updateTemplate(baseUrl, path, template) {
     type: 'UPDATE_TEMPLATE',
     path,
     template,
-    update_object: template,
-    baseUrl,
-    object_id: path
+    record_change: {
+      update_object: template,
+      table_name: baseUrl,
+      object_id: path
+    }
   };
 }
 
