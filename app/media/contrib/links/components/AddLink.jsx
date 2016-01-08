@@ -10,7 +10,7 @@ export default class AddLink extends React.Component {
 
   receiveSubmit = (event) => {
     event.preventDefault();
-    this.props.addLink(this.state.path, this.state);
+    this.props.addLink(this.state);
   }
 
   updateValue = (event) => {
@@ -35,7 +35,7 @@ export default class AddLink extends React.Component {
               <label className="control-label">Path</label>
               <span className="help-block">Url Link to the asset</span>
               <input name="path" className="form-control" value={link.path} required="required" onChange={this.updateValue}
-                pattern="^\/[a-z0-9-\/\.]+$" placeholder="https://domain.com/path.html"/>
+                placeholder="https://domain.com/path.html"/>
             </div>
             <div className="form-group">
               <label className="control-label">Type</label>

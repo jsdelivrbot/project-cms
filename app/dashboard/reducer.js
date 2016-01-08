@@ -1,7 +1,7 @@
 import {Map} from 'immutable';
 import _ from 'lodash';
 
-const INITIAL_STATE = Map({
+export const INITIAL_STATE = Map({
   'alerts': Map(),
   'plugins': Map(),
 });

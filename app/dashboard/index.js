@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import Dashboard from './components/Dashboard.jsx';
 import Welcome from './components/Welcome.jsx';
 
-import reducer from './reducer';
+import reducer, {INITIAL_STATE} from './reducer';
 import actions from './actions';
 
 export default function DashboardApplicationFactory(baseUrl) {
@@ -11,6 +11,9 @@ export default function DashboardApplicationFactory(baseUrl) {
     reducer,
     actions,
     baseUrl,
+    fixtures: {
+      initial: INITIAL_STATE
+    },
     title: 'Dashboard',
     routes: {
       path: baseUrl,

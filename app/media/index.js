@@ -5,25 +5,28 @@ import ProviderList from './components/ProviderList.jsx';
 import ModalPicker from './components/ModalPicker.jsx';
 import SidebarEmbed from './components/SidebarEmbed.jsx';
 
+import reducer from './reducer';
+
+
+function mediaProviders(state) {
+  return _.filter(state.getIn(['/engine', 'apps']), {type: 'media provider'});
+}
 
 export default function MediaApplicationFactory(baseUrl) {
-  function mediaProvidersFilter(app) {
-    return _.startsWith(app.baseUrl, baseUrl+'/');
-  }
-
   return {
     baseUrl,
     type: 'application',
     title: 'Media',
+    reducer: reducer,
     dashboardPlugins: {
       mediaPicker: connect(state => {
         return {
-          providers: _.filter(state.getIn(['/engine', 'apps']), mediaProvidersFilter)
+          providers: mediaProviders(state)
         }
       })(ModalPicker),
       mediaEmbed: connect(state => {
         return {
-          providers: _.filter(state.getIn(['/engine', 'apps']), mediaProvidersFilter)
+          providers: mediaProviders(state)
         }
       })(SidebarEmbed)
     },
@@ -34,7 +37,8 @@ export default function MediaApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            providers: _.filter(state.getIn(['/engine', 'apps']), mediaProvidersFilter)
+            providers: mediaProviders(state),
+            media: state.get(baseUrl)
           }
         })(ProviderList)
       }

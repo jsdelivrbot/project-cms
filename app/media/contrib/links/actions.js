@@ -1,10 +1,16 @@
+import _ from 'lodash';
 import {v4} from 'node-uuid';
 
 export function addLink(baseUrl, link) {
   let linkId = v4();
 
+  link = _.assign({
+    id: linkId,
+    media_type: baseUrl,
+  }, link);
+
   return {
-    type: 'ADD_LINK',
+    type: 'ADD_MEDIA',
     linkId,
     link,
     record_change: {
@@ -18,7 +24,7 @@ export function addLink(baseUrl, link) {
 
 export function removeLink(baseUrl, linkId) {
   return {
-    type: 'REMOVE_LINK',
+    type: 'REMOVE_MEDIA',
     linkId,
     record_change: {
       remove_object: linkId,

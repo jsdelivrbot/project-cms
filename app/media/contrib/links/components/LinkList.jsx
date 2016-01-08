@@ -4,6 +4,8 @@ import {Link} from 'react-router';
 
 
 export default function LinkList({baseUrl, links}) {
+  console.log("LINKS:", links);
+  
   function LinkRow({id, path, type}) {
     return <tr key={id}>
       <td><Link to={`${baseUrl}/${id}`}>{path}</Link></td>

@@ -40,6 +40,8 @@ appsLoader(appConfig).then(apps => {
 
   var initialState = Map();
   return Promise.all(_.map(apps, app => {
+    //no reducer, no state
+    if (!app.reducer) return Promise.resolve();
     var baseUrl = app.baseUrl;
     //restore state from storage
     return readTable(baseUrl).then(tableState => {
@@ -47,9 +49,16 @@ appsLoader(appConfig).then(apps => {
         initialState = initialState.update(baseUrl, Map(), appState => appState.merge(tableState));
       } else if (app.fixtures && app.fixtures.initial){
         //or load state from fixtures
-        return app.fixtures.initial(null, baseUrl).then(topState => {
-          initialState = initialState.mergeDeep(topState);
-        });
+        if (_.isFunction(app.fixtures.initial)) {
+          return app.fixtures.initial(null, baseUrl).then(topState => {
+            initialState = initialState.mergeDeep(topState);
+          });
+        } else {
+          initialState = initialState.update(baseUrl, Map(), appState => appState.merge(app.fixtures.initial));
+        }
+      } else {
+        //default fixture is empty map
+        initialState = initialState.mergeDeep({[baseUrl]: {}});
       }
     });
   })).then(x => {
