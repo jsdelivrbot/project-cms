@@ -4,17 +4,38 @@ import _ from 'lodash';
 import LinkList from './components/LinkList.jsx';
 import AddLink from './components/AddLink.jsx';
 
-//import reducer from './reducer';
 import actions from './actions';
+
+
+function renderMediaItem(media_item, field) {
+  switch(field) {
+    case "detail_link":
+      return media_item.media_type + "/" + media_item.id;
+    case "preview":
+      return media_item.path;
+    case "embed_code":
+      switch(media_item.type) {
+        case "anchor":
+          return `<a href=${media_item.path}>${media_item.path}</a>`
+        case "css":
+          return `<link ref="stylesheet" href=${media_item.path}/>`
+        case "javascript":
+          return `<script src=${media_item.path}></script>`
+        case "image":
+          return `<img src=${media_item.path}/>`
+      }
+  }
+}
+
 
 export default function LinksApplicationFactory(baseUrl) {
 
   return {
     baseUrl,
     type: 'media provider',
-    //reducer,
     actions,
     title: 'Links',
+    renderMediaItem: renderMediaItem,
     routes: {
       path: baseUrl,
       component: 'div',

@@ -21,12 +21,14 @@ export default function MediaApplicationFactory(baseUrl) {
     dashboardPlugins: {
       mediaPicker: connect(state => {
         return {
-          providers: mediaProviders(state)
+          providers: mediaProviders(state),
+          media: state.get(baseUrl)
         }
       })(ModalPicker),
       mediaEmbed: connect(state => {
         return {
-          providers: mediaProviders(state)
+          providers: mediaProviders(state),
+          media: state.get(baseUrl)
         }
       })(SidebarEmbed)
     },

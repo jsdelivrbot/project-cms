@@ -5,14 +5,25 @@ import {Link} from 'react-router';
 
 function ProvidersNav({providers}) {
   function ProviderLink({baseUrl, title}) {
-    return <li key={baseUrl}>
-      <Link to={baseUrl} className="btn">{title}</Link>
-    </li>
+    return <Link to={baseUrl} className="btn btn-default" key={baseUrl}>{title}</Link>
   }
 
-  return <ul>
+  return <div className="btn-group">
     {_.map(providers, ProviderLink)}
-  </ul>
+  </div>
+}
+
+function MediaRow({providers, media_item}) {
+  let provider = _.find(providers, {baseUrl: media_item.media_type});
+  if (!provider || !provider.renderMediaItem) {
+    return <tr/>
+  }
+  return <tr>
+    <td><Link to={provider.renderMediaItem(media_item, "detail_link")}>
+      {provider.renderMediaItem(media_item, "preview")}
+    </Link></td>
+    <td>{provider.title}</td>
+  </tr>
 }
 
 
@@ -37,12 +48,12 @@ export default function ProviderList({providers, media}) {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th>Title</th>
-            <th>Path</th>
+            <th>Item</th>
+            <th>Provider</th>
           </tr>
         </thead>
         <tbody>
-          {}
+          {media.map((media_item, id) => <MediaRow providers={providers} media_item={media_item.toJS()} key={id}/>).toArray()}
         </tbody>
       </table>
     </div>
