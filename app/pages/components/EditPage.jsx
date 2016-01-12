@@ -52,7 +52,9 @@ export default class EditPage extends React.Component {
 
   render() {
     let page = this.state;
-    return <div className="container-fluid">
+    let MediaSidebar = this.props.mediaSidebar;
+    return <div> {MediaSidebar ? <MediaSidebar/> : null} <div className="container-fluid">
+
       <div className="row">
         <div className="col-sm-12">
           <h1>Editing Page: {page.title}</h1>
@@ -127,6 +129,6 @@ export default class EditPage extends React.Component {
           <RenderPreview page={page} render={this.props.render} key="preview"/>
         </div>
       </div>
-    </div>
+    </div></div>
   }
 }

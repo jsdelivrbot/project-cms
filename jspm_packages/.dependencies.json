@@ -679,5 +679,6 @@
     "process": "github:jspm/nodelibs-process@^0.1.0",
     "buffer": "github:jspm/nodelibs-buffer@^0.1.0",
     "events": "github:jspm/nodelibs-events@^0.1.1"
-  }
+  },
+  "npm:systemjs-plugin-css@0.1.20": {}
 }

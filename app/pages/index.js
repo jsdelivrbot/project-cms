@@ -10,6 +10,15 @@ import actions from './actions';
 import publish from './publish';
 import fixtures from './fixtures';
 
+function pageTemplates(state) {
+  return state.get('/templates').filter(tmp => tmp.get('type') === 'page');
+}
+
+function mediaSidebar(state) {
+  let mediaApp = _.find(state.getIn(['/engine', 'apps']), {baseUrl: '/media'});
+  return (mediaApp && mediaApp.embeddableComponents) ? mediaApp.embeddableComponents.mediaSidebar : null;
+}
+
 export default function PagesApplicationFactory(baseUrl) {
   return {
     baseUrl,
@@ -35,8 +44,9 @@ export default function PagesApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            templates: state.get('/templates').filter(tmp => tmp.get('type') === 'page'),
-            render: state.getIn(['/engine', 'renderer'])
+            templates: pageTemplates(state),
+            render: state.getIn(['/engine', 'renderer']),
+            mediaSidebar: mediaSidebar(state)
           }
         }, {
           addPage: _.partial(actions.addPage, baseUrl),
@@ -49,8 +59,9 @@ export default function PagesApplicationFactory(baseUrl) {
             baseUrl: baseUrl,
             page: state.getIn([baseUrl, path]).toJS(),
             path,
-            templates: state.get('/templates').filter(tmp => tmp.get('type') === 'page'),
-            render: state.getIn(['/engine', 'renderer'])
+            templates: pageTemplates(state),
+            render: state.getIn(['/engine', 'renderer']),
+            mediaSidebar: mediaSidebar(state)
           }
         }, {
           updatePage: _.partial(actions.updatePage, baseUrl),

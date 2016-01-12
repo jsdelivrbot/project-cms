@@ -1,7 +1,5 @@
-var baseURL = (typeof window !== "undefined" && window.baseURL) ? window.baseURL : "/";
-
 System.config({
-  baseURL: baseURL,
+  baseURL: "/",
   defaultJSExtensions: true,
   transpiler: "babel",
   babelOptions: {
@@ -22,6 +20,9 @@ System.config({
       "modules": {
         "*.jsx": {
           "loader": "jsx"
+        },
+        "*.css": {
+          "loader": "css"
         }
       }
     }
@@ -1931,6 +1932,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.34",
     "codemirror": "npm:codemirror@5.9.0",
     "core-js": "npm:core-js@1.2.6",
+    "css": "npm:systemjs-plugin-css@0.1.20",
     "history": "npm:history@1.13.1",
     "immutable": "npm:immutable@3.7.5",
     "jsx": "github:loggur/plugin-babel-jsx@1.0.5",

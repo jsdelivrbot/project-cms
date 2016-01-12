@@ -46,6 +46,7 @@ appsLoader(appConfig).then(apps => {
     //restore state from storage
     return readTable(baseUrl).then(tableState => {
       if (tableState) {
+        //TODO tableState should be merged in by the app, because app state != tableState
         initialState = initialState.update(baseUrl, Map(), appState => appState.merge(tableState));
       } else if (app.fixtures && app.fixtures.initial){
         //or load state from fixtures

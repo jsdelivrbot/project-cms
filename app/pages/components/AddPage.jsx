@@ -46,7 +46,9 @@ export default class AddPage extends React.Component {
 
   render() {
     let page = this.state;
+    let MediaSidebar = this.props.mediaSidebar;
     return <div className="container-fluid">
+      {MediaSidebar ? <MediaSidebar/> : null}
       <div className="row">
         <div className="col-sm-12">
           <h1>Add Page</h1>
