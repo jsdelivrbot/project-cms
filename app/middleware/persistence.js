@@ -22,7 +22,7 @@ export function getTable(baseUrl) {
   return tables[baseUrl];
 }
 
-export default function persistenceMiddleware() {
+export function persistenceMiddleware() {
   return (next) => (action) => {
     const {record_change} = action;
     if (!record_change) {
@@ -43,6 +43,35 @@ export default function persistenceMiddleware() {
     }
     return next(action);
   };
+}
+
+//{tables: persistenceReducer}
+const INITIAL_STATE = Map();
+
+export function persistenceReducer(state=INITIAL_STATE, action) {
+  const {record_change} = action;
+  if (!record_change) {
+    return state;
+  }
+
+  const { new_object, update_object, remove_object, table_name, object_id } = record_change;
+  const table = getTable(table_name);
+  if (new_object) {
+    console.log("New object:", table_name, object_id)
+    //if (_.isFunction(new_object.toJS)) new_object = new_object.toJS();
+    table.put(object_id, new_object);
+    return state.setIn([table_name, object_id], new_object);
+  } else if (update_object) {
+    console.log("Update object:", table_name, object_id)
+    //if (_.isFunction(update_object.toJS)) update_object = update_object.toJS();
+    table.put(object_id, update_object);
+    return state.setIn([table_name, object_id], update_object);
+  } else if (remove_object) {
+    table.del(object_id);
+    return state.deleteIn([table_name, object_id]);
+  }
+  console.warn("Received invalid record_change action:", action);
+  return state;
 }
 
 export function readTable(tableName) {

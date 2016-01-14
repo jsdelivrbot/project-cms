@@ -48,6 +48,6 @@ class RenderPreview extends React.Component {
 
 export default connect((state, props) => {
   return {
-    site: state.get('/site').toJS()
+    site: state.getIn(['tables', '/site', 'site']).toJS()
   };
 })(RenderPreview);

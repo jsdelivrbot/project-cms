@@ -13,12 +13,12 @@ import fixtures from './fixtures';
 export default function TemplateApplicationFactory(baseUrl) {
 
   return {
-    baseUrl,
     type: 'application',
     reducer,
     actions,
     fixtures,
     renderFactory: renderFactory,
+    tables: [baseUrl],
     title: 'Templates',
     routes: {
       path: baseUrl,
@@ -27,7 +27,7 @@ export default function TemplateApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            templates: state.get(baseUrl).toJS()
+            templates: state.getIn(['tables', baseUrl]).toJS()
           }
         })(TemplateList)
       },
@@ -46,7 +46,7 @@ export default function TemplateApplicationFactory(baseUrl) {
           let path = '/'+props.params.splat;
           return {
             baseUrl: baseUrl,
-            template: state.getIn([baseUrl, path]).toJS(),
+            template: state.getIn(['tables', baseUrl, path]).toJS(),
             path
           }
         }, {

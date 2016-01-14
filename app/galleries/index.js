@@ -13,7 +13,7 @@ import fixtures from './fixtures';
 
 
 function galleryTemplates(state) {
-  return state.get('/templates').filter(tmp => tmp.get('type') === 'page');
+  return state.getIn(['tables', '/templates']).filter(tmp => tmp.get('type') === 'page');
 }
 
 
@@ -27,12 +27,12 @@ function askForMedia(quantityLimit=20) {
 
 export default function GallerysApplicationFactory(baseUrl) {
   return {
-    baseUrl,
     type: 'application',
     reducer,
     actions,
     fixtures,
     publish: _.partial(publish, baseUrl),
+    tables: [baseUrl],
     title: 'Galleries',
     routes: {
       path: baseUrl,
@@ -41,7 +41,7 @@ export default function GallerysApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            galleries: state.get(baseUrl).toJS()
+            galleries: state.getIn(['tables', baseUrl]).toJS()
           }
         }, {
           askForMedia
@@ -65,7 +65,7 @@ export default function GallerysApplicationFactory(baseUrl) {
           let path = '/'+props.params.splat;
           return {
             baseUrl: baseUrl,
-            gallery: state.getIn([baseUrl, path]).toJS(),
+            gallery: state.getIn(['tables', baseUrl, path]).toJS(),
             path,
             templates: galleryTemplates(state),
             render: state.getIn(['/engine', 'renderer']),

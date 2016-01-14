@@ -25,7 +25,7 @@ class CopyLink extends React.Component {
 
   render() {
     return <div>
-      <p><textarea className="js-cuttextarea" ref="textarea" value={this.props.data}/></p>
+      <p><textarea className="js-cuttextarea" ref="textarea" value={this.props.data} readOnly={true}/></p>
       <button onClick={this.copyToClipboard}>Copy</button>
     </div>
   }

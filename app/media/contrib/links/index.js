@@ -31,7 +31,6 @@ function renderMediaItem(media_item, field) {
 export default function LinksApplicationFactory(baseUrl) {
 
   return {
-    baseUrl,
     type: 'media provider',
     actions,
     title: 'Links',

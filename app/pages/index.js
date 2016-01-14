@@ -11,7 +11,7 @@ import publish from './publish';
 import fixtures from './fixtures';
 
 function pageTemplates(state) {
-  return state.get('/templates').filter(tmp => tmp.get('type') === 'page');
+  return state.getIn(['tables', '/templates']).filter(tmp => tmp.get('type') === 'page');
 }
 
 function mediaSidebar(state) {
@@ -21,11 +21,11 @@ function mediaSidebar(state) {
 
 export default function PagesApplicationFactory(baseUrl) {
   return {
-    baseUrl,
     type: 'application',
     reducer,
     actions,
     fixtures,
+    tables: [baseUrl],
     publish: _.partial(publish, baseUrl),
     title: 'Pages',
     routes: {
@@ -35,7 +35,7 @@ export default function PagesApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            pages: state.get(baseUrl).toJS()
+            pages: state.getIn(['tables', baseUrl]).toJS()
           }
         })(PageList)
       },
@@ -57,7 +57,7 @@ export default function PagesApplicationFactory(baseUrl) {
           let path = '/'+props.params.splat;
           return {
             baseUrl: baseUrl,
-            page: state.getIn([baseUrl, path]).toJS(),
+            page: state.getIn(['tables', baseUrl, path]).toJS(),
             path,
             templates: pageTemplates(state),
             render: state.getIn(['/engine', 'renderer']),

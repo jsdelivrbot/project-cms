@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
-import {Map} from 'immutable';
+import {Map, fromJS} from 'immutable';
 import {compose, createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {combineReducers} from 'redux-immutablejs';
@@ -10,7 +10,7 @@ import {Route, Router, Redirect} from 'react-router';
 import createHistory from 'history/lib/createHashHistory'
 
 import promiseMiddleware from './middleware/promise';
-import persistenceMiddleware, {readTable} from './middleware/persistence';
+import {readTable, persistenceReducer} from './middleware/persistence';
 import nextUrlMiddleware from './middleware/next_url';
 import askForMiddleware from './middleware/ask_for';
 
@@ -19,7 +19,7 @@ import zipPublisher from './publishers/zipfile';
 import publish from './publishers/index';
 
 
-var createStoreWithMiddleware = applyMiddleware(persistenceMiddleware, nextUrlMiddleware, promiseMiddleware, askForMiddleware)(createStore);
+var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, promiseMiddleware, askForMiddleware)(createStore);
 
 var history = createHistory();
 
@@ -42,28 +42,32 @@ appsLoader(appConfig).then(apps => {
 
   var initialState = Map();
   return Promise.all(_.map(apps, app => {
-    //no reducer, no state
-    if (!app.reducer) return Promise.resolve();
-    var baseUrl = app.baseUrl;
-    //restore state from storage
-    return readTable(baseUrl).then(tableState => {
-      if (tableState) {
-        //TODO tableState should be merged in by the app, because app state != tableState
-        initialState = initialState.update(baseUrl, Map(), appState => appState.merge(tableState));
-      } else if (app.fixtures && app.fixtures.initial){
-        //or load state from fixtures
-        if (_.isFunction(app.fixtures.initial)) {
-          return app.fixtures.initial(null, baseUrl).then(topState => {
-            initialState = initialState.mergeDeep(topState);
-          });
-        } else {
-          initialState = initialState.update(baseUrl, Map(), appState => appState.merge(app.fixtures.initial));
+    //if app defines tables, then load them or load its initial fixture
+    if (app.tables) {
+      var initialized = true;
+      return Promise.all(app.tables.map(tableName => {
+        return readTable(tableName).then(tableState => {
+          if (!tableState) {
+            initialized = false;
+            return;
+          }
+          initialState = initialState.setIn(['tables', tableName], fromJS(tableState));
+        });
+      })).then(done => {
+        if (!initialized) {
+          if (app.fixtures && app.fixtures.initial){
+            //or load state from fixtures
+            if (_.isFunction(app.fixtures.initial)) {
+              return app.fixtures.initial(null, app.baseUrl).then(tablesState => {
+                initialState = initialState.mergeDeepIn(['tables'], tablesState);
+              });
+            } else {
+              initialState = initialState.mergeDeepIn(['tables'], app.fixtures.initial);
+            }
+          }
         }
-      } else {
-        //default fixture is empty map
-        initialState = initialState.mergeDeep({[baseUrl]: {}});
-      }
-    });
+      });
+    }
   })).then(x => {
     console.log("Initial State:", initialState);
     return {apps, initialState};
@@ -81,7 +85,9 @@ appsLoader(appConfig).then(apps => {
       col[app.baseUrl] = app.reducer;
     }
     return col;
-  }, {});
+  }, {
+    tables: persistenceReducer
+  });
   var dashboardPlugins = _.reduce(apps, (col, app) => {
     if (app.dashboardPlugins) {
       _.assign(col, app.dashboardPlugins);
