@@ -6,7 +6,6 @@ import GalleryList from './components/GalleryList.jsx';
 import AddGallery from './components/AddGallery.jsx';
 import EditGallery from './components/EditGallery.jsx';
 
-import reducer from './reducer';
 import actions from './actions';
 import publish from './publish';
 import fixtures from './fixtures';
@@ -20,7 +19,7 @@ function galleryTemplates(state) {
 function askForMedia(quantityLimit=20) {
   return {
     type: 'ASK_FOR_MEDIA',
-    media_types: ['pictures'],
+    mediaTypes: ['pictures'],
     quantityLimit
   }
 }
@@ -28,7 +27,6 @@ function askForMedia(quantityLimit=20) {
 export default function GallerysApplicationFactory(baseUrl) {
   return {
     type: 'application',
-    reducer,
     actions,
     fixtures,
     publish: _.partial(publish, baseUrl),
@@ -61,7 +59,7 @@ export default function GallerysApplicationFactory(baseUrl) {
         })(AddGallery)
       }, {
         path: '**',
-        component: connect(state => {
+        component: connect((state, props) => {
           let path = '/'+props.params.splat;
           return {
             baseUrl: baseUrl,

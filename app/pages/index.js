@@ -5,7 +5,6 @@ import PageList from './components/PageList.jsx';
 import AddPage from './components/AddPage.jsx';
 import EditPage from './components/EditPage.jsx';
 
-import reducer from './reducer';
 import actions from './actions';
 import publish from './publish';
 import fixtures from './fixtures';
@@ -22,7 +21,6 @@ function mediaSidebar(state) {
 export default function PagesApplicationFactory(baseUrl) {
   return {
     type: 'application',
-    reducer,
     actions,
     fixtures,
     tables: [baseUrl],

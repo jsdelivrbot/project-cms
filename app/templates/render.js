@@ -16,7 +16,7 @@ function storeLoader(store) {
       return rPath;
     },
     load: function (identifier, cb) {
-      var tpl = store.getState().getIn(['/templates', identifier, 'content']);
+      var tpl = store.getState().getIn(['tables', '/templates', identifier, 'content']);
       if (tpl) {
         if (cb) return cb(null, tpl);
         return tpl;
@@ -45,7 +45,7 @@ export default function renderFactory(store) {
   function getRenderer(templateKey) {
     //console.log("getRenderer", templateKey)
     var cached = templatesCache[templateKey];
-    var template = store.getState().getIn(['/templates', templateKey, 'content']);
+    var template = store.getState().getIn(['tables', '/templates', templateKey, 'content']);
 
     //if cache is up to date, return cached render
     if (cached && cached.template === template) {

@@ -3,14 +3,12 @@ import _ from 'lodash';
 
 import EditSite from './components/EditSite.jsx';
 
-import reducer from './reducer';
 import actions from './actions';
 import fixtures from './fixtures';
 
 export default function SiteApplicationFactory(baseUrl) {
   return {
     type: 'application',
-    reducer,
     actions,
     fixtures,
     tables: [baseUrl],

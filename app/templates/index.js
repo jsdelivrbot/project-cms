@@ -5,7 +5,6 @@ import TemplateList from './components/TemplateList.jsx';
 import AddTemplate from './components/AddTemplate.jsx';
 import EditTemplate from './components/EditTemplate.jsx';
 
-import reducer from './reducer';
 import actions from './actions';
 import renderFactory from './render';
 import fixtures from './fixtures';
@@ -14,7 +13,6 @@ export default function TemplateApplicationFactory(baseUrl) {
 
   return {
     type: 'application',
-    reducer,
     actions,
     fixtures,
     renderFactory: renderFactory,
