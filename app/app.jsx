@@ -12,13 +12,14 @@ import createHistory from 'history/lib/createHashHistory'
 import promiseMiddleware from './middleware/promise';
 import persistenceMiddleware, {readTable} from './middleware/persistence';
 import nextUrlMiddleware from './middleware/next_url';
+import askForMiddleware from './middleware/ask_for';
 
 import appsLoader from './appsLoader';
 import zipPublisher from './publishers/zipfile';
 import publish from './publishers/index';
 
 
-var createStoreWithMiddleware = applyMiddleware(persistenceMiddleware, nextUrlMiddleware, promiseMiddleware)(createStore);
+var createStoreWithMiddleware = applyMiddleware(persistenceMiddleware, nextUrlMiddleware, promiseMiddleware, askForMiddleware)(createStore);
 
 var history = createHistory();
 
@@ -29,6 +30,7 @@ var appConfig = {
   '/engine': './engine/index',
   '/site': './site/index',
   '/pages': './pages/index',
+  '/galleries': './galleries/index',
   '/templates': './templates/index',
   '/media': './media/index',
   '/media/links': './media/contrib/links/index',

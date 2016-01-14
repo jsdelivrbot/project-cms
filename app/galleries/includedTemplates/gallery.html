@@ -1,0 +1,27 @@
+{% extends "/base.html" %}
+
+{% block head %}
+<title>{{gallery.title}}</title>
+
+{{gallery.head|safe}}
+
+{% if gallery.css %}
+<style>{{gallery.css}}</style>
+{% endif %}
+
+{% if gallery.javascript %}
+<script type="application/javascript">{{gallery.javascript}}</script>
+{% endif %}
+{% endblock head %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div id="content" class="col-md-12">
+      {% for picture in gallery.pictures %}
+        <img src="{{ picture }}"/>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

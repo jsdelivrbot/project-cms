@@ -5,15 +5,12 @@ import _ from 'lodash';
 import {Map, fromJS} from 'immutable';
 
 /*
-detect
+detect record_change
  * new_object, update_object, remove_object
  * object_id
- * baseUrl
+ * table_name
 
-baseUrl determines the sublevel
 object_id is the key
-
-but for say /site the object is the sublevel, object_id will be $ or _ or self
 */
 
 
@@ -44,7 +41,7 @@ export default function persistenceMiddleware() {
     } else if (remove_object) {
       table.del(object_id);
     }
-    next(action);
+    return next(action);
   };
 }
 

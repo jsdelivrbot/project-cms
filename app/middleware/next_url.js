@@ -4,6 +4,6 @@ export default function nextUrlMiddleware() {
       //TODO react router method instead
       window.location.hash = action.next_url;
     }
-    next(action);
+    return next(action);
   };
 }

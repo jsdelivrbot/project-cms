@@ -33,7 +33,7 @@ export default function ModalPicker({providers, media, respondWithMedia}) {
     respondWithMedia(null);
   }
 
-  return <div className="modal fade" id="media-modal-picker" tabindex="-1" role="dialog" aria-labelledby="media-modal-picker-label">
+  return <div className="modal fade" id="media-modal-picker" tabIndex="-1" role="dialog" aria-labelledby="media-modal-picker-label">
     <div className="modal-dialog" role="document">
       <div className="modal-content">
         <div className="modal-header">
