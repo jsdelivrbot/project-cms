@@ -1,11 +1,10 @@
 import React from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import _ from 'lodash';
-import {Link} from 'react-router';
 
 
-function MediaRow({providers, media_item, onSelect, selectMultiple}) {
-  let provider = _.find(providers, {baseUrl: media_item.media_type});
+function MediaRow({providers, media_item, onSelect, selectMultiple, selected}) {
+  const provider = _.find(providers, {baseUrl: media_item.get('media_type')});
   if (!provider || !provider.renderMediaItem) {
     return <tr/>
   }
@@ -24,46 +23,76 @@ function MediaRow({providers, media_item, onSelect, selectMultiple}) {
 
 //TODO do something with mediaTypes
 export default class ModalPicker extends React.Component {
-  //props = {providers, media, respondWithMedia, mediaTypes, quantityLimit}
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      visible: false,
+      selection: new Set()
+    };
+  }
+  //props = {providers, media, respondWithMedia, mediaTypes, quantityLimit, visible}
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log("refresh selection?", shallowCompare(this, nextProps, nextState), nextProps);
     return shallowCompare(this, nextProps, nextState);
   }
 
-  render() {
-    let {providers, media, respondWithMedia, mediaTypes, quantityLimit} = this.props;
-    const selectMultiple = quantityLimit > 1;
-    console.log("refresh selection");
-    let selection = new Set();
-
-    function dismiss() {
-      respondWithMedia(null);
-      selection.clear();
-    }
-
-    function onSelect(media_item) {
-      if (selectMultiple) {
-        respondWithMedia(media_item);
+  componentWillReceiveProps(nextProps) {
+    if (this.state.visible !== nextProps.visible) {
+      if (nextProps.visible) {
+        $("#media-modal-picker").modal('show');
       } else {
-        if (selection.has(media_item)) {
-          selection.delete(media_item);
-        } else {
-          selection.add(media_item);
-        }
+        $("#media-modal-picker").modal('hide');
       }
-    }
 
-    function submitSelection() {
-      respondWithMedia(selection.values());
-      selection.clear();
+      this.setState({
+        selection: new Set(),
+        visible: nextProps.visible,
+      });
     }
+  }
 
-    return <div className="modal fade" id="media-modal-picker" tabIndex="-1" role="dialog" aria-labelledby="media-modal-picker-label">
+  onDismiss = (event) => {
+    event.preventDefault();
+    this.props.respondWithMedia(null);
+  };
+
+  onSelectMultiple = (media_item) => {
+    let selection = this.state.selection;
+    if (selection.has(media_item)) {
+      selection.delete(media_item);
+    } else {
+      selection.add(media_item);
+    }
+    //this.setState({selection});
+  };
+
+  onSelect = (media_item) => {
+    this.props.respondWithMedia(media_item.toJS());
+  };
+
+  onSubmitSelection = (event) => {
+    event.preventDefault();
+    let selection = this.state.selection;
+    let items = [];
+    for (let media_item of selection.values()) {
+      items.push(media_item.toJS());
+    }
+    this.props.respondWithMedia(items);
+  };
+
+  render() {
+    let {providers, media, mediaTypes, quantityLimit} = this.props;
+    let {selection, visible} = this.state;
+    const selectMultiple = quantityLimit > 1;
+    const modalFade = visible ? "in" : "";
+
+    return <div className={`modal fade ${modalFade}`} id="media-modal-picker" tabIndex="-1" role="dialog" aria-labelledby="media-modal-picker-label">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
           <div className="modal-header">
-            <button type="button" className="close" aria-label="Close" onClick={dismiss}><span aria-hidden="true">&times;</span></button>
+            <button type="button" className="close" aria-label="Close" onClick={this.onDismiss}><span aria-hidden="true">&times;</span></button>
             <h4 className="modal-title" id="media-modal-picker-label">Media Picker</h4>
           </div>
           <div className="modal-body">
@@ -77,7 +106,10 @@ export default class ModalPicker extends React.Component {
                 </thead>
                 <tbody>
                   {media.map((media_item, id) =>
-                    <MediaRow providers={providers} media_item={media_item.toJS()} onSelect={onSelect} selectMultiple={selectMultiple} key={id}/>).toArray()
+                    <MediaRow providers={providers} media_item={media_item}
+                      onSelect={selectMultiple ? this.onSelectMultiple : this.onSelect}
+                      selected={selection.has(media_item)}
+                      selectMultiple={selectMultiple} key={id}/>).toArray()
                   }
                 </tbody>
               </table>
@@ -85,10 +117,10 @@ export default class ModalPicker extends React.Component {
           </div>
           <div className="modal-footer">
             { selectMultiple
-              ? <button type="button" className="btn btn-default" onClick={submitSelection} key="submit">Submit</button>
+              ? <button type="button" className="btn btn-default" onClick={this.onSubmitSelection} key="submit">Submit</button>
               : null
             }
-            <button type="button" className="btn btn-default" onClick={dismiss} key="dismiss">Close</button>
+            <button type="button" className="btn btn-default" onClick={this.onDismiss} key="dismiss">Close</button>
           </div>
         </div>
       </div>

@@ -9,8 +9,6 @@ export function askForMedia(mediaTypes, quantityLimits=1) {
 }
 
 export function respondWithMedia(result) {
-  $("#media-modal-picker").modal('hide');
-
   return {
     type: 'RESPOND_WITH_MEDIA',
     result,

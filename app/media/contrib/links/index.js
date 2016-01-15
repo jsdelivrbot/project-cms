@@ -10,19 +10,20 @@ import actions from './actions';
 function renderMediaItem(media_item, field) {
   switch(field) {
     case "detail_link":
-      return media_item.media_type + "/" + media_item.id;
+      return media_item.get('media_type') + "/" + media_item.get('id');
     case "preview":
-      return media_item.path;
+      return media_item.get('path');
     case "embed_code":
-      switch(media_item.type) {
+      const path = media_item.get('path');
+      switch(media_item.get('type')) {
         case "anchor":
-          return `<a href=${media_item.path}>${media_item.path}</a>`
+          return `<a href=${path}>${path}</a>`
         case "css":
-          return `<link ref="stylesheet" href=${media_item.path}/>`
+          return `<link ref="stylesheet" href=${path}/>`
         case "javascript":
-          return `<script src=${media_item.path}></script>`
+          return `<script src=${path}></script>`
         case "image":
-          return `<img src=${media_item.path}/>`
+          return `<img src=${path}/>`
       }
   }
 }
