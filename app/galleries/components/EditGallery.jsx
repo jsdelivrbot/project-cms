@@ -13,7 +13,7 @@ import RenderPreview from './RenderPreview.jsx';
 export default class EditGallery extends React.Component {
   constructor(props) {
     super(props) //{updateGallery, gallery, path, render}
-    this.state = _.clone(props.gallery);
+    this.state = props.gallery.toJS();
 
     this.updateContent = _.partial(this.updateCode, 'content');
     this.updateHead = _.partial(this.updateCode, 'head');

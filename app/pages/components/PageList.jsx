@@ -4,7 +4,8 @@ import {Link} from 'react-router';
 
 
 export default function PageList({baseUrl, pages}) {
-  function PageRow({title, path}) {
+  function PageRow(page) {
+    const {title, path} = page.toJS()
     return <tr key={path}>
       <td><Link to={`${baseUrl}${path}`}>{title}</Link></td>
       <td>{path}</td>
@@ -29,7 +30,7 @@ export default function PageList({baseUrl, pages}) {
           </tr>
         </thead>
         <tbody>
-          {_.map(pages, PageRow)}
+          {pages.map(PageRow).toArray()}
         </tbody>
       </table>
     </div>

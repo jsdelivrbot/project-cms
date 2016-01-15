@@ -39,7 +39,7 @@ export default function GallerysApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            galleries: state.getIn(['tables', baseUrl]).toJS()
+            galleries: state.getIn(['tables', baseUrl])
           }
         }, {
           askForMedia
@@ -63,7 +63,7 @@ export default function GallerysApplicationFactory(baseUrl) {
           let path = '/'+props.params.splat;
           return {
             baseUrl: baseUrl,
-            gallery: state.getIn(['tables', baseUrl, path]).toJS(),
+            gallery: state.getIn(['tables', baseUrl, path]),
             path,
             templates: galleryTemplates(state),
             render: state.getIn(['/engine', 'renderer']),

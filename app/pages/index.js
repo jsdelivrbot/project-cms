@@ -33,7 +33,7 @@ export default function PagesApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            pages: state.getIn(['tables', baseUrl]).toJS()
+            pages: state.getIn(['tables', baseUrl])
           }
         })(PageList)
       },
@@ -55,7 +55,7 @@ export default function PagesApplicationFactory(baseUrl) {
           let path = '/'+props.params.splat;
           return {
             baseUrl: baseUrl,
-            page: state.getIn(['tables', baseUrl, path]).toJS(),
+            page: state.getIn(['tables', baseUrl, path]),
             path,
             templates: pageTemplates(state),
             render: state.getIn(['/engine', 'renderer']),

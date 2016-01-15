@@ -13,7 +13,7 @@ import RenderPreview from './RenderPreview.jsx';
 export default class EditPage extends React.Component {
   constructor(props) {
     super(props) //{updatePage, page, path, render}
-    this.state = _.clone(props.page);
+    this.state = props.page.toJS();
 
     this.updateContent = _.partial(this.updateCode, 'content');
     this.updateHead = _.partial(this.updateCode, 'head');

@@ -5,8 +5,9 @@ import {Link} from 'react-router';
 
 export default function LinkList({baseUrl, links}) {
   console.log("LINKS:", links);
-  
-  function LinkRow({id, path, type}) {
+
+  function LinkRow(link) {
+    const {id, path, type} = link.toJS();
     return <tr key={id}>
       <td><Link to={`${baseUrl}/${id}`}>{path}</Link></td>
       <td>{type}</td>
@@ -31,7 +32,7 @@ export default function LinkList({baseUrl, links}) {
           </tr>
         </thead>
         <tbody>
-          {_.map(links, LinkRow)}
+          {links.map(LinkRow).toArray()}
         </tbody>
       </table>
     </div>

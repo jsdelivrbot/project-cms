@@ -10,7 +10,7 @@ import 'codemirror/mode/css/css';
 export default class EditSite extends React.Component {
   constructor(props) {
     super(props) //{updateSite, site}
-    this.state = _.clone(props.site);
+    this.state = props.site.toJS();
 
     this.updateHead = _.partial(this.updateCode, 'head');
     this.updateCSS = _.partial(this.updateCode, 'css');

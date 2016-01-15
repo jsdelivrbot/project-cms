@@ -25,7 +25,7 @@ export default function TemplateApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            templates: state.getIn(['tables', baseUrl]).toJS()
+            templates: state.getIn(['tables', baseUrl])
           }
         })(TemplateList)
       },
@@ -44,7 +44,7 @@ export default function TemplateApplicationFactory(baseUrl) {
           let path = '/'+props.params.splat;
           return {
             baseUrl: baseUrl,
-            template: state.getIn(['tables', baseUrl, path]).toJS(),
+            template: state.getIn(['tables', baseUrl, path]),
             path
           }
         }, {

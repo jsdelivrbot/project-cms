@@ -8,7 +8,7 @@ import 'codemirror/mode/jinja2/jinja2';
 export default class EditTemplate extends React.Component {
   constructor(props) {
     super(props) //{updateTemplate, template, path}
-    this.state = _.clone(props.template);
+    this.state = props.template.toJS();
   }
 
   receiveSubmit = (event) => {

@@ -4,7 +4,8 @@ import {Link} from 'react-router';
 
 
 export default function GalleryList({baseUrl, galleries}) {
-  function GalleryRow({title, path}) {
+  function GalleryRow(gallery) {
+    let {path, title} = gallery.toJS();
     return <tr key={path}>
       <td><Link to={`${baseUrl}${path}`}>{title}</Link></td>
       <td>{path}</td>
@@ -29,7 +30,7 @@ export default function GalleryList({baseUrl, galleries}) {
           </tr>
         </thead>
         <tbody>
-          {_.map(galleries, GalleryRow)}
+          {galleries.map(GalleryRow).toArray()}
         </tbody>
       </table>
     </div>

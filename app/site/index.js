@@ -18,7 +18,7 @@ export default function SiteApplicationFactory(baseUrl) {
       component: connect(state => {
         return {
           baseUrl: baseUrl,
-          site: state.getIn(['tables', baseUrl, 'site']).toJS()
+          site: state.getIn(['tables', baseUrl, 'site'])
         }
       }, {
         updateSite: _.partial(actions.updateSite, baseUrl),

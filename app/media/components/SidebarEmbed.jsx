@@ -32,7 +32,8 @@ class CopyLink extends React.Component {
 }
 
 function MediaRow({providers, media_item}) {
-  let provider = _.find(providers, {baseUrl: media_item.media_type});
+  const media_type = media_item.get('media_type');
+  const provider = _.find(providers, {baseUrl: media_type});
   if (!provider || !provider.renderMediaItem) {
     return <tr/>
   }
@@ -74,7 +75,7 @@ export default class SidebarEmbed extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {media.map((media_item, id) => <MediaRow providers={providers} media_item={media_item.toJS()} key={id}/>).toArray()}
+              {media.map((media_item, id) => <MediaRow providers={providers} media_item={media_item} key={id}/>).toArray()}
             </tbody>
           </table>
         </div>

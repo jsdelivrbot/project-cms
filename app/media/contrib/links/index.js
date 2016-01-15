@@ -43,7 +43,7 @@ export default function LinksApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            links: state.get('/media').filter(x => x.get('media_type') === baseUrl).toJS()
+            links: state.getIn(['tables', '/media']).filter(x => x.get('media_type') === baseUrl)
           }
         })(LinkList)
       },
