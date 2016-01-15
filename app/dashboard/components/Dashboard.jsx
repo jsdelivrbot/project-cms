@@ -1,4 +1,5 @@
 import React from 'react';
+import shallowCompare from 'react-addons-shallow-compare';
 import _ from 'lodash';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
@@ -40,14 +41,21 @@ function NavBar({pathname, apps}) {
   </nav>
 }
 
-function Plugins({plugins}) {
-  console.log("plugins:", plugins.toJS());
-  let renderedPlugins = plugins.map((PluginComponent, key) => {
-    return <PluginComponent key={key}/>
-  }).toArray();
-  return <div>
-    {renderedPlugins}
-  </div>
+class Plugins extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return shallowCompare(this, nextProps, nextState);
+  }
+
+  render() {
+    let plugins = this.props.plugins;
+    console.log("rendering plugins:", plugins);
+    let renderedPlugins = plugins.map((PluginComponent, key) => {
+      return <PluginComponent key={key}/>
+    }).toArray();
+    return <div>
+      {renderedPlugins}
+    </div>
+  }
 }
 
 function Dashboard({location, apps, plugins, children}) {

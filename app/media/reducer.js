@@ -6,10 +6,10 @@ export default function pages(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'ASK_FOR_MEDIA':
       $("#media-modal-picker").modal('show');
-      return state.set('modal-options', {
+      return state.set('modal-options', Map({
         mediaTypes: action.mediaTypes,
         quantityLimit: action.quantityLimit,
-      });
+      }));
     default:
       return state
   }

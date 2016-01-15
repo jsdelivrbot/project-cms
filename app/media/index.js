@@ -25,8 +25,8 @@ export default function MediaApplicationFactory(baseUrl) {
         return {
           providers: mediaProviders(state),
           media: state.getIn(['tables', '/media']),
-          mediaTypes: state.getIn([baseUrl, 'model-options', 'mediaTypes']),
-          quantityLimit: state.getIn([baseUrl, 'model-options', 'quantityLimit']),
+          mediaTypes: state.getIn([baseUrl, 'modal-options', 'mediaTypes']),
+          quantityLimit: state.getIn([baseUrl, 'modal-options', 'quantityLimit']),
         }
       }, actions)(ModalPicker)
     },

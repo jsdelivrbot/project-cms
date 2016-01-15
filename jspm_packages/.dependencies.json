@@ -94,13 +94,6 @@
     "fs": "github:jspm/nodelibs-fs@^0.1.0"
   },
   "npm:whatwg-fetch@0.9.0": {},
-  "npm:promise@7.0.4": {
-    "asap": "npm:asap@~2.0.3",
-    "fs": "github:jspm/nodelibs-fs@^0.1.0"
-  },
-  "npm:ua-parser-js@0.7.9": {
-    "systemjs-json": "github:systemjs/plugin-json@^0.1.0"
-  },
   "npm:history@1.13.1": {
     "deep-equal": "npm:deep-equal@^1.0.0",
     "invariant": "npm:invariant@^2.0.0",
@@ -126,14 +119,6 @@
     "process": "github:jspm/nodelibs-process@^0.1.0",
     "fs": "github:jspm/nodelibs-fs@^0.1.0"
   },
-  "npm:fbjs@0.3.2": {
-    "core-js": "npm:core-js@^1.0.0",
-    "loose-envify": "npm:loose-envify@^1.0.0",
-    "promise": "npm:promise@^7.0.3",
-    "ua-parser-js": "npm:ua-parser-js@^0.7.9",
-    "whatwg-fetch": "npm:whatwg-fetch@^0.9.0",
-    "process": "github:jspm/nodelibs-process@^0.1.0"
-  },
   "github:jspm/nodelibs-stream@0.1.0": {
     "stream-browserify": "npm:stream-browserify@^1.0.0"
   },
@@ -156,11 +141,6 @@
   "github:jspm/nodelibs-child_process@0.1.0": {},
   "github:jspm/nodelibs-events@0.1.1": {
     "events": "npm:events@1.0.2"
-  },
-  "npm:react@0.14.3": {
-    "envify": "npm:envify@^3.0.0",
-    "fbjs": "npm:fbjs@^0.3.1",
-    "process": "github:jspm/nodelibs-process@^0.1.0"
   },
   "npm:core-js@1.2.6": {
     "systemjs-json": "github:systemjs/plugin-json@^0.1.0",
@@ -322,26 +302,6 @@
   "npm:codemirror@5.9.0": {
     "process": "github:jspm/nodelibs-process@^0.1.0",
     "buffer": "github:jspm/nodelibs-buffer@^0.1.0"
-  },
-  "npm:domain-browser@1.1.5": {
-    "assert-helpers": "npm:assert-helpers@^4.1.0",
-    "events": "github:jspm/nodelibs-events@^0.1.1"
-  },
-  "npm:assert-helpers@4.1.0": {
-    "ansicolors": "npm:ansicolors@^0.3.2",
-    "diff": "npm:diff@^2.1.1",
-    "esnextguardian": "npm:esnextguardian@^1.1.0",
-    "path": "github:jspm/nodelibs-path@^0.1.0",
-    "util": "github:jspm/nodelibs-util@^0.1.0",
-    "assert": "github:jspm/nodelibs-assert@^0.1.0",
-    "process": "github:jspm/nodelibs-process@^0.1.0"
-  },
-  "npm:esnextguardian@1.2.0": {
-    "process": "github:jspm/nodelibs-process@^0.1.0"
-  },
-  "npm:ansicolors@0.3.2": {},
-  "npm:diff@2.2.1": {
-    "process": "github:jspm/nodelibs-process@^0.1.0"
   },
   "npm:localstorage-down@0.6.4": {
     "abstract-leveldown": "npm:abstract-leveldown@0.12.3",
@@ -680,5 +640,37 @@
     "buffer": "github:jspm/nodelibs-buffer@^0.1.0",
     "events": "github:jspm/nodelibs-events@^0.1.1"
   },
-  "npm:systemjs-plugin-css@0.1.20": {}
+  "npm:systemjs-plugin-css@0.1.20": {},
+  "npm:react-addons-shallow-compare@0.14.6": {
+    "react": "npm:react@^0.14.6"
+  },
+  "npm:source-map@0.1.31": {
+    "amdefine": "npm:amdefine",
+    "process": "github:jspm/nodelibs-process@^0.1.0",
+    "path": "github:jspm/nodelibs-path@^0.1.0",
+    "fs": "github:jspm/nodelibs-fs@^0.1.0"
+  },
+  "npm:promise@7.1.1": {
+    "asap": "npm:asap@~2.0.3",
+    "fs": "github:jspm/nodelibs-fs@^0.1.0"
+  },
+  "npm:ua-parser-js@0.7.10": {
+    "systemjs-json": "github:systemjs/plugin-json@^0.1.0"
+  },
+  "npm:fbjs@0.6.1": {
+    "core-js": "npm:core-js@^1.0.0",
+    "loose-envify": "npm:loose-envify@^1.0.0",
+    "promise": "npm:promise@^7.0.3",
+    "ua-parser-js": "npm:ua-parser-js@^0.7.9",
+    "whatwg-fetch": "npm:whatwg-fetch@^0.9.0",
+    "process": "github:jspm/nodelibs-process@^0.1.0"
+  },
+  "npm:react@0.14.6": {
+    "envify": "npm:envify@^3.0.0",
+    "fbjs": "npm:fbjs@^0.6.1",
+    "process": "github:jspm/nodelibs-process@^0.1.0"
+  },
+  "npm:domain-browser@1.1.7": {
+    "events": "github:jspm/nodelibs-events@^0.1.1"
+  }
 }

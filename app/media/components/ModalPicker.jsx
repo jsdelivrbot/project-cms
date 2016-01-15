@@ -1,21 +1,17 @@
 import React from 'react';
+import shallowCompare from 'react-addons-shallow-compare';
 import _ from 'lodash';
 import {Link} from 'react-router';
 
-/*
-<button type="button" className="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button>
-*/
 
-function MediaRow({providers, media_item, respondWithMedia}) {
+function MediaRow({providers, media_item, onSelect, selectMultiple}) {
   let provider = _.find(providers, {baseUrl: media_item.media_type});
   if (!provider || !provider.renderMediaItem) {
     return <tr/>
   }
 
   function send(event) {
-    respondWithMedia(media_item);
+    onSelect(media_item);
   }
 
   return <tr>
@@ -26,41 +22,76 @@ function MediaRow({providers, media_item, respondWithMedia}) {
   </tr>
 }
 
-//TODO selecting an item needs to send a return value to whoever opened the dialog
-//TODO caller needs to be able to set embed type filter (ie img tag) so the user may only select images
-export default function ModalPicker({providers, media, respondWithMedia}) {
-  function dismiss() {
-    respondWithMedia(null);
+//TODO do something with mediaTypes
+export default class ModalPicker extends React.Component {
+  //props = {providers, media, respondWithMedia, mediaTypes, quantityLimit}
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("refresh selection?", shallowCompare(this, nextProps, nextState), nextProps);
+    return shallowCompare(this, nextProps, nextState);
   }
 
-  return <div className="modal fade" id="media-modal-picker" tabIndex="-1" role="dialog" aria-labelledby="media-modal-picker-label">
-    <div className="modal-dialog" role="document">
-      <div className="modal-content">
-        <div className="modal-header">
-          <button type="button" className="close" aria-label="Close" onClick={dismiss}><span aria-hidden="true">&times;</span></button>
-          <h4 className="modal-title" id="myModalLabel">Modal title</h4>
-        </div>
-        <div className="modal-body">
-          <div className="table-responsive">
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th>Item</th>
-                  <th>Provider</th>
-                </tr>
-              </thead>
-              <tbody>
-                {media.map((media_item, id) =>
-                  <MediaRow providers={providers} media_item={media_item.toJS()} respondWithMedia={respondWithMedia} key={id}/>).toArray()
-                }
-              </tbody>
-            </table>
+  render() {
+    let {providers, media, respondWithMedia, mediaTypes, quantityLimit} = this.props;
+    const selectMultiple = quantityLimit > 1;
+    console.log("refresh selection");
+    let selection = new Set();
+
+    function dismiss() {
+      respondWithMedia(null);
+      selection.clear();
+    }
+
+    function onSelect(media_item) {
+      if (selectMultiple) {
+        respondWithMedia(media_item);
+      } else {
+        if (selection.has(media_item)) {
+          selection.delete(media_item);
+        } else {
+          selection.add(media_item);
+        }
+      }
+    }
+
+    function submitSelection() {
+      respondWithMedia(selection.values());
+      selection.clear();
+    }
+
+    return <div className="modal fade" id="media-modal-picker" tabIndex="-1" role="dialog" aria-labelledby="media-modal-picker-label">
+      <div className="modal-dialog" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <button type="button" className="close" aria-label="Close" onClick={dismiss}><span aria-hidden="true">&times;</span></button>
+            <h4 className="modal-title" id="media-modal-picker-label">Media Picker</h4>
           </div>
-        </div>
-        <div className="modal-footer">
-          <button type="button" className="btn btn-default" onClick={dismiss}>Close</button>
+          <div className="modal-body">
+            <div className="table-responsive">
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Provider</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {media.map((media_item, id) =>
+                    <MediaRow providers={providers} media_item={media_item.toJS()} onSelect={onSelect} selectMultiple={selectMultiple} key={id}/>).toArray()
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="modal-footer">
+            { selectMultiple
+              ? <button type="button" className="btn btn-default" onClick={submitSelection} key="submit">Submit</button>
+              : null
+            }
+            <button type="button" className="btn btn-default" onClick={dismiss} key="dismiss">Close</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  }
 }
