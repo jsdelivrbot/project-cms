@@ -13,11 +13,18 @@ function MediaRow({providers, media_item, onSelect, selectMultiple, selected}) {
     onSelect(media_item);
   }
 
+  let selectedStatus = selectMultiple ?
+    <td key="selected" onClick={send}>
+      {selected ? <span className="glyphicon glyphicon-ok"/> : null}
+    </td>
+    : null;
+
   return <tr>
-    <td><a onClick={send}>
+    { selectedStatus }
+    <td key="preview"><button onClick={send}>
       {provider.renderMediaItem(media_item, "preview")}
-    </a></td>
-    <td>{provider.title}</td>
+    </button></td>
+    <td key="provider">{provider.title}</td>
   </tr>
 }
 
@@ -65,6 +72,7 @@ export default class ModalPicker extends React.Component {
     } else {
       selection.add(media_item);
     }
+    this.forceUpdate();
     //this.setState({selection});
   };
 
@@ -100,8 +108,9 @@ export default class ModalPicker extends React.Component {
               <table className="table table-striped">
                 <thead>
                   <tr>
-                    <th>Item</th>
-                    <th>Provider</th>
+                    {selectMultiple ? <th key="selected">Selected</th> : null}
+                    <th key="item">Item</th>
+                    <th key="provider">Provider</th>
                   </tr>
                 </thead>
                 <tbody>
