@@ -26,3 +26,13 @@ Or:
 ```
   docker-compose up
 ```
+
+
+# TODO
+
+* new version of babel
+* fix bundle
+* remarkable => markdown-it
+* support markdown classes
+* nunjucks templating
+* render single block updates

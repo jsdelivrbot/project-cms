@@ -41,7 +41,6 @@ export default class ModalPicker extends React.Component {
   //props = {providers, media, respondWithMedia, mediaTypes, quantityLimit, visible}
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log("refresh selection?", shallowCompare(this, nextProps, nextState), nextProps);
     return shallowCompare(this, nextProps, nextState);
   }
 

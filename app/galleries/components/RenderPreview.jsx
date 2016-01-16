@@ -3,24 +3,33 @@ import ReactDOM from 'react-dom';
 import {connect} from 'react-redux'
 
 class RenderPreview extends React.Component {
-  componentDidMount() {
-    this.renderFrameContents();
+  componentWillMount() {
+    this._renderedPage = this.renderPage();
   }
 
-  renderFrameContents() {
+  componentDidMount() {
+    const renderedPage = this._renderedPage;
+    this.writeFrameContents(renderedPage);
+  }
+
+  renderPage() {
+    let gallery = this.props.gallery;
+    let site = this.props.site.toJS();
+    var context = {
+      site,
+      gallery
+    };
+    return this.props.render(gallery.template, context);
+  }
+
+  writeFrameContents(renderedPage) {
     var doc = ReactDOM.findDOMNode(this).contentDocument;
     if(doc && doc.readyState === 'complete') {
-      let gallery = this.props.gallery;
-      let site = this.props.site;
-      var context = {
-        site,
-        gallery
-      };
-      var renderedPage = this.props.render(gallery.template, context);
+      doc.open();
       doc.write(renderedPage);
-
+      doc.close();
     } else {
-      setTimeout(this.renderFrameContents, 0);
+      setTimeout(this.writeFrameContents.bind(this, renderedPage), 0);
     }
   }
 
@@ -42,6 +51,6 @@ class RenderPreview extends React.Component {
 
 export default connect((state, props) => {
   return {
-    site: state.getIn(['tables', '/site', 'site']).toJS()
+    site: state.getIn(['tables', '/site', 'site'])
   };
 })(RenderPreview);
