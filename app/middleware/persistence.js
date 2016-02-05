@@ -91,6 +91,16 @@ export function readTable(tableName) {
   });
 }
 
+export function writeFixture(fixtureData) {
+  console.log("writeFixture", fixtureData);
+  _.each(fixtureData, function(rows, tableName) {
+    var table = getTable(tableName);
+    _.each(rows, function(value, key) {
+      table.put(key, value);
+    });
+  });
+}
+
 export function destroy(callback) {
   return Promise.all(_.map(tables, (table, table_name) => {
     return purgeTable(table_name);

@@ -36,3 +36,4 @@ Or:
 * support markdown classes
 * nunjucks templating
 * render single block updates
+* tagging for templates (for application filtering)

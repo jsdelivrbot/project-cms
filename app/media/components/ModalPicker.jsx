@@ -76,7 +76,7 @@ export default class ModalPicker extends React.Component {
   };
 
   onSelect = (media_item) => {
-    this.props.respondWithMedia(media_item.toJS());
+    this.props.respondWithMedia(this.translateMediaItem(media_item));
   };
 
   onSubmitSelection = (event) => {
@@ -84,10 +84,15 @@ export default class ModalPicker extends React.Component {
     let selection = this.state.selection;
     let items = [];
     for (let media_item of selection.values()) {
-      items.push(media_item.toJS());
+      items.push(this.translateMediaItem(media_item));
     }
     this.props.respondWithMedia(items);
   };
+
+  translateMediaItem(media_item) {
+    //const provider = _.find(providers, {baseUrl: media_item.get('media_type')});
+    return media_item.toJS();
+  }
 
   render() {
     let {providers, media, mediaTypes, quantityLimit} = this.props;
@@ -117,8 +122,7 @@ export default class ModalPicker extends React.Component {
                     <MediaRow providers={providers} media_item={media_item}
                       onSelect={selectMultiple ? this.onSelectMultiple : this.onSelect}
                       selected={selection.has(media_item)}
-                      selectMultiple={selectMultiple} key={id}/>).toArray()
-                  }
+                      selectMultiple={selectMultiple} key={id}/>).toArray()}
                 </tbody>
               </table>
             </div>

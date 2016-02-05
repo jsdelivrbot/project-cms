@@ -10,7 +10,7 @@ import {Route, Router, Redirect} from 'react-router';
 import createHistory from 'history/lib/createHashHistory'
 
 import promiseMiddleware from './middleware/promise';
-import {readTable, persistenceReducer} from './middleware/persistence';
+import {readTable, persistenceReducer, writeFixture} from './middleware/persistence';
 import nextUrlMiddleware from './middleware/next_url';
 import askForMiddleware from './middleware/ask_for';
 
@@ -59,11 +59,15 @@ appsLoader(appConfig).then(apps => {
             //or load state from fixtures
             if (_.isFunction(app.fixtures.initial)) {
               return app.fixtures.initial(null, app.baseUrl).then(tablesState => {
+                writeFixture(tablesState);
                 initialState = initialState.mergeDeepIn(['tables'], tablesState);
               });
             } else {
+              writeFixture(app.fixtures.initial);
               initialState = initialState.mergeDeepIn(['tables'], app.fixtures.initial);
             }
+          } else {
+            initialState = initialState.mergeDeepIn(['tables'], {[app.baseUrl]: {}});
           }
         }
       });
