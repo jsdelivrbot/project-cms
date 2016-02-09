@@ -4,7 +4,7 @@ const INITIATE_REQUEST = 'ASK_FOR_';
 const FULFILL_REQUEST = 'RESPOND_WITH_';
 
 //'ASK_FOR_<NS>' middleware; injects promise; fullfills when it sees RESPOND_WITH_<NS>
-export default function promiseMiddleware() {
+export default function askForMiddleware() {
   var requests = {};
 
   return (next) => (action) => {

@@ -31,7 +31,7 @@ export function setApps(apps) {
 }
 
 export function setAppsConfig(apps) {
-  //TODO apps should be a dictionary and should be ran through apps loader
+  //TODO apps should be ran through apps loader
   //this would then have a promise property
   //somehow on app set we replace the core reducer (black magic?)
   return {

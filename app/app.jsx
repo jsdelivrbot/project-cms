@@ -23,21 +23,8 @@ var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, promiseMiddle
 
 var history = createHistory();
 
-//TODO have the engine app tell us what apps to load (dynamically loaded apps?)
-//apps that have an admin presence
-var appConfig = {
-  '/': './dashboard/index',
-  '/engine': './engine/index',
-  '/site': './site/index',
-  '/pages': './pages/index',
-  '/galleries': './galleries/index',
-  '/templates': './templates/index',
-  '/media': './media/index',
-  '/media/links': './media/contrib/links/index',
-};
 
-
-appsLoader(appConfig).then(apps => {
+appsLoader().then(apps => {
   console.log("apps:", apps);
 
   var initialState = Map();
