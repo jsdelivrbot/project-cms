@@ -40,4 +40,11 @@ export function setAppsConfig(apps) {
   }
 }
 
-export default {setRenderer, setPublisher, pushContent, setApps, setAppsConfig}
+export function setAwsConfig(awsConfig) {
+  return {
+    type: 'SET_AWS_CONFIG',
+    awsConfig
+  }
+}
+
+export default {setRenderer, setPublisher, pushContent, setApps, setAppsConfig, setAwsConfig}

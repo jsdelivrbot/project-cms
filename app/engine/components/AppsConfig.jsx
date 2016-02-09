@@ -2,7 +2,7 @@ import React from 'react';
 import _ from 'lodash';
 
 
-export default class EditSite extends React.Component {
+export default class AppsConfig extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -76,7 +76,7 @@ export default class EditSite extends React.Component {
 
       <form onSubmit={this.receiveSubmit}>
         {_.map(apps, this.renderAppField)}
-        <div className="row">
+        <div className="row" key="ctrl-row">
           <div className="col-sm-6">
             <div className="form-group" key="add">
               <button type="button" className="btn btn-defualt" onClick={this.addApp}>Add</button>

@@ -23,7 +23,8 @@ const INITIAL_STATE = Map({
     type: 'builtin',
     location: './templates/index'
   }],
-  apps: []
+  apps: [],
+  awsConfig: {}
 });
 
 export default function engine(state = INITIAL_STATE, action) {
@@ -36,6 +37,8 @@ export default function engine(state = INITIAL_STATE, action) {
       return state.set('apps', action.apps);
     case 'SET_APPS_CONFIG':
       return state.set('appsConfig', action.apps);
+    case 'SET_AWS_CONFIG':
+      return state.set('awsConfig', action.awsConfig);
     case 'PUBLISH_REQUEST':
       return state.set('publishing', true).remove('publish_error');
     case 'PUBLISH':

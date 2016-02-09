@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 
-import AppsConfig from './components/AppsConfig.jsx';
+import ConfigPanel from './components/ConfigPanel.jsx';
 
 import reducer from './reducer';
 import actions from './actions';
@@ -17,11 +17,13 @@ export default function EngineFactory(baseUrl) {
       component: connect(state => {
         return {
           baseUrl: baseUrl,
-          appsConfig: state.getIn(['/engine', 'appsConfig'])
+          appsConfig: state.getIn(['/engine', 'appsConfig']),
+          awsConfig: state.getIn(['/engine', 'awsConfig'])
         }
       }, {
-        setAppsConfig: actions.setAppsConfig
-      })(AppsConfig)
+        setAppsConfig: actions.setAppsConfig,
+        setAwsConfig: actions.setAwsConfig
+      })(ConfigPanel)
     }
   }
 }
