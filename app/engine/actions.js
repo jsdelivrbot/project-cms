@@ -41,6 +41,7 @@ export function setAppsConfig(apps) {
 }
 
 export function setAwsConfig(awsConfig) {
+  console.log("setAwsConfig", awsConfig)
   return {
     type: 'SET_AWS_CONFIG',
     awsConfig

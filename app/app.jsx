@@ -15,8 +15,6 @@ import nextUrlMiddleware from './middleware/next_url';
 import askForMiddleware from './middleware/ask_for';
 
 import appsLoader from './appsLoader';
-import zipPublisher from './publishers/zipfile';
-import publish from './publishers/index';
 
 
 var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, promiseMiddleware, askForMiddleware)(createStore);
@@ -104,14 +102,6 @@ appsLoader().then(apps => {
   var renderer = getApp('/templates').renderFactory(store);
   console.log("renderer:", renderer);
   store.dispatch(engine.actions.setRenderer(renderer));
-
-
-  /* set up publishing */
-  function doPublish() {
-    let publisher = zipPublisher();
-    return publish(store, publisher);
-  }
-  store.dispatch(engine.actions.setPublisher(doPublish));
 
 
   /* mount application to DOM */

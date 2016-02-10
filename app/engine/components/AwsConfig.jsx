@@ -5,16 +5,13 @@ import _ from 'lodash';
 export default class AwsConfig extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      awsConfig: _.clone(props.awsConfig)
-    };
-
+    this.state = _.clone(props.awsConfig);
   }
 
   receiveSubmit = (event) => {
     event.preventDefault();
     console.log("Submit:", event);
-    this.props.setAwsConfig(this.state.awsConfig);
+    this.props.setAwsConfig(this.state);
   }
 
   updateValue = (event) => {
@@ -24,8 +21,9 @@ export default class AwsConfig extends React.Component {
   }
 
   render() {
-    let aws = this.state.awsConfig;
-    let origin = 'localhost'
+    let aws = this.state;
+    let origin = window.location.hostname;
+
     return <div className="container-fluid">
       <div className="row">
         <div className="col-sm-12">
@@ -38,12 +36,12 @@ export default class AwsConfig extends React.Component {
         <div className="row">
           <div className="form-group col-sm-6">
             <label>Access Key</label>
-            <input name="baseUrl" value={aws.key} onChange={this.updateValue}
+            <input name="key" value={aws.key} onChange={this.updateValue}
               type="text" className="form-control" placeholder="XXXXX"/>
           </div>
           <div className="form-group col-sm-6">
             <label>Secret Key</label>
-            <input name="baseUrl" value={aws.secret} onChange={this.updateValue}
+            <input name="secret" value={aws.secret} onChange={this.updateValue}
               type="text" className="form-control" placeholder="XXXXX"/>
           </div>
         </div>
@@ -51,7 +49,7 @@ export default class AwsConfig extends React.Component {
           <div className="form-group col-sm-6">
             <label>S3 Bucket</label>
             <span className="help-block">Ensure that you have cross-origin set to allow requests from {origin}</span>
-            <input name="baseUrl" value={aws.bucket} onChange={this.updateValue}
+            <input name="bucket" value={aws.bucket} onChange={this.updateValue}
               type="text" className="form-control" placeholder="bucket-name"/>
           </div>
         </div>

@@ -1,5 +1,3 @@
-import {connect} from 'react-redux'
-
 import Dashboard from './components/Dashboard.jsx';
 import Welcome from './components/Welcome.jsx';
 
@@ -13,12 +11,7 @@ export default function DashboardApplicationFactory(baseUrl) {
     title: 'Dashboard',
     routes: {
       path: baseUrl,
-      component: connect(state => {
-        return {
-          apps: state.getIn(['/engine', 'apps']),
-          plugins: state.getIn(['/', 'plugins']),
-        }
-      })(Dashboard),
+      component: Dashboard,
       indexRoute: {
         component: Welcome
       }

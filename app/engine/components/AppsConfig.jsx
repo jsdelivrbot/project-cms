@@ -19,12 +19,6 @@ export default class AppsConfig extends React.Component {
     }));
   }
 
-  updateValue = (event) => {
-    var changes = {};
-    changes[event.target.name] = event.target.value;
-    this.setState(changes);
-  }
-
   updateAppValue = (index, event) => {
     var changes = {
       appsConfig: _.clone(this.state.appsConfig)

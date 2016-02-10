@@ -1,28 +1,34 @@
 import _ from 'lodash';
-import fetch from 'whatwg-fetch';
+import knox from 'knox';
 
-//CONSIDER: use knoxclient?
 
 export default function s3Publisher(awsConfig) {
-  let baseUrl = `https://${awsConfig.bucket}.s3.amazonaws.com`;
+  var client = knox.createClient({
+    key: awsConfig.key,
+    secret: awsConfig.secret,
+    bucket: awsConfig.bucket
+  });
 
   function view() {
-    return baseUrl;
+    //TODO open tab
+    return `https://${awsConfig.bucket}.s3.amazonaws.com/`;
   }
 
   function pushContent(path, content, mimetype) {
-    let url = `${baseUrl}${path}`;
-    let authorization = '';
-    return fetch(url, {
-      method: 'PUT',
-      data: content,
-      headers: {
-        'Authorization': authorization,
+    return new Promise(function(resolve, reject) {
+      var req = client.put(path, {
         'x-amz-acl': 'public-read',
         'Content-Length': Buffer.byteLength(content),
-        'Content-Type': mimetype,
-        'Content-Encoding': 'utf-8'
-      }
+        'Content-Type': mimetype
+      });
+      req.on('response', function(res) {
+        if (res.statusCode === 200) {
+          resolve(req.url)
+        } else {
+          reject(res)
+        }
+      });
+      req.end(content);
     });
   }
 
