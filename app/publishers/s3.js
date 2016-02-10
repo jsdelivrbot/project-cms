@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import knox from 'knox';
+import {Buffer} from 'buffer';
 
 
 export default function s3Publisher(awsConfig) {

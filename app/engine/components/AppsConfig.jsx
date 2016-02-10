@@ -6,7 +6,7 @@ export default class AppsConfig extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      appsConfig: _.clone(props.appsConfig)
+      appsConfig: props.appsConfig.toJS()
     };
 
   }

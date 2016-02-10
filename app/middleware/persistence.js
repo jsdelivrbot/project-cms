@@ -17,32 +17,19 @@ object_id is the key
 var top = sublevel(levelup('cms', { db: localstorage, valueEncoding : 'json' }));
 var tables = {};
 
+function toJS(obj) {
+  if (_.isFunction(obj.toJS)) return obj.toJS();
+  return obj;
+}
+
+function toImmut(obj) {
+  if (_.isFunction(obj.toJS)) return obj;
+  return fromJS(obj);
+}
+
 export function getTable(baseUrl) {
   if (!tables[baseUrl]) tables[baseUrl] = top.sublevel(baseUrl);
   return tables[baseUrl];
-}
-
-export function persistenceMiddleware() {
-  return (next) => (action) => {
-    const {record_change} = action;
-    if (!record_change) {
-      return next(action);
-    }
-    const { new_object, update_object, remove_object, table_name, object_id } = record_change;
-    const table = getTable(table_name);
-    if (new_object) {
-      console.log("New object:", table_name, object_id)
-      //if (_.isFunction(new_object.toJS)) new_object = new_object.toJS();
-      table.put(object_id, new_object);
-    } else if (update_object) {
-      console.log("Update object:", table_name, object_id)
-      //if (_.isFunction(update_object.toJS)) update_object = update_object.toJS();
-      table.put(object_id, update_object);
-    } else if (remove_object) {
-      table.del(object_id);
-    }
-    return next(action);
-  };
 }
 
 //{tables: persistenceReducer}
@@ -58,14 +45,12 @@ export function persistenceReducer(state=INITIAL_STATE, action) {
   const table = getTable(table_name);
   if (new_object) {
     console.log("New object:", table_name, object_id)
-    //if (_.isFunction(new_object.toJS)) new_object = new_object.toJS();
-    table.put(object_id, new_object);
-    return state.setIn([table_name, object_id], new_object);
+    table.put(object_id, toJS(new_object));
+    return state.setIn([table_name, object_id], toImmut(new_object));
   } else if (update_object) {
     console.log("Update object:", table_name, object_id)
-    //if (_.isFunction(update_object.toJS)) update_object = update_object.toJS();
-    table.put(object_id, update_object);
-    return state.setIn([table_name, object_id], update_object);
+    table.put(object_id, toJS(update_object));
+    return state.setIn([table_name, object_id], toImmut(update_object));
   } else if (remove_object) {
     table.del(object_id);
     return state.deleteIn([table_name, object_id]);

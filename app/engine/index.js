@@ -4,6 +4,7 @@ import ConfigPanel from './components/ConfigPanel.jsx';
 
 import reducer from './reducer';
 import actions from './actions';
+import fixtures from './fixtures';
 
 
 export default function EngineFactory(baseUrl) {
@@ -11,14 +12,16 @@ export default function EngineFactory(baseUrl) {
     type: 'application',
     reducer,
     actions,
-    title: 'Apps',
+    fixtures,
+    tables: [baseUrl],
+    title: 'System',
     routes: {
       path: baseUrl,
       component: connect(state => {
         return {
           baseUrl: baseUrl,
-          appsConfig: state.getIn(['/engine', 'appsConfig']),
-          awsConfig: state.getIn(['/engine', 'awsConfig'])
+          appsConfig: state.getIn(['tables', '/engine', 'appsConfig']),
+          awsConfig: state.getIn(['tables', '/engine', 'awsConfig'])
         }
       }, {
         setAppsConfig: actions.setAppsConfig,

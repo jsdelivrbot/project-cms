@@ -8,6 +8,7 @@ export function setRenderer(renderer) {
 
 export function setPublisher(publisher) {
   //assert publisher is function
+  //CONSIDER: is this needed anymore?
   return {
     type: 'SET_PUBLISHER',
     publisher
@@ -30,21 +31,31 @@ export function setApps(apps) {
   }
 }
 
-export function setAppsConfig(apps) {
+export function setAppsConfig(appsConfig) {
   //TODO apps should be ran through apps loader
   //this would then have a promise property
-  //somehow on app set we replace the core reducer (black magic?)
+  //import {loadAppsConfig} from '~/appsLoader'
+  //somehow on app set we replace the core reducer (need access to store)
   return {
     type: 'SET_APPS_CONFIG',
-    apps
+    appsConfig,
+    record_change: {
+      update_object: appsConfig,
+      table_name: '/engine',
+      object_id: 'appsConfig'
+    }
   }
 }
 
 export function setAwsConfig(awsConfig) {
-  console.log("setAwsConfig", awsConfig)
   return {
     type: 'SET_AWS_CONFIG',
-    awsConfig
+    awsConfig,
+    record_change: {
+      update_object: awsConfig,
+      table_name: '/engine',
+      object_id: 'awsConfig'
+    }
   }
 }
 

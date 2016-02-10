@@ -5,7 +5,7 @@ import _ from 'lodash';
 export default class AwsConfig extends React.Component {
   constructor(props) {
     super(props)
-    this.state = _.clone(props.awsConfig);
+    this.state = props.awsConfig.toJS();
   }
 
   receiveSubmit = (event) => {

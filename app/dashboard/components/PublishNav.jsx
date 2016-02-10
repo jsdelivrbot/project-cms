@@ -15,7 +15,7 @@ export class PublishNav extends React.Component {
 
   render() {
     let {store} = this.context;
-    let {awsConfig} = this.props;
+    let awsConfig = this.props.awsConfig.toJS();
     let publishS3 = () => {
       return publish(store, s3Publisher(awsConfig));
     }
@@ -23,10 +23,10 @@ export class PublishNav extends React.Component {
       return publish(store, zipPublisher());
     }
 
-    return <ul className="nav navbar-nav navbar-right">
-      <li key="zip"><PublishButton publish={publishZipfile}>Export Zipfile</PublishButton></li>
-      {awsConfig.bucket ? <li key="s3"><PublishButton publish={publishS3}>Publish to S3</PublishButton></li> : null}
-    </ul>
+    return <div className="nav navbar-nav navbar-right btn-group" role="group">
+      <PublishButton key="zip" publish={publishZipfile}>Export Zipfile</PublishButton>
+      {awsConfig.bucket ? <PublishButton key="s3" publish={publishS3}>Publish to S3</PublishButton> : null}
+    </div>
   }
 }
 
@@ -36,6 +36,6 @@ PublishNav.contextTypes = {
 
 export default connect(state => {
   return {
-    awsConfig: state.getIn(['/engine', 'awsConfig'])
+    awsConfig: state.getIn(['tables', '/engine', 'awsConfig'])
   }
 })(PublishNav);

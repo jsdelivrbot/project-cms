@@ -43,10 +43,16 @@ appsLoader().then(apps => {
           if (app.fixtures && app.fixtures.initial){
             //or load state from fixtures
             if (_.isFunction(app.fixtures.initial)) {
-              return app.fixtures.initial(null, app.baseUrl).then(tablesState => {
-                writeFixture(tablesState);
-                initialState = initialState.mergeDeepIn(['tables'], tablesState);
-              });
+              let fixtureResponse = app.fixtures.initial(null, app.baseUrl);
+              if (_.isFunction(fixtureResponse.then)) {
+                return fixtureResponse.then(tablesState => {
+                  writeFixture(tablesState);
+                  initialState = initialState.mergeDeepIn(['tables'], tablesState);
+                });
+              } else {
+                writeFixture(fixtureResponse);
+                initialState = initialState.mergeDeepIn(['tables'], fixtureResponse);
+              }
             } else {
               writeFixture(app.fixtures.initial);
               initialState = initialState.mergeDeepIn(['tables'], app.fixtures.initial);

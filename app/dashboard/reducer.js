@@ -7,11 +7,15 @@ export const INITIAL_STATE = Map({
 });
 
 function craftAlert(state, type, message) {
+  if (type === 'error') {
+    console.error(message);
+    type = 'danger';
+  }
   var key = _.uniqueId();
   var alert = {
     type,
     key,
-    message
+    message: `${message}`
   };
   return state.setIn(['alerts', key], alert);
 }
