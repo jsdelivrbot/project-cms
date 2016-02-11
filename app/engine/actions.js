@@ -1,17 +1,9 @@
 export function setRenderer(renderer) {
+  /* set the template renderer */
   //assert renderer is function
   return {
     type: 'SET_RENDERER',
     renderer
-  };
-}
-
-export function setPublisher(publisher) {
-  //assert publisher is function
-  //CONSIDER: is this needed anymore?
-  return {
-    type: 'SET_PUBLISHER',
-    publisher
   };
 }
 
@@ -59,4 +51,4 @@ export function setAwsConfig(awsConfig) {
   }
 }
 
-export default {setRenderer, setPublisher, pushContent, setApps, setAppsConfig, setAwsConfig}
+export default {setRenderer, pushContent, setApps, setAppsConfig, setAwsConfig}

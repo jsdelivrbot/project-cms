@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import {readTable} from './middleware/persistence';
+import {readTable} from './reducers/tables';
 
 
 export const DEFAULT_APPS_CONFIG = [

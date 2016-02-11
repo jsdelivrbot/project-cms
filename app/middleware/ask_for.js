@@ -25,6 +25,7 @@ export default function askForMiddleware() {
         requests[ns] = {resolve, reject};
       });
 
+      //TODO detect if reducer is responding
       next(action);
       return promise;
 

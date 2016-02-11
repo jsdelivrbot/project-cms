@@ -32,10 +32,9 @@ export function getTable(baseUrl) {
   return tables[baseUrl];
 }
 
-//{tables: persistenceReducer}
 const INITIAL_STATE = Map();
 
-export function persistenceReducer(state=INITIAL_STATE, action) {
+export function tablesReducer(state=INITIAL_STATE, action) {
   const {record_change} = action;
   if (!record_change) {
     return state;
@@ -113,3 +112,5 @@ export function purgeTable(table_name) {
       });
   });
 }
+
+export default tablesReducer;

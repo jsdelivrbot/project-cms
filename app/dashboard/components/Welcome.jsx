@@ -1,5 +1,5 @@
 import React from 'react';
-import {destroy} from '../../middleware/persistence';
+import {destroy} from '~/reducers/tables';
 
 function doPurge(event) {
   destroy(err => {

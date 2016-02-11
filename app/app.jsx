@@ -10,7 +10,7 @@ import {Route, Router, Redirect} from 'react-router';
 import createHistory from 'history/lib/createHashHistory'
 
 import promiseMiddleware from './middleware/promise';
-import {readTable, persistenceReducer, writeFixture} from './middleware/persistence';
+import {readTable, tablesReducer, writeFixture} from './reducers/tables';
 import nextUrlMiddleware from './middleware/next_url';
 import askForMiddleware from './middleware/ask_for';
 
@@ -81,7 +81,7 @@ appsLoader().then(apps => {
     }
     return col;
   }, {
-    tables: persistenceReducer
+    tables: tablesReducer
   });
   var dashboardPlugins = _.reduce(apps, (col, app) => {
     if (app.dashboardPlugins) {

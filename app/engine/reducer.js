@@ -9,8 +9,9 @@ export default function engine(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'SET_RENDERER':
       return state.set('renderer', action.renderer);
-    case 'SET_PUBLISHER':
-      return state.set('publisher', action.publisher);
+    case 'SET_AWS_CONFIG':
+      //TODO if (action.awsConfig.bucket) then set uploader to s3
+      return state;
     case 'SET_APPS':
       return state.set('apps', action.apps);
     case 'PUBLISH_REQUEST':
