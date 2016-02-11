@@ -1,41 +1,42 @@
 import _ from 'lodash';
 import auth from 'knox/lib/auth';
-import knox from 'knox';
+import _fetch from 'fetch';
 import {Buffer} from 'buffer';
 
 //https://github.com/Automattic/knox/issues/299
 
 
 export default function s3Publisher(awsConfig) {
-  var client = knox.createClient({
-    port: 80,
-    key: awsConfig.key,
-    secret: awsConfig.secret,
-    bucket: awsConfig.bucket
-  });
-
   function view() {
-    //TODO open tab
-    return `https://${awsConfig.bucket}.s3.amazonaws.com/`;
+    //TODO region
+    let region = awsConfig.region || 'us-east-1';
+    let url = `http://${awsConfig.bucket}.s3-website-${region}.amazonaws.com/`;
+    return window.open(url, '_blank');
   }
 
   function pushContent(path, content, mimetype) {
-    return new Promise(function(resolve, reject) {
-      var req = client.put(path, {
-        'x-amz-acl': 'public-read',
-        'Content-Length': Buffer.byteLength(content),
-        'Content-Type': mimetype
-      });
-      console.log("knox request", req);
-      req.on('response', function(res) {
-        console.log("knox response")
-        if (res.statusCode === 200) {
-          resolve(req.url)
-        } else {
-          reject(res)
-        }
-      });
-      req.end(content);
+    let date = new Date();
+    let headers = {
+      'x-amz-acl': 'public-read',
+      'x-amz-date': date.toUTCString(),
+      'Content-Length': Buffer.byteLength(content),
+      'Content-Type': mimetype,
+    };
+
+    headers.Authorization = auth.authorization({
+      key: awsConfig.key,
+      secret: awsConfig.secret,
+      verb: 'PUT',
+      date: '',
+      resource: auth.canonicalizeResource('/' + awsConfig.bucket + path),
+      contentType: mimetype,
+      md5: '',
+      amazonHeaders: `x-amz-acl:public-read\nx-amz-date:${headers['x-amz-date']}`,
+    });
+    return fetch(`https://${awsConfig.bucket}.s3.amazonaws.com${path}`, {
+      method: 'PUT',
+      headers: headers,
+      body: content
     });
   }
 
