@@ -1,4 +1,6 @@
-import {loadAppsConfig} from '~/appsLoader';
+import _ from 'lodash';
+
+import {loadAppsConfig, makeReducer} from '~/appsLoader';
 
 
 export function setRenderer(renderer) {
@@ -35,23 +37,38 @@ export function testAppsConfig(appsConfig) {
 }
 
 export function setAppsConfig(appsConfig, store) {
-  //TODO apps should be ran through apps loader
-  //this would then have a promise property
-  //import {loadAppsConfig} from '~/appsLoader'
-  //somehow on app set we replace the core reducer (need access to store)
-  //also need to trigure fixture loading
-  //TODO only record change after app config is successfully loaded
+  /* sets apps on successful loading and records change */
+  if (!store) throw new Error('Must provide store when setting appsConfig');
+  //CONSIDER: this might become THE way to load apps
+
+  let record_change = {
+    update_object: appsConfig,
+    table_name: '/engine',
+    object_id: 'appsConfig'
+  };
+
   return {
     type: 'SET_APPS_CONFIG',
     appsConfig,
     promise: loadAppsConfig(appsConfig).then(apps => {
+      if (store) {
+        console.log("Triggering apps reload", apps, store);
+        let reducer = makeReducer(apps);
+        let renderer = _.find(apps, {baseUrl: '/templates'}).renderFactory(store);
+        console.log("renderer:", renderer);
+
+        store.replaceReducer(reducer);
+        store.dispatch(setApps(apps));
+        store.dispatch(setRenderer(renderer));
+        //TODO handle fixtures
+
+        store.dispatch({
+          type: '!',
+          record_change
+        });
+      }
       return apps;
-    }),
-    record_change: {
-      update_object: appsConfig,
-      table_name: '/engine',
-      object_id: 'appsConfig'
-    }
+    })
   }
 }
 

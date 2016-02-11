@@ -3,6 +3,10 @@ import _ from 'lodash';
 
 
 export default class AppsConfig extends React.Component {
+  static contextTypes = {
+    store: React.PropTypes.object.isRequired
+  };
+
   constructor(props) {
     super(props)
     this.state = {
@@ -16,7 +20,7 @@ export default class AppsConfig extends React.Component {
     console.log("Submit:", event);
     this.props.setAppsConfig(_.filter(this.state.appsConfig, config => {
       return config.baseUrl && config.location;
-    }));
+    }), this.context.store);
   }
 
   updateAppValue = (index, event) => {
@@ -31,7 +35,9 @@ export default class AppsConfig extends React.Component {
     var changes = {
       appsConfig: _.clone(this.state.appsConfig)
     };
-    changes.appsConfig.push({});
+    changes.appsConfig.push({
+      type: 'builtin'
+    });
     this.setState(changes);
   }
 

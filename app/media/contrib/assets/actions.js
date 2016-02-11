@@ -50,4 +50,4 @@ export function removeAsset(baseUrl, assetId) {
 }
 
 
-export default {addAsset, removeAsset}
+export default {addAsset, updateAsset, removeAsset}

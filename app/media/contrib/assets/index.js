@@ -8,34 +8,6 @@ import EditAsset from './components/EditAsset.jsx';
 import actions from './actions';
 
 
-function renderMediaItem(media_item, field) {
-  switch(field) {
-    case "detail_link":
-      return media_item.get('media_type') + "/" + media_item.get('id');
-    case "preview":
-      return media_item.get('path');
-    case "embed_code":
-      const path = media_item.get('path');
-      switch(media_item.get('type')) {
-        case "anchor":
-          return `<a href=${path}>${path}</a>`
-        case "css":
-          return `<link ref="stylesheet" href=${path}/>`
-        case "javascript":
-          return `<script src=${path}></script>`
-        case "image":
-          return `<img src=${path}/>`
-  }
-}
-
-
-function uploadFile(file) {
-  return {
-    type: 'UPLOAD_FILE',
-    file
-  }
-}
-
 export default function AssetsApplicationFactory(baseUrl) {
 
   return {
@@ -78,5 +50,34 @@ export default function AssetsApplicationFactory(baseUrl) {
         })(EditAsset)
       }]
     }
+  }
+}
+
+function renderMediaItem(media_item, field) {
+  switch(field) {
+    case "detail_link":
+      return media_item.get('media_type') + "/" + media_item.get('id');
+    case "preview":
+      return media_item.get('path');
+    case "embed_code":
+      const path = media_item.get('path');
+      switch(media_item.get('type')) {
+        case "anchor":
+          return `<a href=${path}>${path}</a>`
+        case "css":
+          return `<link ref="stylesheet" href=${path}/>`
+        case "javascript":
+          return `<script src=${path}></script>`
+        case "image":
+          return `<img src=${path}/>`
+    }
+  }
+}
+
+
+function uploadFile(file) {
+  return {
+    type: 'UPLOAD_FILE',
+    file
   }
 }

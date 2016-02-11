@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import {Asset} from 'react-router';
+import {Link} from 'react-router';
 
 
 export default function AssetList({baseUrl, links}) {
@@ -18,7 +18,7 @@ export default function AssetList({baseUrl, links}) {
         <h1>Assets</h1>
       </div>
       <div className="col-md-6">
-        <Asset type="button" className="btn btn-primary" to={`${baseUrl}/add`}>Add Asset</Asset>
+        <Link type="button" className="btn btn-primary" to={`${baseUrl}/add`}>Add Asset</Link>
       </div>
     </div>
     <div className="table-responsive">

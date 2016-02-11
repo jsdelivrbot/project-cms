@@ -50,4 +50,4 @@ export function removePicture(baseUrl, pictureId) {
 }
 
 
-export default {addPicture, removePicture}
+export default {addPicture, updatePicture, removePicture}

@@ -18,25 +18,29 @@ export const DEFAULT_APPS_CONFIG = [
 
 export function readAppsConfig() {
   return readTable('/engine').then(tableState => {
-    if (!tableState || !tableState.appsConfig) return DEFAULT_APPS_CONFIG;
-    return tableState.appsConfig;
-  })
+    if (!tableState) return DEFAULT_APPS_CONFIG;
+    let appsConfig = tableState.get('appsConfig');
+    if (!appsConfig) return DEFAULT_APPS_CONFIG;
+    return appsConfig.toJS();
+  });
 }
 
 export function loadAppsConfig(appsConfig) {
   return Promise.all(_.map(appsConfig, config => {
     let {baseUrl, type, location} = config;
-    switch (type) {
-      case 'builtin':
-        return System.import(location, __moduleName).then(mod =>
-          _.assign(mod.default(baseUrl, config), {baseUrl})
-        );
-      //TODO support these
-      case 'github':
-      case 'npm':
-      default:
-        throw Error('Unrecognized app type: '+type)
-    }
+    return new Promise(function(resolve, reject) {
+      switch (type) {
+        case 'builtin':
+          resolve(System.import(location, __moduleName));
+        //TODO support these
+        case 'github':
+        case 'npm':
+        default:
+          reject(new Error('Unrecognized app type: '+type))
+      }
+    }).then(mod => {
+      return _.assign(mod.default(baseUrl, config), {baseUrl});
+    });
   }));
 }
 

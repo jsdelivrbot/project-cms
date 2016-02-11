@@ -31,7 +31,7 @@ export class PublishNav extends React.Component {
 }
 
 PublishNav.contextTypes = {
-  store: React.PropTypes.object
+  store: React.PropTypes.object.isRequired
 };
 
 export default connect(state => {

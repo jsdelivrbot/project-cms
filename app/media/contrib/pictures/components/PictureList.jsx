@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import {Picture} from 'react-router';
+import {Link} from 'react-router';
 
 
 export default function PictureList({baseUrl, links}) {
@@ -18,7 +18,7 @@ export default function PictureList({baseUrl, links}) {
         <h1>Pictures</h1>
       </div>
       <div className="col-md-6">
-        <Picture type="button" className="btn btn-primary" to={`${baseUrl}/add`}>Add Picture</Picture>
+        <Link type="button" className="btn btn-primary" to={`${baseUrl}/add`}>Add Picture</Link>
       </div>
     </div>
     <div className="table-responsive">
