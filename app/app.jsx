@@ -1,20 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
-import {Map, fromJS} from 'immutable';
+import {Map} from 'immutable';
 import {compose, createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
-import {combineReducers} from 'redux-immutablejs';
 
 import {Route, Router, Redirect} from 'react-router';
 import createHistory from 'history/lib/createHashHistory'
 
 import promiseMiddleware from './middleware/promise';
-import {readTable, tablesReducer, writeFixture} from './reducers/tables';
 import nextUrlMiddleware from './middleware/next_url';
 import askForMiddleware from './middleware/ask_for';
 
-import appsLoader from './appsLoader';
+import {appsLoader, loadAppsTables, makeReducer} from './appsLoader';
 
 
 var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, promiseMiddleware, askForMiddleware)(createStore);
@@ -25,48 +23,13 @@ var history = createHistory();
 appsLoader().then(apps => {
   console.log("apps:", apps);
 
-  var initialState = Map();
-  return Promise.all(_.map(apps, app => {
-    //if app defines tables, then load them or load its initial fixture
-    if (app.tables) {
-      var initialized = true;
-      return Promise.all(app.tables.map(tableName => {
-        return readTable(tableName).then(tableState => {
-          if (!tableState) {
-            initialized = false;
-            return;
-          }
-          initialState = initialState.setIn(['tables', tableName], fromJS(tableState));
-        });
-      })).then(done => {
-        if (!initialized) {
-          if (app.fixtures && app.fixtures.initial){
-            //or load state from fixtures
-            if (_.isFunction(app.fixtures.initial)) {
-              let fixtureResponse = app.fixtures.initial(null, app.baseUrl);
-              if (_.isFunction(fixtureResponse.then)) {
-                return fixtureResponse.then(tablesState => {
-                  writeFixture(tablesState);
-                  initialState = initialState.mergeDeepIn(['tables'], tablesState);
-                });
-              } else {
-                writeFixture(fixtureResponse);
-                initialState = initialState.mergeDeepIn(['tables'], fixtureResponse);
-              }
-            } else {
-              writeFixture(app.fixtures.initial);
-              initialState = initialState.mergeDeepIn(['tables'], app.fixtures.initial);
-            }
-          } else {
-            initialState = initialState.mergeDeepIn(['tables'], {[app.baseUrl]: {}});
-          }
-        }
-      });
-    }
-  })).then(x => {
+  return loadAppsTables(apps).then(tables => {
+    var initialState = Map({
+      tables
+    });
     console.log("Initial State:", initialState);
     return {apps, initialState};
-  });
+  })
 }).then(({apps, initialState}) => {
 
   function getApp(baseUrl) {
@@ -75,22 +38,7 @@ appsLoader().then(apps => {
 
   /* set up reducer & store */
 
-  var reducers = _.reduce(apps, (col, app) => {
-    if (app.reducer) {
-      col[app.baseUrl] = app.reducer;
-    }
-    return col;
-  }, {
-    tables: tablesReducer
-  });
-  var dashboardPlugins = _.reduce(apps, (col, app) => {
-    if (app.dashboardPlugins) {
-      _.assign(col, app.dashboardPlugins);
-    }
-    return col;
-  }, {});
-  console.log("reducers:", reducers)
-  var reducer = combineReducers(reducers);
+  var reducer = makeReducer(apps);
   var store = createStoreWithMiddleware(reducer, initialState);
   console.log("store:", store);
 
@@ -98,7 +46,6 @@ appsLoader().then(apps => {
   var dashboard = getApp('/');
 
   store.dispatch(engine.actions.setApps(apps));
-  store.dispatch(dashboard.actions.setPlugins(dashboardPlugins));
 
 
   //CONSIDER: we are storing core functions in the engine domain - probably not using the redux as intended

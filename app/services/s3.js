@@ -6,7 +6,7 @@ import {Buffer} from 'buffer';
 //https://github.com/Automattic/knox/issues/299
 
 
-export function put(awsConfig, {path, content, mimetye}) {
+export function put(awsConfig, {path, content, mimetype}) {
   let date = new Date();
   let headers = {
     'x-amz-acl': 'public-read',

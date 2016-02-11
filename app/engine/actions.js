@@ -1,3 +1,6 @@
+import {loadAppsConfig} from '~/appsLoader';
+
+
 export function setRenderer(renderer) {
   /* set the template renderer */
   //assert renderer is function
@@ -23,14 +26,27 @@ export function setApps(apps) {
   }
 }
 
-export function setAppsConfig(appsConfig) {
+export function testAppsConfig(appsConfig) {
+  return {
+    type: 'TEST_APPS_CONFIG',
+    appsConfig,
+    promise: loadAppsConfig(appsConfig)
+  }
+}
+
+export function setAppsConfig(appsConfig, store) {
   //TODO apps should be ran through apps loader
   //this would then have a promise property
   //import {loadAppsConfig} from '~/appsLoader'
   //somehow on app set we replace the core reducer (need access to store)
+  //also need to trigure fixture loading
+  //TODO only record change after app config is successfully loaded
   return {
     type: 'SET_APPS_CONFIG',
     appsConfig,
+    promise: loadAppsConfig(appsConfig).then(apps => {
+      return apps;
+    }),
     record_change: {
       update_object: appsConfig,
       table_name: '/engine',
@@ -51,4 +67,4 @@ export function setAwsConfig(awsConfig) {
   }
 }
 
-export default {setRenderer, pushContent, setApps, setAppsConfig, setAwsConfig}
+export default {setRenderer, pushContent, setApps, testAppsConfig, setAppsConfig, setAwsConfig}

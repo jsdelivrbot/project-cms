@@ -34,6 +34,14 @@ export default function dashboard(state = INITIAL_STATE, action) {
       return state.set('alerts', Map());
     case 'DASHBOARD_PLUGINS':
       return state.set('plugins', Map(action.plugins));
+    case 'SET_APPS':
+      var dashboardPlugins = _.reduce(action.apps, (col, app) => {
+        if (app.dashboardPlugins) {
+          _.assign(col, app.dashboardPlugins);
+        }
+        return col;
+      }, {});
+      return state.set('plugins', Map(dashboardPlugins));
   }
 
   //auto detect alerts
