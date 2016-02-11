@@ -1,0 +1,17 @@
+{
+  "main": "minimatch.js",
+  "format": "cjs",
+  "meta": {
+    "*": {
+      "globals": {
+        "process": "process"
+      }
+    },
+    "*.json": {
+      "format": "json"
+    },
+    "browser.js": {
+      "cjsRequireDetection": false
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "main": "source-map-support.js",
+  "format": "cjs",
+  "meta": {
+    "*": {
+      "globals": {
+        "process": "process"
+      }
+    },
+    "*.json": {
+      "format": "json"
+    },
+    "amd-test/script.js": {
+      "format": "amd"
+    },
+    "source-map-support.js": {
+      "globals": {
+        "Buffer": "buffer/global"
+      }
+    },
+    "test.js": {
+      "globals": {
+        "Buffer": "buffer/global"
+      }
+    }
+  }
+}

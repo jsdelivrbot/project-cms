@@ -1,0 +1,44 @@
+{
+  "main": "abstract-leveldown.js",
+  "format": "cjs",
+  "meta": {
+    "*": {
+      "globals": {
+        "process": "process"
+      }
+    },
+    "*.json": {
+      "format": "json"
+    },
+    "abstract-leveldown.js": {
+      "globals": {
+        "Buffer": "buffer/global"
+      }
+    },
+    "abstract/batch-test.js": {
+      "globals": {
+        "Buffer": "buffer/global"
+      }
+    },
+    "abstract/get-test.js": {
+      "globals": {
+        "Buffer": "buffer/global"
+      }
+    },
+    "abstract/iterator-test.js": {
+      "globals": {
+        "Buffer": "buffer/global"
+      }
+    },
+    "abstract/put-get-del-test.js": {
+      "globals": {
+        "Buffer": "buffer/global"
+      }
+    },
+    "abstract/ranges-test.js": {
+      "globals": {
+        "Buffer": "buffer/global"
+      }
+    }
+  }
+}

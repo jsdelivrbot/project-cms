@@ -1,0 +1,1 @@
+module.exports = require("npm:redux-immutable@1.3.10/dist/index.js");

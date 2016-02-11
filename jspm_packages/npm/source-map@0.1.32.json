@@ -1,0 +1,17 @@
+{
+  "main": "lib/source-map.js",
+  "format": "cjs",
+  "meta": {
+    "*": {
+      "globals": {
+        "process": "process"
+      }
+    },
+    "*.json": {
+      "format": "json"
+    }
+  },
+  "map": {
+    "source-map": "."
+  }
+}

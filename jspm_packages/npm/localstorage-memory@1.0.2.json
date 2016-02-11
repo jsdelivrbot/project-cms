@@ -1,0 +1,14 @@
+{
+  "main": "lib/localstorage-memory.js",
+  "format": "cjs",
+  "meta": {
+    "*": {
+      "globals": {
+        "process": "process"
+      }
+    },
+    "*.json": {
+      "format": "json"
+    }
+  }
+}

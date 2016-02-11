@@ -1,0 +1,17 @@
+{
+  "main": "lib/Codemirror.js",
+  "format": "cjs",
+  "meta": {
+    "*": {
+      "globals": {
+        "process": "process"
+      }
+    },
+    "*.json": {
+      "format": "json"
+    },
+    "dist/react-codemirror.js": {
+      "cjsRequireDetection": false
+    }
+  }
+}

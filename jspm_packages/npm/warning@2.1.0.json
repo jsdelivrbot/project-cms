@@ -1,0 +1,19 @@
+{
+  "main": "warning.js",
+  "format": "cjs",
+  "meta": {
+    "*": {
+      "globals": {
+        "process": "process"
+      }
+    },
+    "*.json": {
+      "format": "json"
+    }
+  },
+  "map": {
+    "./warning.js": {
+      "browser": "./browser.js"
+    }
+  }
+}

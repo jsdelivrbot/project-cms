@@ -1,0 +1,29 @@
+{
+  "main": "index.js",
+  "format": "cjs",
+  "meta": {
+    "*": {
+      "globals": {
+        "process": "process"
+      }
+    },
+    "*.json": {
+      "format": "json"
+    },
+    "codecs.js": {
+      "globals": {
+        "Buffer": "buffer/global"
+      }
+    },
+    "index.js": {
+      "globals": {
+        "Buffer": "buffer/global"
+      }
+    },
+    "util.js": {
+      "globals": {
+        "Buffer": "buffer/global"
+      }
+    }
+  }
+}

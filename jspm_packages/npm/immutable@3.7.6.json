@@ -1,0 +1,18 @@
+{
+  "main": "dist/immutable.js",
+  "format": "cjs",
+  "meta": {
+    "*": {
+      "globals": {
+        "process": "process"
+      }
+    },
+    "*.json": {
+      "format": "json"
+    }
+  },
+  "map": {
+    "./contrib/cursor.js": "./contrib/cursor/index.js",
+    "immutable": "."
+  }
+}

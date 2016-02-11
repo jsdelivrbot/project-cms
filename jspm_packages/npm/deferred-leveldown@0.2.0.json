@@ -1,0 +1,19 @@
+{
+  "main": "deferred-leveldown.js",
+  "format": "cjs",
+  "meta": {
+    "*": {
+      "globals": {
+        "process": "process"
+      }
+    },
+    "*.json": {
+      "format": "json"
+    },
+    "deferred-leveldown.js": {
+      "globals": {
+        "Buffer": "buffer/global"
+      }
+    }
+  }
+}

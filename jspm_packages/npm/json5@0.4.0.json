@@ -1,0 +1,14 @@
+{
+  "main": "lib/json5.js",
+  "format": "cjs",
+  "meta": {
+    "*": {
+      "globals": {
+        "process": "process"
+      }
+    },
+    "*.json": {
+      "format": "json"
+    }
+  }
+}

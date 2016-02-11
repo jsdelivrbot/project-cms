@@ -1,0 +1,21 @@
+{
+  "main": "lodash.js",
+  "format": "cjs",
+  "meta": {
+    "*": {
+      "globals": {
+        "process": "process"
+      }
+    },
+    "*.json": {
+      "format": "json"
+    },
+    "isBuffer.js": {
+      "globals": {
+        "Buffer": "buffer/global"
+      }
+    },
+    "toString": true,
+    "valueOf": true
+  }
+}

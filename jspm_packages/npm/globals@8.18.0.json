@@ -1,0 +1,15 @@
+{
+  "main": "index",
+  "format": "cjs",
+  "meta": {
+    "*": {
+      "globals": {
+        "process": "process"
+      }
+    },
+    "*.json": {
+      "format": "json"
+    },
+    "globals.json": true
+  }
+}
