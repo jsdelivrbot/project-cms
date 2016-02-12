@@ -41,7 +41,7 @@ export default function AssetsApplicationFactory(baseUrl) {
         component: connect((state, props) => {
           return {
             baseUrl: baseUrl,
-            asset: state.getIn([baseUrl, props.params.assetId]),
+            asset: state.getIn(['tables', '/media', props.params.assetId]),
             assetId: props.params.assetId
           }
         }, {

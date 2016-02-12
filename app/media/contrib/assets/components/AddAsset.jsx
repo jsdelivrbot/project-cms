@@ -59,7 +59,7 @@ export default class AddAsset extends React.Component {
           <form onSubmit={this.receiveSubmit}>
             <div className="form-group">
               <label className="control-label">Asset</label>
-              <input type="file" name="file" className="form-control" value={asset.file} required="required" onChange={this.updateFile}/>
+              <input type="file" name="file" className="form-control" required="required" onChange={this.updateFile}/>
             </div>
             <div className="form-group">
               <label className="control-label">Type</label>

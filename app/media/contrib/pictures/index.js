@@ -53,7 +53,7 @@ export default function PicturesApplicationFactory(baseUrl) {
         component: connect((state, props) => {
           return {
             baseUrl: baseUrl,
-            picture: state.getIn([baseUrl, props.params.pictureId]),
+            picture: state.getIn(['tables', '/media', props.params.pictureId]),
             pictureId: props.params.pictureId
           }
         }, {

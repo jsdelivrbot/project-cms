@@ -4,23 +4,47 @@ import _ from 'lodash';
 
 export default class EditAsset extends React.Component {
   constructor(props) {
-    super(props) //{updateAsset, asset}
-    this.state = props.asset.toJS();
+    super(props) //{updateAsset, asset, uploadFile}
+    this.state = {
+      asset: props.asset.toJS(),
+      uploading: false
+    };
   }
 
   receiveSubmit = (event) => {
     event.preventDefault();
-    this.props.updateAsset(this.state);
+    this.props.updateAsset(this.state.asset);
   }
 
   updateValue = (event) => {
-    var changes = {};
-    changes[event.target.name] = event.target.value;
+    var changes = {
+      asset: _.clone(this.state.asset)
+    };
+    changes.asset[event.target.name] = event.target.value;
     this.setState(changes);
   }
 
+  updateFile = (event) => {
+    let file = event.target.files[0];
+    this.setState({uploading: true});
+    this.props.uploadFile(file).then(({result}) => {
+      let url = result.url;
+      console.log("updated file to:", url);
+      var changes = {
+        uploading: false,
+        asset: _.clone(this.state.asset)
+      }
+      changes.asset.url = url;
+      this.setState(changes);
+    }, error => {
+      //TODO craft alert
+      console.error(error);
+      this.setState({uploading: false});
+    });
+  }
+
   render() {
-    let asset = this.state;
+    let {asset, uploading} = this.state;
 
     return <div className="container-fluid">
       <div className="row">
@@ -33,7 +57,7 @@ export default class EditAsset extends React.Component {
           <form onSubmit={this.receiveSubmit}>
             <div className="form-group">
               <label className="control-label">Asset</label>
-              <input type="file" name="file" className="form-control" value={asset.file} required="required" onChange={this.updateValue}/>
+              <input type="file" name="file" className="form-control" required="required" onChange={this.updateValue}/>
             </div>
             <div className="form-group">
               <label className="control-label">Type</label>
@@ -47,7 +71,7 @@ export default class EditAsset extends React.Component {
               </select>
             </div>
             <div className="form-group">
-              <button type="submit" className="btn btn-primary">Save</button>
+              <button type="submit" disabled={uploading} className="btn btn-primary">Save</button>
             </div>
           </form>
         </div>

@@ -56,19 +56,7 @@ export default function LinksApplicationFactory(baseUrl) {
         }, {
           addLink: _.partial(actions.addLink, baseUrl),
         })(AddLink)
-      }/*, {
-        path: ':linkId',
-        component: connect((state, props) => {
-          return {
-            baseUrl: baseUrl,
-            link: state.getIn([baseUrl, props.params.linkId]).toJS(),
-            linkId: props.params.linkId
-          }
-        }, {
-          updateTemplate: _.partial(actions.updateTemplate, baseUrl),
-          removeTemplate: _.partial(actions.removeTemplate, baseUrl),
-        })(EditTemplate)
-      }*/]
+      }]
     }
   }
 }
