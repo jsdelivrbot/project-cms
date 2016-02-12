@@ -68,12 +68,6 @@
     "process": "github:jspm/nodelibs-process@^0.1.0"
   },
   "npm:qs@4.0.0": {},
-  "npm:amdefine@1.0.0": {
-    "path": "github:jspm/nodelibs-path@^0.1.0",
-    "process": "github:jspm/nodelibs-process@^0.1.0",
-    "module": "github:jspm/nodelibs-module@^0.1.0",
-    "fs": "github:jspm/nodelibs-fs@^0.1.0"
-  },
   "npm:history@1.13.1": {
     "deep-equal": "npm:deep-equal@^1.0.0",
     "invariant": "npm:invariant@^2.0.0",
@@ -97,7 +91,6 @@
   "npm:core-util-is@1.0.2": {
     "buffer": "github:jspm/nodelibs-buffer@^0.1.0"
   },
-  "github:jspm/nodelibs-module@0.1.0": {},
   "github:jspm/nodelibs-path@0.1.0": {
     "path-browserify": "npm:path-browserify@0.0.0"
   },
@@ -165,63 +158,6 @@
     "redux": "npm:redux@^3.0.0",
     "immutable": "npm:immutable@^3.7.5",
     "process": "github:jspm/nodelibs-process@^0.1.0"
-  },
-  "npm:uglify-to-browserify@1.0.2": {
-    "fs": "github:jspm/nodelibs-fs@^0.1.0",
-    "stream": "github:jspm/nodelibs-stream@^0.1.0"
-  },
-  "npm:minimist@0.0.10": {},
-  "npm:camelcase@1.2.1": {},
-  "npm:window-size@0.1.0": {
-    "tty": "github:jspm/nodelibs-tty@^0.1.0",
-    "process": "github:jspm/nodelibs-process@^0.1.0"
-  },
-  "npm:optimist@0.6.1": {
-    "wordwrap": "npm:wordwrap@~0.0.2",
-    "minimist": "npm:minimist@~0.0.1",
-    "path": "github:jspm/nodelibs-path@^0.1.0",
-    "process": "github:jspm/nodelibs-process@^0.1.0"
-  },
-  "npm:wordwrap@0.0.2": {},
-  "npm:decamelize@1.1.1": {},
-  "npm:async@0.2.10": {
-    "process": "github:jspm/nodelibs-process@^0.1.0"
-  },
-  "npm:yargs@3.5.4": {
-    "camelcase": "npm:camelcase@^1.0.2",
-    "decamelize": "npm:decamelize@^1.0.0",
-    "window-size": "npm:window-size@0.1.0",
-    "wordwrap": "npm:wordwrap@0.0.2",
-    "fs": "github:jspm/nodelibs-fs@^0.1.0",
-    "path": "github:jspm/nodelibs-path@^0.1.0",
-    "process": "github:jspm/nodelibs-process@^0.1.0",
-    "assert": "github:jspm/nodelibs-assert@^0.1.0"
-  },
-  "npm:swig@1.4.2": {
-    "uglify-js": "npm:uglify-js@~2.4",
-    "optimist": "npm:optimist@~0.6",
-    "fs": "github:jspm/nodelibs-fs@^0.1.0",
-    "path": "github:jspm/nodelibs-path@^0.1.0",
-    "systemjs-json": "github:systemjs/plugin-json@^0.1.0",
-    "process": "github:jspm/nodelibs-process@^0.1.0",
-    "util": "github:jspm/nodelibs-util@^0.1.0"
-  },
-  "npm:source-map@0.1.34": {
-    "amdefine": "npm:amdefine",
-    "process": "github:jspm/nodelibs-process@^0.1.0",
-    "path": "github:jspm/nodelibs-path@^0.1.0",
-    "fs": "github:jspm/nodelibs-fs@^0.1.0"
-  },
-  "npm:uglify-js@2.4.24": {
-    "async": "npm:async@~0.2.6",
-    "source-map": "npm:source-map@0.1.34",
-    "uglify-to-browserify": "npm:uglify-to-browserify@~1.0.0",
-    "yargs": "npm:yargs@~3.5.4",
-    "fs": "github:jspm/nodelibs-fs@^0.1.0",
-    "process": "github:jspm/nodelibs-process@^0.1.0",
-    "path": "github:jspm/nodelibs-path@^0.1.0",
-    "vm": "github:jspm/nodelibs-vm@^0.1.0",
-    "buffer": "github:jspm/nodelibs-buffer@^0.1.0"
   },
   "npm:tty-browserify@0.0.0": {},
   "github:jspm/nodelibs-tty@0.1.0": {
@@ -706,5 +642,7 @@
     "systemjs-json": "github:systemjs/plugin-json@^0.1.0",
     "events": "github:jspm/nodelibs-events@^0.1.1"
   },
-  "github:github/fetch@0.11.0": {}
+  "github:github/fetch@0.11.0": {},
+  "npm:isarray@0.0.1": {},
+  "github:mozilla/nunjucks@2.3.0": {}
 }

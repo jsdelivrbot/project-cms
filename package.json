@@ -21,7 +21,9 @@
       "levelup": "npm:levelup@0.19.0",
       "localstorage-down": "npm:localstorage-down@^0.6.4",
       "lodash": "npm:lodash@^3.10.1",
+      "mozilla/nunjucks": "github:mozilla/nunjucks@^2.3.0",
       "node-uuid": "npm:node-uuid@^1.4.7",
+      "nunjucks": "github:mozilla/nunjucks@^2.3.0",
       "path": "npm:path@^0.12.7",
       "react": "npm:react@^0.14.3",
       "react-addons-shallow-compare": "npm:react-addons-shallow-compare@^0.14.6",
@@ -37,7 +39,6 @@
       "reflect-metadata": "npm:reflect-metadata@^0.1.2",
       "remarkable": "npm:remarkable@^1.6.1",
       "stream-browserify": "npm:stream-browserify@2.0.1",
-      "swig": "npm:swig@^1.4.2",
       "text": "github:systemjs/plugin-text@^0.0.4",
       "zone.js": "npm:zone.js@^0.5.8"
     },

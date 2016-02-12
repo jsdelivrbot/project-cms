@@ -1,1 +1,0 @@
-module.exports = require("npm:swig@1.4.2/index");

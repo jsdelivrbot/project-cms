@@ -56,7 +56,7 @@ export default class AddTemplate extends React.Component {
             </div>
             <div className="form-group">
               <label className="control-label">Template</label>
-              <span className="help-block">Write the HTML layout using <a href="https://paularmstrong.github.io/swig/">swig</a></span>
+              <span className="help-block">Write the HTML layout using <a href="https://mozilla.github.io/nunjucks/">nunjucks</a></span>
               <Codemirror value={template.content} onChange={this.updateContent} options={{
                   mode: 'jinja2',
                   lineNumbers: true

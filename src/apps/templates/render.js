@@ -1,27 +1,25 @@
-import path from 'path';
-import swig from 'swig';
+import nunjucks from 'nunjucks/browser/nunjucks.js';
 import {markdownFilter} from './filters';
 
+console.log("nunjucks", nunjucks)
+
 /*
-  Swig renderer tied to our template store
+  Nunjucks renderer tied to our template store
   Caches compiled templates and invalidates cache if template has been updated
 */
 
 function storeLoader(store) {
   return {
-    resolve: function (to, from) {
-      if (!from) from = '/';
-      var rPath = path.resolve(from, to);
-      //console.log(`resolve: ${to} (${from}) => ${rPath}`);
-      return rPath;
-    },
-    load: function (identifier, cb) {
+    getSource: function (identifier) {
+      console.log("getSource", identifier);
       var tpl = store.getState().getIn(['tables', '/templates', identifier, 'content']);
       if (tpl) {
-        if (cb) return cb(null, tpl);
-        return tpl;
+        return {
+          path: identifier,
+          src: tpl,
+          noCache: true
+        }
       } else {
-        if (cb) return cb(new Error('Template not found'));
         throw new Error('Template not found');
       }
     }
@@ -32,13 +30,12 @@ function storeLoader(store) {
   Given a redux store, return a rendering function
 */
 export default function renderFactory(store) {
-  // Tell swig about the loader:
-  swig.setDefaults({
-    loader: storeLoader(store),
-    cache: false //TODO pass in get & set object with our own cache logic
+  //construct nunjucks environment with our own custom caching mechanism
+  let env = new nunjucks.Environment(storeLoader(store), {
+    noCache: true
   });
 
-  swig.setFilter('markdown', markdownFilter);
+  env.addFilter('markdown', markdownFilter);
 
   var templatesCache = {}; // path: {renderF, template}
 
@@ -54,7 +51,22 @@ export default function renderFactory(store) {
 
     console.log("compile template:", templateKey);
     //update cache and return new render function
-    var renderF = swig.compileFile(templateKey);
+    /*
+    templateObj = nunjucks.compiler.compile(template,
+                                   env.asyncFilters,
+                                   env.extensionsList,
+                                   templateKey,
+                                   env.opts);
+    */
+    var templateObj = nunjucks.compile(template, env, templateKey, true);
+    console.log("compiled to:", templateObj);
+    var renderF = templateObj.render.bind(templateObj);
+    /*
+    var renderF = nunjucks.precompile(templateKey, {
+      asFunction: true,
+      env
+    });
+    */
 
     templatesCache[templateKey] = {
       renderF,

@@ -6,7 +6,7 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript" key="jquery"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" type="text/javascript" key="bootstrap-js"></script>
-  
+
   {{site.head|safe}}
 
   {% if site.css %}
@@ -18,19 +18,19 @@
   {% endif %}
 
   {% block head %}
-  {% endblock head %}
+  {% endblock %}
 </head>
 <body>
   {% block header %}
   {% include "/header.html" %}
-  {% endblock header %}
+  {% endblock %}
 
   {% block content %}
 
-  {% endblock content %}
+  {% endblock %}
 
   {% block footer %}
   {% include "/footer.html" %}
-  {% endblock footer %}
+  {% endblock %}
 </body>
 </html>

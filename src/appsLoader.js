@@ -15,7 +15,7 @@ export const DEFAULT_APPS_CONFIG = [
   {baseUrl: '/media', type: 'builtin', location: './apps/media/index'},
   {baseUrl: '/media/links', type: 'builtin', location: './apps/media/contrib/links/index'},
   {baseUrl: '/media/assets', type: 'builtin', location: './apps/media/contrib/assets/index'},
-  {baseUrl: '/media/photos', type: 'builtin', location: './apps/media/contrib/photos/index'},
+  {baseUrl: '/media/pictures', type: 'builtin', location: './apps/media/contrib/pictures/index'},
 ]
 
 export function readAppsConfig() {

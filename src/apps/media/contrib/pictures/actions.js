@@ -22,7 +22,7 @@ export function addPicture(baseUrl, picture) {
   };
 }
 
-export function updateAsset(baseUrl, pictureId, picture) {
+export function updatePicture(baseUrl, pictureId, picture) {
   return {
     type: 'UPDATE_MEDIA',
     pictureId,

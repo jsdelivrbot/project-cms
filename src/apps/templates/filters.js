@@ -1,4 +1,5 @@
 import Remarkable from 'remarkable';
+import nunjucks from 'nunjucks/browser/nunjucks.js';
 import _ from 'lodash';
 
 let md = new Remarkable({
@@ -9,6 +10,5 @@ let md = new Remarkable({
 });
 
 export function markdownFilter(input) {
-  return md.render(input);
+  return nunjucks.runtime.markSafe(md.render(input));
 }
-markdownFilter.safe = true;
