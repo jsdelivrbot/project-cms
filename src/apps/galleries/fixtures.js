@@ -1,5 +1,5 @@
 
-export function initial(store, baseUrl) {
+export function initial(baseUrl) {
   return System.import('./includedTemplates/gallery.html!text', __moduleName).then(galleryTemplate => {
     return {
       [baseUrl]: {

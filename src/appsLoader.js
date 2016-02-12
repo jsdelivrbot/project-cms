@@ -64,7 +64,7 @@ export function loadAppsTables(apps) {
           if (app.fixtures && app.fixtures.initial){
             //or load state from fixtures
             if (_.isFunction(app.fixtures.initial)) {
-              let fixtureResponse = app.fixtures.initial(null, app.baseUrl);
+              let fixtureResponse = app.fixtures.initial(app.baseUrl);
               if (_.isFunction(fixtureResponse.then)) {
                 return fixtureResponse.then(tablesState => {
                   writeFixture(tablesState);

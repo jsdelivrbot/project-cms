@@ -1,5 +1,5 @@
 
-export function initial(store, baseUrl) {
+export function initial(baseUrl) {
   return new Promise(function(resolve, reject) {
     resolve({
       [baseUrl]: {

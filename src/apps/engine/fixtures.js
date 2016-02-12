@@ -1,6 +1,6 @@
 import {DEFAULT_APPS_CONFIG} from '~/appsLoader';
 
-export function initial(store, baseUrl) {
+export function initial(baseUrl) {
   return {
     [baseUrl]: {
       awsConfig: {},

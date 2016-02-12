@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export function initial(store, baseUrl) {
+export function initial(baseUrl) {
   return Promise.all([
     System.import('./includedTemplates/base.html!text', __moduleName),
     System.import('./includedTemplates/header.html!text', __moduleName),
