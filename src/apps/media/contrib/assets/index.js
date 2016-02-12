@@ -22,7 +22,7 @@ export default function AssetsApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            links: state.getIn(['tables', '/media']).filter(x => x.get('media_type') === baseUrl)
+            assets: state.getIn(['tables', '/media']).filter(x => x.get('media_type') === baseUrl)
           }
         })(AssetList)
       },
@@ -58,18 +58,18 @@ function renderMediaItem(media_item, field) {
     case "detail_link":
       return media_item.get('media_type') + "/" + media_item.get('id');
     case "preview":
-      return media_item.get('path');
+      return media_item.get('url');
     case "embed_code":
-      const path = media_item.get('path');
+      const url = media_item.get('url');
       switch(media_item.get('type')) {
         case "anchor":
-          return `<a href=${path}>${path}</a>`
+          return `<a href=${url}>${url}</a>`
         case "css":
-          return `<link ref="stylesheet" href=${path}/>`
+          return `<link ref="stylesheet" href=${url}/>`
         case "javascript":
-          return `<script src=${path}></script>`
+          return `<script src=${url}></script>`
         case "image":
-          return `<img src=${path}/>`
+          return `<img src=${url}/>`
     }
   }
 }

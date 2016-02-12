@@ -3,9 +3,9 @@ import _ from 'lodash';
 import {Link} from 'react-router';
 
 
-export default function PictureList({baseUrl, links}) {
-  function PictureRow(link) {
-    const {id, path, type} = link.toJS();
+export default function PictureList({baseUrl, pictures}) {
+  function PictureRow(picture) {
+    const {id, path, type} = picture.toJS();
     return <tr key={id}>
       <td><Link to={`${baseUrl}/${id}`}>{path}</Link></td>
       <td>{type}</td>
@@ -30,7 +30,7 @@ export default function PictureList({baseUrl, links}) {
           </tr>
         </thead>
         <tbody>
-          {links.map(PictureRow).toArray()}
+          {pictures.map(PictureRow).toArray()}
         </tbody>
       </table>
     </div>

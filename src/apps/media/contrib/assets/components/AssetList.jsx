@@ -3,11 +3,11 @@ import _ from 'lodash';
 import {Link} from 'react-router';
 
 
-export default function AssetList({baseUrl, links}) {
-  function AssetRow(link) {
-    const {id, path, type} = link.toJS();
+export default function AssetList({baseUrl, assets}) {
+  function AssetRow(asset) {
+    const {id, url, type} = asset.toJS();
     return <tr key={id}>
-      <td><Link to={`${baseUrl}/${id}`}>{path}</Link></td>
+      <td><Link to={`${baseUrl}/${id}`}>{url}</Link></td>
       <td>{type}</td>
     </tr>
   }
@@ -30,7 +30,7 @@ export default function AssetList({baseUrl, links}) {
           </tr>
         </thead>
         <tbody>
-          {links.map(AssetRow).toArray()}
+          {assets.map(AssetRow).toArray()}
         </tbody>
       </table>
     </div>

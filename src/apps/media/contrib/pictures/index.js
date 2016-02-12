@@ -35,7 +35,7 @@ export default function PicturesApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            links: state.getIn(['tables', '/media']).filter(x => x.get('media_type') === baseUrl)
+            pictures: state.getIn(['tables', '/media']).filter(x => x.get('media_type') === baseUrl)
           }
         })(PictureList)
       },
