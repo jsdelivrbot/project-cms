@@ -99,6 +99,7 @@ export default class ModalPicker extends React.Component {
     let {selection, visible} = this.state;
     const selectMultiple = quantityLimit > 1;
     const modalFade = visible ? "in" : "";
+    //TODO filter media by mediaTypes
 
     return <div className={`modal fade ${modalFade}`} id="media-modal-picker" tabIndex="-1" role="dialog" aria-labelledby="media-modal-picker-label">
       <div className="modal-dialog" role="document">

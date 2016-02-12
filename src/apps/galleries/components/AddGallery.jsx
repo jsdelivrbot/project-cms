@@ -6,79 +6,9 @@ import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/css/css';
 
+import RenderPreview from './RenderPreview.jsx';
+import PictureList from './PictureList.jsx';
 
-export class PictureList extends React.Component {
-  constructor(props) {
-    super(props); //{askForMedia, value, onChange}
-    let value = props.value || props.defaultValue || [];
-    this.state = {
-      value,
-      count: value.length
-    }
-  }
-
-  signalChange(value) {
-    if (!value) value = this.state.value;
-
-    if (this.props.onChange) {
-      this.props.onChange(value);
-    }
-  }
-
-  removeRow = (event) => {
-
-  }
-
-  addPictures = (event) => {
-    event.preventDefault();
-    this.props.askForMedia(['pictures'], 20).then(media_item => {
-      if (!media_item) return;
-
-      var value = this.state.value;
-      if (_.isArray(media_item)) {
-        value = value.concat(media_item);
-      } else {
-        value.push(media_item);
-      }
-      this.setState({value});
-      this.signalChange(value);
-    });
-  }
-
-  selectPicture = (event) => {
-    let index = parseInt(event.target.dataset.index);
-    this.props.askForMedia(['pictures'], 1).then(media_item => {
-      if (!media_item) return;
-
-      var value = this.state.value;
-      value[index] = media_item
-      this.setState({value});
-      this.signalChange(value);
-    });
-  }
-
-  renderPictureRow(picture, index) {
-    //TODO what is the shape of picture?
-    console.log("renderPictureRow:", picture);
-    return <div className="form-group" key={index}>
-      <label className="control-label" key="label">Picture</label>
-      { picture
-        ? <img src={picture} onClick={this.selectPicture} key="picture" data-index={index}/>
-      : <button className="btn btn-default" onClick={this.selectPicture} key="picture" data-index={index}>Select</button>
-      }
-    </div>
-  }
-
-  render() {
-    return <div>
-      {_.map(this.state.value, this.renderPictureRow, this)}
-
-      <div className="form-group" key="add">
-        <button type="button" className="btn btn-default" onClick={this.addPictures}>Add Pictures</button>
-      </div>
-    </div>
-  }
-}
 
 export default class AddGallery extends React.Component {
   constructor(props) {
@@ -130,7 +60,7 @@ export default class AddGallery extends React.Component {
         </div>
       </div>
       <div className="row">
-        <div className="col-sm-12">
+        <div className="col-md-6 col-sm-12">
           <form onSubmit={this.receiveSubmit}>
             <div className="form-group" key="path">
               <label className="control-label">Path</label>
@@ -187,6 +117,12 @@ export default class AddGallery extends React.Component {
             </div>
           </form>
         </div>
+        { gallery.template ?
+        <div className="col-md-6 col-sm-12" key="preview">
+          <h3 key="title">Preview</h3>
+          <RenderPreview gallery={gallery} render={this.props.render} key="preview"/>
+        </div>
+        : null}
       </div>
     </div>
   }

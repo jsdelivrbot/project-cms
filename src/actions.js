@@ -12,10 +12,10 @@ export function uploadFiles(files) {
   }
 }
 
-export function askForMedia(mediaTypes, quantityLimits=1) {
+export function askForMedia(mediaTypes, quantityLimit=1) {
   return {
     type: 'ASK_FOR_MEDIA',
     mediaTypes,
-    quantityLimits
+    quantityLimit
   };
 }

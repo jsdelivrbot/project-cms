@@ -5,17 +5,16 @@ import Codemirror from 'react-codemirror';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/css/css';
-import 'codemirror/mode/markdown/markdown';
 
 import RenderPreview from './RenderPreview.jsx';
+import PictureList from './PictureList.jsx';
 
 
 export default class EditGallery extends React.Component {
   constructor(props) {
-    super(props) //{updateGallery, gallery, path, render}
+    super(props) //{updateGallery, askForMedia, gallery, path, render}
     this.state = props.gallery.toJS();
 
-    this.updateContent = _.partial(this.updateCode, 'content');
     this.updateHead = _.partial(this.updateCode, 'head');
     this.updateCSS = _.partial(this.updateCode, 'css');
     this.updateJavascript = _.partial(this.updateCode, 'javascript');
@@ -38,6 +37,10 @@ export default class EditGallery extends React.Component {
     var changes = {};
     changes[name] = code;
     this.setState(changes);
+  }
+
+  updatePictures = (pictures) => {
+    this.setState({pictures});
   }
 
   deleteGallery = (event) => {
@@ -71,14 +74,7 @@ export default class EditGallery extends React.Component {
                 {this.renderTemplateOptions()}
               </select>
             </div>
-            <div className="form-group">
-              <label className="control-label">Content</label>
-              <span className="help-block">Write using <a href="https://help.github.com/articles/markdown-basics/">markdown</a>.</span>
-              <Codemirror value={gallery.content} onChange={this.updateContent} options={{
-                  mode: 'markdown',
-                  lineNumbers: true
-              }} />
-            </div>
+            <PictureList onChange={this.updatePictures} value={gallery.pictures} askForMedia={this.props.askForMedia} key="pictures"/>
 
             <div className="form-group">
               <button className="btn btn-default" type="button" data-toggle="collapse" data-target="#galleryAdvanced" aria-expanded="false" aria-controls="collapseExample">
