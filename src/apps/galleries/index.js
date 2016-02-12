@@ -11,11 +11,10 @@ import publish from './publish';
 import fixtures from './fixtures';
 
 import {askForMedia} from '~/actions';
+import {getTemplates} from '~/plugins';
 
 
-function galleryTemplates(state) {
-  return state.getIn(['tables', '/templates']).filter(tmp => tmp.get('type') === 'page');
-}
+const galleryTemplates = getTemplates('page', ['gallery']);
 
 
 export default function GallerysApplicationFactory(baseUrl) {

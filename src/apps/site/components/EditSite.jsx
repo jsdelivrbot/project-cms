@@ -38,7 +38,9 @@ export default class EditSite extends React.Component {
 
   render() {
     let site = this.state;
+    let MediaSidebar = this.props.mediaSidebar;
     return <div className="container-fluid">
+      {MediaSidebar ? <MediaSidebar/> : null}
       <div className="row">
         <div className="col-sm-12">
           <h1>Edit Site Settings</h1>

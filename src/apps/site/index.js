@@ -6,6 +6,9 @@ import EditSite from './components/EditSite.jsx';
 import actions from './actions';
 import fixtures from './fixtures';
 
+import {mediaSidebar} from '~/plugins';
+
+
 export default function SiteApplicationFactory(baseUrl) {
   return {
     type: 'application',
@@ -18,7 +21,8 @@ export default function SiteApplicationFactory(baseUrl) {
       component: connect(state => {
         return {
           baseUrl: baseUrl,
-          site: state.getIn(['tables', baseUrl, 'site'])
+          site: state.getIn(['tables', baseUrl, 'site']),
+          mediaSidebar: mediaSidebar(state)
         }
       }, {
         updateSite: _.partial(actions.updateSite, baseUrl),

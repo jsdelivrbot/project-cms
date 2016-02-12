@@ -9,14 +9,10 @@ import actions from './actions';
 import publish from './publish';
 import fixtures from './fixtures';
 
-function pageTemplates(state) {
-  return state.getIn(['tables', '/templates']).filter(tmp => tmp.get('type') === 'page');
-}
+import {getTemplates, mediaSidebar} from '~/plugins';
 
-function mediaSidebar(state) {
-  let mediaApp = _.find(state.getIn(['/engine', 'apps']), {baseUrl: '/media'});
-  return (mediaApp && mediaApp.embeddableComponents) ? mediaApp.embeddableComponents.mediaSidebar : null;
-}
+
+const pageTemplates = getTemplates('page');
 
 export default function PagesApplicationFactory(baseUrl) {
   return {
