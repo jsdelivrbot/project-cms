@@ -48,6 +48,7 @@ export default function PicturesApplicationFactory(baseUrl) {
           }
         }, {
           addPicture: _.partial(actions.addPicture, baseUrl),
+          uploadFile
         })(AddPicture)
       }, {
         path: ':pictureId',
@@ -60,6 +61,7 @@ export default function PicturesApplicationFactory(baseUrl) {
         }, {
           updatePicture: _.partial(actions.updatePicture, baseUrl),
           removePicture: _.partial(actions.removePicture, baseUrl),
+          uploadFile
         })(EditPicture)
       }]
     }

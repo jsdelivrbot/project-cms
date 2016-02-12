@@ -57,6 +57,7 @@ export default class EditAsset extends React.Component {
           <form onSubmit={this.receiveSubmit}>
             <div className="form-group">
               <label className="control-label">Asset</label>
+              <span className="help-block">{asset.url}</span>
               <input type="file" name="file" className="form-control" required="required" onChange={this.updateValue}/>
             </div>
             <div className="form-group">

@@ -4,23 +4,49 @@ import _ from 'lodash';
 
 export default class AddPicture extends React.Component {
   constructor(props) {
-    super(props) //{addPicture}
-    this.state = {};
+    super(props) //{addPicture, uploadFile}
+    this.state = {
+      picture: {},
+      uploading: false,
+      uploaded: false
+    };
   }
 
   receiveSubmit = (event) => {
     event.preventDefault();
-    this.props.addPicture(this.state);
+    this.props.addPicture(this.state.picture);
   }
 
   updateValue = (event) => {
-    var changes = {};
-    changes[event.target.name] = event.target.value;
+    var changes = {
+      picture: _.clone(this.state.picture)
+    };
+    changes.picture[event.target.name] = event.target.value;
     this.setState(changes);
   }
 
+  updateFile = (event) => {
+    let file = event.target.files[0];
+    this.setState({uploading: true});
+    this.props.uploadFile(file).then(({result}) => {
+      let url = result.url;
+      console.log("updated file to:", url);
+      var changes = {
+        uploading: false,
+        uploaded: true,
+        picture: _.clone(this.state.picture)
+      }
+      changes.picture.url = url;
+      this.setState(changes);
+    }, error => {
+      //TODO craft alert
+      console.error(error);
+      this.setState({uploading: false});
+    });
+  }
+
   render() {
-    let picture = this.state;
+    let {picture, uploading, uploaded} = this.state;
 
     return <div className="container-fluid">
       <div className="row">
@@ -33,10 +59,10 @@ export default class AddPicture extends React.Component {
           <form onSubmit={this.receiveSubmit}>
             <div className="form-group">
               <label className="control-label">Source</label>
-              <input type="file" name="source" className="form-control" value={picture.source} required="required" onChange={this.updateValue}/>
+              <input type="file" name="source" className="form-control" required="required" onChange={this.updateFile}/>
             </div>
             <div className="form-group">
-              <button type="submit" className="btn btn-primary">Save</button>
+              <button type="submit" disabled={!uploaded || uploading} className="btn btn-primary">Save</button>
             </div>
           </form>
         </div>
