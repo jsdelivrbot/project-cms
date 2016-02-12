@@ -9,6 +9,7 @@ export function AppRouter({apps, history}) {
   let routes = _.clone(dashboard.routes);
   routes.childRoutes = _.map(_.filter(apps, x => x.baseUrl !== '/'), x => x.routes);
   //TODO media.childRoutes = media apps
+  console.log("loading routes:", routes);
 
   return <Router history={history} routes={routes} />
 }

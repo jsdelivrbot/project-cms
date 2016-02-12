@@ -6,14 +6,14 @@ import {readTable, writeFixture, tablesReducer} from './reducers/tables';
 
 
 export const DEFAULT_APPS_CONFIG = [
-  {baseUrl: '/', type: 'builtin', location: './dashboard/index'},
-  {baseUrl: '/engine', type: 'builtin', location: './engine/index'},
-  {baseUrl: '/site', type: 'builtin', location: './site/index'},
-  {baseUrl: '/pages', type: 'builtin', location: './pages/index'},
-  {baseUrl: '/galleries', type: 'builtin', location: './galleries/index'},
-  {baseUrl: '/templates', type: 'builtin', location: './templates/index'},
-  {baseUrl: '/media', type: 'builtin', location: './media/index'},
-  {baseUrl: '/media/links', type: 'builtin', location: './media/contrib/links/index'},
+  {baseUrl: '/', type: 'builtin', location: './apps/dashboard/index'},
+  {baseUrl: '/engine', type: 'builtin', location: './apps/engine/index'},
+  {baseUrl: '/site', type: 'builtin', location: './apps/site/index'},
+  {baseUrl: '/pages', type: 'builtin', location: './apps/pages/index'},
+  {baseUrl: '/galleries', type: 'builtin', location: './apps/galleries/index'},
+  {baseUrl: '/templates', type: 'builtin', location: './apps/templates/index'},
+  {baseUrl: '/media', type: 'builtin', location: './apps/media/index'},
+  {baseUrl: '/media/links', type: 'builtin', location: './apps/media/contrib/links/index'},
 ]
 
 export function readAppsConfig() {
@@ -99,5 +99,12 @@ export function makeReducer(apps) {
 }
 
 export function appsLoader() {
-  return readAppsConfig().then(loadAppsConfig);
+  return readAppsConfig().then(appsConfig => {
+    return loadAppsConfig(appsConfig).catch(error => {
+      console.error('Error loading apps from config:');
+      console.error(error);
+      console.log("Loading default apps");
+      return loadAppsConfig(DEFAULT_APPS_CONFIG);
+    });
+  });
 }

@@ -3,11 +3,11 @@ import _ from 'lodash';
 import {Link} from 'react-router';
 
 
-export default function PictureList({baseUrl, links}) {
-  function PictureRow(link) {
+export default function AssetList({baseUrl, links}) {
+  function AssetRow(link) {
     const {id, path, type} = link.toJS();
     return <tr key={id}>
-      <td><Picture to={`${baseUrl}/${id}`}>{path}</Picture></td>
+      <td><Link to={`${baseUrl}/${id}`}>{path}</Link></td>
       <td>{type}</td>
     </tr>
   }
@@ -15,10 +15,10 @@ export default function PictureList({baseUrl, links}) {
   return <div className="container-fluid">
     <div className="row">
       <div className="col-md-6">
-        <h1>Pictures</h1>
+        <h1>Assets</h1>
       </div>
       <div className="col-md-6">
-        <Link type="button" className="btn btn-primary" to={`${baseUrl}/add`}>Add Picture</Link>
+        <Link type="button" className="btn btn-primary" to={`${baseUrl}/add`}>Add Asset</Link>
       </div>
     </div>
     <div className="table-responsive">
@@ -30,7 +30,7 @@ export default function PictureList({baseUrl, links}) {
           </tr>
         </thead>
         <tbody>
-          {links.map(PictureRow).toArray()}
+          {links.map(AssetRow).toArray()}
         </tbody>
       </table>
     </div>

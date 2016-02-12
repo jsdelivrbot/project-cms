@@ -69,7 +69,7 @@ System.config({
     "swig": "npm:swig@1.4.2",
     "text": "github:systemjs/plugin-text@0.0.4",
     "zone.js": "npm:zone.js@0.5.8",
-    "~": "/app",
+    "~": "/src",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
