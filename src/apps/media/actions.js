@@ -1,13 +1,5 @@
 //intended to work with the ASK_FOR middleware
 
-export function askForMedia(mediaTypes, quantityLimits=1) {
-  return {
-    type: 'ASK_FOR_MEDIA',
-    mediaTypes,
-    quantityLimits
-  };
-}
-
 export function respondWithMedia(result) {
   return {
     type: 'RESPOND_WITH_MEDIA',
@@ -15,4 +7,4 @@ export function respondWithMedia(result) {
   }
 }
 
-export default {askForMedia, respondWithMedia}
+export default {respondWithMedia}

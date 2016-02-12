@@ -10,19 +10,13 @@ import actions from './actions';
 import publish from './publish';
 import fixtures from './fixtures';
 
+import {askForMedia} from '~/actions';
+
 
 function galleryTemplates(state) {
   return state.getIn(['tables', '/templates']).filter(tmp => tmp.get('type') === 'page');
 }
 
-
-function askForMedia(quantityLimit=20) {
-  return {
-    type: 'ASK_FOR_MEDIA',
-    mediaTypes: ['pictures'],
-    quantityLimit
-  }
-}
 
 export default function GallerysApplicationFactory(baseUrl) {
   return {

@@ -6,6 +6,7 @@ import AddPicture from './components/AddPicture.jsx';
 import EditPicture from './components/EditPicture.jsx';
 
 import actions from './actions';
+import {uploadFile} from '~/actions';
 
 
 function renderMediaItem(media_item, field) {

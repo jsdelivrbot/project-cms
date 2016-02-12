@@ -6,6 +6,7 @@ import AddAsset from './components/AddAsset.jsx';
 import EditAsset from './components/EditAsset.jsx';
 
 import actions from './actions';
+import {uploadFile} from '~/actions';
 
 
 export default function AssetsApplicationFactory(baseUrl) {
@@ -71,13 +72,5 @@ function renderMediaItem(media_item, field) {
         case "image":
           return `<img src=${url}/>`
     }
-  }
-}
-
-
-function uploadFile(file) {
-  return {
-    type: 'UPLOAD_FILE',
-    file
   }
 }

@@ -31,7 +31,7 @@ export class PictureList extends React.Component {
 
   addPictures = (event) => {
     event.preventDefault();
-    this.props.askForMedia(20).then(media_item => {
+    this.props.askForMedia(['pictures'], 20).then(media_item => {
       if (!media_item) return;
 
       var value = this.state.value;
@@ -47,7 +47,7 @@ export class PictureList extends React.Component {
 
   selectPicture = (event) => {
     let index = parseInt(event.target.dataset.index);
-    this.props.askForMedia(1).then(media_item => {
+    this.props.askForMedia(['pictures'], 1).then(media_item => {
       if (!media_item) return;
 
       var value = this.state.value;
