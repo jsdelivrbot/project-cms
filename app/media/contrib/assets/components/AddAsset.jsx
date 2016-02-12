@@ -28,7 +28,9 @@ export default class AddAsset extends React.Component {
   updateFile = (event) => {
     let file = event.target.files[0];
     this.setState({uploading: true});
-    this.props.uploadFile(file).then(url => {
+    this.props.uploadFile(file).then(({result}) => {
+      let url = result.url;
+      console.log("updated file to:", url);
       var changes = {
         uploading: false,
         uploaded: true,
@@ -71,7 +73,7 @@ export default class AddAsset extends React.Component {
               </select>
             </div>
             <div className="form-group">
-              <button type="submit" disabled={uploaded && !uploading} className="btn btn-primary">Save</button>
+              <button type="submit" disabled={!uploaded || uploading} className="btn btn-primary">Save</button>
             </div>
           </form>
         </div>

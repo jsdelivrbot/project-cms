@@ -10,12 +10,15 @@ import createHistory from 'history/lib/createHashHistory'
 import promiseMiddleware from './middleware/promise';
 import nextUrlMiddleware from './middleware/next_url';
 import askForMiddleware from './middleware/ask_for';
+import uploaderMiddleware from './middleware/uploader';
 
 import {appsLoader, loadAppsTables, makeReducer} from './appsLoader';
 import AppRouter from './router.jsx';
 
+import {s3Uploader} from './services/s3';
 
-var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, promiseMiddleware, askForMiddleware)(createStore);
+
+var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, uploaderMiddleware, promiseMiddleware, askForMiddleware)(createStore);
 
 var history = createHistory();
 
@@ -45,6 +48,9 @@ appsLoader().then(apps => {
   var engine = getApp('/engine');
 
   store.dispatch(engine.actions.setApps(apps));
+
+  //hook in S3 uploader
+  s3Uploader(store);
 
 
   //CONSIDER: we are storing core functions in the engine domain - probably not using the redux as intended

@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {connect} from 'react-redux'
 import {Router} from 'react-router';
 
-
+//TODO router reloading doesn't seem to work
 export function AppRouter({apps, history}) {
   let dashboard = _.find(apps, {baseUrl: '/'});
   let routes = _.clone(dashboard.routes);

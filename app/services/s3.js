@@ -31,3 +31,34 @@ export function put(awsConfig, {path, content, mimetype}) {
     body: content
   });
 }
+
+export function s3Uploader(store) {
+  let awsConfig = null;
+
+  function listener() {
+    let newAwsConfig = store.getState().getIn(['tables', '/engine', 'awsConfig']);
+    if (awsConfig !== newAwsConfig && newAwsConfig.get('bucket')) {
+      awsConfig = newAwsConfig;
+      let uploader = function(files) {
+        return Promise.all(_.map(files, file => {
+          //TODO avoid name collisions
+          let path = `/media/${file.name}`;
+          let content = file;
+          let mimetype = file.type;
+          return put(awsConfig.toJS(), {
+            path,
+            content,
+            mimetype
+          });
+        }));
+      }
+      store.dispatch({
+        type: 'SET_UPLOADER',
+        uploader
+      });
+    }
+  }
+
+  listener();
+  store.subscribe(listener);
+}
