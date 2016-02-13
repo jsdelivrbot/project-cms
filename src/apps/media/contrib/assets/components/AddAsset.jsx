@@ -29,14 +29,18 @@ export default class AddAsset extends React.Component {
     let file = event.target.files[0];
     this.setState({uploading: true});
     this.props.uploadFile(file).then(({result}) => {
-      let url = result.url;
-      console.log("updated file to:", url);
+      let {url, path} = result;
+      let asset = _.assign({}, this.state.asset, {
+        name: file.name,
+        url,
+        path,
+      });
+
       var changes = {
         uploading: false,
         uploaded: true,
-        asset: _.clone(this.state.asset)
-      }
-      changes.asset.url = url;
+        asset
+      };
       this.setState(changes);
     }, error => {
       //TODO craft alert

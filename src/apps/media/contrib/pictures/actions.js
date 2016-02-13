@@ -32,7 +32,7 @@ export function updatePicture(baseUrl, pictureId, picture) {
       table_name: '/media',
       object_id: pictureId
     },
-    next_url: `${baseUrl}/${assetId}`
+    next_url: `${baseUrl}/${pictureId}`
   };
 }
 
@@ -49,5 +49,18 @@ export function removePicture(baseUrl, pictureId) {
   };
 }
 
+//move into ~/actions.js?
+export function makeThumbnail(picture, options) {
+  //CONSIDER: must trigger a record change and an uploadFile action
+  //I guess we would also do resizing here
+  //but don't I need to read picture.url first?
+  //so middleware that looks for 'MAKE_THUMBNAIL' and then issues 'UPLOAD_FILE'
+  //but doesn't the middleware need state? argh....
+  return {
+    type: 'MAKE_THUMBNAIL',
+    picture,
+    options,
+  };
+}
 
-export default {addPicture, updatePicture, removePicture}
+export default {addPicture, updatePicture, removePicture, makeThumbnail}

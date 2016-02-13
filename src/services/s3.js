@@ -2,6 +2,7 @@ import _ from 'lodash';
 import auth from 'knox/lib/auth';
 import _fetch from 'fetch';
 import {Buffer} from 'buffer';
+import {v4} from 'node-uuid';
 
 //https://github.com/Automattic/knox/issues/299
 
@@ -32,6 +33,21 @@ export function put(awsConfig, {path, content, mimetype}) {
   });
 }
 
+function _uploader(awsConfig, files) {
+  return Promise.all(_.map(files, file => {
+    let id = v4();
+    let extension = _.last(file.name.split('.'));
+    let path = file.path ? file.path : `/media/${id}.${extension}`;
+    let content = file;
+    let mimetype = file.type;
+    return put(awsConfig, {
+      path,
+      content,
+      mimetype
+    }).then(r => _.assign(r, {path}));
+  }));
+}
+
 export function s3Uploader(store) {
   let awsConfig = null;
 
@@ -39,19 +55,8 @@ export function s3Uploader(store) {
     let newAwsConfig = store.getState().getIn(['tables', '/engine', 'awsConfig']);
     if (awsConfig !== newAwsConfig && newAwsConfig.get('bucket')) {
       awsConfig = newAwsConfig;
-      let uploader = function(files) {
-        return Promise.all(_.map(files, file => {
-          //TODO avoid name collisions
-          let path = `/media/${file.name}`;
-          let content = file;
-          let mimetype = file.type;
-          return put(awsConfig.toJS(), {
-            path,
-            content,
-            mimetype
-          });
-        }));
-      }
+      let uploader = _.partial(_uploader, awsConfig.toJS());
+
       store.dispatch({
         type: 'SET_UPLOADER',
         uploader

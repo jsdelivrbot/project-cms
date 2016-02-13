@@ -6,7 +6,7 @@ import AddPicture from './components/AddPicture.jsx';
 import EditPicture from './components/EditPicture.jsx';
 
 import actions from './actions';
-import {uploadFile} from '~/actions';
+import {uploadFile, replaceFile} from '~/actions';
 
 
 function renderMediaItem(media_item, field) {
@@ -14,16 +14,20 @@ function renderMediaItem(media_item, field) {
     case "detail_link":
       return media_item.get('media_type') + "/" + media_item.get('id');
     case "preview":
-      return media_item.get('path');
+      return media_item.get('name');
     case "embed_code":
-      const path = media_item.get('path');
-      return `<img src=${path}/>`;
+      const url = media_item.get('url');
+      const name = media_item.get('name');
+      return `<img src=${url} alt=${name}/>`;
   }
 }
 
 
 export default function PicturesApplicationFactory(baseUrl) {
-
+  //TODO uploadPictures (for use with media picker)
+  //TODO thumbnail request renderThumbnail(media_item, options) (maybe as action MAKE_THUMBNAIL)
+  //would trigger an update and access state
+  //also needs to be available as a filter
   return {
     type: 'media provider',
     actions,
@@ -61,7 +65,7 @@ export default function PicturesApplicationFactory(baseUrl) {
         }, {
           updatePicture: _.partial(actions.updatePicture, baseUrl),
           removePicture: _.partial(actions.removePicture, baseUrl),
-          uploadFile
+          replaceFile
         })(EditPicture)
       }]
     }

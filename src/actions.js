@@ -5,6 +5,14 @@ export function uploadFile(file) {
   }
 }
 
+export function replaceFile(file, path) {
+  file.path = path;
+  return {
+    type: 'REPLACE_FILE',
+    file
+  }
+}
+
 export function uploadFiles(files) {
   return {
     type: 'UPLOAD_FILES',

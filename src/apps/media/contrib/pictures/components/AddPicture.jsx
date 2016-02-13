@@ -29,14 +29,18 @@ export default class AddPicture extends React.Component {
     let file = event.target.files[0];
     this.setState({uploading: true});
     this.props.uploadFile(file).then(({result}) => {
-      let url = result.url;
-      console.log("updated file to:", url);
+      let {url, path} = result;
+      let picture = _.assign({}, this.state.picture, {
+        name: file.name,
+        url,
+        path,
+      });
+      console.log("updated file to:", url, picture);
       var changes = {
         uploading: false,
         uploaded: true,
-        picture: _.clone(this.state.picture)
+        picture
       }
-      changes.picture.url = url;
       this.setState(changes);
     }, error => {
       //TODO craft alert

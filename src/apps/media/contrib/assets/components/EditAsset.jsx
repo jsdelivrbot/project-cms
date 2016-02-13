@@ -27,14 +27,18 @@ export default class EditAsset extends React.Component {
   updateFile = (event) => {
     let file = event.target.files[0];
     this.setState({uploading: true});
-    this.props.uploadFile(file).then(({result}) => {
-      let url = result.url;
-      console.log("updated file to:", url);
+    this.props.replaceFile(file, this.state.asset.path).then(({result}) => {
+      let {url, path} = result;
+      let asset = _.assign({}, this.state.asset, {
+        name: file.name,
+        url,
+        path,
+      });
+
       var changes = {
         uploading: false,
-        asset: _.clone(this.state.asset)
-      }
-      changes.asset.url = url;
+        asset
+      };
       this.setState(changes);
     }, error => {
       //TODO craft alert

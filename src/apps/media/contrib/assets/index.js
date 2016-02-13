@@ -6,7 +6,7 @@ import AddAsset from './components/AddAsset.jsx';
 import EditAsset from './components/EditAsset.jsx';
 
 import actions from './actions';
-import {uploadFile} from '~/actions';
+import {uploadFile, replaceFile} from '~/actions';
 
 
 export default function AssetsApplicationFactory(baseUrl) {
@@ -48,6 +48,7 @@ export default function AssetsApplicationFactory(baseUrl) {
         }, {
           updateAsset: _.partial(actions.updateAsset, baseUrl),
           removeAsset: _.partial(actions.removeAsset, baseUrl),
+          replaceFile
         })(EditAsset)
       }]
     }
@@ -59,7 +60,7 @@ function renderMediaItem(media_item, field) {
     case "detail_link":
       return media_item.get('media_type') + "/" + media_item.get('id');
     case "preview":
-      return media_item.get('url');
+      return media_item.get('name');
     case "embed_code":
       const url = media_item.get('url');
       switch(media_item.get('type')) {
@@ -70,7 +71,8 @@ function renderMediaItem(media_item, field) {
         case "javascript":
           return `<script src=${url}></script>`
         case "image":
-          return `<img src=${url}/>`
+          const name = media_item.get('name');
+          return `<img src=${url} name=${name}/>`
     }
   }
 }

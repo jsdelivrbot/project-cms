@@ -25,17 +25,23 @@ export default class EditPicture extends React.Component {
   }
 
   updateFile = (event) => {
+    //TODO only replaceFile on submit? or just uploadFile?
     let file = event.target.files[0];
     this.setState({uploading: true});
-    this.props.uploadFile(file).then(({result}) => {
-      let url = result.url;
+    this.props.replaceFile(file, this.state.picture.path).then(({result}) => {
+      let {url, path} = result;
+      let picture = _.assign({}, this.state.picture, {
+        name: file.name,
+        url,
+        path,
+      });
+
       console.log("updated file to:", url);
       var changes = {
         uploading: false,
         uploaded: true,
-        picture: _.clone(this.state.picture)
-      }
-      changes.picture.url = url;
+        picture
+      };
       this.setState(changes);
     }, error => {
       //TODO craft alert
