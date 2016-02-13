@@ -7,7 +7,8 @@ import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/css/css';
 import 'codemirror/mode/markdown/markdown';
 
-import RenderPreview from '~/RenderPreview.jsx';
+import RenderPreview from '~/components/RenderPreview.jsx';
+import MediaSidebar from '~/components/MediaSidebar.jsx';
 
 
 export default class AddPage extends React.Component {
@@ -48,9 +49,8 @@ export default class AddPage extends React.Component {
 
   render() {
     let page = this.state;
-    let MediaSidebar = this.props.mediaSidebar;
     return <div className="container-fluid">
-      {MediaSidebar ? <MediaSidebar/> : null}
+      <MediaSidebar/>
       <div className="row">
         <div className="col-sm-12">
           <h1>Add Page</h1>

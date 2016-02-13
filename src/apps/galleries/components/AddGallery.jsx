@@ -6,7 +6,7 @@ import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/css/css';
 
-import RenderPreview from '~/RenderPreview.jsx';
+import RenderPreview from '~/components/RenderPreview.jsx';
 import PictureList from './PictureList.jsx';
 
 

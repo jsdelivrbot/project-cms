@@ -13,7 +13,7 @@ import askForMiddleware from './middleware/ask_for';
 import uploaderMiddleware from './middleware/uploader';
 
 import {appsLoader, loadAppsTables, makeReducer} from './appsLoader';
-import AppRouter from './router.jsx';
+import AppRouter from './components/AppRouter.jsx';
 
 import {s3Uploader} from './services/s3';
 

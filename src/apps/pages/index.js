@@ -9,7 +9,7 @@ import actions from './actions';
 import publish from './publish';
 import fixtures from './fixtures';
 
-import {getTemplates, mediaSidebar} from '~/plugins';
+import {getTemplates} from '~/plugins';
 
 
 const pageTemplates = getTemplates('page');
@@ -38,8 +38,7 @@ export default function PagesApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            templates: pageTemplates(state),
-            mediaSidebar: mediaSidebar(state)
+            templates: pageTemplates(state)
           }
         }, {
           addPage: _.partial(actions.addPage, baseUrl),
@@ -52,8 +51,7 @@ export default function PagesApplicationFactory(baseUrl) {
             baseUrl: baseUrl,
             page: state.getIn(['tables', baseUrl, path]),
             path,
-            templates: pageTemplates(state),
-            mediaSidebar: mediaSidebar(state)
+            templates: pageTemplates(state)
           }
         }, {
           updatePage: _.partial(actions.updatePage, baseUrl),

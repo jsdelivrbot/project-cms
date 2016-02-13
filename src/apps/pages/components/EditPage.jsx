@@ -7,7 +7,8 @@ import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/css/css';
 import 'codemirror/mode/markdown/markdown';
 
-import RenderPreview from '~/RenderPreview.jsx';
+import RenderPreview from '~/components/RenderPreview.jsx';
+import MediaSidebar from '~/components/MediaSidebar.jsx';
 
 
 export default class EditPage extends React.Component {
@@ -52,8 +53,9 @@ export default class EditPage extends React.Component {
 
   render() {
     let page = this.state;
-    let MediaSidebar = this.props.mediaSidebar;
-    return <div> {MediaSidebar ? <MediaSidebar/> : null} <div className="container-fluid">
+    return <div> 
+      <MediaSidebar/>
+      <div className="container-fluid">
 
       <div className="row">
         <div className="col-sm-12">
