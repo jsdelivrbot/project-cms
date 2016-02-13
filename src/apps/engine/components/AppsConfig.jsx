@@ -15,6 +15,12 @@ export default class AppsConfig extends React.Component {
 
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.appsConfig !== this.props.appsConfig) {
+      nextState.appsConfig = nextProps.appsConfig.toJS();
+    }
+  }
+
   receiveSubmit = (event) => {
     event.preventDefault();
     console.log("Submit:", event);
@@ -41,8 +47,18 @@ export default class AppsConfig extends React.Component {
     this.setState(changes);
   }
 
+  removeApp = (index, event) => {
+    event.preventDefault();
+    var changes = {
+      appsConfig: _.clone(this.state.appsConfig)
+    };
+    changes.appsConfig.splice(index, 1);
+    this.setState(changes);
+  }
+
   renderAppField = (app, index) => {
     var update = _.partial(this.updateAppValue, index);
+    var remove = _.partial(this.removeApp, index);
     return <div className="row well" key={index}>
       <div className="form-group col-sm-3">
         <label>Base Url</label>
@@ -57,10 +73,13 @@ export default class AppsConfig extends React.Component {
           <option value="npm">NPM</option>
         </select>
       </div>
-      <div className="form-group col-sm-6">
+      <div className="form-group col-sm-5">
         <label>Location</label>
         <input name="location" value={app.location} onChange={update}
           type="text" className="form-control" placeholder="path"/>
+      </div>
+      <div className="form-group col-sm-``">
+        <button onClick={remove} className="btn btn-danger">X</button>
       </div>
     </div>
   }

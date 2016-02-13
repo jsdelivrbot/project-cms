@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {connect} from 'react-redux'
 import {Router} from 'react-router';
 
-//TODO router reloading doesn't seem to work
+
 export function AppRouter({apps, history}) {
   let dashboard = _.find(apps, {baseUrl: '/'});
   let routes = _.clone(dashboard.routes);
@@ -11,7 +11,8 @@ export function AppRouter({apps, history}) {
   //TODO media.childRoutes = media apps
   console.log("loading routes:", routes);
 
-  return <Router history={history} routes={routes} />
+  //by changing the key we force a router reload!
+  return <Router history={history} routes={routes} key={_.uniqueId()}/>
 }
 
 export default connect(state => {
