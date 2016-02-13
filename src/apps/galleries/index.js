@@ -44,7 +44,6 @@ export default function GallerysApplicationFactory(baseUrl) {
           return {
             baseUrl: baseUrl,
             templates: galleryTemplates(state),
-            render: state.getIn(['/engine', 'renderer'])
           }
         }, {
           addGallery: _.partial(actions.addGallery, baseUrl),
@@ -59,7 +58,6 @@ export default function GallerysApplicationFactory(baseUrl) {
             gallery: state.getIn(['tables', baseUrl, path]),
             path,
             templates: galleryTemplates(state),
-            render: state.getIn(['/engine', 'renderer']),
           }
         }, {
           updateGallery: _.partial(actions.updateGallery, baseUrl),

@@ -7,7 +7,7 @@ import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/css/css';
 import 'codemirror/mode/markdown/markdown';
 
-import RenderPreview from './RenderPreview.jsx';
+import RenderPreview from '~/RenderPreview.jsx';
 
 
 export default class EditPage extends React.Component {
@@ -126,7 +126,7 @@ export default class EditPage extends React.Component {
         </div>
         <div className="col-md-6 col-sm-12">
           <h3 key="title">Preview</h3>
-          <RenderPreview page={page} render={this.props.render} key="preview"/>
+          <RenderPreview context={{page}} template={page.template} key="preview"/>
         </div>
       </div>
     </div></div>

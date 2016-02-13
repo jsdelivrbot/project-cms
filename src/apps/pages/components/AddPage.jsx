@@ -7,6 +7,8 @@ import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/css/css';
 import 'codemirror/mode/markdown/markdown';
 
+import RenderPreview from '~/RenderPreview.jsx';
+
 
 export default class AddPage extends React.Component {
   constructor(props) {
@@ -55,7 +57,7 @@ export default class AddPage extends React.Component {
         </div>
       </div>
       <div className="row">
-        <div className="col-sm-12">
+        <div className="col-md-6 col-sm-12">
           <form onSubmit={this.receiveSubmit}>
             <div className="form-group">
               <label className="control-label">Path</label>
@@ -118,6 +120,10 @@ export default class AddPage extends React.Component {
               <button type="submit" className="btn btn-primary">Save</button>
             </div>
           </form>
+        </div>
+        <div className="col-md-6 col-sm-12">
+          <h3 key="title">Preview</h3>
+          <RenderPreview context={{page}} template={page.template} key="preview"/>
         </div>
       </div>
     </div>

@@ -39,7 +39,6 @@ export default function PagesApplicationFactory(baseUrl) {
           return {
             baseUrl: baseUrl,
             templates: pageTemplates(state),
-            render: state.getIn(['/engine', 'renderer']),
             mediaSidebar: mediaSidebar(state)
           }
         }, {
@@ -54,7 +53,6 @@ export default function PagesApplicationFactory(baseUrl) {
             page: state.getIn(['tables', baseUrl, path]),
             path,
             templates: pageTemplates(state),
-            render: state.getIn(['/engine', 'renderer']),
             mediaSidebar: mediaSidebar(state)
           }
         }, {

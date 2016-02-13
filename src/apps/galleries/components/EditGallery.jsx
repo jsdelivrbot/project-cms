@@ -6,7 +6,7 @@ import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/css/css';
 
-import RenderPreview from './RenderPreview.jsx';
+import RenderPreview from '~/RenderPreview.jsx';
 import PictureList from './PictureList.jsx';
 
 
@@ -120,7 +120,7 @@ export default class EditGallery extends React.Component {
         </div>
         <div className="col-md-6 col-sm-12">
           <h3 key="title">Preview</h3>
-          <RenderPreview gallery={gallery} render={this.props.render} key="preview"/>
+          <RenderPreview context={{gallery}} template={gallery.template} key="preview"/>
         </div>
       </div>
     </div>

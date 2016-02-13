@@ -4,14 +4,12 @@ import {connect} from 'react-redux';
 import _ from 'lodash';
 
 
-export function renderBlocks() {
-  return {}
-}
-
-export default class RenderPreview extends React.Component {
+export class RenderPreview extends React.Component {
   static propTypes = {
+    site: React.PropTypes.object.isRequired,
     context: React.PropTypes.object.isRequired,
-    template: React.PropTypes.string.isRequired
+    template: React.PropTypes.string,
+    render: React.PropTypes.func.isRequired
   };
 
   componentDidMount() {
@@ -21,8 +19,9 @@ export default class RenderPreview extends React.Component {
   renderFrameContents() {
     var doc = ReactDOM.findDOMNode(this).contentDocument;
     if(doc && doc.readyState === 'complete') {
-      let {context, template} = this.props;
-      var renderedPage = this.props.render(template, context);
+      let {context, template, site, render} = this.props;
+      context.site = site;
+      var renderedPage = render(template, context);
       doc.write(renderedPage);
     } else {
       setTimeout(this.renderFrameContents, 0);
@@ -35,10 +34,10 @@ export default class RenderPreview extends React.Component {
       this.renderFrameContents();
     } else {
       let doc = ReactDOM.findDOMNode(this).contentDocument;
-      //TODO identify blocks
-      let blocks = ['content'];
-      let {context, template} = this.props;
-      let renderedBlocks = renderBlocks(template, context, blocks);
+      let {context, template, site, render} = this.props;
+      context.site = site;
+      let renderedBlocks = render(template, context, true);
+      //console.log("renderedBlocks:", renderedBlocks);
       _.each(renderedBlocks, (content, block) => {
         let element = doc.querySelector(`[data-template-block="${block}"]`);
         if (element && element.innerHTML !== content) {
@@ -52,3 +51,10 @@ export default class RenderPreview extends React.Component {
     return <iframe style={{width: '100%'}}/>
   }
 }
+
+export default connect(state => {
+  return {
+    render: state.getIn(['/engine', 'renderer']),
+    site: state.getIn(['tables', '/site', 'site'])
+  }
+})(RenderPreview);
