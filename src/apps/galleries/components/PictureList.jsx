@@ -1,10 +1,16 @@
 import React from 'react';
 import _ from 'lodash';
+import {connect} from 'react-redux'
+
+import {askForMedia} from '~/actions'
+import MediaField from '~/components/MediaField.jsx';
 
 
-export default class PictureList extends React.Component {
+export class PictureList extends React.Component {
+  static allowedTypes = ['/media/pictures'];
+
   constructor(props) {
-    super(props); //{askForMedia, value, onChange}
+    super(props); //{value, onChange}
     let value = props.value || props.defaultValue || [];
     this.state = {
       value
@@ -32,7 +38,7 @@ export default class PictureList extends React.Component {
 
   addPictures = (event) => {
     event.preventDefault();
-    this.props.askForMedia(['pictures'], 20).then(media_item => {
+    this.props.askForMedia(this.allowedTypes, 20).then(media_item => {
       if (!media_item) return;
 
       var value = this.state.value.slice();
@@ -46,24 +52,22 @@ export default class PictureList extends React.Component {
     });
   }
 
-  selectPicture = (event) => {
-    let index = parseInt(event.target.dataset.index);
-    this.props.askForMedia(['pictures'], 1).then(media_item => {
-      if (!media_item) return;
+  setPicture = (index, media_item) => {
+    if (!media_item) return;
 
-      var value = this.state.value.slice();
-      value[index] = media_item
-      this.setState({value});
-      this.signalChange(value);
-    });
+    var value = this.state.value.slice();
+    value[index] = media_item
+    this.setState({value});
+    this.signalChange(value);
   }
 
   renderPictureRow = (picture, index) => {
     //TODO what is the shape of picture?
     console.log("renderPictureRow:", picture);
+    let setPicture = _.partial(this.setPicture, index);
     return <div className="form-group" key={index}>
       <label className="control-label" key="label">Picture</label>
-      <img src={picture.url} onClick={this.selectPicture} key="picture" data-index={index}/>
+      <MediaField mediaId={picture.id} allowedTypes={this.allowedTypes} onChange={setPicture} key="picture"/>
       <button className="btn btn-default" onClick={this.removePicture} key="remove" data-index={index}>Remove</button>
     </div>
   }
@@ -78,3 +82,7 @@ export default class PictureList extends React.Component {
     </div>
   }
 }
+
+export default connect(null, {
+  askForMedia
+})(PictureList);

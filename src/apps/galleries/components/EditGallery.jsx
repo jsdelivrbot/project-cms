@@ -12,7 +12,7 @@ import PictureList from './PictureList.jsx';
 
 export default class EditGallery extends React.Component {
   constructor(props) {
-    super(props) //{updateGallery, askForMedia, gallery, path, render}
+    super(props) //{updateGallery, gallery, path, render}
     this.state = props.gallery.toJS();
 
     this.updateHead = _.partial(this.updateCode, 'head');
@@ -74,7 +74,7 @@ export default class EditGallery extends React.Component {
                 {this.renderTemplateOptions()}
               </select>
             </div>
-            <PictureList onChange={this.updatePictures} value={gallery.pictures} askForMedia={this.props.askForMedia} key="pictures"/>
+            <PictureList onChange={this.updatePictures} value={gallery.pictures} key="pictures"/>
 
             <div className="form-group">
               <button className="btn btn-default" type="button" data-toggle="collapse" data-target="#galleryAdvanced" aria-expanded="false" aria-controls="collapseExample">

@@ -10,7 +10,6 @@ import actions from './actions';
 import publish from './publish';
 import fixtures from './fixtures';
 
-import {askForMedia} from '~/actions';
 import {getTemplates} from '~/plugins';
 
 
@@ -34,8 +33,6 @@ export default function GallerysApplicationFactory(baseUrl) {
             baseUrl: baseUrl,
             galleries: state.getIn(['tables', baseUrl])
           }
-        }, {
-          askForMedia
         })(GalleryList)
       },
       childRoutes: [{
@@ -47,7 +44,6 @@ export default function GallerysApplicationFactory(baseUrl) {
           }
         }, {
           addGallery: _.partial(actions.addGallery, baseUrl),
-          askForMedia,
         })(AddGallery)
       }, {
         path: '**',
@@ -62,7 +58,6 @@ export default function GallerysApplicationFactory(baseUrl) {
         }, {
           updateGallery: _.partial(actions.updateGallery, baseUrl),
           removeGallery: _.partial(actions.removeGallery, baseUrl),
-          askForMedia,
         })(EditGallery)
       }]
     }

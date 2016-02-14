@@ -4,6 +4,7 @@ import _ from 'lodash';
 import PictureList from './components/PictureList.jsx';
 import AddPicture from './components/AddPicture.jsx';
 import EditPicture from './components/EditPicture.jsx';
+import PictureField from './components/PictureField.jsx';
 
 import actions from './actions';
 import {uploadFile, replaceFile} from '~/actions';
@@ -19,6 +20,8 @@ function renderMediaItem(media_item, field) {
       const url = media_item.get('url');
       const name = media_item.get('name');
       return `<img src=${url} alt=${name}/>`;
+    case "field":
+      return PictureField({media_item});
   }
 }
 

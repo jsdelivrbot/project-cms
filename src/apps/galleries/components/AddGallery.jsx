@@ -12,7 +12,7 @@ import PictureList from './PictureList.jsx';
 
 export default class AddGallery extends React.Component {
   constructor(props) {
-    super(props) //{addGallery, askForMedia, render}
+    super(props) //{addGallery, render}
     this.state = {
       pictures: []
     };
@@ -78,7 +78,7 @@ export default class AddGallery extends React.Component {
                 {this.renderTemplateOptions()}
               </select>
             </div>
-            <PictureList onChange={this.updatePictures} value={gallery.pictures} askForMedia={this.props.askForMedia} key="pictures"/>
+            <PictureList onChange={this.updatePictures} value={gallery.pictures} key="pictures"/>
 
             <div className="form-group" key="adv-button">
               <button className="btn btn-default" type="button" data-toggle="collapse" data-target="#galleryAdvanced" aria-expanded="false" aria-controls="collapseExample">
