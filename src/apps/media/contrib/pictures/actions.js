@@ -20,7 +20,8 @@ export function addPicture(baseUrl, picture) {
       table_name: '/media',
       object_id: pictureId
     },
-    next_url: `${baseUrl}/${pictureId}`
+    next_url: `${baseUrl}/${pictureId}`,
+    alert_message: `Added Picture ${picture.name}`,
   };
 }
 
@@ -34,6 +35,7 @@ export function updatePicture(baseUrl, pictureId, picture) {
       table_name: '/media',
       object_id: pictureId
     },
+    alert_message: `Updated Picture ${picture.name}`,
     next_url: `${baseUrl}/${pictureId}`
   };
 }
@@ -47,6 +49,7 @@ export function removePicture(baseUrl, pictureId) {
       table_name: '/media',
       object_id: pictureId
     },
+    alert_message: `Removed Picture`,
     next_url: baseUrl
   };
 }

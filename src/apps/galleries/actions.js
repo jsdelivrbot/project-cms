@@ -9,6 +9,7 @@ export function addGallery(baseUrl, path, gallery) {
       table_name: baseUrl,
       object_id: path,
     },
+    alert_message: `Added gallery ${gallery.title}`,
     next_url: `${baseUrl}${path}`
   };
 }
@@ -22,6 +23,7 @@ export function removeGallery(baseUrl, path) {
       table_name: baseUrl,
       object_id: path
     },
+    alert_message: `Removed gallery`,
     next_url: `${baseUrl}`
   };
 }
@@ -35,7 +37,8 @@ export function updateGallery(baseUrl, path, gallery) {
       update_object: gallery,
       table_name: baseUrl,
       object_id: path
-    }
+    },
+    alert_message: `Updated gallery ${gallery.title}`,
   };
 }
 

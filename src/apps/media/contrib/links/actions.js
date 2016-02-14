@@ -18,6 +18,7 @@ export function addLink(baseUrl, link) {
       table_name: '/media',
       object_id: linkId
     },
+    alert_message: `Added link`,
     next_url: `${baseUrl}/${linkId}`
   };
 }
@@ -31,6 +32,7 @@ export function removeLink(baseUrl, linkId) {
       table_name: '/media',
       object_id: linkId
     },
+    alert_message: `Removed link`,
     next_url: baseUrl
   };
 }

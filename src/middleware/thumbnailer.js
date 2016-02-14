@@ -82,6 +82,7 @@ export default function thumbnailerMiddleware({getState}) {
 
           fullfill(pictureId, thumbnailKey, thumbnail);
 
+          //TODO bulk record_changes once all commitments have been fulfilled
           next({
             type: 'UPDATE_MEDIA',
             pictureId,

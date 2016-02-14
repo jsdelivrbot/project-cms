@@ -9,6 +9,7 @@ export function addPage(baseUrl, path, page) {
       table_name: baseUrl,
       object_id: path,
     },
+    alert_message: `Added page ${page.title}`,
     next_url: `${baseUrl}${path}`
   };
 }
@@ -22,6 +23,7 @@ export function removePage(baseUrl, path) {
       table_name: baseUrl,
       object_id: path
     },
+    alert_message: `Removed page`,
     next_url: `${baseUrl}`
   };
 }
@@ -35,7 +37,8 @@ export function updatePage(baseUrl, path, page) {
       update_object: page,
       table_name: baseUrl,
       object_id: path
-    }
+    },
+    alert_message: `Updated page ${page.title}`,
   };
 }
 

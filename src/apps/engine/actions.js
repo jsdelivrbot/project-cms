@@ -64,7 +64,8 @@ export function setAppsConfig(appsConfig, store) {
 
         store.dispatch({
           type: '!',
-          record_change
+          record_change,
+          alert_message: 'Apps reloaded',
         });
       }
       return apps;
@@ -80,7 +81,8 @@ export function setAwsConfig(awsConfig) {
       update_object: awsConfig,
       table_name: '/engine',
       object_id: 'awsConfig'
-    }
+    },
+    alert_message: 'AWS Config updated',
   }
 }
 

@@ -48,17 +48,8 @@ export default function dashboard(state = INITIAL_STATE, action) {
   if (action.error) {
     return craftAlert(state, 'error', action.error);
   }
-  if (action.record_change) {
-    let change = action.record_change;
-    if (change.new_object) {
-      return craftAlert(state, 'success', `New ${stripName(action.type)} created.`);
-    }
-    if (change.update_object) {
-      return craftAlert(state, 'success', `${stripName(action.type)} updated.`);
-    }
-    if (change.remove_object) {
-      return craftAlert(state, 'success', `${stripName(action.type)} deleted.`);
-    }
+  if (action.alert_message) {
+    return craftAlert(state, 'success', action.alert_message);
   }
   return state;
 }

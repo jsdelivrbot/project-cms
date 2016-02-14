@@ -18,6 +18,7 @@ export function addAsset(baseUrl, asset) {
       table_name: '/media',
       object_id: assetId
     },
+    alert_message: `Added Asset`,
     next_url: `${baseUrl}/${assetId}`
   };
 }
@@ -32,6 +33,7 @@ export function updateAsset(baseUrl, assetId, asset) {
       table_name: '/media',
       object_id: assetId
     },
+    alert_message: `Updated Asset`,
     next_url: `${baseUrl}/${assetId}`
   };
 }
@@ -45,6 +47,7 @@ export function removeAsset(baseUrl, assetId) {
       table_name: '/media',
       object_id: assetId
     },
+    alert_message: `Removed Asset`,
     next_url: baseUrl
   };
 }
