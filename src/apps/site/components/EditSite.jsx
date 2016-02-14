@@ -6,6 +6,8 @@ import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/css/css';
 
+import MediaSidebar from '~/components/MediaSidebar.jsx';
+
 
 export default class EditSite extends React.Component {
   constructor(props) {
@@ -38,9 +40,8 @@ export default class EditSite extends React.Component {
 
   render() {
     let site = this.state;
-    let MediaSidebar = this.props.mediaSidebar;
     return <div className="container-fluid">
-      {MediaSidebar ? <MediaSidebar/> : null}
+      <MediaSidebar/>
       <div className="row">
         <div className="col-sm-12">
           <h1>Edit Site Settings</h1>
