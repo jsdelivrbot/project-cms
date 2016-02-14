@@ -23,9 +23,9 @@ export function refFilter(getState, reference) {
 }
 
 export function thumbnailFilter(dispatch, picture, options, callback) {
-  console.log("tf args", arguments);
+  //console.log("tf args", arguments);
   let key = options.key || `${options.width}x${options.height}`;
-  console.log("key:", key)
+  //console.log("key:", key)
   if (picture.thumbnails && picture.thumbnails[key]) {
     callback(null, picture.thumbnails[key].url);
   } else {

@@ -18,6 +18,15 @@ export default function thumbnailerMiddleware({getState}) {
     }
   }
 
+  function rejectfill(pictureId, thumbnailKey) {
+    let index = `${pictureId}::${thumbnailKey}`;
+    let commitments = promises[index];
+    if (commitments) {
+      _.each(commitments, ([r,e]) => e());
+      delete promises[index];
+    }
+  }
+
   function requestThumbnail(pictureId, thumbnailKey) {
     let index = `${pictureId}::${thumbnailKey}`;
     let commitments = promises[index];
@@ -85,6 +94,10 @@ export default function thumbnailerMiddleware({getState}) {
           });
 
           return thumbnail;
+        }).catch(error => {
+          console.error(error);
+          rejectfill(pictureId, thumbnailKey);
+          return Promise.reject(error);
         });
       }
       action.promise = promise;
