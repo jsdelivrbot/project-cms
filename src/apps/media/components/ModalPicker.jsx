@@ -90,8 +90,12 @@ export default class ModalPicker extends React.Component {
   };
 
   translateMediaItem(media_item) {
-    //const provider = _.find(providers, {baseUrl: media_item.get('media_type')});
-    return media_item.toJS();
+    //return a reference that can be looked up
+    return {
+      mediaType: media_item.get('media_type'),
+      table: '/media',
+      id: media_item.get('id'),
+    };
   }
 
   render() {
@@ -99,7 +103,7 @@ export default class ModalPicker extends React.Component {
     let {selection, visible} = this.state;
     const selectMultiple = quantityLimit > 1;
     const modalFade = visible ? "in" : "";
-    
+
     if (mediaTypes) {
       media = media.filter(x => mediaTypes.indexOf(x.get('media_type')) !== -1);
     }

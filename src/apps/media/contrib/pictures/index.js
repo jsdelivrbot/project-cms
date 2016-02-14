@@ -21,7 +21,7 @@ function renderMediaItem(media_item, field) {
       const name = media_item.get('name');
       return `<img src=${url} alt=${name}/>`;
     case "field":
-      return PictureField({media_item});
+      return PictureField;
   }
 }
 

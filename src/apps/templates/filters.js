@@ -12,3 +12,10 @@ let md = new Remarkable({
 export function markdownFilter(input) {
   return nunjucks.runtime.markSafe(md.render(input));
 }
+
+export function refFilter(getState, reference) {
+  if (_.isArray(reference)) {
+    return _.map(reference, r => getState().getIn(['tables', r.table, r.id]));
+  }
+  return getState().getIn(['tables', reference.table, reference.id]);
+}

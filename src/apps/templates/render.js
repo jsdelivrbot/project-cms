@@ -1,7 +1,7 @@
 import nunjucks from 'nunjucks/browser/nunjucks.js';
 import Obj from 'nunjucks/src/object';
 import _ from 'lodash';
-import {markdownFilter} from './filters';
+import {markdownFilter, refFilter} from './filters';
 
 console.log("nunjucks:", nunjucks)
 
@@ -121,8 +121,9 @@ export default function renderFactory(store) {
   });
 
   env.addFilter('markdown', markdownFilter);
+  env.addFilter('ref', _.partial(refFilter, store.getState));
 
-  var templatesCache = {}; // path: {renderF, template}
+  var templatesCache = {}; // path: {content, template}
 
   function getTemplate(templateKey) {
     //console.log("getRenderer", templateKey)

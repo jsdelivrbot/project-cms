@@ -43,11 +43,9 @@ export class PictureList extends React.Component {
 
       var value = this.state.value.slice();
       if (_.isArray(media_item)) {
-        _.each(media_item, mi => {
-          value.push(mi.id)
-        });
+        value = value.concat(media_item);
       } else {
-        value.push(media_item.id);
+        value.push(media_item);
       }
       this.setState({value});
       this.signalChange(value);
@@ -58,15 +56,15 @@ export class PictureList extends React.Component {
     if (!media_item) return;
 
     var value = this.state.value.slice();
-    value[index] = media_item.id
+    value[index] = media_item
     this.setState({value});
     this.signalChange(value);
   }
 
-  renderPictureRow = (pictureId, index) => {
+  renderPictureRow = (mediaRef, index) => {
     let setPicture = _.partial(this.setPicture, index);
     return <div className="form-group" key={index}>
-      <MediaField mediaId={pictureId} allowedTypes={this.allowedTypes} onChange={setPicture} key="picture"/>
+      <MediaField mediaRef={mediaRef} allowedTypes={this.allowedTypes} onSelect={setPicture} key="picture"/>
       <button className="btn btn-default" onClick={this.removePicture} key="remove" data-index={index}>Remove</button>
     </div>
   }
