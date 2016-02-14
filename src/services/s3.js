@@ -44,7 +44,7 @@ function _uploader(awsConfig, files) {
       path,
       content,
       mimetype
-    }).then(r => _.assign(r, {path}));
+    }).then(r => _.assign(r, {path, name: file.name}));
   }));
 }
 

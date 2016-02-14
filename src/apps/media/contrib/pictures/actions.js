@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import {v4} from 'node-uuid';
+import {fromJS} from 'immutable';
+
 
 export function addPicture(baseUrl, picture) {
   let pictureId = v4();
@@ -49,18 +51,30 @@ export function removePicture(baseUrl, pictureId) {
   };
 }
 
-//move into ~/actions.js?
-export function makeThumbnail(picture, options) {
-  //CONSIDER: must trigger a record change and an uploadFile action
-  //I guess we would also do resizing here
-  //but don't I need to read picture.url first?
-  //so middleware that looks for 'MAKE_THUMBNAIL' and then issues 'UPLOAD_FILE'
-  //but doesn't the middleware need state? argh....
+
+export function pushFiles(media_type, uploaded_files) {
+  console.log("pushFiles", uploaded_files)
+  let media_items = fromJS(_.map(uploaded_files, file => {
+    return {
+      id: v4(),
+      media_type,
+      name: file.name,
+      url: file.url,
+      path: file.path
+    }
+  }));
   return {
-    type: 'MAKE_THUMBNAIL',
-    picture,
-    options,
+    type: 'PUSH_FILES',
+    media_items,
+    uploaded_files,
+    record_changes: media_items.map(picture => {
+      return {
+        new_object: picture,
+        table_name: '/media',
+        object_id: picture.get('id')
+      };
+    }).toArray()
   };
 }
 
-export default {addPicture, updatePicture, removePicture, makeThumbnail}
+export default {addPicture, updatePicture, removePicture, pushFiles}

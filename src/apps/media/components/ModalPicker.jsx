@@ -35,7 +35,8 @@ export default class ModalPicker extends React.Component {
 
     this.state = {
       visible: false,
-      selection: new Set()
+      selection: new Set(),
+      uploading: false
     };
   }
   //props = {providers, media, respondWithMedia, mediaTypes, quantityLimit, visible}
@@ -98,15 +99,51 @@ export default class ModalPicker extends React.Component {
     };
   }
 
+  uploadFiles = (event) => {
+    let provider = _.find(this.props.providers, {baseUrl: this._uploader});
+    this.props.uploadFiles(event.target.files).then(({result}) => {
+      return this.props.dispatch(provider.actions.pushFiles(this._uploader, result));
+    }).then(({media_items}) => {
+      let selection = this.state.selection;
+      media_items.forEach(media_item => selection.add(media_item));
+      this.setState({uploading: false, selection});
+    }).catch(error => {
+      console.error(error);
+      this.setState({uploading: false});
+    })
+    this.setState({uploading: true});
+  };
+
+  setUploader = (media_type, event) => {
+    this._uploader = media_type;
+    this.refs.uploadfield.click();
+  }
+
   render() {
     let {providers, media, mediaTypes, quantityLimit} = this.props;
-    let {selection, visible} = this.state;
+    let {selection, visible, uploading} = this.state;
+    let upload_options = [];
     const selectMultiple = quantityLimit > 1;
     const modalFade = visible ? "in" : "";
 
     if (mediaTypes) {
       media = media.filter(x => mediaTypes.indexOf(x.get('media_type')) !== -1);
+
+      _.each(mediaTypes, media_type => {
+        let provider = _.find(providers, {baseUrl: media_type});
+        if (provider.actions.pushFiles) {
+          upload_options.push(<button key={media_type} type="button" className="btn btn-default" onClick={_.partial(this.setUploader, media_type)}>Upload {provider.title}</button>);
+        }
+      });
+    } else {
+      _.each(providers, provider => {
+        if (provider.actions.pushFiles) {
+          let media_type = provider.baseUrl;
+          upload_options.push(<button key={media_type} type="button" className="btn btn-default" onClick={_.partial(this.setUploader, media_type)}>Upload {provider.title}</button>);
+        }
+      });
     }
+
 
     return <div className={`modal fade ${modalFade}`} id="media-modal-picker" tabIndex="-1" role="dialog" aria-labelledby="media-modal-picker-label">
       <div className="modal-dialog" role="document">
@@ -136,6 +173,8 @@ export default class ModalPicker extends React.Component {
             </div>
           </div>
           <div className="modal-footer">
+            <input type="file" style={{visibility: 'hidden'}} ref="uploadfield" key="uploadfield" multiple onChange={this.uploadFiles}/>
+            {uploading ? "Uploading..." : upload_options}
             { selectMultiple
               ? <button type="button" className="btn btn-default" onClick={this.onSubmitSelection} key="submit">Submit</button>
               : null

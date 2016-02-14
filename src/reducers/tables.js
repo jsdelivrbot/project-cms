@@ -35,11 +35,18 @@ export function getTable(baseUrl) {
 const INITIAL_STATE = Map();
 
 export function tablesReducer(state=INITIAL_STATE, action) {
-  const {record_change} = action;
-  if (!record_change) {
-    return state;
+  const {record_change, record_changes} = action;
+  if (record_change) {
+    return recordChange(state, record_change);
+  } else if (record_changes) {
+    _.each(record_changes, rc => {
+      state = recordChange(state, rc);
+    });
   }
+  return state
+}
 
+export function recordChange(state, record_change) {
   const { new_object, update_object, remove_object, table_name, object_id } = record_change;
   const table = getTable(table_name);
   if (new_object) {

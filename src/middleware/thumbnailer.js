@@ -18,7 +18,7 @@ export default function thumbnailerMiddleware({getState}) {
     }
   }
 
-  function requestThumbnail(picture, thumbnailKey) {
+  function requestThumbnail(pictureId, thumbnailKey) {
     let index = `${pictureId}::${thumbnailKey}`;
     let commitments = promises[index];
     if (commitments) {
@@ -41,6 +41,13 @@ export default function thumbnailerMiddleware({getState}) {
       let promise = requestThumbnail(pictureId, thumbnailKey);
 
       if (!promise) {
+        let path = `/media/${pictureId}/${thumbnailKey}.jpg`;
+        let thumbnail = {
+          path,
+          width,
+          height
+        };
+
         promise =  new Promise(function(resolve, reject) {
           original = new Image();
           original.crossOrigin = "Anonymous";
@@ -52,17 +59,9 @@ export default function thumbnailerMiddleware({getState}) {
         }).then(result => {
           //result is blob
           console.log("processing thumbnail result:", action);
-          let path = `/media/${pictureId}/${thumbnailKey}.jpg`;
           result.path = path;
           result.name = picture.name;
 
-          let thumbnail = {
-            path,
-            width,
-            height
-          };
-
-          //CONSIDER: only record change after upload completion
           return uploader([result]);
         }).then(uploads => {
           console.log("thumbnail upload results:", uploads);

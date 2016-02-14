@@ -1,4 +1,5 @@
 import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux';
 import _ from 'lodash';
 
 import ProviderList from './components/ProviderList.jsx';
@@ -7,6 +8,8 @@ import SidebarEmbed from './components/SidebarEmbed.jsx';
 
 import reducer from './reducer';
 import actions from './actions';
+
+import {uploadFiles} from '~/actions';
 
 
 function mediaProviders(state) {
@@ -29,7 +32,16 @@ export default function MediaApplicationFactory(baseUrl) {
           quantityLimit: state.getIn([baseUrl, 'modal-options', 'quantityLimit']),
           visible: state.getIn([baseUrl, 'modal-options', 'visible']),
         }
-      }, actions)(ModalPicker)
+      }, dispatch => {
+        //yo dawg
+        return {
+          dispatch,
+          ...bindActionCreators({
+            uploadFiles,
+            ...actions
+          }, dispatch)
+        };
+      })(ModalPicker)
     },
     embeddableComponents: {
       mediaSidebar: connect(state => {
