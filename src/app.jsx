@@ -19,7 +19,7 @@ import AppRouter from './components/AppRouter.jsx';
 import {s3Uploader} from './services/s3';
 
 
-var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, uploaderMiddleware, promiseMiddleware, thumbnailerMiddleware, askForMiddleware)(createStore);
+var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, uploaderMiddleware, thumbnailerMiddleware, promiseMiddleware, askForMiddleware)(createStore);
 
 var history = createHistory();
 
