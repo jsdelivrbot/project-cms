@@ -43,9 +43,11 @@ export class PictureList extends React.Component {
 
       var value = this.state.value.slice();
       if (_.isArray(media_item)) {
-        value = value.concat(media_item);
+        _.each(media_item, mi => {
+          value.push(mi.id)
+        });
       } else {
-        value.push(media_item);
+        value.push(media_item.id);
       }
       this.setState({value});
       this.signalChange(value);
@@ -56,18 +58,15 @@ export class PictureList extends React.Component {
     if (!media_item) return;
 
     var value = this.state.value.slice();
-    value[index] = media_item
+    value[index] = media_item.id
     this.setState({value});
     this.signalChange(value);
   }
 
-  renderPictureRow = (picture, index) => {
-    //TODO what is the shape of picture?
-    console.log("renderPictureRow:", picture);
+  renderPictureRow = (pictureId, index) => {
     let setPicture = _.partial(this.setPicture, index);
     return <div className="form-group" key={index}>
-      <label className="control-label" key="label">Picture</label>
-      <MediaField mediaId={picture.id} allowedTypes={this.allowedTypes} onChange={setPicture} key="picture"/>
+      <MediaField mediaId={pictureId} allowedTypes={this.allowedTypes} onChange={setPicture} key="picture"/>
       <button className="btn btn-default" onClick={this.removePicture} key="remove" data-index={index}>Remove</button>
     </div>
   }
