@@ -29,9 +29,9 @@ export function thumbnailFilter(dispatch, picture, options, callback) {
   if (picture.thumbnails && picture.thumbnails[key]) {
     callback(null, picture.thumbnails[key].url);
   } else {
-    dispatch(makeThumbnail(picture, options)).then(thumbnail => {
-      console.log("thumbnailFilter result:", thumbnail);
-      callback(null, thumbnail.url);
+    dispatch(makeThumbnail(picture, options)).then(({result}) => {
+      console.log("thumbnailFilter result:", result);
+      callback(null, result.url);
     }, error => {
       callback(error);
     });

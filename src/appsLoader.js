@@ -103,6 +103,7 @@ export function makeReducer(apps) {
 export function appsLoader() {
   return readAppsConfig().then(appsConfig => {
     return loadAppsConfig(appsConfig).catch(error => {
+      alert("There was an error loading your apps, check the console for details");
       console.error('Error loading apps from config:');
       console.error(error);
       console.log("Loading default apps");

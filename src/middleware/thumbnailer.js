@@ -1,22 +1,16 @@
-import _fetch from 'fetch';
 import _ from 'lodash';
+import {fromJS, Map} from 'immutable';
 
 
 export default function thumbnailerMiddleware({getState}) {
   let promises = {};
+  let changes = Map();
 
   function uploader(files) {
     return getState().getIn(['/engine', 'uploader'])(files);
   }
 
-  function fullfill(pictureId, thumbnailKey, picture) {
-    let index = `${pictureId}::${thumbnailKey}`;
-    let commitments = promises[index];
-    if (commitments) {
-      _.each(commitments, ([r,e]) => r(picture));
-      delete promises[index];
-    }
-  }
+
 
   function rejectfill(pictureId, thumbnailKey) {
     let index = `${pictureId}::${thumbnailKey}`;
@@ -40,6 +34,47 @@ export default function thumbnailerMiddleware({getState}) {
   }
 
   return (next) => (action) => {
+
+    function fullfill(pictureId, thumbnailKey, thumbnail) {
+      let index = `${pictureId}::${thumbnailKey}`;
+      let commitments = promises[index];
+      if (commitments) {
+        _.each(commitments, ([r,e]) => r(thumbnail));
+        delete promises[index];
+      }
+
+      changes = changes.setIn([pictureId, thumbnailKey], fromJS(thumbnail));
+      if (!_.keys(promises).length) {
+        recordChanges();
+      }
+    }
+
+    function recordChanges() {
+      let record_changes = [];
+
+      changes.forEach((thumbnails, pictureId) => {
+        let picture = getState().getIn(['tables', '/media', pictureId]);
+        console.log("saving thumbnails for picture:", pictureId);
+
+        thumbnails.forEach((thumbnail, thumbnailKey) => {
+          picture = picture.setIn(['thumbnails', thumbnailKey], thumbnail);
+        });
+
+        record_changes.push({
+          update_object: picture,
+          table_name: '/media',
+          object_id: pictureId
+        });
+      });
+
+      changes = new Map();
+
+      next({
+        type: 'UPDATE_MEDIAS',
+        record_changes,
+      });
+    }
+
     const { type } = action;
     if (type === 'MAKE_THUMBNAIL') {
       let {picture, options, result} = action;
@@ -75,25 +110,9 @@ export default function thumbnailerMiddleware({getState}) {
         }).then(uploads => {
           console.log("thumbnail upload results:", uploads);
           thumbnail.url = uploads[0].url;
-          picture = getState().getIn(['tables', '/media', pictureId]);
-          console.log("saving thumbnail:", thumbnailKey, thumbnail, pictureId);
-          picture = picture.setIn(['thumbnails', thumbnailKey], thumbnail);
           console.log("picture result:", picture);
 
           fullfill(pictureId, thumbnailKey, thumbnail);
-
-          //TODO bulk record_changes once all commitments have been fulfilled
-          next({
-            type: 'UPDATE_MEDIA',
-            pictureId,
-            picture,
-            record_change: {
-              update_object: picture,
-              table_name: '/media',
-              object_id: pictureId
-            }
-          });
-
           return thumbnail;
         }).catch(error => {
           console.error(error);
