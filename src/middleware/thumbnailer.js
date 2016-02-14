@@ -9,6 +9,7 @@ export default function thumbnailerMiddleware({getState}) {
   return (next) => (action) => {
     const { type } = action;
     if (type === 'MAKE_THUMBNAIL') {
+      //TODO dedupe thumbnail requests
       //result is blob
       console.log("processing thumbnail result:", action);
       let {picture, options, result} = action;
@@ -33,10 +34,9 @@ export default function thumbnailerMiddleware({getState}) {
         console.log("saving thumbnail:", thumbnailKey, thumbnail, pictureId);
         picture = picture.setIn(['thumbnails', thumbnailKey], thumbnail);
         console.log("picture result:", picture);
-        //TODO how to record change without causing cyclic crazyness
-        /*
+
         next({
-          type: '_UPDATE_MEDIA',
+          type: 'UPDATE_MEDIA',
           pictureId,
           picture,
           record_change: {
@@ -45,7 +45,7 @@ export default function thumbnailerMiddleware({getState}) {
             object_id: pictureId
           }
         });
-        */
+
         return thumbnail;
       });
     }
