@@ -11,8 +11,9 @@ export default function publish(baseUrl, state, pushContent) {
       site,
       page
     };
-    var renderedPage = renderer(page.template, context);
-    return pushContent(path, renderedPage, mimetype);
+    return renderer(page.template, context).then(renderedPage => {
+      return pushContent(path, renderedPage, mimetype);
+    });
   }).toArray();
 
   return Promise.all(_.filter(promises));

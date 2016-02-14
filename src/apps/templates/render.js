@@ -1,7 +1,7 @@
 import nunjucks from 'nunjucks/browser/nunjucks.js';
 import Obj from 'nunjucks/src/object';
 import _ from 'lodash';
-import {markdownFilter, refFilter} from './filters';
+import {markdownFilter, refFilter, thumbnailFilter} from './filters';
 
 console.log("nunjucks:", nunjucks)
 
@@ -122,6 +122,7 @@ export default function renderFactory(store) {
 
   env.addFilter('markdown', markdownFilter);
   env.addFilter('ref', _.partial(refFilter, store.getState));
+  env.addFilter('thumbnail', _.partial(thumbnailFilter, store.dispatch), true);
 
   var templatesCache = {}; // path: {content, template}
 
@@ -153,19 +154,33 @@ export default function renderFactory(store) {
       //console.log("rendering blocks:", blocks, template);
       let context = new Context(ctx, template.blocks, env)
 
-      _.each(template.blocks, (renderBlock, blockName) => {
-        //(env, context, frame, runtime, cb)
-        let frame = new nunjucks.runtime.Frame();
+      let promises = _.map(template.blocks, (renderBlock, blockName) => {
+        return new Promise(function(resolve, reject) {
+          //(env, context, frame, runtime, cb)
+          let frame = new nunjucks.runtime.Frame();
 
-        renderBlock(env, context, frame, nunjucks.runtime, (error, content) => {
-          if (error) throw error;
-          renderedBlocks[blockName] = content;
-        });
+          renderBlock(env, context, frame, nunjucks.runtime, (error, content) => {
+            if (error) {
+              reject(error)
+            } else {
+              renderedBlocks[blockName] = content;
+              resolve(content);
+            }
+          });
+        })
       });
 
-      return renderedBlocks;
+      return Promise.all(promises).then(contents => renderedBlocks);
     } else {
-      return template.render(ctx);
+      return new Promise(function(resolve, reject) {
+        template.render(ctx, (err, result) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(result);
+          }
+        });
+      });
     }
   }
 }

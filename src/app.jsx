@@ -11,6 +11,7 @@ import promiseMiddleware from './middleware/promise';
 import nextUrlMiddleware from './middleware/next_url';
 import askForMiddleware from './middleware/ask_for';
 import uploaderMiddleware from './middleware/uploader';
+import thumbnailerMiddleware from './middleware/thumbnailer';
 
 import {appsLoader, loadAppsTables, makeReducer} from './appsLoader';
 import AppRouter from './components/AppRouter.jsx';
@@ -18,7 +19,7 @@ import AppRouter from './components/AppRouter.jsx';
 import {s3Uploader} from './services/s3';
 
 
-var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, uploaderMiddleware, promiseMiddleware, askForMiddleware)(createStore);
+var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, uploaderMiddleware, promiseMiddleware, thumbnailerMiddleware, askForMiddleware)(createStore);
 
 var history = createHistory();
 

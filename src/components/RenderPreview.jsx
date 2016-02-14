@@ -21,8 +21,9 @@ export class RenderPreview extends React.Component {
     if(doc && doc.readyState === 'complete') {
       let {context, template, site, render} = this.props;
       context.site = site;
-      var renderedPage = render(template, context);
-      doc.write(renderedPage);
+      render(template, context).then(renderedPage => {
+        doc.write(renderedPage);
+      });
     } else {
       setTimeout(this.renderFrameContents, 0);
     }
@@ -36,13 +37,14 @@ export class RenderPreview extends React.Component {
       let doc = ReactDOM.findDOMNode(this).contentDocument;
       let {context, template, site, render} = this.props;
       context.site = site;
-      let renderedBlocks = render(template, context, true);
-      //console.log("renderedBlocks:", renderedBlocks);
-      _.each(renderedBlocks, (content, block) => {
-        let element = doc.querySelector(`[data-template-block="${block}"]`);
-        if (element && element.innerHTML !== content) {
-          element.innerHTML = content;
-        }
+      render(template, context, true).then(renderedBlocks => {
+        //console.log("renderedBlocks:", renderedBlocks);
+        _.each(renderedBlocks, (content, block) => {
+          let element = doc.querySelector(`[data-template-block="${block}"]`);
+          if (element && element.innerHTML !== content) {
+            element.innerHTML = content;
+          }
+        });
       });
     }
   }

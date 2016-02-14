@@ -1,7 +1,8 @@
 
 export default function uploaderMiddleware({getState}) {
-  //TODO just fetch uploader from engine
-  var uploader = null;
+  function uploader(files) {
+    return getState().getIn(['/engine', 'uploader'])(files);
+  }
 
   return (next) => (action) => {
     const { type } = action;
@@ -12,9 +13,6 @@ export default function uploaderMiddleware({getState}) {
         break;
       case 'UPLOAD_FILES':
         action.promise = uploader(action.files);
-        break;
-      case 'SET_UPLOADER':
-        uploader = action.uploader;
         break;
     }
     return next(action);

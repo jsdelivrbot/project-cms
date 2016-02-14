@@ -2,33 +2,51 @@ import _fetch from 'fetch';
 
 
 export default function thumbnailerMiddleware({getState}) {
+  function uploader(files) {
+    return getState().getIn(['/engine', 'uploader'])(files);
+  }
+
   return (next) => (action) => {
     const { type } = action;
     if (type === 'MAKE_THUMBNAIL') {
-      let {picture, options} = action;
-      action.promise = fetch(picture.url).then(response => response.blob()).then(image => {
-        let {} = options;
-        let pictureId = picture.id;
-        let thumbnailKey = 'something';
-        let file = {
-          type: '',
-          name: '',
-          path: '',
-        } //TODO should be a Blob
+      //result is blob
+      console.log("processing thumbnail result:", action);
+      let {picture, options, result} = action;
+      let {width, height} = options;
+      let pictureId = picture.id;
+      let thumbnailKey = `${width}x${height}`;
+      let path = `${picture.path}/${thumbnailKey}.jpg`;
+      result.path = path;
+      result.name = picture.name;
 
-        //CONSIDER: record_change should be a merge as this may happen after someone else modifies object
-        //especially in the case of multiple thumbnails of the same picture
+      let thumbnail = {
+        path,
+        width,
+        height
+      };
+
+      //CONSIDER: only record change after upload completion
+      return uploader([result]).then(uploads => {
+        console.log("thumbnail upload results:", uploads);
+        thumbnail.url = uploads[0].url;
         picture = getState().getIn(['tables', '/media', pictureId]);
-        picture.thumbnails[thumbnailKey] = thumbnail;
+        console.log("saving thumbnail:", thumbnailKey, thumbnail, pictureId);
+        picture = picture.setIn(['thumbnails', thumbnailKey], thumbnail);
+        console.log("picture result:", picture);
+        //TODO how to record change without causing cyclic crazyness
+        /*
         next({
-          type: 'UPLOAD_FILE',
-          file,
+          type: '_UPDATE_MEDIA',
+          pictureId,
+          picture,
           record_change: {
             update_object: picture,
             table_name: '/media',
             object_id: pictureId
           }
         });
+        */
+        return thumbnail;
       });
     }
     return next(action);
