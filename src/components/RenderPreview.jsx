@@ -6,7 +6,6 @@ import _ from 'lodash';
 
 export class RenderPreview extends React.Component {
   static propTypes = {
-    site: React.PropTypes.object.isRequired,
     context: React.PropTypes.object.isRequired,
     template: React.PropTypes.string,
     render: React.PropTypes.func.isRequired
@@ -19,8 +18,7 @@ export class RenderPreview extends React.Component {
   renderFrameContents() {
     var doc = ReactDOM.findDOMNode(this).contentDocument;
     if(doc && doc.readyState === 'complete') {
-      let {context, template, site, render} = this.props;
-      context.site = site;
+      let {context, template, render} = this.props;
       render(template, context).then(renderedPage => {
         doc.write(renderedPage);
       });
@@ -35,8 +33,7 @@ export class RenderPreview extends React.Component {
       this.renderFrameContents();
     } else {
       let doc = ReactDOM.findDOMNode(this).contentDocument;
-      let {context, template, site, render} = this.props;
-      context.site = site;
+      let {context, template, render} = this.props;
       render(template, context, true).then(renderedBlocks => {
         //console.log("renderedBlocks:", renderedBlocks);
         _.each(renderedBlocks, (content, block) => {
@@ -56,7 +53,6 @@ export class RenderPreview extends React.Component {
 
 export default connect(state => {
   return {
-    render: state.getIn(['/engine', 'renderer']),
-    site: state.getIn(['tables', '/site', 'site'])
+    render: state.getIn(['/engine', 'renderer'])
   }
 })(RenderPreview);

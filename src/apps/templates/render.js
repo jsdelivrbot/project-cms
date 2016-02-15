@@ -148,6 +148,9 @@ export default function renderFactory(store) {
   }
 
   return function render(templateKey, ctx, blocks=false) {
+    //TODO pluggable way to inject global rendering context
+    let site = store.getState().getIn(['tables', '/site', 'site']).toJS();
+    ctx = _.assign({}, ctx, {site});
     var template = getTemplate(templateKey);
     if (blocks) {
       var renderedBlocks = {};

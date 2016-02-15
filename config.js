@@ -18,7 +18,7 @@ System.config({
   packages: {
     ".": {
       "defaultExtension": "js",
-      "modules": {
+      "meta": {
         "*.jsx": {
           "format": "esm"
         },
