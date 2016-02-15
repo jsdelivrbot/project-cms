@@ -1,5 +1,5 @@
 /* */ 
-var brorand = require('../../brorand@1.0.5');
+var brorand = require('../index');
 var assert = require('assert');
 describe('Brorand', function() {
   it('should generate random numbers', function() {

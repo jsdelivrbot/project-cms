@@ -1,6 +1,6 @@
 /* */ 
 var test = require('tape'),
-    errno = require('./errno');
+    errno = require('../errno@0.1.4.json!systemjs-json');
 test('sanity checks', function(t) {
   t.ok(errno.all, 'errno.all not found');
   t.ok(errno.errno, 'errno.errno not found');

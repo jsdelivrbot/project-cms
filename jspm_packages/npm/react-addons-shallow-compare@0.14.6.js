@@ -1,1 +1,0 @@
-module.exports = require("npm:react-addons-shallow-compare@0.14.6/index");

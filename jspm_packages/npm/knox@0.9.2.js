@@ -1,1 +1,1 @@
-module.exports = require("npm:knox@0.9.2/lib/index");
+module.exports = require("npm:knox@0.9.2/lib/index.js");

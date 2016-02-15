@@ -1,6 +1,6 @@
 /* */ 
 var test = require('tape'),
-    DeferredLevelDOWN = require('./deferred-leveldown');
+    DeferredLevelDOWN = require('../deferred-leveldown@0.2.0.json!systemjs-json');
 test('single operation', function(t) {
   var called = false;
   var ld = new DeferredLevelDOWN('loc');

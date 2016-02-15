@@ -1,1 +1,1 @@
-module.exports = require("npm:tiny-queue@0.2.0/index");
+module.exports = require("npm:tiny-queue@0.2.0/index.js");

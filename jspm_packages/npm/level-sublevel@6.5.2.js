@@ -1,1 +1,0 @@
-module.exports = require("npm:level-sublevel@6.5.2/index");

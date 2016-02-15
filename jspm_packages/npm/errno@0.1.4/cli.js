@@ -1,6 +1,6 @@
 /* */ 
 (function(process) {
-  var errno = require('./errno'),
+  var errno = require('../errno@0.1.4.json!systemjs-json'),
       arg = process.argv[2],
       data,
       code;

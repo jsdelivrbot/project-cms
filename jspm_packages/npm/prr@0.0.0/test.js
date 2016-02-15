@@ -1,6 +1,6 @@
 /* */ 
 const test = require('tap').test,
-    prr = require('./prr');
+    prr = require('../prr@0.0.0.json!systemjs-json');
 test('test prr(o, key, value) form', function(t) {
   t.plan(2);
   var o = {};

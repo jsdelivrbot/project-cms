@@ -1,7 +1,7 @@
 /* */ 
 (function(Buffer) {
   var assert = require('assert');
-  var asn1 = require('../../../lib/asn1');
+  var asn1 = require('../../../../asn1.js@4.4.0.json!systemjs-json');
   var rfc3280 = require('../index');
   var Buffer = require('buffer').Buffer;
   describe('asn1.js RFC3280', function() {

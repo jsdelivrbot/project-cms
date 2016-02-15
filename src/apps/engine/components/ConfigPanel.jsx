@@ -16,7 +16,7 @@ export default class ConfigPanel extends React.Component {
   activateTab = (tab, event) => {
     event.preventDefault();
     this.setState({active: tab});
-  }
+  };
 
   render() {
     let active = this.state.active;

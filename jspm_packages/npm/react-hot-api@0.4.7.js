@@ -1,1 +1,0 @@
-module.exports = require("npm:react-hot-api@0.4.7/modules/index");

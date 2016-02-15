@@ -1,5 +1,5 @@
 /* */ 
-var Queue = require('./index');
+var Queue = require('../tiny-queue@0.2.0.json!systemjs-json');
 var test = require('tape');
 function init(queue) {
   queue.push(1);

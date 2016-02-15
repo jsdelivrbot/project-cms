@@ -1,6 +1,6 @@
 /* */ 
 var tape = require('tape');
-var ltgt = require('./index');
+var ltgt = require('../ltgt@2.1.2.json!systemjs-json');
 function clone(o) {
   var O = {};
   for (var k in o)

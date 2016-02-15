@@ -1,6 +1,6 @@
 /* */ 
 try {
-  var asn1 = require('../../lib/asn1');
+  var asn1 = require('../../../asn1.js@4.4.0.json!systemjs-json');
 } catch (e) {
   var asn1 = require('../' + '..');
 }

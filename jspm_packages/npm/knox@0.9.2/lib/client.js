@@ -103,7 +103,6 @@
     return headers;
   }
   var Client = module.exports = exports = function Client(options) {
-    console.log("new client:", options)
     if (!options.key)
       throw new Error('aws "key" required');
     if (!options.secret)
@@ -183,7 +182,6 @@
     options.headers = headers;
     var req = (this.secure ? https : http).request(options);
     req.url = this.url(filename);
-    console.log("headers:", headers)
     debug('%s %s', method, req.url);
     return req;
   };

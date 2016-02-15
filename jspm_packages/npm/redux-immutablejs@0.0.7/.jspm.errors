@@ -1,5 +1,39 @@
-/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:1:21: Unexpected reserved word import,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:1:28: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:1:38: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:1:43: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:72:1: Unexpected reserved word export,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:72:8: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:72:8: Unexpected reserved word default,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:72:16: Semi-colon expected
+MultipleErrors: /home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:1:21: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:1:28: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:1:38: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:1:43: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:72:1: Unexpected reserved word export
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:72:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:72:8: Unexpected reserved word default
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/combineReducers.js:72:16: Semi-colon expected
 
-/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:1:21: Unexpected reserved word import,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:1:28: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:1:38: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:1:43: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:1: Unexpected reserved word export,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:8: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:8: Unexpected reserved word default,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:16: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:102: Unexpected token :,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:103: Unexpected token :,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:104: Unexpected token Immutable,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:113: Unexpected token .,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:114: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:120: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:120: Unexpected token ),/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:122: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:38:2: Unexpected token ),/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:38:24: Unexpected token End of File,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:38:24: Unexpected token End of File
+MultipleErrors: /home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:1:21: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:1:28: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:1:38: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:1:43: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:1: Unexpected reserved word export
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:8: Unexpected reserved word default
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:16: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:102: Unexpected token :
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:103: Unexpected token :
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:104: Unexpected token Immutable
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:113: Unexpected token .
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:114: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:120: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:120: Unexpected token )
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:14:122: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:38:2: Unexpected token )
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:38:24: Unexpected token End of File
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/utils/createReducer.js:38:24: Unexpected token End of File
 
-/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:1:1: Unexpected reserved word import,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:1:8: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:1:24: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:1:29: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:2:1: Unexpected reserved word import,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:2:8: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:2:22: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:2:27: Semi-colon expected,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:4:1: Unexpected reserved word export,/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:4:8: Semi-colon expected
+MultipleErrors: /home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:1:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:1:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:1:24: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:1:29: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:2:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:2:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:2:22: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:2:27: Semi-colon expected
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:4:1: Unexpected reserved word export
+/home/jason/.jspm/packages/npm/redux-immutablejs@0.0.7/src/index.js:4:8: Semi-colon expected

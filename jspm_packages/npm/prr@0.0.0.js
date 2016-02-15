@@ -1,1 +1,1 @@
-module.exports = require("npm:prr@0.0.0/prr");
+module.exports = require("npm:prr@0.0.0/prr.js");

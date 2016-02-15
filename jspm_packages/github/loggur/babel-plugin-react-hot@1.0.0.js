@@ -1,1 +1,0 @@
-module.exports = require("github:loggur/babel-plugin-react-hot@1.0.0/index");

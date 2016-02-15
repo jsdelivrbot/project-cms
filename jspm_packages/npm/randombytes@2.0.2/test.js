@@ -1,7 +1,7 @@
 /* */ 
 (function(process) {
   var test = require('tape');
-  var randomBytes = require('./index');
+  var randomBytes = require('../randombytes@2.0.2.json!systemjs-json');
   test('sync', function(t) {
     t.plan(3);
     t.equals(randomBytes(3).length, 3, 'len: ' + 3);

@@ -1,1 +1,0 @@
-module.exports = require("github:loggur/plugin-babel-jsx@1.0.5/index");

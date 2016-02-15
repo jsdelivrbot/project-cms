@@ -1,7 +1,7 @@
 /* */ 
 (function(Buffer) {
   var assert = require('assert');
-  var BN = require('../../lib/bn').BN;
+  var BN = require('../../../bn.js@4.10.3.json!systemjs-json').BN;
   var fixtures = require('../fixtures');
   describe('BN.js/Slow DH test', function() {
     var groups = fixtures.dhGroups;
