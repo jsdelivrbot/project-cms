@@ -34,13 +34,12 @@ class CopyLink extends React.Component {
 function MediaRow({providers, media_item}) {
   const media_type = media_item.get('media_type');
   const provider = _.find(providers, {baseUrl: media_type});
-  if (!provider || !provider.renderMediaItem) {
+  if (!provider || !provider.itemInterface) {
     return <tr/>
   }
   return <tr>
-    <td><CopyLink data={provider.renderMediaItem(media_item, "embed_code")}/></td>
-    <td>{provider.renderMediaItem(media_item, "preview")}</td>
-    <td>{provider.title}</td>
+    <td><CopyLink data={provider.itemInterface.embedCode(media_item)}/></td>
+    <td>{provider.itemInterface.preview(media_item)}</td>
   </tr>
 }
 
@@ -71,7 +70,6 @@ export default class SidebarEmbed extends React.Component {
               <tr>
                 <th>Copy</th>
                 <th>Preview</th>
-                <th>Provider</th>
               </tr>
             </thead>
             <tbody>

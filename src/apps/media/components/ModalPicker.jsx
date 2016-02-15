@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 function MediaRow({providers, media_item, onSelect, selectMultiple, selected}) {
   const provider = _.find(providers, {baseUrl: media_item.get('media_type')});
-  if (!provider || !provider.renderMediaItem) {
+  if (!provider || !provider.itemInterface) {
     return <tr/>
   }
 
@@ -22,9 +22,8 @@ function MediaRow({providers, media_item, onSelect, selectMultiple, selected}) {
   return <tr>
     { selectedStatus }
     <td key="preview"><button onClick={send}>
-      {provider.renderMediaItem(media_item, "preview")}
+      {provider.itemInterface.preview(media_item)}
     </button></td>
-    <td key="provider">{provider.title}</td>
   </tr>
 }
 
@@ -165,7 +164,6 @@ export default class ModalPicker extends React.Component {
                   <tr>
                     {selectMultiple ? <th key="selected">Selected</th> : null}
                     <th key="item">Item</th>
-                    <th key="provider">Provider</th>
                   </tr>
                 </thead>
                 <tbody>

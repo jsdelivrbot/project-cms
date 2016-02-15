@@ -16,12 +16,12 @@ function ProvidersNav({providers}) {
 function MediaRow({providers, media_item}) {
   let media_type = media_item.get('media_type');
   let provider = _.find(providers, {baseUrl: media_type});
-  if (!provider || !provider.renderMediaItem) {
+  if (!provider || !provider.itemInterface) {
     return <tr/>
   }
   return <tr>
-    <td><Link to={provider.renderMediaItem(media_item, "detail_link")}>
-      {provider.renderMediaItem(media_item, "preview")}
+    <td><Link to={provider.itemInterface.detailLink(media_item)}>
+      {provider.itemInterface.preview(media_item)}
     </Link></td>
     <td>{provider.title}</td>
   </tr>

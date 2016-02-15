@@ -6,6 +6,8 @@ import AddAsset from './components/AddAsset.jsx';
 import EditAsset from './components/EditAsset.jsx';
 
 import actions from './actions';
+import itemInterface from './itemInterface';
+
 import {uploadFile, replaceFile} from '~/actions';
 
 
@@ -15,7 +17,7 @@ export default function AssetsApplicationFactory(baseUrl) {
     type: 'media provider',
     actions,
     title: 'Assets',
-    renderMediaItem: renderMediaItem,
+    itemInterface,
     routes: {
       path: baseUrl,
       component: 'div',
@@ -51,28 +53,6 @@ export default function AssetsApplicationFactory(baseUrl) {
           replaceFile
         })(EditAsset)
       }]
-    }
-  }
-}
-
-function renderMediaItem(media_item, field) {
-  switch(field) {
-    case "detail_link":
-      return media_item.get('media_type') + "/" + media_item.get('id');
-    case "preview":
-      return media_item.get('name');
-    case "embed_code":
-      const url = media_item.get('url');
-      switch(media_item.get('type')) {
-        case "anchor":
-          return `<a href=${url}>${url}</a>`
-        case "css":
-          return `<link ref="stylesheet" href=${url}/>`
-        case "javascript":
-          return `<script src=${url}></script>`
-        case "image":
-          const name = media_item.get('name');
-          return `<img src=${url} name=${name}/>`
     }
   }
 }

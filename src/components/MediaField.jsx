@@ -13,7 +13,7 @@ export function MediaField({allowedTypes, mediaItem, mediaApp, onSelect, askForM
   }
 
   if (mediaItem) {
-    let Field = mediaApp.renderMediaItem(mediaItem, 'field');
+    let Field = mediaApp.itemInterface.Field;
 
     return <Field onSelectMedia={selectMedia} mediaItem={mediaItem} {...props}/>
   } else {
