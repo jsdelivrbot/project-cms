@@ -33,10 +33,11 @@ export function loadAppsConfig(appsConfig) {
     return new Promise(function(resolve, reject) {
       switch (type) {
         case 'builtin':
-          resolve(System.import(location, __moduleName));
-        //TODO support these
+          return resolve(System.import(location, __moduleName));
         case 'github':
+          return resolve(System.import("ext-github:"+location, __moduleName));
         case 'npm':
+          //return resolve(System.import("ext-npm:"+location, __moduleName));
         default:
           reject(new Error('Unrecognized app type: '+type))
       }

@@ -12,7 +12,9 @@ System.config({
   },
   paths: {
     "github:*": "jspm_packages/github/*",
-    "npm:*": "jspm_packages/npm/*"
+    "npm:*": "jspm_packages/npm/*",
+    "ext-github:*": "/github/*",
+    "ext-npm:*": "/npm/*"
   },
 
   packages: {
