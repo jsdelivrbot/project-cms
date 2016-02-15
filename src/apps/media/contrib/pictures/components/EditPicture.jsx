@@ -64,8 +64,16 @@ export default class EditPicture extends React.Component {
           <form onSubmit={this.receiveSubmit}>
             <div className="form-group">
               <label className="control-label">Source</label>
+              <img src={picture.url} width="50"/>
               <input type="file" name="source" className="form-control" required="required" onChange={this.updateFile}/>
             </div>
+            <h2>Thumbnails</h2>
+            {_.map(picture.thumbnails, (thumbnail, key) => (
+              <div className="form-group" key={key}>
+                <label className="control-label">{key}</label>
+                <img src={thumbnail.url} width="50"/>
+              </div>
+            ))}
             <div className="form-group">
               <button type="submit" disabled={uploading} className="btn btn-primary">Save</button>
             </div>

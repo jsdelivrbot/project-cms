@@ -39,11 +39,11 @@ export default function Welcome() {
         <ul>
           <li>This demo is 100% in the browser, no help from servers</li>
           <li>Everything is a pluggable application and is given a `baseUrl` for mounting in the dashboard app</li>
-          <li>Publishing currently exports to a zipfile</li>
+          <li>Publishing currently exports to a zipfile or S3 if configured</li>
           <li>Persistence is done with localstorage which can be <a onClick={doPurge}>purged</a></li>
           <li>[TODO] HTTP/2 will dramatically decrease load time</li>
-          <li>I would hot load github modules and push to S3 or IPFS but cross origin security prevents that</li>
-          <li>Local storage maxes out at 5MB, so no full media app is possible for this demo</li>
+          <li>I would hot load github modules and push to IPFS but cross origin security prevents that</li>
+          <li>No uploading until you plugin S3 credentials</li>
         </ul>
       </div>
     </div>
