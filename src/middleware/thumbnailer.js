@@ -93,7 +93,7 @@ export default function thumbnailerMiddleware({getState}) {
         };
 
         promise =  new Promise(function(resolve, reject) {
-          original = new Image();
+          let original = new Image();
           original.crossOrigin = "Anonymous";
           original.onload = function() {
             thumb(original, width, height, quality || .9, resolve);
@@ -102,15 +102,21 @@ export default function thumbnailerMiddleware({getState}) {
           original.src = picture.url;
         }).then(result => {
           //result is blob
-          console.log("processing thumbnail result:", action);
+          console.log("uploading thumbnail result:", result);
+          if (!result.size) {
+            return Promise.reject("Image object has 0 size")
+          }
+          if (!result.type) {
+            return Promise.reject("Image needs mimetype")
+          }
           result.path = path;
-          result.name = picture.name;
+          result.name = picture.name || _.last(path.split('/'));
 
           return uploader([result]);
         }).then(uploads => {
           console.log("thumbnail upload results:", uploads);
           thumbnail.url = uploads[0].url;
-          console.log("picture result:", picture);
+          //console.log("picture result:", picture);
 
           fullfill(pictureId, thumbnailKey, thumbnail);
           return thumbnail;
@@ -163,7 +169,7 @@ function dataURLToBlob(dataURL) {
     var contentType = parts[0].split(':')[1];
     var raw = decodeURIComponent(parts[1]);
 
-    return new Blob([raw], {type: contentType});
+    return new Blob([raw], {type: contentType || 'image/jpeg'});
   }
 
   var parts = dataURL.split(BASE64_MARKER);
@@ -177,5 +183,5 @@ function dataURLToBlob(dataURL) {
     uInt8Array[i] = raw.charCodeAt(i);
   }
 
-  return new Blob([uInt8Array], {type: contentType});
+  return new Blob([uInt8Array], {type: contentType || 'image/jpeg'});
 }

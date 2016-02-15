@@ -15,11 +15,18 @@ export function markdownFilter(input) {
   return nunjucks.runtime.markSafe(md.render(input));
 }
 
-export function refFilter(getState, reference) {
-  if (_.isArray(reference)) {
-    return _.map(reference, r => getState().getIn(['tables', r.table, r.id]).toJS());
-  }
+export function lookupReference(getState, reference) {
   return getState().getIn(['tables', reference.table, reference.id]).toJS();
+}
+
+export function refFilter(getState, reference) {
+  if (!reference) {
+    return null;
+  }
+  if (_.isArray(reference)) {
+    return _.map(reference, r => lookupReference(getState, r));
+  }
+  return lookupReference(getState, reference)
 }
 
 export function thumbnailFilter(dispatch, picture, options, callback) {

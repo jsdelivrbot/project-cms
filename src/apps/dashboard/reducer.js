@@ -20,10 +20,6 @@ function craftAlert(state, type, message) {
   return state.setIn(['alerts', key], alert);
 }
 
-function stripName(action_type)  {
-  return _.capitalize(_.last(action_type.split('_')).toLowerCase());
-}
-
 export default function dashboard(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'ADD_ALERT':
