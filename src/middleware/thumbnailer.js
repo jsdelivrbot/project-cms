@@ -6,8 +6,8 @@ export default function thumbnailerMiddleware({getState}) {
   let promises = {};
   let changes = Map();
 
-  function uploader(files) {
-    return getState().getIn(['/engine', 'uploader'])(files);
+  function uploader(...args) {
+    return getState().getIn(['/engine', 'uploader'])(...args);
   }
 
 

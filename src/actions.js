@@ -1,7 +1,8 @@
-export function uploadFile(file) {
+export function uploadFile(file, onProgress) {
   return {
     type: 'UPLOAD_FILE',
-    file
+    file,
+    onProgress
   }
 }
 
@@ -13,10 +14,11 @@ export function replaceFile(file, path) {
   }
 }
 
-export function uploadFiles(files) {
+export function uploadFiles(files, onProgress) {
   return {
     type: 'UPLOAD_FILES',
-    files
+    files,
+    onProgress
   }
 }
 

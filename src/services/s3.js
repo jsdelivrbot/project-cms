@@ -1,13 +1,12 @@
 import _ from 'lodash';
 import auth from 'knox/lib/auth';
-import _fetch from 'fetch';
 import {Buffer} from 'buffer';
 import {v4} from 'node-uuid';
 
 //https://github.com/Automattic/knox/issues/299
 
 
-export function put(awsConfig, {path, content, mimetype}) {
+export function put(awsConfig, {path, content, mimetype}, onProgress) {
   let date = new Date();
   let headers = {
     'x-amz-acl': 'public-read',
@@ -26,15 +25,63 @@ export function put(awsConfig, {path, content, mimetype}) {
     md5: '',
     amazonHeaders: `x-amz-acl:public-read\nx-amz-date:${headers['x-amz-date']}`,
   });
+
+  //sadly fetch isn't at a point where I know how to do onprogress events
+  let url = `https://${awsConfig.bucket}.s3.amazonaws.com${path}`;
+
+  return new Promise(function(resolve, reject) {
+    let xhr = new XMLHttpRequest({
+      responseType: 'blob',
+    });
+
+    xhr.open("PUT", url);
+    _.each(headers, (headerValue, headerName) => {
+      if (headerName === 'Content-Length') return;
+      xhr.setRequestHeader(headerName, headerValue);
+    });
+
+    if (onProgress) {
+      xhr.upload.addEventListener("progress", onProgress);
+    }
+    xhr.upload.addEventListener("abort", reject);
+    xhr.upload.addEventListener("error", reject);
+
+    xhr.addEventListener("load", event => {
+      resolve({
+        url,
+        body: xhr.response,
+        xhr
+      });
+    });
+
+    xhr.send(content);
+  });
+
+  /*
   return fetch(`https://${awsConfig.bucket}.s3.amazonaws.com${path}`, {
     method: 'PUT',
     headers: headers,
     body: content
   });
+  */
 }
 
-function _uploader(awsConfig, files) {
-  return Promise.all(_.map(files, file => {
+function _uploader(awsConfig, files, onProgress) {
+  let total = 0;
+  let individualUploads = {};
+
+  //emit an overall progress
+  function updateProgress(index, event) {
+    if (!onProgress) return;
+    individualUploads[index] = event.loaded;
+    let loaded = _.reduce(individualUploads, (loaded, col) => {
+      return col+loaded;
+    }, 0);
+    onProgress({loaded, total});
+  }
+
+  return Promise.all(_.map(files, (file, index) => {
+    total += file.size;
     let id = v4();
     let extension = _.last(file.name.split('.'));
     let path = file.path ? file.path : `/media/${id}.${extension}`;
@@ -44,7 +91,7 @@ function _uploader(awsConfig, files) {
       path,
       content,
       mimetype
-    }).then(r => _.assign(r, {path, name: file.name}));
+    }, _.partial(updateProgress, index)).then(r => _.assign(r, {path, name: file.name}));
   }));
 }
 

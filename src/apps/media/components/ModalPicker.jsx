@@ -99,9 +99,15 @@ export default class ModalPicker extends React.Component {
     };
   }
 
+  onUploadProgress = (event) => {
+    this.setState({
+      percentUploaded: Math.round(event.loaded / event.total * 100)
+    });
+  };
+
   uploadFiles = (event) => {
     let provider = _.find(this.props.providers, {baseUrl: this._uploader});
-    this.props.uploadFiles(event.target.files).then(({result}) => {
+    this.props.uploadFiles(event.target.files, this.onUploadProgress).then(({result}) => {
       return this.props.dispatch(provider.actions.pushFiles(this._uploader, result));
     }).then(({media_items}) => {
       let selection = this.state.selection;
@@ -111,17 +117,17 @@ export default class ModalPicker extends React.Component {
       console.error(error);
       this.setState({uploading: false});
     })
-    this.setState({uploading: true});
+    this.setState({uploading: true, percentUploaded: 0});
   };
 
   setUploader = (media_type, event) => {
     this._uploader = media_type;
     this.refs.uploadfield.click();
-  }
+  };
 
   render() {
     let {providers, media, mediaTypes, quantityLimit} = this.props;
-    let {selection, visible, uploading} = this.state;
+    let {selection, visible, uploading, percentUploaded} = this.state;
     let upload_options = [];
     const selectMultiple = quantityLimit > 1;
     const modalFade = visible ? "in" : "";
@@ -174,7 +180,7 @@ export default class ModalPicker extends React.Component {
           </div>
           <div className="modal-footer">
             <input type="file" style={{visibility: 'hidden'}} ref="uploadfield" key="uploadfield" multiple onChange={this.uploadFiles}/>
-            {uploading ? "Uploading..." : upload_options}
+            {uploading ? (percentUploaded ? `${percentUploaded}%` : "Uploading...") : upload_options}
             { selectMultiple
               ? <button type="button" className="btn btn-default" onClick={this.onSubmitSelection} key="submit">Submit</button>
               : null

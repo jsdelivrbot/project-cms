@@ -1,7 +1,7 @@
 
 export default function uploaderMiddleware({getState}) {
-  function uploader(files) {
-    return getState().getIn(['/engine', 'uploader'])(files);
+  function uploader(...args) {
+    return getState().getIn(['/engine', 'uploader'])(...args);
   }
 
   return (next) => (action) => {
@@ -9,10 +9,10 @@ export default function uploaderMiddleware({getState}) {
     switch (type) {
       case 'REPLACE_FILE':
       case 'UPLOAD_FILE':
-        action.promise = uploader([action.file]).then(r => r[0]);
+        action.promise = uploader([action.file], action.onProgress).then(r => r[0]);
         break;
       case 'UPLOAD_FILES':
-        action.promise = uploader(action.files);
+        action.promise = uploader(action.files, action.onProgress);
         break;
     }
     return next(action);
