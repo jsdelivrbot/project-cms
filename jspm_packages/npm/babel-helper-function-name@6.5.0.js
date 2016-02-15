@@ -1,0 +1,1 @@
+module.exports = require("npm:babel-helper-function-name@6.5.0/lib/index.js");
