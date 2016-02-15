@@ -1,5 +1,5 @@
 System.config({
-  baseURL: "/",
+  baseURL: "/project-cms",
   defaultJSExtensions: true,
   transpiler: "babel",
   babelOptions: {
@@ -73,7 +73,7 @@ System.config({
     "systemjs-json": "github:systemjs/plugin-json@0.1.0",
     "text": "github:systemjs/plugin-text@0.0.4",
     "zone.js": "npm:zone.js@0.5.14",
-    "~": "/src",
+    "~": "/project-cms/src",
     "github:floatdrop/plugin-jsx@1.2.1": {
       "react-tools": "npm:react-tools@0.13.3"
     },

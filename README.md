@@ -11,26 +11,18 @@ Install dependencies:
 
 ```
   npm install
-  pip install docker-compose
-  gulp init
 ```
 
 Run project:
 
 ```
-  gulp
-```
-
-Or:
-
-```
-  docker-compose up
+  npm start
 ```
 
 
 # TODO
 
-* new version of babel
+* new version of babel 6
 * fix bundle
 * remarkable => markdown-it
 * support markdown classes

@@ -134,6 +134,7 @@ export default function thumbnailerMiddleware({getState}) {
 
 
 //TODO finalize options
+//TODO implement better sampler: https://stackoverflow.com/questions/2303690/resizing-an-image-in-an-html5-canvas
 function thumb(img, width, height, quality, resolve) {
   var canvas = document.createElement('canvas');
   var ctx = canvas.getContext('2d');

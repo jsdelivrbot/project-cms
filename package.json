@@ -52,12 +52,15 @@
     "jspm": "0.16.27"
   },
   "devDependencies": {
-    "gulp": "^3.8.11",
-    "gulp-connect": "^2.2.0"
+    "babel": "^5.8.34",
+    "babel-core": "^5.8.34",
+    "express": "^4.13.4",
+    "lodash": "^4.3.0",
+    "request": "^2.69.0"
   },
   "description": "",
   "main": "config.js",
   "scripts": {
-    "start": "gulp"
+    "start": "node serve/index.js"
   }
 }
