@@ -6,9 +6,9 @@ import {askForMedia} from '~/actions'
 import MediaField from '~/components/MediaField.jsx';
 
 
-export class PictureList extends React.Component {
-  static allowedTypes = ['/media/pictures'];
+const ALLOWED_TYPES = ['/media/pictures'];
 
+export class PictureList extends React.Component {
   constructor(props) {
     super(props); //{value, onChange}
     let value = props.value || props.defaultValue || [];
@@ -38,7 +38,7 @@ export class PictureList extends React.Component {
 
   addPictures = (event) => {
     event.preventDefault();
-    this.props.askForMedia(this.allowedTypes, 20).then(media_item => {
+    this.props.askForMedia(ALLOWED_TYPES, 20).then(media_item => {
       if (!media_item) return;
 
       var value = this.state.value.slice();
@@ -64,7 +64,7 @@ export class PictureList extends React.Component {
   renderPictureRow = (mediaRef, index) => {
     let setPicture = _.partial(this.setPicture, index);
     return <div className="form-group" key={index}>
-      <MediaField mediaRef={mediaRef} allowedTypes={this.allowedTypes} onSelect={setPicture} key="picture"/>
+      <MediaField mediaRef={mediaRef} allowedTypes={ALLOWED_TYPES} onSelect={setPicture} key="picture"/>
       <button className="btn btn-default" onClick={this.removePicture} key="remove" data-index={index}>Remove</button>
     </div>
   }

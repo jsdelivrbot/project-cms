@@ -11,6 +11,7 @@ export function put(awsConfig, {path, content, mimetype}, onProgress) {
   let headers = {
     'x-amz-acl': 'public-read',
     'x-amz-date': date.toUTCString(),
+    'Access-Control-Allow-Origin': '*',
     'Content-Length': Buffer.byteLength(content),
     'Content-Type': mimetype,
   };
@@ -34,7 +35,7 @@ export function put(awsConfig, {path, content, mimetype}, onProgress) {
       responseType: 'blob',
     });
 
-    xhr.open("PUT", url);
+    xhr.open("PUT", url, true);
     _.each(headers, (headerValue, headerName) => {
       if (headerName === 'Content-Length') return;
       xhr.setRequestHeader(headerName, headerValue);
@@ -91,7 +92,11 @@ function _uploader(awsConfig, files, onProgress) {
       path,
       content,
       mimetype
-    }, _.partial(updateProgress, index)).then(r => _.assign(r, {path, name: file.name}));
+    }, _.partial(updateProgress, index)).then(r => _.assign(r, {
+      path,
+      name: file.name,
+      type: file.type
+    }));
   }));
 }
 

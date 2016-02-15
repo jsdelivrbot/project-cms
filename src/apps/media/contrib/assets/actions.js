@@ -52,5 +52,47 @@ export function removeAsset(baseUrl, assetId) {
   };
 }
 
+export function pushFiles(media_type, uploaded_files) {
+  console.log("pushFiles", uploaded_files)
+  let media_items = fromJS(_.map(uploaded_files, file => {
+    let type = 'anchor';
+    switch(file.type) {
+      case 'text/css':
+        type = 'css';
+        break;
+      case 'text/javascript':
+      case 'application/x-javascript':
+      case 'application/javascript':
+        type = 'javascript';
+        break;
+      case 'image/jpeg':
+      case 'image/png':
+      case 'image/gif':
+        type = 'image';
+        break;
+    }
+    return {
+      id: v4(),
+      media_type,
+      name: file.name,
+      url: file.url,
+      path: file.path,
+      type
+    }
+  }));
+  return {
+    type: 'PUSH_FILES',
+    media_items,
+    uploaded_files,
+    record_changes: media_items.map(asset => {
+      return {
+        new_object: asset,
+        table_name: '/media',
+        object_id: asset.get('id')
+      };
+    }).toArray()
+  };
+}
 
-export default {addAsset, updateAsset, removeAsset}
+
+export default {addAsset, updateAsset, removeAsset, pushFiles}
