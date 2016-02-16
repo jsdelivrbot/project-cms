@@ -138,6 +138,20 @@ export default function thumbnailerMiddleware({getState}) {
 function thumb(img, width, height, quality, resolve) {
   var canvas = document.createElement('canvas');
   var ctx = canvas.getContext('2d');
+
+  //preserve aspect ratio
+  var ratio = img.width / width > img.height / height
+    ? img.width / width
+    : img.height / height;
+
+  if (ratio > 1) {
+    width = Math.ceil(img.width / ratio);
+    height = Math.ceil(img.height / ratio);
+  } else {
+    width = img.width;
+    height = img.height;
+  }
+
   canvas.width = img.width;
   canvas.height = img.height;
   ctx.drawImage(img, 0, 0);
