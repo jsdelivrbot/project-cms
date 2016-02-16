@@ -25,7 +25,7 @@ export default class AddPage extends React.Component {
   receiveSubmit = (event) => {
     event.preventDefault();
     console.log("Submit:", event);
-    this.props.addPage(this.state.path, this.state)
+    this.props.addPage(this.state)
   }
 
   updateValue = (event) => {

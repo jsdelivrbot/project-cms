@@ -46,13 +46,13 @@ export default function GallerysApplicationFactory(baseUrl) {
           addGallery: _.partial(actions.addGallery, baseUrl),
         })(AddGallery)
       }, {
-        path: '**',
+        path: ':id',
         component: connect((state, props) => {
-          let path = '/'+props.params.splat;
+          let {id} = props.params;
           return {
             baseUrl: baseUrl,
-            gallery: state.getIn(['tables', baseUrl, path]),
-            path,
+            gallery: state.getIn(['tables', baseUrl, id]),
+            id,
             templates: galleryTemplates(state),
           }
         }, {

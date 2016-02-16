@@ -25,7 +25,7 @@ export default class AddGallery extends React.Component {
   receiveSubmit = (event) => {
     event.preventDefault();
     console.log("Submit:", event);
-    this.props.addGallery(this.state.path, this.state)
+    this.props.addGallery(this.state)
   }
 
   updateValue = (event) => {

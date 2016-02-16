@@ -12,7 +12,7 @@ import PictureList from './PictureList.jsx';
 
 export default class EditGallery extends React.Component {
   constructor(props) {
-    super(props) //{updateGallery, gallery, path, render}
+    super(props) //{updateGallery, gallery, id, render}
     this.state = props.gallery.toJS();
 
     this.updateHead = _.partial(this.updateCode, 'head');
@@ -23,7 +23,7 @@ export default class EditGallery extends React.Component {
   receiveSubmit = (event) => {
     event.preventDefault();
     console.log("Submit:", event);
-    this.props.updateGallery(this.props.path, this.state)
+    this.props.updateGallery(this.props.id, this.state)
   }
 
   updateValue = (event) => {
@@ -44,7 +44,7 @@ export default class EditGallery extends React.Component {
   }
 
   deleteGallery = (event) => {
-    this.props.removeGallery(this.props.path);
+    this.props.removeGallery(this.props.id);
   }
 
   renderTemplateOptions() {
@@ -64,6 +64,12 @@ export default class EditGallery extends React.Component {
       <div className="row">
         <div className="col-md-6 col-sm-12">
           <form onSubmit={this.receiveSubmit}>
+            <div className="form-group" key="path">
+              <label className="control-label">Path</label>
+              <span className="help-block">Must start with a / ; may contain alphanumerics, dashes, slashes and periods only</span>
+              <input name="path" className="form-control" value={gallery.path} required="required" onChange={this.updateValue}
+                pattern="^\/[a-z0-9-\/\.]+$" placeholder="/path.html"/>
+            </div>
             <div className="form-group">
               <label className="control-label">Title</label>
               <input name="title" className="form-control" value={gallery.title} required="required" onChange={this.updateValue}/>

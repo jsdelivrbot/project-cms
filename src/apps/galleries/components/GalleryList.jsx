@@ -5,9 +5,9 @@ import {Link} from 'react-router';
 
 export default function GalleryList({baseUrl, galleries}) {
   function GalleryRow(gallery) {
-    let {path, title} = gallery.toJS();
+    let {id, path, title} = gallery.toJS();
     return <tr key={path}>
-      <td><Link to={`${baseUrl}${path}`}>{title}</Link></td>
+      <td><Link to={`${baseUrl}/${id}`}>{title}</Link></td>
       <td>{path}</td>
     </tr>
   }

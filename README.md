@@ -26,4 +26,5 @@ Run project:
 * fix bundle
 * remarkable => markdown-it
 * support markdown classes
-* tagging for templates (for application filtering)
+* tagging for templates (for application filtering and selecting default template)
+* fixture management (when adding a new app ask to load specific fixtures, allow table purge of apps)

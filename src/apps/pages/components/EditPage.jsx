@@ -13,7 +13,7 @@ import MediaSidebar from '~/components/MediaSidebar.jsx';
 
 export default class EditPage extends React.Component {
   constructor(props) {
-    super(props) //{updatePage, page, path, render}
+    super(props) //{updatePage, page, id, render}
     this.state = props.page.toJS();
 
     this.updateContent = _.partial(this.updateCode, 'content');
@@ -25,7 +25,7 @@ export default class EditPage extends React.Component {
   receiveSubmit = (event) => {
     event.preventDefault();
     console.log("Submit:", event);
-    this.props.updatePage(this.props.path, this.state)
+    this.props.updatePage(this.props.id, this.state)
   }
 
   updateValue = (event) => {
@@ -42,7 +42,7 @@ export default class EditPage extends React.Component {
   }
 
   deletePage = (event) => {
-    this.props.removePage(this.props.path);
+    this.props.removePage(this.props.id);
   }
 
   renderTemplateOptions() {
@@ -53,7 +53,7 @@ export default class EditPage extends React.Component {
 
   render() {
     let page = this.state;
-    return <div> 
+    return <div>
       <MediaSidebar/>
       <div className="container-fluid">
 
@@ -65,6 +65,12 @@ export default class EditPage extends React.Component {
       <div className="row">
         <div className="col-md-6 col-sm-12">
           <form onSubmit={this.receiveSubmit}>
+            <div className="form-group">
+              <label className="control-label">Path</label>
+              <span className="help-block">Must start with a / ; may contain alphanumerics, dashes, slashes and periods only</span>
+              <input name="path" className="form-control" value={page.path} required="required" onChange={this.updateValue}
+                pattern="^\/[a-z0-9-\/\.]+$" placeholder="/path.html"/>
+            </div>
             <div className="form-group">
               <label className="control-label">Title</label>
               <input name="title" className="form-control" value={page.title} required="required" onChange={this.updateValue}/>

@@ -44,13 +44,13 @@ export default function PagesApplicationFactory(baseUrl) {
           addPage: _.partial(actions.addPage, baseUrl),
         })(AddPage)
       }, {
-        path: '**',
+        path: ':id',
         component: connect((state, props) => {
-          let path = '/'+props.params.splat;
+          let {id} = props.params;
           return {
             baseUrl: baseUrl,
-            page: state.getIn(['tables', baseUrl, path]),
-            path,
+            page: state.getIn(['tables', baseUrl, id]),
+            id,
             templates: pageTemplates(state)
           }
         }, {
