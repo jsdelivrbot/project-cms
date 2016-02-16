@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 
 
 export function MediaSidebar({mediaApp}) {
-  console.log("MediaSidebar", mediaApp);
   let Sidebar = (mediaApp && mediaApp.embeddableComponents) ? mediaApp.embeddableComponents.mediaSidebar : null;
   if (Sidebar) {
     return <Sidebar/>

@@ -4,8 +4,8 @@ import {Link} from 'react-router';
 
 
 function ProvidersNav({providers}) {
-  function ProviderLink({baseUrl, title}) {
-    return <Link to={baseUrl} className="btn btn-default" key={baseUrl}>{title}</Link>
+  function ProviderLink({baseUrl, title, actions}) {
+    return <Link to={baseUrl+"/add"} className="btn btn-default" key={baseUrl}>Add {title}</Link>
   }
 
   return <div className="btn-group">
@@ -13,26 +13,27 @@ function ProvidersNav({providers}) {
   </div>
 }
 
-function SnippetRow({providers, snippit}) {
-  let snippit_type = snippit.get('snippit_type');
-  let provider = _.find(providers, {baseUrl: snippit_type});
+function SnippetRow({providers, snippet}) {
+  let snippet_type = snippet.get('snippet_type');
+  let provider = _.find(providers, {baseUrl: snippet_type});
   if (!provider || !provider.itemInterface) {
+    console.log("Unrecognized provider:", snippet_type, provider);
     return <tr/>
   }
   return <tr>
-    <td><Link to={provider.itemInterface.detailLink(snippit)}>
-      {provider.itemInterface.preview(snippit)}
+    <td><Link to={provider.itemInterface.detailLink(snippet)}>
+      {provider.itemInterface.preview(snippet)}
     </Link></td>
     <td>{provider.title}</td>
   </tr>
 }
 
 
-export default function ProviderList({providers, snippit}) {
+export default function ProviderList({providers, snippets}) {
   return <div className="container-fluid">
     <div className="row">
       <div className="col-md-6">
-        <h1>Snippit Providers</h1>
+        <h1>Snippet Providers</h1>
       </div>
     </div>
     <div className="row">
@@ -54,7 +55,7 @@ export default function ProviderList({providers, snippit}) {
           </tr>
         </thead>
         <tbody>
-          {snippit.map((snippit, id) => <SnippetRow providers={providers} snippit={snippit} key={id}/>).toArray()}
+          {snippets.map((snippet, id) => <SnippetRow providers={providers} snippet={snippet} key={id}/>).toArray()}
         </tbody>
       </table>
     </div>

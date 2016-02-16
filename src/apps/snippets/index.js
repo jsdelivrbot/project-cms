@@ -7,24 +7,26 @@ import SidebarEmbed from './components/SidebarEmbed.jsx';
 
 import reducer from './reducer';
 import actions from './actions';
+import templateTags from './templateTags';
 
 
-function snippitsProviders(state) {
-  return _.filter(state.getIn(['/engine', 'apps']), {type: 'snippits provider'});
+function snippetsProviders(state) {
+  return _.filter(state.getIn(['/engine', 'apps']), {type: 'snippets provider'});
 }
 
-export default function snippitsApplicationFactory(baseUrl) {
+export default function snippetsApplicationFactory(baseUrl) {
   return {
     type: 'application',
-    title: 'snippits',
+    title: 'Snippets',
     reducer,
     actions,
     tables: [baseUrl],
+    templateTags,
     embeddableComponents: {
-      snippitsSidebar: connect(state => {
+      snippetsSidebar: connect(state => {
         return {
-          providers: snippitsProviders(state),
-          snippits: state.getIn(['tables', baseUrl])
+          providers: snippetsProviders(state),
+          snippets: state.getIn(['tables', baseUrl])
         }
       })(SidebarEmbed)
     },
@@ -35,8 +37,8 @@ export default function snippitsApplicationFactory(baseUrl) {
         component: connect(state => {
           return {
             baseUrl: baseUrl,
-            providers: snippitsProviders(state),
-            snippits: state.getIn(['tables', baseUrl])
+            providers: snippetsProviders(state),
+            snippets: state.getIn(['tables', baseUrl])
           }
         })(ProviderList)
       }

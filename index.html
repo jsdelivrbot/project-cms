@@ -7,6 +7,28 @@
 		<script src="./jspm_packages/system.src.js"></script>
 	<script src="./config.js"></script>
 	<script>
+	window.addEventListener("message", receiveMessage, false);
+
+	function receiveMessage(event)
+	{
+	  var origin = event.origin || event.originalEvent.origin; // For Chrome, the origin property is in the event.originalEvent object.
+	  if (origin !== "http://"+window.location.hostname+":"+window.location.port)
+	    return;
+
+		try {
+			var message = JSON.parse(event.data)
+			if (message && message.type === "APPLICATION_STATE") {
+				if (message.text === true) {
+					$("#opening_screen").hide()
+				} else {
+					$("#opening_screen").text(message.text);
+				}
+			}
+		} catch (error) {
+			//
+			console.log(error)
+		}
+	}
 		System.import('./src/app.jsx');
 	</script>
 
@@ -28,9 +50,14 @@
 		height: auto;
 		border: 1px solid #DDD;
 	}
+
+	#opening_screen {
+
+	}
 	</style>
 </head>
 <body>
+	<div id="opening_screen">boot strapping...</div>
 	<div id="app"></div>
 </body>
 </html>

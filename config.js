@@ -55,7 +55,6 @@ System.config({
     "levelup": "npm:levelup@0.19.0",
     "localstorage-down": "npm:localstorage-down@0.6.6",
     "lodash": "npm:lodash@4.3.0",
-    "mozilla/nunjucks": "github:mozilla/nunjucks@2.3.0",
     "node-uuid": "npm:node-uuid@1.4.7",
     "nunjucks": "github:mozilla/nunjucks@2.3.0",
     "path": "npm:path@0.12.7",

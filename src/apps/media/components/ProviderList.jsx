@@ -29,11 +29,6 @@ function MediaRow({providers, media_item}) {
 
 
 export default class ProviderList extends React.Component {
-  constructor(props) {
-    super(props)
-    {providers, media}
-  }
-
   uploadFiles = (event) => {
     let provider = _.find(this.props.providers, {baseUrl: this._uploader});
     this.props.uploadFiles(event.target.files, this.onUploadProgress).then(({result}) => {
@@ -49,7 +44,27 @@ export default class ProviderList extends React.Component {
     this.setState({uploading: true, percentUploaded: 0});
   };
 
+  setUploader = (media_type, event) => {
+    event.preventDefault();
+    this._uploader = media_type;
+    this.refs.uploadfield.click();
+  };
+
+  renderUploadOptions() {
+    return <div className="btn-group">
+    {
+      _.reduce(this.props.providers, (col, provider) => {
+        if (provider.actions.pushFiles) {
+          col.push(<button key={provider.baseUrl} className="btn btn-primary" onClick={_.partial(this.setUploader, provider.baseUrl)}>Upload {provider.title}</button>)
+        }
+        return col;
+      }, [])
+    }
+    </div>
+  }
+
   render()  {
+    let {providers, media} = this.props;
     return <div className="container-fluid">
       <div className="row">
         <div className="col-md-6">
@@ -57,8 +72,11 @@ export default class ProviderList extends React.Component {
         </div>
       </div>
       <div className="row">
-        <div className="col-md-12">
+        <div className="col-md-6">
           <ProvidersNav providers={providers}/>
+        </div>
+        <div className="col-md-6">
+          {this.renderUploadOptions()}
         </div>
       </div>
       <div className="row">

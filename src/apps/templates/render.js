@@ -120,6 +120,20 @@ export default function renderFactory(store) {
     noCache: true
   });
 
+  let apps = store.getState().getIn(['/engine', 'apps']);
+  apps.forEach(app => {
+    if (app.templateTags) {
+      _.each(app.templateTags, (tag, tagname) => {
+        env.addExtension(tagname, new tag(store));
+      });
+    }
+    if (app.templateFilters) {
+      _.each(app.templateFilters, (filter, filtername) => {
+        env.addFilter(filtername, filter(store), filter.async);
+      });
+    }
+  });
+
   env.addFilter('markdown', markdownFilter);
   env.addFilter('ref', _.partial(refFilter, store.getState));
   env.addFilter('thumbnail', _.partial(thumbnailFilter, store.dispatch), true);
