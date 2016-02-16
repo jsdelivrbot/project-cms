@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import {fromJS, Map} from 'immutable';
+import resample_hermite from 'hermimg'
 
 
 export default function thumbnailerMiddleware({getState}) {
@@ -134,26 +135,14 @@ export default function thumbnailerMiddleware({getState}) {
 
 
 //TODO finalize options
-//TODO implement better sampler: https://stackoverflow.com/questions/2303690/resizing-an-image-in-an-html5-canvas
 function thumb(img, width, height, quality, resolve) {
   var canvas = document.createElement('canvas');
   var ctx = canvas.getContext('2d');
+  canvas.width = img.width;
+  canvas.height = img.height;
+  ctx.drawImage(img, 0, 0);
 
-  var ratio = img.width / width > img.height / height
-    ? img.width / width
-    : img.height / height;
-
-  if (ratio > 1) {
-    width = Math.ceil(img.width / ratio);
-    height = Math.ceil(img.height / ratio);
-  } else {
-    width = img.width;
-    height = img.height;
-  }
-
-  canvas.width = width;
-  canvas.height = height;
-  ctx.drawImage(img, 0, 0, width, height);
+  resample_hermite(canvas, img.width, img.height, width, height);
 
   if (canvas.toBlob) {
     canvas.toBlob(resolve, 'image/jpeg', quality);

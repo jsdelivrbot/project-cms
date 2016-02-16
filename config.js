@@ -13,8 +13,8 @@ System.config({
   paths: {
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*",
-    "ext-github:*": "/github/*",
-    "ext-npm:*": "/npm/*"
+    "ext-github:*": "/github/",
+    "ext-npm:*": "/npm/"
   },
 
   packages: {
@@ -44,6 +44,7 @@ System.config({
     "css": "npm:systemjs-plugin-css@0.1.20",
     "eligrey/FileSaver.js": "github:eligrey/FileSaver.js@master",
     "fetch": "github:github/fetch@0.11.0",
+    "hermimg": "github:viliusle/Hermite-resize@master/hermite.js",
     "history": "npm:history@1.17.0",
     "immutable": "npm:immutable@3.7.6",
     "immutable-reducers": "npm:immutable-reducers@1.1.0",
