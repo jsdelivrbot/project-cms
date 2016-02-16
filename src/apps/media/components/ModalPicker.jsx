@@ -3,14 +3,15 @@ import shallowCompare from 'react-addons-shallow-compare';
 import _ from 'lodash';
 
 
-function MediaRow({providers, media_item, onSelect, selectMultiple, selected}) {
-  const provider = _.find(providers, {baseUrl: media_item.get('media_type')});
+function MediaRow({providers, mediaItem, onSelect, selectMultiple, selected}) {
+  const provider = _.find(providers, {baseUrl: mediaItem.get('media_type')});
   if (!provider || !provider.itemInterface) {
     return <tr/>
   }
 
   function send(event) {
-    onSelect(media_item);
+    event.preventDefault();
+    onSelect(mediaItem);
   }
 
   let selectedStatus = selectMultiple ?
@@ -22,7 +23,7 @@ function MediaRow({providers, media_item, onSelect, selectMultiple, selected}) {
   return <tr>
     { selectedStatus }
     <td key="preview"><button onClick={send}>
-      {provider.itemInterface.preview(media_item)}
+      {provider.itemInterface.preview(mediaItem)}
     </button></td>
   </tr>
 }
@@ -64,27 +65,29 @@ export default class ModalPicker extends React.Component {
     this.props.respondWithMedia(null);
   };
 
-  onSelectMultiple = (media_item) => {
+  onSelectMultiple = (mediaItem) => {
     let selection = this.state.selection;
-    if (selection.has(media_item)) {
-      selection.delete(media_item);
+    let id = mediaItem.get('id');
+    if (selection.has(id)) {
+      selection.delete(id);
     } else {
-      selection.add(media_item);
+      selection.add(id);
     }
     this.forceUpdate();
     //this.setState({selection});
   };
 
-  onSelect = (media_item) => {
-    this.props.respondWithMedia(this.translateMediaItem(media_item));
+  onSelect = (mediaItem) => {
+    this.props.respondWithMedia(this.translateMediaItem(mediaItem));
   };
 
   onSubmitSelection = (event) => {
     event.preventDefault();
     let selection = this.state.selection;
     let items = [];
-    for (let media_item of selection.values()) {
-      items.push(this.translateMediaItem(media_item));
+    for (let id of selection.values()) {
+      let mediaItem = this.props.media.get(id);
+      items.push(this.translateMediaItem(mediaItem));
     }
     this.props.respondWithMedia(items);
   };
@@ -110,7 +113,7 @@ export default class ModalPicker extends React.Component {
       return this.props.dispatch(provider.actions.pushFiles(this._uploader, result));
     }).then(({media_items}) => {
       let selection = this.state.selection;
-      media_items.forEach(media_item => selection.add(media_item));
+      media_items.forEach(media_item => selection.add(media_item.get('id')));
       this.setState({uploading: false, selection});
     }).catch(error => {
       console.error(error);
@@ -167,10 +170,10 @@ export default class ModalPicker extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {media.map((media_item, id) =>
-                    <MediaRow providers={providers} media_item={media_item}
+                  {media.map((mediaItem, id) =>
+                    <MediaRow providers={providers} mediaItem={mediaItem}
                       onSelect={selectMultiple ? this.onSelectMultiple : this.onSelect}
-                      selected={selection.has(media_item)}
+                      selected={selection.has(id)}
                       selectMultiple={selectMultiple} key={id}/>).toArray()}
                 </tbody>
               </table>
