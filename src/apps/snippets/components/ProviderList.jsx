@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 
 function ProvidersNav({providers}) {
   function ProviderLink({baseUrl, title, actions}) {
-    return <Link to={baseUrl+"/add"} className="btn btn-default" key={baseUrl}>Add {title}</Link>
+    return <Link to={baseUrl+"/add"} className="btn btn-primary" key={baseUrl}>Add {title}</Link>
   }
 
   return <div className="btn-group">
@@ -22,7 +22,7 @@ function SnippetRow({providers, snippet}) {
   }
   return <tr>
     <td><Link to={provider.itemInterface.detailLink(snippet)}>
-      {provider.itemInterface.preview(snippet)}
+      {snippet.get('key')}
     </Link></td>
     <td>{provider.title}</td>
   </tr>
@@ -50,7 +50,7 @@ export default function ProviderList({providers, snippets}) {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th>Item</th>
+            <th>Key</th>
             <th>Provider</th>
           </tr>
         </thead>

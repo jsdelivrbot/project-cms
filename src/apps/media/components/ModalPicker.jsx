@@ -2,6 +2,9 @@ import React from 'react';
 import shallowCompare from 'react-addons-shallow-compare';
 import _ from 'lodash';
 
+function Uploading({percent}) {
+  return <progress value={percent} max={100}>{percent} %</progress>
+}
 
 function MediaRow({providers, mediaItem, onSelect, selectMultiple, selected}) {
   const provider = _.find(providers, {baseUrl: mediaItem.get('media_type')});
@@ -181,7 +184,7 @@ export default class ModalPicker extends React.Component {
           </div>
           <div className="modal-footer">
             <input type="file" style={{visibility: 'hidden'}} ref="uploadfield" key="uploadfield" multiple onChange={this.uploadFiles}/>
-            {uploading ? (percentUploaded ? `${percentUploaded}%` : "Uploading...") : upload_options}
+            {uploading ? <Uploading key="uploading" percent={percentUploaded}/> : upload_options}
             { selectMultiple
               ? <button type="button" className="btn btn-default" onClick={this.onSubmitSelection} key="submit">Submit</button>
               : null
