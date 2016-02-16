@@ -23,8 +23,18 @@ var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, uploaderMiddl
 
 var history = createHistory();
 
-console.log('loading apps...')
+function sendLoadingMessage(text) {
+  console.log(text);
+  window.postMessage(JSON.stringify({
+    type:"APPLICATION_STATE",
+    text
+
+  }), "http://"+window.location.hostname+":"+window.location.port);
+}
+
+sendLoadingMessage('loading apps...')
 appsLoader().then(apps => {
+  sendLoadingMessage("apps loaded");
   console.log("apps:", apps);
 
   return loadAppsTables(apps).then(tables => {
@@ -62,15 +72,17 @@ appsLoader().then(apps => {
   console.log("renderer:", renderer);
   store.dispatch(engine.actions.setRenderer(renderer));
 
-
+  sendLoadingMessage("rendering");
   /* mount application to DOM */
   ReactDOM.render(
     <Provider store={store}>
       <AppRouter history={history}/>
     </Provider>,
     document.getElementById('app')
-  )
+  );
+  
+  sendLoadingMessage(true);
 }).catch(error => {
-  console.log("Error starting application:");
+  sendLoadingMessage("Error starting application, check console log");
   console.error(error);
 });

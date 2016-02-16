@@ -16,18 +16,19 @@ function mediaProviders(state) {
   return _.filter(state.getIn(['/engine', 'apps']), {type: 'media provider'});
 }
 
+
 export default function MediaApplicationFactory(baseUrl) {
   return {
     type: 'application',
     title: 'Media',
     reducer,
     actions,
-    tables: ['/media'],
+    tables: [baseUrl],
     dashboardPlugins: {
       mediaPicker: connect(state => {
         return {
           providers: mediaProviders(state),
-          media: state.getIn(['tables', '/media']),
+          media: state.getIn(['tables', baseUrl]),
           mediaTypes: state.getIn([baseUrl, 'modal-options', 'mediaTypes']),
           quantityLimit: state.getIn([baseUrl, 'modal-options', 'quantityLimit']),
           visible: state.getIn([baseUrl, 'modal-options', 'visible']),
@@ -47,7 +48,7 @@ export default function MediaApplicationFactory(baseUrl) {
       mediaSidebar: connect(state => {
         return {
           providers: mediaProviders(state),
-          media: state.getIn(['tables', '/media'])
+          media: state.getIn(['tables', baseUrl])
         }
       })(SidebarEmbed)
     },
@@ -59,7 +60,7 @@ export default function MediaApplicationFactory(baseUrl) {
           return {
             baseUrl: baseUrl,
             providers: mediaProviders(state),
-            media: state.getIn(['tables', '/media'])
+            media: state.getIn(['tables', baseUrl])
           }
         })(ProviderList)
       }

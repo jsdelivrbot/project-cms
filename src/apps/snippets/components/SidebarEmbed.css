@@ -1,0 +1,23 @@
+.Component-SidebarEmbed {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  right: 0;
+}
+
+
+.Component-SidebarEmbed-Button {
+  float: left;
+  margin-top: 50vh;
+}
+
+.Component-SidebarEmbed-Pane {
+  visibility: collapse;
+  width:0;
+}
+
+.Component-SidebarEmbed-Pane.visible {
+  display: block;
+  visibility: visible;
+  width: 50vw;
+}

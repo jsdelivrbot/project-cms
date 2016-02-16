@@ -28,35 +28,60 @@ function MediaRow({providers, media_item}) {
 }
 
 
-export default function ProviderList({providers, media}) {
-  return <div className="container-fluid">
-    <div className="row">
-      <div className="col-md-6">
-        <h1>Media Providers</h1>
+export default class ProviderList extends React.Component {
+  constructor(props) {
+    super(props)
+    {providers, media}
+  }
+
+  uploadFiles = (event) => {
+    let provider = _.find(this.props.providers, {baseUrl: this._uploader});
+    this.props.uploadFiles(event.target.files, this.onUploadProgress).then(({result}) => {
+      return this.props.dispatch(provider.actions.pushFiles(this._uploader, result));
+    }).then(({media_items}) => {
+      let selection = this.state.selection;
+      media_items.forEach(media_item => selection.add(media_item.get('id')));
+      this.setState({uploading: false, selection});
+    }).catch(error => {
+      console.error(error);
+      this.setState({uploading: false});
+    })
+    this.setState({uploading: true, percentUploaded: 0});
+  };
+
+  render()  {
+    return <div className="container-fluid">
+      <div className="row">
+        <div className="col-md-6">
+          <h1>Media Providers</h1>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          <ProvidersNav providers={providers}/>
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-6">
+          <h1>Media</h1>
+        </div>
+        <div className="col-md-6">
+          <input type="file" style={{visibility: 'hidden'}} ref="uploadfield" key="uploadfield" multiple onChange={this.uploadFiles}/>
+        </div>
+      </div>
+      <div className="table-responsive">
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Provider</th>
+            </tr>
+          </thead>
+          <tbody>
+            {media.map((media_item, id) => <MediaRow providers={providers} media_item={media_item} key={id}/>).toArray()}
+          </tbody>
+        </table>
       </div>
     </div>
-    <div className="row">
-      <div className="col-md-12">
-        <ProvidersNav providers={providers}/>
-      </div>
-    </div>
-    <div className="row">
-      <div className="col-md-6">
-        <h1>Media</h1>
-      </div>
-    </div>
-    <div className="table-responsive">
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Provider</th>
-          </tr>
-        </thead>
-        <tbody>
-          {media.map((media_item, id) => <MediaRow providers={providers} media_item={media_item} key={id}/>).toArray()}
-        </tbody>
-      </table>
-    </div>
-  </div>
+  }
 }
