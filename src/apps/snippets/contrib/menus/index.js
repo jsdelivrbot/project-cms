@@ -8,6 +8,11 @@ import actions from './actions';
 import itemInterface from './itemInterface';
 import fixtures from './fixtures';
 
+import {getTemplates} from '~/plugins';
+
+
+const menuTemplates = getTemplates('partial');
+
 
 export default function MenusApplicationFactory(baseUrl) {
 
@@ -25,7 +30,8 @@ export default function MenusApplicationFactory(baseUrl) {
         path: 'add',
         component: connect(state => {
           return {
-            baseUrl: baseUrl
+            baseUrl: baseUrl,
+            templates: menuTemplates(state)
           }
         }, {
           addMenu: _.partial(actions.addMenu, baseUrl),
@@ -37,6 +43,7 @@ export default function MenusApplicationFactory(baseUrl) {
             baseUrl: baseUrl,
             id: props.params.id,
             menu: state.getIn(['tables', '/snippets', props.params.id]),
+            templates: menuTemplates(state)
           }
         }, {
           editMenu: _.partial(actions.editMenu, baseUrl),

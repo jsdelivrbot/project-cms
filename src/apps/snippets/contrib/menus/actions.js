@@ -25,15 +25,14 @@ export function addMenu(baseUrl, menu) {
 
 export function editMenu(baseUrl, menuId, menu) {
   return {
-    type: 'REMOVE_SNIPPET',
+    type: 'UPDATE_SNIPPET',
     menuId,
     record_change: {
-      edit_object: menuId,
+      update_object: menu,
       table_name: '/snippets',
       object_id: menuId
     },
-    alert_message: `Updated menu`,
-    next_url: baseUrl
+    alert_message: `Updated menu`
   };
 }
 

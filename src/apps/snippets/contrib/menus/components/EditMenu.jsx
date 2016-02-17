@@ -25,6 +25,12 @@ export default class EditMenu extends React.Component {
     this.setState({menuItems});
   }
 
+  renderTemplateOptions() {
+    return this.props.templates.map((template, path) => {
+      return <option key={path} value={path}>{path}</option>
+    }).toArray();
+  }
+
   render() {
     let menu = this.state;
 
@@ -41,6 +47,12 @@ export default class EditMenu extends React.Component {
               <label className="control-label">key</label>
               <input name="key" className="form-control" value={menu.key} required="required" onChange={this.updateValue}
                 placeholder="menu-name"/>
+            </div>
+            <div className="form-group">
+              <label className="control-label">Template</label>
+              <select name="template" className="form-control" value={menu.template} onChange={this.updateValue}>
+                {this.renderTemplateOptions()}
+              </select>
             </div>
             <MenuItemList defaultValue={menu.menuItems} onChange={this.updateMenuItems} />
             <div className="form-group">

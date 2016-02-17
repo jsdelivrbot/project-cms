@@ -162,6 +162,9 @@ export default function renderFactory(store) {
   }
 
   return function render(templateKey, ctx, blocks=false) {
+    if (!templateKey) {
+      throw new Error('Must provide a template key')
+    }
     //TODO pluggable way to inject global rendering context
     let site = store.getState().getIn(['tables', '/site', 'site']).toJS();
     ctx = _.assign({}, ctx, {site});

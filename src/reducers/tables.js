@@ -61,7 +61,7 @@ export function recordChange(state, record_change) {
     table.del(object_id);
     return state.deleteIn([table_name, object_id]);
   }
-  console.warn("Received invalid record_change action:", action);
+  console.warn("Received invalid record_change:", record_change);
   return state;
 }
 

@@ -15,7 +15,7 @@ export function preview(snippetItem) {
 }
 
 export function render(state, snippetItem) {
-  return state.getIn('/engine', 'renderer')(snippetItem.get('template_name'), {
+  return state.getIn(['/engine', 'renderer'])(snippetItem.get('template'), {
     menu: snippetItem.toJS()
   });
 }

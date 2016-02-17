@@ -9,6 +9,7 @@ export function addTemplate(baseUrl, path, template) {
       table_name: baseUrl,
       object_id: path,
     },
+    alert_message: 'Template added',
     next_url: `${baseUrl}${path}`
   };
 }
@@ -22,6 +23,7 @@ export function removeTemplate(baseUrl, path) {
       table_name: baseUrl,
       object_id: path
     },
+    alert_message: 'Template removed',
     next_url: `${baseUrl}`
   };
 }
@@ -35,7 +37,8 @@ export function updateTemplate(baseUrl, path, template) {
       update_object: template,
       table_name: baseUrl,
       object_id: path
-    }
+    },
+    alert_message: 'Template updated'
   };
 }
 

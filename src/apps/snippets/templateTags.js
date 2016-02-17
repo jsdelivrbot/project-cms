@@ -12,7 +12,7 @@ export function SnippetsExtension({getState}) {
 
         // parse the args and move after the block end. passing true
         // as the second arg is required if there are no parentheses
-        var args = parser.parseSignature(null, true);
+        var args = parser.parseSignature(null, true); //TODO parse options?
         parser.advanceAfterBlockEnd(tok.value);
 
         //parser.advanceAfterBlockEnd();
@@ -21,7 +21,8 @@ export function SnippetsExtension({getState}) {
         return new nodes.CallExtensionAsync(this, 'run', args);
     };
 
-    this.run = function(context, key, options, callback) {
+    this.run = function(context, key, /*options,*/ callback) {
+      console.log("Snippets run:", arguments)
       let state = getState();
       let snippet = state.getIn(['tables', '/snippets']).find(x => x.get('key') === key);
       if (!snippet) return callback('');
