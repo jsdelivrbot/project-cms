@@ -12,9 +12,7 @@ System.config({
   },
   paths: {
     "github:*": "jspm_packages/github/*",
-    "npm:*": "jspm_packages/npm/*",
-    "ext-github:*": "/github/",
-    "ext-npm:*": "/npm/"
+    "npm:*": "jspm_packages/npm/*"
   },
 
   packages: {
@@ -34,6 +32,7 @@ System.config({
   map: {
     "@empty/package": "@empty",
     "FileSaver.js": "github:eligrey/FileSaver.js@master",
+    "aws-sdk": "npm:aws-sdk@2.2.36",
     "babel": "npm:babel-core@5.8.35",
     "babel-preset-stage-0": "npm:babel-preset-stage-0@6.5.0",
     "babel-runtime": "npm:babel-runtime@5.8.35",
@@ -44,17 +43,17 @@ System.config({
     "css": "npm:systemjs-plugin-css@0.1.20",
     "eligrey/FileSaver.js": "github:eligrey/FileSaver.js@master",
     "fetch": "github:github/fetch@0.11.0",
-    "hermimg": "github:viliusle/Hermite-resize@master/hermite.js",
+    "hermimg": "github:viliusle/Hermite-resize@master",
     "history": "npm:history@1.17.0",
     "immutable": "npm:immutable@3.7.6",
     "immutable-reducers": "npm:immutable-reducers@1.1.0",
     "jsx": "github:floatdrop/plugin-jsx@1.2.1",
     "jszip": "npm:jszip@2.5.0",
-    "knox": "npm:knox@0.9.2",
     "level-sublevel": "npm:level-sublevel@6.5.4",
     "levelup": "npm:levelup@0.19.0",
     "localstorage-down": "npm:localstorage-down@0.6.6",
-    "lodash": "npm:lodash@4.3.0",
+    "lodash": "npm:lodash@4.4.0",
+    "mozilla/nunjucks": "github:mozilla/nunjucks@2.3.0",
     "node-uuid": "npm:node-uuid@1.4.7",
     "nunjucks": "github:mozilla/nunjucks@2.3.0",
     "path": "npm:path@0.12.7",
@@ -124,6 +123,9 @@ System.config({
     "github:jspm/nodelibs-process@0.1.2": {
       "process": "npm:process@0.11.2"
     },
+    "github:jspm/nodelibs-punycode@0.1.0": {
+      "punycode": "npm:punycode@1.3.2"
+    },
     "github:jspm/nodelibs-querystring@0.1.0": {
       "querystring": "npm:querystring@0.2.0"
     },
@@ -188,6 +190,25 @@ System.config({
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:aws-sdk@2.2.36": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "crypto": "github:jspm/nodelibs-crypto@0.1.0",
+      "events": "github:jspm/nodelibs-events@0.1.1",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "http": "github:jspm/nodelibs-http@1.7.1",
+      "https": "github:jspm/nodelibs-https@0.1.0",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "punycode": "github:jspm/nodelibs-punycode@0.1.0",
+      "querystring": "github:jspm/nodelibs-querystring@0.1.0",
+      "sax": "npm:sax@1.1.5",
+      "stream": "github:jspm/nodelibs-stream@0.1.0",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0",
+      "url": "github:jspm/nodelibs-url@0.1.0",
+      "util": "github:jspm/nodelibs-util@0.1.0",
+      "xml2js": "npm:xml2js@0.4.16",
+      "xmlbuilder": "npm:xmlbuilder@4.2.1"
+    },
     "npm:babel-code-frame@6.5.0": {
       "babel-runtime": "npm:babel-runtime@5.8.35",
       "chalk": "npm:chalk@1.1.1",
@@ -210,7 +231,7 @@ System.config({
       "babel-helper-function-name": "npm:babel-helper-function-name@6.5.0",
       "babel-runtime": "npm:babel-runtime@5.8.35",
       "babel-types": "npm:babel-types@6.5.2",
-      "lodash": "npm:lodash@4.3.0"
+      "lodash": "npm:lodash@4.4.0"
     },
     "npm:babel-helper-explode-assignable-expression@6.5.0": {
       "babel-runtime": "npm:babel-runtime@5.8.35",
@@ -347,7 +368,7 @@ System.config({
       "babel-traverse": "npm:babel-traverse@6.5.0",
       "babel-types": "npm:babel-types@6.5.2",
       "babylon": "npm:babylon@6.5.2",
-      "lodash": "npm:lodash@4.3.0"
+      "lodash": "npm:lodash@4.4.0"
     },
     "npm:babel-traverse@6.5.0": {
       "babel-code-frame": "npm:babel-code-frame@6.5.0",
@@ -358,7 +379,7 @@ System.config({
       "debug": "npm:debug@2.2.0",
       "globals": "npm:globals@8.18.0",
       "invariant": "npm:invariant@2.2.0",
-      "lodash": "npm:lodash@4.3.0",
+      "lodash": "npm:lodash@4.4.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "repeating": "npm:repeating@1.1.3"
     },
@@ -366,7 +387,7 @@ System.config({
       "babel-runtime": "npm:babel-runtime@5.8.35",
       "babel-traverse": "npm:babel-traverse@6.5.0",
       "esutils": "npm:esutils@2.0.2",
-      "lodash": "npm:lodash@4.3.0",
+      "lodash": "npm:lodash@4.4.0",
       "to-fast-properties": "npm:to-fast-properties@1.0.1"
     },
     "npm:babylon@6.5.2": {
@@ -458,7 +479,7 @@ System.config({
       "typewise": "npm:typewise@1.0.3"
     },
     "npm:canonical-reducer-composition-validator@1.3.1": {
-      "lodash": "npm:lodash@4.3.0"
+      "lodash": "npm:lodash@4.4.0"
     },
     "npm:chalk@1.1.1": {
       "ansi-styles": "npm:ansi-styles@2.1.0",
@@ -715,22 +736,6 @@ System.config({
       "pako": "npm:pako@0.2.8",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:knox@0.9.2": {
-      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
-      "crypto": "github:jspm/nodelibs-crypto@0.1.0",
-      "debug": "npm:debug@2.2.0",
-      "events": "github:jspm/nodelibs-events@0.1.1",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "http": "github:jspm/nodelibs-http@1.7.1",
-      "https": "github:jspm/nodelibs-https@0.1.0",
-      "mime": "npm:mime@1.3.4",
-      "once": "npm:once@1.3.3",
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "querystring": "github:jspm/nodelibs-querystring@0.1.0",
-      "stream-counter": "npm:stream-counter@1.0.0",
-      "url": "github:jspm/nodelibs-url@0.1.0",
-      "xml2js": "npm:xml2js@0.4.16"
-    },
     "npm:level-sublevel@6.5.4": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "bytewise": "npm:bytewise@1.1.0",
@@ -776,7 +781,7 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "querystring": "github:jspm/nodelibs-querystring@0.1.0"
     },
-    "npm:lodash@4.3.0": {
+    "npm:lodash@4.4.0": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
@@ -793,13 +798,6 @@ System.config({
     "npm:miller-rabin@4.0.0": {
       "bn.js": "npm:bn.js@4.10.3",
       "brorand": "npm:brorand@1.0.5"
-    },
-    "npm:mime@1.3.4": {
-      "assert": "github:jspm/nodelibs-assert@0.1.0",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
-      "path": "github:jspm/nodelibs-path@0.1.0",
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:minimatch@3.0.0": {
       "brace-expansion": "npm:brace-expansion@1.1.3",
@@ -906,7 +904,7 @@ System.config({
     "npm:react-redux@4.4.0": {
       "hoist-non-react-statics": "npm:hoist-non-react-statics@1.0.5",
       "invariant": "npm:invariant@2.2.0",
-      "lodash": "npm:lodash@4.3.0",
+      "lodash": "npm:lodash@4.4.0",
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "react": "npm:react@0.14.7",
@@ -956,7 +954,7 @@ System.config({
     "npm:redux-immutable@1.3.10": {
       "canonical-reducer-composition-validator": "npm:canonical-reducer-composition-validator@1.3.1",
       "immutable": "npm:immutable@3.7.6",
-      "lodash": "npm:lodash@4.3.0"
+      "lodash": "npm:lodash@4.4.0"
     },
     "npm:redux-immutablejs@0.0.7": {
       "immutable": "npm:immutable@3.7.6",
@@ -964,7 +962,7 @@ System.config({
       "redux": "npm:redux@3.3.1"
     },
     "npm:redux@3.3.1": {
-      "lodash": "npm:lodash@4.3.0",
+      "lodash": "npm:lodash@4.4.0",
       "lodash-es": "npm:lodash-es@4.3.0",
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
@@ -1011,10 +1009,6 @@ System.config({
       "events": "github:jspm/nodelibs-events@0.1.1",
       "inherits": "npm:inherits@2.0.1",
       "readable-stream": "npm:readable-stream@2.0.5"
-    },
-    "npm:stream-counter@1.0.0": {
-      "stream": "github:jspm/nodelibs-stream@0.1.0",
-      "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:string_decoder@0.10.31": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
@@ -1069,7 +1063,7 @@ System.config({
       "xmlbuilder": "npm:xmlbuilder@4.2.1"
     },
     "npm:xmlbuilder@4.2.1": {
-      "lodash": "npm:lodash@4.3.0",
+      "lodash": "npm:lodash@4.4.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:xtend@4.0.1": {

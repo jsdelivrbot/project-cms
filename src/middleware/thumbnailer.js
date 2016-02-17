@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import {fromJS, Map} from 'immutable';
-import resample_hermite from 'hermimg'
+import resample_hermite from 'hermimg/hermite.js'
 
 
 export default function thumbnailerMiddleware({getState}) {

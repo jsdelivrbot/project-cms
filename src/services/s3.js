@@ -1,70 +1,36 @@
 import _ from 'lodash';
-import auth from 'knox/lib/auth';
+import _AWS from 'aws-sdk/dist/aws-sdk.min'; //I have a dream that browser and node packages can live side by side
 import {Buffer} from 'buffer';
 import {v4} from 'node-uuid';
 
-//https://github.com/Automattic/knox/issues/299
-
+const AWS = window.AWS;
+console.log("AWS:", AWS)
 
 export function put(awsConfig, {path, content, mimetype}, onProgress) {
-  let date = new Date();
-  let headers = {
-    'x-amz-acl': 'public-read',
-    'x-amz-date': date.toUTCString(),
-    'Access-Control-Allow-Origin': '*',
-    'Content-Length': Buffer.byteLength(content),
-    'Content-Type': mimetype,
-  };
+  AWS.config.update({accessKeyId: awsConfig.key, secretAccessKey: awsConfig.secret});
+  AWS.config.region = awsConfig.region || 'us-east-1';
 
-  headers.Authorization = auth.authorization({
-    key: awsConfig.key,
-    secret: awsConfig.secret,
-    verb: 'PUT',
-    date: '',
-    resource: auth.canonicalizeResource('/' + awsConfig.bucket + path),
-    contentType: mimetype,
-    md5: '',
-    amazonHeaders: `x-amz-acl:public-read\nx-amz-date:${headers['x-amz-date']}`,
-  });
-
-  //sadly fetch isn't at a point where I know how to do onprogress events
-  let url = `https://${awsConfig.bucket}.s3.amazonaws.com${path}`;
+  let key = path.slice(1);
 
   return new Promise(function(resolve, reject) {
-    let xhr = new XMLHttpRequest({
-      responseType: 'blob',
-    });
-
-    xhr.open("PUT", url, true);
-    _.each(headers, (headerValue, headerName) => {
-      if (headerName === 'Content-Length') return;
-      xhr.setRequestHeader(headerName, headerValue);
-    });
-
-    if (onProgress) {
-      xhr.upload.addEventListener("progress", onProgress);
-    }
-    xhr.upload.addEventListener("abort", reject);
-    xhr.upload.addEventListener("error", reject);
-
-    xhr.addEventListener("load", event => {
-      resolve({
-        url,
-        body: xhr.response,
-        xhr
+    var s3obj = new AWS.S3({params: {Bucket: awsConfig.bucket, Key: key}});
+    s3obj.upload({Body: content, ACL: 'public-read', ContentType: mimetype}).
+      on('httpUploadProgress', function(evt) {
+        //console.log(evt);
+        onProgress(evt)
+      }).
+      send(function(err, data) {
+        //console.log(err, data)
+        if(err) {
+          reject(err)
+        } else {
+          resolve({
+            url: data.Location,
+            response: data
+          });
+        }
       });
-    });
-
-    xhr.send(content);
   });
-
-  /*
-  return fetch(`https://${awsConfig.bucket}.s3.amazonaws.com${path}`, {
-    method: 'PUT',
-    headers: headers,
-    body: content
-  });
-  */
 }
 
 function _uploader(awsConfig, files, onProgress) {
