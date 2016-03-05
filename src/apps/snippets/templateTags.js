@@ -25,8 +25,19 @@ export function SnippetsExtension({getState}) {
       console.log("Snippets run:", arguments)
       let state = getState();
       let snippet = state.getIn(['tables', '/snippets']).find(x => x.get('key') === key);
-      if (!snippet) return callback('');
+      if (!snippet) {
+        console.warn('Snippet not found during render:', key)
+        return callback('');
+      }
       let provider = _.find(state.getIn(['/engine', 'apps']), {baseUrl: snippet.get('snippet_type')});
+      if (!provider) {
+        console.warn('Snippet type not found during render:', snippet.get('snippet_type'))
+        return callback('')
+      }
+      if (!provider.itemInterface || !provider.itemInterface.render) {
+        console.warn('Snippet provider does not define render item interface', provider)
+        return callback('')
+      }
       provider.itemInterface.render(state, snippet).then(content => {
         callback(null, new nunjucks.runtime.SafeString(content));
       }).catch(error => {

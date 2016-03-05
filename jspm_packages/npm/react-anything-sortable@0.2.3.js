@@ -1,0 +1,1 @@
+module.exports = require("npm:react-anything-sortable@0.2.3/lib/index.js");

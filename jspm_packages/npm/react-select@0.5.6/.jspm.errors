@@ -1,0 +1,169 @@
+MultipleErrors: /home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:10: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:11: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:16: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:29: Unexpected token this
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:30: Unexpected token onClick
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:39: Unexpected token className
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:14:11: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:10: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:11: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:16: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:29: Unexpected token this
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:30: Unexpected token onClick
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:17:10: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:39: Unexpected token className
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:66: Unexpected token this
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:67: Unexpected token props
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:81: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:19:83: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/npm/react-select@0.5.6/examples/src/app.js:20:2: Unexpected token }
+
+MultipleErrors: /home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:685:5: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:685:35: Unexpected token 'option-'
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:685:37: Unexpected token op
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:685:45: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:685:87: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:687:5: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:687:35: Unexpected token 'option-'
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:687:37: Unexpected token op
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:687:45: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:687:171: Unexpected token .
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:687:249: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:687:251: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:692:4: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:693:10: Unexpected token this
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:693:11: Unexpected token props
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:693:112: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:694:5: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:719:16: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:719:17: Unexpected token Value
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:720:14: Unexpected token .
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:720:15: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:721:6: Unexpected token option
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:718:4: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:722:20: Unexpected token this
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:722:21: Unexpected token props
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:723:24: Unexpected token !
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:723:25: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:724:6: Unexpected token onOptionLabelClick
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:14:15: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:49:19: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:77:19: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:95:22: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:138:21: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:144:24: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:153:29: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:165:22: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:191:9: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:195:25: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:204:21: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:228:19: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:251:12: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:261:15: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:270:12: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:274:12: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:278:15: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:284:14: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:295:14: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:299:16: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:304:19: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:310:19: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:329:26: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:347:20: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:367:19: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:383:17: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:441:24: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:450:21: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:475:24: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:483:20: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:537:17: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:570:23: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:577:15: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:583:19: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:587:23: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:591:23: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:636:17: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:685:5: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:685:35: Unexpected token 'option-'
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:685:37: Unexpected token op
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:685:45: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:685:87: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:687:5: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:687:35: Unexpected token 'option-'
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:687:37: Unexpected token op
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:687:45: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:687:171: Unexpected token .
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:687:249: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:687:251: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:692:4: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:693:10: Unexpected token this
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:693:11: Unexpected token props
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:693:112: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:694:5: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:644:13: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:698:26: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:719:16: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:719:17: Unexpected token Value
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:720:14: Unexpected token .
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:720:15: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:721:6: Unexpected token option
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:718:4: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:722:20: Unexpected token this
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:722:21: Unexpected token props
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:723:24: Unexpected token !
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:723:25: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:704:10: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:724:6: Unexpected token onOptionLabelClick
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:724:30: Unexpected token this
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:724:31: Unexpected token handleOptionLabelClick
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:724:69: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:725:20: Unexpected token this
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:725:21: Unexpected token removeValue
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Select.js:725:48: Unexpected token }
+
+MultipleErrors: /home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:34:5: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:35:23: Unexpected token this
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:35:24: Unexpected token blockEvent
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:35:34: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:36:22: Unexpected token this
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:36:23: Unexpected token props
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:36:47: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:37:19: Unexpected token this
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:37:20: Unexpected token props
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:37:44: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:39:6: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:44:4: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:45:5: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:46:23: Unexpected token this
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:46:24: Unexpected token blockEvent
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:46:34: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:47:19: Unexpected token this
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:47:20: Unexpected token handleOnRemove
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:47:34: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:48:22: Unexpected token this
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:48:23: Unexpected token handleOnRemove
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:48:37: Unexpected token }
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:48:39: Unexpected token &
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:48:45: Unexpected token ;
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:48:47: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:49:49: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/npm/react-select@0.5.6/src/Value.js:50:5: Expected '/' in regular expression literal
+
+MultipleErrors: /home/jason/.jspm/packages/npm/react-select@0.5.6/test/Select-test.js:40:5: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/test/Select-test.js:40:6: Unexpected token Select
+/home/jason/.jspm/packages/npm/react-select@0.5.6/test/Select-test.js:45:22: Unexpected token true
+/home/jason/.jspm/packages/npm/react-select@0.5.6/test/Select-test.js:46:6: Unexpected token /
+/home/jason/.jspm/packages/npm/react-select@0.5.6/test/Select-test.js:47:4: Unexpected token )
+
+MultipleErrors: /home/jason/.jspm/packages/npm/react-select@0.5.6/test/Value-test.js:34:40: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/test/Value-test.js:34:41: Unexpected token Value
+/home/jason/.jspm/packages/npm/react-select@0.5.6/test/Value-test.js:34:47: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-select@0.5.6/test/Value-test.js:34:48: Unexpected token ...
+/home/jason/.jspm/packages/npm/react-select@0.5.6/test/Value-test.js:34:51: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-select@0.5.6/test/Value-test.js:34:57: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/npm/react-select@0.5.6/test/Value-test.js:74:41: Unexpected token <
+/home/jason/.jspm/packages/npm/react-select@0.5.6/test/Value-test.js:74:42: Unexpected token Value
+/home/jason/.jspm/packages/npm/react-select@0.5.6/test/Value-test.js:74:48: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-select@0.5.6/test/Value-test.js:74:49: Unexpected token ...
+/home/jason/.jspm/packages/npm/react-select@0.5.6/test/Value-test.js:74:52: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-select@0.5.6/test/Value-test.js:74:58: Expected '/' in regular expression literal

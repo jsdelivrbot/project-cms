@@ -10,11 +10,12 @@ import publish from './publish';
 import fixtures from './fixtures';
 
 import {getTemplates} from '~/plugins';
+import templateSettingsMiddleware from '~/appMiddleware/templateSettings/index';
 
 
 const pageTemplates = getTemplates('page');
 
-export default function PagesApplicationFactory(baseUrl) {
+export default templateSettingsMiddleware(function PagesApplicationFactory(baseUrl) {
   return {
     type: 'application',
     actions,
@@ -60,4 +61,4 @@ export default function PagesApplicationFactory(baseUrl) {
       }]
     }
   }
-}
+});

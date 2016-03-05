@@ -1,0 +1,56 @@
+MultipleErrors: /home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/app.js:1:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/app.js:1:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/app.js:1:14: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/app.js:1:19: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/app.js:2:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/app.js:2:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/app.js:2:21: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/app.js:2:26: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/app.js:5:3: Unexpected token <
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/app.js:5:4: Unexpected token SignaturePad
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/app.js:5:17: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/app.js:5:37: Unexpected token >
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/app.js:7:1: Unexpected token )
+
+MultipleErrors: /home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/bezier.js:1:1: Unexpected reserved word export
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/bezier.js:1:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/bezier.js:1:8: Unexpected reserved word default
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/bezier.js:1:16: Semi-colon expected
+
+MultipleErrors: /home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/point.js:1:1: Unexpected reserved word export
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/point.js:1:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/point.js:1:8: Unexpected reserved word default
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/point.js:1:16: Semi-colon expected
+
+MultipleErrors: /home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:1:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:1:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:1:14: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:1:19: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:2:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:2:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:2:15: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:2:20: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:3:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:3:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:3:14: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:3:19: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:5:1: Unexpected reserved word export
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:5:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:5:8: Unexpected reserved word default
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:5:16: Semi-colon expected
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:319:7: Unexpected token <
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:320:9: Unexpected token <
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:321:11: Unexpected token <
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:321:28: Unexpected token <
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:322:9: Unexpected token <
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:323:15: Unexpected token this
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:323:16: Unexpected token props
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:324:11: Unexpected token <
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:325:13: Unexpected token <
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:325:75: Unexpected token this
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:325:76: Unexpected token clear
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:325:92: Unexpected token }
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:325:100: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:326:12: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:327:9: Unexpected token }
+/home/jason/.jspm/packages/npm/react-signature-pad@0.0.3/src/index.js:328:8: Expected '/' in regular expression literal

@@ -30,6 +30,7 @@
       "react-addons-shallow-compare": "npm:react-addons-shallow-compare@^0.14.6",
       "react-codemirror": "npm:react-codemirror@^0.2.2",
       "react-dom": "npm:react-dom@^0.14.3",
+      "react-form-builder": "github:blackjk3/react-form-builder@master",
       "react-redux": "npm:react-redux@^4.0.0",
       "react-remarkable": "npm:react-remarkable@^1.1.1",
       "react-router": "npm:react-router@^1.0.0",
@@ -47,6 +48,11 @@
       "babel": "npm:babel-core@^5.8.34",
       "babel-runtime": "npm:babel-runtime@^5.8.34",
       "core-js": "npm:core-js@^1.2.6"
+    },
+    "overrides": {
+      "github:blackjk3/react-form-builder@master": {
+        "registry": "npm"
+      }
     }
   },
   "dependencies": {

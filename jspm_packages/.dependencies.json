@@ -357,9 +357,6 @@
     "systemjs-json": "github:systemjs/plugin-json@^0.1.0"
   },
   "npm:systemjs-plugin-css@0.1.20": {},
-  "npm:fbjs@0.6.1": {
-    "process": "github:jspm/nodelibs-process@^0.1.0"
-  },
   "npm:once@1.3.3": {
     "wrappy": "npm:wrappy@^1.0.0"
   },
@@ -1041,5 +1038,110 @@
   },
   "npm:https-browserify@0.0.0": {
     "http": "github:jspm/nodelibs-http@^1.7.0"
+  },
+  "github:blackjk3/react-form-builder@master": {
+    "classnames": "npm:classnames@^2.1.3",
+    "fbemitter": "npm:fbemitter@^2.0.0",
+    "react-anything-sortable": "npm:react-anything-sortable@^0.2.2",
+    "react-select": "npm:react-select@^0.5.5",
+    "react-signature-pad": "npm:react-signature-pad@0.0.3",
+    "react-sortable-items": "npm:react-sortable-items@0.0.7",
+    "react-star-rating": "github:blackjk3/react-star-rating",
+    "recat-bootstrap-native-slider": "github:blackjk3/react.bootstrap.slidertest",
+    "react-textarea-autosize": "npm:react-textarea-autosize@^2.3.1",
+    "reflux": "npm:reflux@^0.2.8",
+    "react": "npm:react@~0.13.0",
+    "process": "github:jspm/nodelibs-process@^0.1.0"
+  },
+  "npm:react-textarea-autosize@2.5.4": {
+    "react": "npm:react@~0.14.0-alpha"
+  },
+  "npm:react-signature-pad@0.0.3": {
+    "react": "npm:react"
+  },
+  "npm:eventemitter3@1.1.1": {},
+  "npm:fbemitter@2.0.2": {
+    "fbjs": "npm:fbjs@~0.7.1",
+    "process": "github:jspm/nodelibs-process@^0.1.0"
+  },
+  "npm:react-anything-sortable@0.2.3": {
+    "react": "npm:react@~0.13.0"
+  },
+  "npm:isomorphic-fetch@2.2.1": {
+    "node-fetch": "npm:node-fetch@^1.0.1",
+    "whatwg-fetch": "npm:whatwg-fetch"
+  },
+  "npm:whatwg-fetch@0.11.0": {},
+  "npm:reflux@0.2.13": {
+    "eventemitter3": "npm:eventemitter3@^1.1.1",
+    "reflux-core": "npm:reflux-core@^0.2.1",
+    "react": "npm:react@~0.14.0",
+    "process": "github:jspm/nodelibs-process@^0.1.0"
+  },
+  "npm:asap@2.0.3": {
+    "process": "github:jspm/nodelibs-process@^0.1.0",
+    "domain": "github:jspm/nodelibs-domain@^0.1.0"
+  },
+  "npm:react-sortable-items@0.0.7": {
+    "path": "github:jspm/nodelibs-path@^0.1.0",
+    "process": "github:jspm/nodelibs-process@^0.1.0"
+  },
+  "npm:reflux-core@0.2.1": {
+    "eventemitter3": "npm:eventemitter3@^1.1.1"
+  },
+  "npm:encoding@0.1.12": {
+    "iconv-lite": "npm:iconv-lite@~0.4.13",
+    "buffer": "github:jspm/nodelibs-buffer@^0.1.0"
+  },
+  "npm:node-fetch@1.3.3": {
+    "encoding": "npm:encoding@^0.1.11",
+    "url": "github:jspm/nodelibs-url@^0.1.0",
+    "http": "github:jspm/nodelibs-http@^1.7.0",
+    "buffer": "github:jspm/nodelibs-buffer@^0.1.0",
+    "https": "github:jspm/nodelibs-https@^0.1.0",
+    "zlib": "github:jspm/nodelibs-zlib@^0.1.0",
+    "stream": "github:jspm/nodelibs-stream@^0.1.0"
+  },
+  "npm:ua-parser-js@0.7.10": {
+    "systemjs-json": "github:systemjs/plugin-json@^0.1.0"
+  },
+  "npm:promise@7.1.1": {
+    "asap": "npm:asap@~2.0.3",
+    "fs": "github:jspm/nodelibs-fs@^0.1.0"
+  },
+  "npm:fbjs@0.7.2": {
+    "core-js": "npm:core-js@^1.0.0",
+    "loose-envify": "npm:loose-envify@^1.0.0",
+    "isomorphic-fetch": "npm:isomorphic-fetch@^2.1.1",
+    "promise": "npm:promise@^7.1.1",
+    "ua-parser-js": "npm:ua-parser-js@^0.7.9",
+    "process": "github:jspm/nodelibs-process@^0.1.0"
+  },
+  "github:jspm/nodelibs-domain@0.1.0": {
+    "domain-browser": "npm:domain-browser@^1.1.3"
+  },
+  "npm:react-input-autosize@0.5.3": {
+    "react": "npm:react@~0.14.0-alpha"
+  },
+  "npm:react-select@0.5.6": {
+    "classnames": "npm:classnames@^2.1.3",
+    "react-input-autosize": "npm:react-input-autosize@^0.5.0",
+    "react": "npm:react"
+  },
+  "npm:domain-browser@1.1.7": {
+    "events": "github:jspm/nodelibs-events@^0.1.1"
+  },
+  "github:blackjk3/react-star-rating@1.3.2": {},
+  "github:blackjk3/react.bootstrap.slidertest@master": {},
+  "github:jspm/nodelibs-zlib@0.1.0": {
+    "browserify-zlib": "npm:browserify-zlib@^0.1.4"
+  },
+  "npm:browserify-zlib@0.1.4": {
+    "readable-stream": "npm:readable-stream@^2.0.2",
+    "pako": "npm:pako@~0.2.0",
+    "buffer": "github:jspm/nodelibs-buffer@^0.1.0",
+    "process": "github:jspm/nodelibs-process@^0.1.0",
+    "util": "github:jspm/nodelibs-util@^0.1.0",
+    "assert": "github:jspm/nodelibs-assert@^0.1.0"
   }
 }

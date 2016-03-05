@@ -1,0 +1,1 @@
+module.exports = require("npm:fbemitter@2.0.2/index.js");

@@ -1,0 +1,1 @@
+module.exports = require("github:blackjk3/react-star-rating@1.3.2/dist/react-star-rating.min.js");

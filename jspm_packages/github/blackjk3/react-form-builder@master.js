@@ -1,0 +1,1 @@
+module.exports = require("github:blackjk3/react-form-builder@master/lib/app.js");

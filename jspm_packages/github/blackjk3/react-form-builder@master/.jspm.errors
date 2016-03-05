@@ -1,0 +1,104 @@
+MultipleErrors: /home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:1:1: Unexpected reserved word import
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:1:8: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:1:14: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:1:19: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:2:1: Unexpected reserved word import
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:2:8: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:2:16: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:2:21: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:3:1: Unexpected reserved word import
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:3:8: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:3:20: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:3:25: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:9:3: Unexpected token <
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:9:4: Unexpected token FormBuilder
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:9:34: Unexpected token >
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:11:1: Unexpected token )
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:14:3: Unexpected token <
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:14:4: Unexpected token DemoBar
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:14:13: Unexpected token >
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/app.js:16:1: Unexpected token )
+
+MultipleErrors: /home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:1:1: Unexpected reserved word import
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:1:8: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:1:14: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:1:19: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:2:1: Unexpected reserved word import
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:2:8: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:2:21: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:2:26: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:3:1: Unexpected reserved word import
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:3:8: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:3:27: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:3:32: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:5:1: Unexpected reserved word export
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:5:8: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:5:8: Unexpected reserved word default
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:5:16: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:42:7: Unexpected token <
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:42:40: Unexpected token {
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:42:47: Unexpected token :
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:42:61: Unexpected token :
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:42:67: Unexpected token }
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:42:68: Unexpected token }
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:43:9: Unexpected token <
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:43:43: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:44:63: Unexpected token {
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:44:76: Unexpected token :
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:44:84: Unexpected token }
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:44:85: Unexpected token }
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:44:100: Unexpected token this
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:44:101: Unexpected token showPreview
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:44:123: Unexpected token }
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:44:148: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:46:11: Unexpected token <
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:47:13: Unexpected token <
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:48:15: Unexpected token <
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:48:80: Unexpected token {
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:48:81: Unexpected token }
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:48:82: Unexpected token }
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:48:129: Unexpected token this
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:48:130: Unexpected token state
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:48:140: Unexpected token }
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:48:143: Unexpected token >
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:51:17: Unexpected token <
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:51:67: Invalid left-hand side expression in assignment
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:51:101: Unexpected token this
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:51:102: Unexpected token closePreview
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:51:125: Unexpected token }
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:51:133: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:52:16: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:53:14: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:54:12: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:55:10: Expected '/' in regular expression literal
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/demobar.js:56:8: Expected '/' in regular expression literal
+
+MultipleErrors: /home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:8:1: Unexpected reserved word import
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:8:8: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:8:19: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:8:24: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:16:7: Unexpected token <
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:16:8: Unexpected token StarRating
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:16:19: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:16:30: Unexpected token 2.5
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:16:32: Unexpected token name
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:16:30: Unexpected token }
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:16:50: Unexpected token >
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:17:5: Unexpected token )
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:18:5: Unexpected reserved word var
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:18:9: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:28:7: Unexpected token <
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:28:8: Unexpected token StarRating
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:28:19: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:28:37: Unexpected token >
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/star-rating-test.js:29:5: Unexpected token )
+
+MultipleErrors: /home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/toolbar-test.js:15:7: Unexpected token <
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/toolbar-test.js:15:8: Unexpected token Toolbar
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/toolbar-test.js:15:17: Unexpected token >
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/toolbar-test.js:16:5: Unexpected token )
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/toolbar-test.js:47:7: Unexpected token <
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/toolbar-test.js:47:8: Unexpected token Toolbar
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/toolbar-test.js:47:16: Semi-colon expected
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/toolbar-test.js:47:31: Unexpected token >
+/home/jason/.jspm/packages/github/blackjk3/react-form-builder@master/test/toolbar-test.js:48:5: Unexpected token )
