@@ -2,7 +2,7 @@ import _ from 'lodash';
 import {Map, fromJS} from 'immutable';
 import {combineReducers} from 'redux-immutablejs';
 
-import {readTable, writeFixture, tablesReducer} from './reducers/tables';
+import {loadStorage, readTable, writeFixture, tablesReducer} from './reducers/tables';
 
 
 export const DEFAULT_APPS_CONFIG = [
@@ -21,6 +21,7 @@ export const DEFAULT_APPS_CONFIG = [
 ]
 
 export function readAppsConfig() {
+  //TODO detect & load storage service
   return readTable('/engine').then(tableState => {
     if (!tableState) return DEFAULT_APPS_CONFIG;
     let appsConfig = tableState.get('appsConfig');
@@ -104,7 +105,7 @@ export function makeReducer(apps) {
 }
 
 export function appsLoader() {
-  return readAppsConfig().then(appsConfig => {
+  return loadStorage().then(readAppsConfig).then(appsConfig => {
     return loadAppsConfig(appsConfig).catch(error => {
       alert("There was an error loading your apps, check the console for details");
       console.error('Error loading apps from config:');

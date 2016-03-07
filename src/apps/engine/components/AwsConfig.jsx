@@ -52,6 +52,12 @@ export default class AwsConfig extends React.Component {
             <input name="bucket" value={aws.bucket} onChange={this.updateValue}
               type="text" className="form-control" placeholder="bucket-name"/>
           </div>
+          <div className="form-group col-sm-6">
+            <label>DynamoDB Table</label>
+            <span className="help-block">Ensure that you have permissions to read & write</span>
+            <input name="table" value={aws.table} onChange={this.updateValue}
+              type="text" className="form-control" placeholder="dynamo table"/>
+          </div>
         </div>
         <div className="row">
           <div className="col-sm-6">

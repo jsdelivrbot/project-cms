@@ -32,7 +32,10 @@ function sendLoadingMessage(text) {
   }), "http://"+window.location.hostname+":"+window.location.port);
 }
 
+
 sendLoadingMessage('loading apps...')
+//TODO load sysinfo from get params or from localstorage
+//sysinfo sets storage service
 appsLoader().then(apps => {
   sendLoadingMessage("apps loaded");
   console.log("apps:", apps);
@@ -80,7 +83,7 @@ appsLoader().then(apps => {
     </Provider>,
     document.getElementById('app')
   );
-  
+
   sendLoadingMessage(true);
 }).catch(error => {
   sendLoadingMessage("Error starting application, check console log");

@@ -2,10 +2,7 @@ import _ from 'lodash';
 import {Map, fromJS} from 'immutable';
 
 
-//TODO storage backend should be configurable
-import localdb from '~/services/localdb';
-
-export var storage = localdb()
+export var storage = null;
 /*
 detect record_change
  * new_object, update_object, remove_object
@@ -14,6 +11,29 @@ detect record_change
 
 object_id is the key
 */
+
+export function loadStorage() {
+  //console.log("query params:", getQueryParams(window.location.href.split('?')[1]))
+  let storage_config = localStorage.getItem('storage-service');
+  let factory_promise = null;
+  if (storage_config) {
+    storage_config = JSON.parse(storage_config)
+    factory_promise = System.import('~/services/dynamodb', __moduleName).then(module => {
+      return module.default(storage_config)
+    })
+  } else {
+    factory_promise = System.import('~/services/localdb', __moduleName).then(module => {
+      return module.default()
+    })
+  }
+  return factory_promise.then(_storage => {
+    storage = _storage;
+  });
+}
+
+export function setStorageConfig(storage_config) {
+  localStorage.setItem('storage-service', JSON.stringify(storage_config));
+}
 
 
 function toJS(obj) {
