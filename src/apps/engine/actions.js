@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import {loadAppsConfig, makeReducer} from '~/appsLoader';
+import {loadAppsConfig, makeReducer, setStorage} from '~/appsLoader';
 
 
 export function setRenderer(renderer) {
@@ -51,32 +51,39 @@ export function setAppsConfig(appsConfig, store) {
     type: 'SET_APPS_CONFIG',
     appsConfig,
     promise: loadAppsConfig(appsConfig).then(apps => {
-      if (store) {
-        console.log("Triggering apps reload", apps, store);
-        let reducer = makeReducer(apps);
-        let renderer = _.find(apps, {baseUrl: '/templates'}).renderFactory(store);
-        console.log("renderer:", renderer);
+      console.log("Triggering apps reload", apps, store);
+      let reducer = makeReducer(apps);
+      let renderer = _.find(apps, {baseUrl: '/templates'}).renderFactory(store);
+      console.log("renderer:", renderer);
 
-        store.replaceReducer(reducer);
-        store.dispatch(setApps(apps));
-        store.dispatch(setRenderer(renderer));
-        //TODO handle fixtures
+      store.replaceReducer(reducer);
+      store.dispatch(setApps(apps));
+      store.dispatch(setRenderer(renderer));
+      //TODO handle fixtures
+      //loadAppsTables(apps) -> set tables
 
-        store.dispatch({
-          type: '!',
-          record_change,
-          alert_message: 'Apps reloaded',
-        });
-      }
+      store.dispatch({
+        type: '!',
+        record_change,
+        alert_message: 'Apps reloaded',
+      });
       return apps;
     })
   }
 }
 
 export function setAwsConfig(awsConfig) {
+  let promise;
+  //CONSIDER: this is awkward. We switch storages where a copy of this is stored
+  if (awsConfig.table) {
+    promise = setStorage(_.assign({
+      module_path: '~/services/dynamodb',
+    }, awsConfig));
+  }
   return {
     type: 'SET_AWS_CONFIG',
     awsConfig,
+    promise,
     record_change: {
       update_object: awsConfig,
       table_name: '/engine',

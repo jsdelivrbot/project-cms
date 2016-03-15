@@ -2,6 +2,7 @@ import _ from 'lodash';
 import _AWS from 'aws-sdk/dist/aws-sdk.min'; //I have a dream that browser and node packages can live side by side
 import {Buffer} from 'buffer';
 import {v4} from 'node-uuid';
+import DynamoDown from 'dynamo-down';
 
 const AWS = window.AWS;
 console.log("AWS:", AWS)
@@ -9,13 +10,24 @@ console.log("AWS:", AWS)
 
 const TABLE_SCHEMA = {
     KeySchema: [
-        { AttributeName: "table_name", KeyType: "HASH"},  //Partition key
-        { AttributeName: "object_id", KeyType: "RANGE" }  //Sort key
+      {
+      	"AttributeName": "type",
+      	"KeyType": "HASH"
+      },
+      {
+      	"AttributeName": "key",
+      	"KeyType": "RANGE"
+      },
     ],
     AttributeDefinitions: [
-        { AttributeName: "table_name", AttributeType: "S" },
-        { AttributeName: "object_id", AttributeType: "S" },
-        { AttributeName: "value", AttributeType: "S" },
+      {
+      	AttributeName: "type",
+      	AttributeType: "S"
+      },
+      {
+      	AttributeName: "key",
+      	AttributeType: "S"
+      },
     ],
     ProvisionedThroughput: {
         ReadCapacityUnits: 1,
@@ -27,8 +39,18 @@ export class DynamoStorage {
   constructor(awsConfig) {
     AWS.config.update({accessKeyId: awsConfig.key, secretAccessKey: awsConfig.secret});
 
-    this.dynamodb = new AWS.DynamoDB();
+    this.dynamo_db = new AWS.DynamoDB({apiVersion: '2012-08-10'});
+    this.dynamo_down = DynamoDown(this.dynamo_db)
     this.table = awsConfig.table;
+  }
+
+  identifier() {
+    return `dynamodb:${this.table}`
+  }
+
+  getTable(table_name) {
+    var options = {db: this.dynamo_down, valueEncoding: "json"}
+    return levelup(`${this.table}\\${table_name}`, options);
   }
 
   pCall(action, ...args) {
@@ -39,82 +61,15 @@ export class DynamoStorage {
     })
   }
 
-  createTable() {
+  createDynamoTable() {
     return this.pCall('createTable', _.assign({TableName: this.table}, TABLE_SCHEMA));
   }
 
-  tableExists() {
+  dynamoTableExists() {
     return this.pCall('listTables').then(data => {
       return _.indexOf(data.TableNames, this.table) !== -1
     });
   }
-
-  putObject = (table_name, object_id, new_object) => {
-    var params = {
-        TableName: this.table,
-        Item:{
-            "table_name": table_name,
-            "object_id": object_id,
-            "value": JSON.stringify(new_object)
-        }
-    };
-    return this.pCall('put', params);
-  };
-
-  deleteObject = (table_name, object_id) => {
-    var params = {
-        TableName: this.table,
-        Key:{
-            "table_name": table_name,
-            "object_id": object_id
-        }
-    };
-    return this.pCall('delete', params);
-  };
-
-  readTable = (table_name) => {
-    var params = {
-        TableName: this.table,
-        Key:{
-            "table_name": table_name
-        }
-    };
-
-    var items = [];
-
-    return new Promise((resolve, reject) => {
-      function onScan(err, data) {
-        if (err) {
-          reject(err);
-        } else {
-          // print all the movies
-          console.log("Scan succeeded.");
-          items = _.concat(item, data.Items);
-
-          // continue scanning if we have more movies
-          if (typeof data.LastEvaluatedKey != "undefined") {
-            console.log("Scanning for more...");
-            params.ExclusiveStartKey = data.LastEvaluatedKey;
-            this.dynamodb.scan(params, onScan);
-          } else {
-            resolve(items);
-          }
-        }
-      }
-
-      this.dynamodb.scan(params, onScan);
-    });
-  };
-
-  purgeTable = (table_name) => {
-    var params = {
-        TableName: this.table,
-        Key:{
-            "table_name": table_name
-        }
-    };
-    return this.pCall('delete', params);
-  };
 
   destroy = () => {
     var params = {
@@ -126,8 +81,9 @@ export class DynamoStorage {
 
 export default function serviceFactory(settings) {
   let storage = new DynamoStorage(settings);
-  storage.tableExists().then(exists => {
-    if (!exists) storage.createTable();
+  return storage.dynamoTableExists().then(exists => {
+    if (!exists) return storage.createDynamoTable();
+  }).then(x => {
+    return storage;
   });
-  return storage;
 };

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import {Map, fromJS} from 'immutable';
 import {combineReducers} from 'redux-immutablejs';
 
-import {loadStorage, readTable, writeFixture, tablesReducer} from './reducers/tables';
+import {getStorage, loadStorage, setStorageConfig, readTable, writeFixture, tablesReducer} from './reducers/tables';
 
 
 export const DEFAULT_APPS_CONFIG = [
@@ -21,7 +21,6 @@ export const DEFAULT_APPS_CONFIG = [
 ]
 
 export function readAppsConfig() {
-  //TODO detect & load storage service
   return readTable('/engine').then(tableState => {
     if (!tableState) return DEFAULT_APPS_CONFIG;
     let appsConfig = tableState.get('appsConfig');
@@ -113,5 +112,20 @@ export function appsLoader() {
       console.log("Loading default apps");
       return loadAppsConfig(DEFAULT_APPS_CONFIG);
     });
+  });
+}
+
+export function setStorage(config) {
+  let old_storage = getStorage();
+  setStorageConfig(config);
+
+  return loadStorage().then(new_storage => {
+    //only trigger transfer if storage backend actually changes
+    if (new_storage.identifier() !== old_storage.identifier()) {
+      //TODO transfer data
+      //old_storage.dump(new_storage.batch_record)
+      //batch_record({table: {key: value}})
+    }
+    return new_storage;
   });
 }

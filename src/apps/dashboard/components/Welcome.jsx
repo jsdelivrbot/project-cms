@@ -2,9 +2,11 @@ import React from 'react';
 import {destroy} from '~/reducers/tables';
 
 function doPurge(event) {
-  destroy(err => {
-    console.log("Purge complete", err);
+  destroy().then(x => {
+    console.log("Purge complete");
     window.location.reload();
+  }, error => {
+    console.error("Purge failed", error);
   });
 }
 

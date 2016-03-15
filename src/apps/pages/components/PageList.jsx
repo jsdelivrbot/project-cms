@@ -6,7 +6,7 @@ import {Link} from 'react-router';
 export default function PageList({baseUrl, pages}) {
   function PageRow(page) {
     const {title, id, path} = page.toJS()
-    return <tr key={path}>
+    return <tr key={id}>
       <td><Link to={`${baseUrl}/${id}`}>{title}</Link></td>
       <td>{path}</td>
     </tr>

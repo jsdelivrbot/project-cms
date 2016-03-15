@@ -1143,5 +1143,17 @@
     "process": "github:jspm/nodelibs-process@^0.1.0",
     "util": "github:jspm/nodelibs-util@^0.1.0",
     "assert": "github:jspm/nodelibs-assert@^0.1.0"
+  },
+  "npm:dynamo-down@1.0.5": {
+    "abstract-leveldown": "npm:abstract-leveldown@^2.1.0",
+    "buffer": "github:jspm/nodelibs-buffer@^0.1.0"
+  },
+  "npm:abstract-leveldown@2.6.0": {
+    "xtend": "npm:xtend@~4.0.0",
+    "process": "github:jspm/nodelibs-process@^0.1.0",
+    "buffer": "github:jspm/nodelibs-buffer@^0.1.0",
+    "util": "github:jspm/nodelibs-util@^0.1.0",
+    "path": "github:jspm/nodelibs-path@^0.1.0",
+    "fs": "github:jspm/nodelibs-fs@^0.1.0"
   }
 }

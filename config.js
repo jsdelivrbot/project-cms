@@ -41,6 +41,7 @@ System.config({
     "core-js": "npm:core-js@1.2.6",
     "create-hmac": "npm:create-hmac@1.1.4",
     "css": "npm:systemjs-plugin-css@0.1.20",
+    "dynamo-down": "npm:dynamo-down@1.0.5",
     "eligrey/FileSaver.js": "github:eligrey/FileSaver.js@master",
     "fetch": "github:github/fetch@0.11.0",
     "hermimg": "github:viliusle/Hermite-resize@master",
@@ -177,6 +178,14 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0",
+      "util": "github:jspm/nodelibs-util@0.1.0",
+      "xtend": "npm:xtend@4.0.1"
+    },
+    "npm:abstract-leveldown@2.6.0": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
       "util": "github:jspm/nodelibs-util@0.1.0",
       "xtend": "npm:xtend@4.0.1"
     },
@@ -646,6 +655,10 @@ System.config({
     },
     "npm:domain-browser@1.1.7": {
       "events": "github:jspm/nodelibs-events@0.1.1"
+    },
+    "npm:dynamo-down@1.0.5": {
+      "abstract-leveldown": "npm:abstract-leveldown@2.6.0",
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0"
     },
     "npm:elliptic@6.2.3": {
       "bn.js": "npm:bn.js@4.10.3",

@@ -2,15 +2,78 @@ import _ from 'lodash';
 import {Map, fromJS} from 'immutable';
 
 
-export var storage = null;
-/*
-detect record_change
- * new_object, update_object, remove_object
- * object_id
- * table_name
+export class LevelupMultiplexer {
+  constructor(backend) {
+    this.backend = backend
+  }
 
-object_id is the key
-*/
+  identifier() {
+    return this.backend.identifier();
+  }
+
+  getTable = (table_name) => {
+    return this.backend.getTable(table_name);
+  }
+
+  putObject = (table_name, object_id, new_object) => {
+    const table = this.getTable(table_name);
+    table.put(object_id, new_object);
+  };
+
+  deleteObject = (table_name, object_id) => {
+    const table = this.getTable(table_name);
+    table.del(object_id);
+  };
+
+  readTable = (table_name) => {
+    return new Promise((resolve, reject) => {
+      var key_values;
+
+      this.getTable(table_name).createReadStream()
+        .on('data', function(data) {
+          if (typeof data.value !== 'undefined') {
+            if (!key_values) key_values = {};
+            key_values[data.key] = data.value;
+          }
+        })
+        .on('end', function () {
+          resolve(key_values);
+        });
+    });
+  };
+
+  purgeTable = (table_name) => {
+    return new Promise((resolve, reject) => {
+      const table = this.getTable(table_name);
+      var ops = [];
+      table.createKeyStream()
+        .on('data', function(key) {
+          ops.push({ type: 'del', key });
+        })
+        .on('end', function () {
+          var batchJob = table.batch(ops, function(err) {
+            if (err) {
+              reject(err);
+            } else {
+              resolve();
+            }
+          });
+        });
+    });
+  };
+
+  destroy = () => {
+    return this.backend.destroy();
+  }
+}
+
+
+export var storage = null;
+
+
+export function getStorage() {
+  return storage;
+}
 
 export function loadStorage() {
   //console.log("query params:", getQueryParams(window.location.href.split('?')[1]))
@@ -18,7 +81,8 @@ export function loadStorage() {
   let factory_promise = null;
   if (storage_config) {
     storage_config = JSON.parse(storage_config)
-    factory_promise = System.import('~/services/dynamodb', __moduleName).then(module => {
+    module_path = storage_config.module_path || '~/services/dynamodb';
+    factory_promise = System.import(module_path, __moduleName).then(module => {
       return module.default(storage_config)
     })
   } else {
@@ -26,8 +90,9 @@ export function loadStorage() {
       return module.default()
     })
   }
-  return factory_promise.then(_storage => {
-    storage = _storage;
+  return factory_promise.then(backend => {
+    storage = new LevelupMultiplexer(backend);
+    return storage;
   });
 }
 
@@ -50,6 +115,14 @@ function toImmut(obj) {
 const INITIAL_STATE = Map();
 
 export function tablesReducer(state=INITIAL_STATE, action) {
+  /*
+  detect record_change(s)
+   * new_object, update_object, remove_object
+   * object_id
+   * table_name
+
+  object_id is the key
+  */
   const {record_change, record_changes} = action;
   if (record_change) {
     return recordChange(state, record_change);
@@ -93,6 +166,10 @@ export function readTable(table_name) {
     if (!table_data) return null;
     return fromJS(table_data);
   });
+}
+
+export function destroy() {
+  return storage.destroy();
 }
 
 export default tablesReducer;
