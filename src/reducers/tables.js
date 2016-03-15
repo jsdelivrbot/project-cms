@@ -39,6 +39,23 @@ export class LevelupMultiplexer {
     return this.promiseTableCall('del', table_name, object_id);
   };
 
+  replicateToStorage = (storage) => {
+    return new Promise(function(resolve, reject) {
+      _.each(this.tables, function(table_name, table) {
+        //TODO bulk data transfer
+        table.createReadStream()
+          .on('data', function(data) {
+            if (typeof data.value !== 'undefined') {
+              storage.putObject(table_name, data.key, data.value);
+            }
+          })
+          .on('end', function () {
+            resolve(key_values);
+          });
+      });
+    });
+  };
+
   readTable = (table_name) => {
     return new Promise((resolve, reject) => {
       var key_values;
@@ -104,6 +121,7 @@ export function loadStorage() {
       return module.default()
     })
   }
+
   return factory_promise.then(backend => {
     storage = new LevelupMultiplexer(backend);
     return storage;

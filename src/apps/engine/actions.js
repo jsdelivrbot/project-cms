@@ -74,12 +74,15 @@ export function setAppsConfig(appsConfig, store) {
 
 export function setAwsConfig(awsConfig) {
   let promise;
+  //TODO generic backend config, {default: 'aws', aws: {options, backend: aws}}
   //CONSIDER: this is awkward. We switch storages where a copy of this is stored
   if (awsConfig.table) {
     promise = setStorage(_.assign({
       module_path: '~/services/dynamodb',
     }, awsConfig));
   }
+  //CONSIDER: we should avoid copying credentials as much as possible
+  //set in localstorage but not in db? multi site implications?
   return {
     type: 'SET_AWS_CONFIG',
     awsConfig,

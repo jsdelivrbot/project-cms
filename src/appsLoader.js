@@ -134,9 +134,9 @@ export function setStorage(config) {
   return loadStorage().then(new_storage => {
     //only trigger transfer if storage backend actually changes
     if (new_storage.identifier() !== old_storage.identifier()) {
-      //TODO transfer data
-      //old_storage.dump(new_storage.batch_record)
-      //batch_record({table: {key: value}})
+      return old_storage.replicateToStorage(new_storage).then(x => {
+        return new_storage;
+      });
     }
     return new_storage;
   });
