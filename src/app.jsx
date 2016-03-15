@@ -1,3 +1,4 @@
+import _modernJS from 'core-js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
@@ -13,7 +14,7 @@ import askForMiddleware from './middleware/ask_for';
 import uploaderMiddleware from './middleware/uploader';
 import thumbnailerMiddleware from './middleware/thumbnailer';
 
-import {appsLoader, loadAppsTables, makeReducer} from './appsLoader';
+import {appsLoader, loadAppsTables, makeReducer, sendLoadingMessage} from './appsLoader';
 import AppRouter from './components/AppRouter.jsx';
 
 import {s3Uploader} from './services/s3';
@@ -23,23 +24,12 @@ var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, uploaderMiddl
 
 var history = createHistory();
 
-function sendLoadingMessage(text) {
-  console.log(text);
-  window.postMessage(JSON.stringify({
-    type:"APPLICATION_STATE",
-    text
-
-  }), "http://"+window.location.hostname+":"+window.location.port);
-}
-
-
-sendLoadingMessage('loading apps...')
+sendLoadingMessage('loading...')
 //TODO load sysinfo from get params or from localstorage
 //sysinfo sets storage service
 appsLoader().then(apps => {
-  sendLoadingMessage("apps loaded");
   console.log("apps:", apps);
-
+  sendLoadingMessage("Loading app data...");
   return loadAppsTables(apps).then(tables => {
     var initialState = Map({
       tables
@@ -48,7 +38,7 @@ appsLoader().then(apps => {
     return {apps, initialState};
   })
 }).then(({apps, initialState}) => {
-
+  sendLoadingMessage("Booting UX")
   function getApp(baseUrl) {
     return _.find(apps, {baseUrl});
   }

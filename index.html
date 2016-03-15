@@ -12,7 +12,7 @@
 	function receiveMessage(event)
 	{
 	  var origin = event.origin || event.originalEvent.origin; // For Chrome, the origin property is in the event.originalEvent object.
-		console.log("receiveMessage:", origin)
+		console.log("receiveMessage:", origin, window.location.protocol+"//"+window.location.host)
 	  if (origin !== window.location.protocol+"//"+window.location.host)
 	    return;
 

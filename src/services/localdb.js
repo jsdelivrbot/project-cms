@@ -7,7 +7,6 @@ import sublevel from 'level-sublevel';
 export class LocalStorage {
   constructor() {
     this.top = sublevel(levelup('cms', { db: localstorage, valueEncoding : 'json' }));
-    this.tables = {};
   }
 
   identifier() {
@@ -15,8 +14,7 @@ export class LocalStorage {
   }
 
   getTable = (baseUrl) => {
-    if (!this.tables[baseUrl]) this.tables[baseUrl] = this.top.sublevel(baseUrl);
-    return this.tables[baseUrl];
+    return this.top.sublevel(baseUrl);
   }
 
   destroy = () => {

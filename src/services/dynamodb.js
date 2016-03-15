@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import _AWS from 'aws-sdk/dist/aws-sdk.min'; //I have a dream that browser and node packages can live side by side
-import {Buffer} from 'buffer';
-import {v4} from 'node-uuid';
+import levelup from 'levelup';
 import DynamoDown from 'dynamo-down';
+import {Buffer} from 'buffer';
 
 const AWS = window.AWS;
 console.log("AWS:", AWS)
@@ -38,9 +38,9 @@ const TABLE_SCHEMA = {
 export class DynamoStorage {
   constructor(awsConfig) {
     AWS.config.update({accessKeyId: awsConfig.key, secretAccessKey: awsConfig.secret});
-
-    this.dynamo_db = new AWS.DynamoDB({apiVersion: '2012-08-10'});
-    this.dynamo_down = DynamoDown(this.dynamo_db)
+    let region = awsConfig.region || 'us-east-1';
+    this.dynamo_db = new AWS.DynamoDB({apiVersion: '2012-08-10', region});
+    this.dynamo_down = new DynamoDown(this.dynamo_db)
     this.table = awsConfig.table;
   }
 
@@ -49,13 +49,14 @@ export class DynamoStorage {
   }
 
   getTable(table_name) {
-    var options = {db: this.dynamo_down, valueEncoding: "json"}
-    return levelup(`${this.table}\\${table_name}`, options);
+    var table_key = new Buffer(table_name).toString('base64');
+    var options = {db: this.dynamo_down, valueEncoding: "json"};
+    return levelup(`${this.table}/${table_key}`, options);
   }
 
   pCall(action, ...args) {
     return new Promise((resolve, reject) => {
-      this.dynamodb[action].call(this.dynamodb, ...args, function(err, data) {
+      this.dynamo_db[action].call(this.dynamo_db, ...args, function(err, data) {
         err ? reject(err) : resolve(data)
       })
     })

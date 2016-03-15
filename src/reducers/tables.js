@@ -4,7 +4,8 @@ import {Map, fromJS} from 'immutable';
 
 export class LevelupMultiplexer {
   constructor(backend) {
-    this.backend = backend
+    this.backend = backend;
+    this.tables = {};
   }
 
   identifier() {
@@ -12,7 +13,9 @@ export class LevelupMultiplexer {
   }
 
   getTable = (table_name) => {
-    return this.backend.getTable(table_name);
+    if (!this.tables[table_name]) this.tables[table_name] = this.backend.getTable(table_name);
+    //console.log("table:", this.tables[table_name], table_name);
+    return this.tables[table_name];
   }
 
   putObject = (table_name, object_id, new_object) => {

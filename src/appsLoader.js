@@ -55,14 +55,17 @@ export function loadAppsTables(apps) {
   return Promise.all(_.map(apps, app => {
     //if app defines tables, then load them or load its initial fixture
     if (app.tables) {
-      let initialized = true;
+      //initialized if we have any data in its namespace
+      let initialized = false;
       return Promise.all(app.tables.map(tableName => {
         return readTable(tableName).then(tableState => {
-          if (!tableState) {
-            initialized = false;
+          if (tableState) {
+            tables = tables.set(tableName, fromJS(tableState));
+            if (_.startsWith(tableName, app.baseUrl)) {
+              initialized = true;
+            }
             return;
           }
-          tables = tables.set(tableName, fromJS(tableState));
         });
       })).then(done => {
         if (!initialized) {
@@ -104,7 +107,12 @@ export function makeReducer(apps) {
 }
 
 export function appsLoader() {
-  return loadStorage().then(readAppsConfig).then(appsConfig => {
+  sendLoadingMessage("Connecting storage");
+  return loadStorage().then(storage => {
+    sendLoadingMessage("Loading configuration");
+    return readAppsConfig();
+  }).then(appsConfig => {
+    sendLoadingMessage("Importing apps...")
     return loadAppsConfig(appsConfig).catch(error => {
       alert("There was an error loading your apps, check the console for details");
       console.error('Error loading apps from config:');
@@ -128,4 +136,13 @@ export function setStorage(config) {
     }
     return new_storage;
   });
+}
+
+export function sendLoadingMessage(text) {
+  console.log(text);
+  window.postMessage(JSON.stringify({
+    type:"APPLICATION_STATE",
+    text
+
+  }), "http://"+window.location.hostname+":"+window.location.port);
 }
