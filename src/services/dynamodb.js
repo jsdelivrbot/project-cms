@@ -40,7 +40,7 @@ export class DynamoStorage {
     AWS.config.update({accessKeyId: awsConfig.key, secretAccessKey: awsConfig.secret});
     let region = awsConfig.region || 'us-east-1';
     this.dynamo_db = new AWS.DynamoDB({apiVersion: '2012-08-10', region});
-    this.dynamo_down = new DynamoDown(this.dynamo_db)
+    this.dynamo_down = DynamoDown(this.dynamo_db)
     this.table = awsConfig.table;
   }
 

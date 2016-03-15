@@ -18,14 +18,25 @@ export class LevelupMultiplexer {
     return this.tables[table_name];
   }
 
+  promiseTableCall(funcName, tableName, ...args) {
+    const table = this.getTable(tableName);
+    return new Promise(function(resolve, reject) {
+      table[funcName].call(table, ...args, function(err, res) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(res);
+        }
+      })
+    });
+  }
+
   putObject = (table_name, object_id, new_object) => {
-    const table = this.getTable(table_name);
-    table.put(object_id, new_object);
+    return this.promiseTableCall('put', table_name, object_id, new_object);
   };
 
   deleteObject = (table_name, object_id) => {
-    const table = this.getTable(table_name);
-    table.del(object_id);
+    return this.promiseTableCall('del', table_name, object_id);
   };
 
   readTable = (table_name) => {

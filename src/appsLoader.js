@@ -23,9 +23,13 @@ export const DEFAULT_APPS_CONFIG = [
 export function readAppsConfig() {
   return readTable('/engine').then(tableState => {
     if (!tableState) return DEFAULT_APPS_CONFIG;
-    let appsConfig = tableState.get('appsConfig');
-    if (!appsConfig) return DEFAULT_APPS_CONFIG;
-    return appsConfig.toJS();
+    let apps = tableState.getIn(['appsConfig', 'apps']);
+    if (!apps) {
+      console.warn('Engine table does not have apps, setting it')
+      getStorage().putObject('/engine', 'appsConfig', {apps: DEFAULT_APPS_CONFIG});
+      return DEFAULT_APPS_CONFIG;
+    }
+    return apps.toJS();
   });
 }
 

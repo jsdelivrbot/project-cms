@@ -9,39 +9,37 @@ export default class AppsConfig extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      appsConfig: props.appsConfig.toJS()
-    };
-
+    this.state = props.appsConfig.toJS();
   }
 
   componentWillUpdate(nextProps, nextState) {
     if (nextProps.appsConfig !== this.props.appsConfig) {
-      nextState.appsConfig = nextProps.appsConfig.toJS();
+      nextState = nextProps.appsConfig.toJS();
     }
   }
 
   receiveSubmit = (event) => {
     event.preventDefault();
     console.log("Submit:", event);
-    this.props.setAppsConfig(_.filter(this.state.appsConfig, config => {
+    let apps = _.filter(this.state.apps, config => {
       return config.baseUrl && config.location;
-    }), this.context.store);
+    });
+    this.props.setAppsConfig(_.assign(this.state, {apps}), this.context.store);
   }
 
   updateAppValue = (index, event) => {
     var changes = {
-      appsConfig: _.clone(this.state.appsConfig)
+      apps: _.clone(this.state.apps)
     };
-    changes.appsConfig[index][event.target.name] = event.target.value;
+    changes.apps[index][event.target.name] = event.target.value;
     this.setState(changes);
   }
 
   addApp = (event) => {
     var changes = {
-      appsConfig: _.clone(this.state.appsConfig)
+      apps: _.clone(this.state.apps)
     };
-    changes.appsConfig.push({
+    changes.apps.push({
       type: 'builtin'
     });
     this.setState(changes);
@@ -50,9 +48,9 @@ export default class AppsConfig extends React.Component {
   removeApp = (index, event) => {
     event.preventDefault();
     var changes = {
-      appsConfig: _.clone(this.state.appsConfig)
+      apps: _.clone(this.state.apps)
     };
-    changes.appsConfig.splice(index, 1);
+    changes.apps.splice(index, 1);
     this.setState(changes);
   }
 
@@ -85,7 +83,7 @@ export default class AppsConfig extends React.Component {
   }
 
   render() {
-    let apps = this.state.appsConfig;
+    let {apps} = this.state;
     return <div className="container-fluid">
       <div className="row">
         <div className="col-sm-12">

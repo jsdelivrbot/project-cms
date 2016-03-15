@@ -4,7 +4,7 @@ export function initial(baseUrl) {
   return {
     [baseUrl]: {
       awsConfig: {},
-      appsConfig: DEFAULT_APPS_CONFIG
+      appsConfig: {apps: DEFAULT_APPS_CONFIG}
     }
   }
 }
