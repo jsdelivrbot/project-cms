@@ -1,0 +1,36 @@
+MultipleErrors: /home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:1:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:1:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:1:12: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:1:17: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:2:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:2:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:2:13: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:2:18: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:3:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:3:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:3:15: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:3:20: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:4:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:4:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:4:17: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:4:22: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:5:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:5:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:5:14: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:5:19: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:6:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:6:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:6:12: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:6:17: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:7:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:7:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:7:16: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:7:21: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:8:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:8:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:8:15: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:8:20: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:9:1: Unexpected reserved word import
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:9:8: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:9:19: Semi-colon expected
+/home/jason/.jspm/packages/npm/dynamo-down@1.0.5/test.js:9:24: Semi-colon expected

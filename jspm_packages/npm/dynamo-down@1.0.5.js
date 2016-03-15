@@ -1,0 +1,1 @@
+module.exports = require("npm:dynamo-down@1.0.5/index");
