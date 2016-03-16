@@ -8,11 +8,13 @@ export default function uploaderMiddleware({getState}) {
     const { type } = action;
     switch (type) {
       case 'REPLACE_FILE':
+        action.promise = uploader([action.file], true, action.onProgress).then(r => r[0]);
+        break;
       case 'UPLOAD_FILE':
-        action.promise = uploader([action.file], action.onProgress).then(r => r[0]);
+        action.promise = uploader([action.file], false, action.onProgress).then(r => r[0]);
         break;
       case 'UPLOAD_FILES':
-        action.promise = uploader(action.files, action.onProgress);
+        action.promise = uploader(action.files, false, action.onProgress);
         break;
       case 'SET_HOSTING_CONFIG':
         action.promise = loadUploader(action.config).then(({uploader}) => {

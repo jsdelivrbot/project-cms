@@ -33,7 +33,7 @@ export function put(awsConfig, {path, content, mimetype}, onProgress) {
   });
 }
 
-function _uploader(awsConfig, files, onProgress) {
+function _uploader(awsConfig, files, overwrite, onProgress) {
   let total = 0;
   let individualUploads = {};
 
@@ -49,9 +49,18 @@ function _uploader(awsConfig, files, onProgress) {
 
   return Promise.all(_.map(files, (file, index) => {
     total += file.size;
-    let id = v4();
-    let extension = _.last(file.name.split('.'));
-    let path = file.path ? file.path : `/media/${id}.${extension}`;
+    //TODO awsConfig.prefix
+    //we only want to prepend prefix if it is a new upload, mot a replace action
+    let path = file.path;
+    if (!path) {
+      let id = v4();
+      let extension = _.last(file.name.split('.'));
+      path = `/media/${id}.${extension}`;
+
+    }
+    if (!overwrite && awsConfig.prefix) {
+      path = awsConfig.prefix + path;
+    }
     let content = file;
     let mimetype = file.type;
     return put(awsConfig, {
@@ -79,6 +88,9 @@ export function publisherFactory(awsConfig) {
   }
 
   function pushContent(path, content, mimetype) {
+    if (awsConfig.prefix) {
+      path = awsConfig.prefix + path;
+    }
     return put(awsConfig, {path, content, mimetype});
   }
 

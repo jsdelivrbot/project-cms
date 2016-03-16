@@ -63,7 +63,7 @@ export default class HostingConfig extends React.Component {
   }
 }
 
-export function S3Config({key, secret, bucket, updateValue}) {
+export function S3Config({key, secret, bucket, prefix, updateValue}) {
   let origin = window.location.hostname;
 
   return (
@@ -84,6 +84,12 @@ export function S3Config({key, secret, bucket, updateValue}) {
         <span className="help-block">Ensure that you have cross-origin set to allow requests from {origin}</span>
         <input name="bucket" value={bucket} onChange={updateValue}
           type="text" className="form-control" placeholder="bucket-name"/>
+      </div>
+      <div className="form-group col-sm-6">
+        <label>Subfolder</label>
+        <span className="help-block">(Optional) Set a subfolder for uploads. No trailing slash.</span>
+        <input name="prefix" value={prefix} onChange={updateValue}
+          type="text" className="form-control" placeholder="prefix"/>
       </div>
     </div>
   )
