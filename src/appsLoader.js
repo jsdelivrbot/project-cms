@@ -2,7 +2,9 @@ import _ from 'lodash';
 import {Map, fromJS} from 'immutable';
 import {combineReducers} from 'redux-immutablejs';
 
-import {getStorage, loadStorage, setStorageConfig, readTable, writeFixture, tablesReducer} from './reducers/tables';
+import {getStorage, readTable, writeFixture, tablesReducer} from './reducers/tables';
+import {initializeDatabase} from './reducers/services';
+import servicesReducer from './reducers/services';
 
 
 export const DEFAULT_APPS_CONFIG = [
@@ -106,13 +108,14 @@ export function makeReducer(apps) {
     }
     return col;
   }, {
-    tables: tablesReducer
+    tables: tablesReducer,
+    services: servicesReducer,
   }));
 }
 
 export function appsLoader() {
-  sendLoadingMessage("Connecting storage");
-  return loadStorage().then(storage => {
+  sendLoadingMessage("Connecting database");
+  return initializeDatabase().then(storage => {
     sendLoadingMessage("Loading configuration");
     return readAppsConfig();
   }).then(appsConfig => {
@@ -124,21 +127,6 @@ export function appsLoader() {
       console.log("Loading default apps");
       return loadAppsConfig(DEFAULT_APPS_CONFIG);
     });
-  });
-}
-
-export function setStorage(config) {
-  let old_storage = getStorage();
-  setStorageConfig(config);
-
-  return loadStorage().then(new_storage => {
-    //only trigger transfer if storage backend actually changes
-    if (new_storage.identifier() !== old_storage.identifier()) {
-      return old_storage.replicateToStorage(new_storage).then(x => {
-        return new_storage;
-      });
-    }
-    return new_storage;
   });
 }
 

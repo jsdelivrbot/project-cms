@@ -13,18 +13,17 @@ import nextUrlMiddleware from './middleware/next_url';
 import askForMiddleware from './middleware/ask_for';
 import uploaderMiddleware from './middleware/uploader';
 import thumbnailerMiddleware from './middleware/thumbnailer';
+import {initializeHosting} from './reducers/services';
 
 import {appsLoader, loadAppsTables, makeReducer, sendLoadingMessage} from './appsLoader';
 import AppRouter from './components/AppRouter.jsx';
-
-import {s3Uploader} from './services/s3';
 
 
 var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, uploaderMiddleware, thumbnailerMiddleware, promiseMiddleware, askForMiddleware)(createStore);
 
 var history = createHistory();
 
-sendLoadingMessage('loading...')
+sendLoadingMessage('Core Imported')
 //TODO load sysinfo from get params or from localstorage
 //sysinfo sets storage service
 appsLoader().then(apps => {
@@ -52,10 +51,7 @@ appsLoader().then(apps => {
   var engine = getApp('/engine');
 
   store.dispatch(engine.actions.setApps(apps));
-
-  //hook in S3 uploader
-  s3Uploader(store);
-
+  initializeHosting(store);
 
   //CONSIDER: we are storing core functions in the engine domain - probably not using the redux as intended
   //this is because publish & render need to access state to run
@@ -65,7 +61,7 @@ appsLoader().then(apps => {
   console.log("renderer:", renderer);
   store.dispatch(engine.actions.setRenderer(renderer));
 
-  sendLoadingMessage("rendering");
+  sendLoadingMessage("Rendering UX");
   /* mount application to DOM */
   ReactDOM.render(
     <Provider store={store}>

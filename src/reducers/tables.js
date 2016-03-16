@@ -99,20 +99,33 @@ export class LevelupMultiplexer {
 }
 
 
-export var storage = null;
+var storage = null;
 
 
 export function getStorage() {
   return storage;
 }
 
-export function loadStorage() {
-  //console.log("query params:", getQueryParams(window.location.href.split('?')[1]))
-  let storage_config = localStorage.getItem('storage-service');
+export function setStorage(config) {
+  let old_storage = getStorage();
+
+  return loadStorage(config).then(new_storage => {
+    storage = new_storage;
+    //only trigger transfer if storage backend actually changes
+    if (old_storage && new_storage.identifier() !== old_storage.identifier()) {
+      return old_storage.replicateToStorage(new_storage).then(x => {
+        return new_storage;
+      });
+    }
+    return new_storage;
+  });
+}
+
+
+export function loadStorage(storage_config) {
   let factory_promise = null;
   if (storage_config) {
-    storage_config = JSON.parse(storage_config)
-    module_path = storage_config.module_path || '~/services/dynamodb';
+    module_path = storage_config.module || '~/services/dynamodb';
     factory_promise = System.import(module_path, __moduleName).then(module => {
       return module.default(storage_config)
     })
@@ -127,11 +140,6 @@ export function loadStorage() {
     return storage;
   });
 }
-
-export function setStorageConfig(storage_config) {
-  localStorage.setItem('storage-service', JSON.stringify(storage_config));
-}
-
 
 function toJS(obj) {
   if (_.isFunction(obj.toJS)) return obj.toJS();
@@ -155,6 +163,9 @@ export function tablesReducer(state=INITIAL_STATE, action) {
 
   object_id is the key
   */
+  if (action.type === "SET_STORAGE_SERVICE") {
+    setStorage(action.config);
+  }
   const {record_change, record_changes} = action;
   if (record_change) {
     return recordChange(state, record_change);

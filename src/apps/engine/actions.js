@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import {loadAppsConfig, makeReducer, setStorage} from '~/appsLoader';
+import {loadAppsConfig, makeReducer} from '~/appsLoader';
 
 
 export function setRenderer(renderer) {
@@ -72,28 +72,20 @@ export function setAppsConfig(appsConfig, store) {
   }
 }
 
-export function setAwsConfig(awsConfig) {
-  let promise;
-  //TODO generic backend config, {default: 'aws', aws: {options, backend: aws}}
-  //CONSIDER: this is awkward. We switch storages where a copy of this is stored
-  if (awsConfig.table) {
-    promise = setStorage(_.assign({
-      module_path: '~/services/dynamodb',
-    }, awsConfig));
-  }
-  //CONSIDER: we should avoid copying credentials as much as possible
-  //set in localstorage but not in db? multi site implications?
+export function setDatabaseConfig(config) {
   return {
-    type: 'SET_AWS_CONFIG',
-    awsConfig,
-    promise,
-    record_change: {
-      update_object: awsConfig,
-      table_name: '/engine',
-      object_id: 'awsConfig'
-    },
-    alert_message: 'AWS Config updated',
+    type: 'SET_DATABASE_SERVICE',
+    config,
+    alert_message: 'Database Config updated',
   }
 }
 
-export default {setRenderer, pushContent, setApps, testAppsConfig, setAppsConfig, setAwsConfig}
+export function setHostingConfig(config) {
+  return {
+    type: 'SET_HOSTING_SERVICE',
+    config,
+    alert_message: 'Hosting Config updated',
+  }
+}
+
+export default {setRenderer, pushContent, setApps, testAppsConfig, setAppsConfig, setDatabaseConfig, setHostingConfig}

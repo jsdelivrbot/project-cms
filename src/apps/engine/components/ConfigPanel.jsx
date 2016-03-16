@@ -1,7 +1,8 @@
 import React from 'react';
 import _ from 'lodash';
 
-import AwsConfig from './AwsConfig.jsx';
+import HostingConfig from './HostingConfig.jsx';
+import DatabaseConfig from './DatabaseConfig.jsx';
 import AppsConfig from './AppsConfig.jsx';
 
 
@@ -20,15 +21,22 @@ export default class ConfigPanel extends React.Component {
 
   render() {
     let active = this.state.active;
-    let {awsConfig, setAwsConfig, appsConfig, setAppsConfig} = this.props;
+    let {
+      databaseConfig, setDatabaseConfig,
+      appsConfig, setAppsConfig,
+      hostingConfig, setHostingConfig,
+    } = this.props;
 
     return <div>
       <ul className="nav nav-tabs" role="tablist">
         <li className={active === 'apps' ? 'active' : null} role="presentation">
           <a onClick={_.partial(this.activateTab, 'apps')} role="tab">Apps</a>
         </li>
-        <li className={active === 'aws' ? 'active' : null} role="presentation">
-          <a onClick={_.partial(this.activateTab, 'aws')} role="tab">AWS</a>
+        <li className={active === 'database' ? 'active' : null} role="presentation">
+          <a onClick={_.partial(this.activateTab, 'database')} role="tab">Database</a>
+        </li>
+        <li className={active === 'hosting' ? 'active' : null} role="presentation">
+          <a onClick={_.partial(this.activateTab, 'hosting')} role="tab">Hosting</a>
         </li>
       </ul>
 
@@ -36,8 +44,11 @@ export default class ConfigPanel extends React.Component {
         <div className={"tab-pane "+ (active === 'apps' ? 'active' : '')} role="tabpanel">
           <AppsConfig appsConfig={appsConfig} setAppsConfig={setAppsConfig} key="apps-config"/>
         </div>
-        <div className={"tab-pane "+ (active === 'aws' ? 'active' : '')} role="tabpanel">
-          <AwsConfig awsConfig={awsConfig} setAwsConfig={setAwsConfig} key="aws-config"/>
+        <div className={"tab-pane "+ (active === 'database' ? 'active' : '')} role="tabpanel">
+          <DatabaseConfig databaseConfig={databaseConfig} setDatabaseConfig={setDatabaseConfig} key="database-config"/>
+        </div>
+        <div className={"tab-pane "+ (active === 'hosting' ? 'active' : '')} role="tabpanel">
+          <HostingConfig hostingConfig={hostingConfig} setHostingConfig={setHostingConfig} key="hosting-config"/>
         </div>
       </div>
     </div>

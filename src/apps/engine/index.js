@@ -21,11 +21,13 @@ export default function EngineFactory(baseUrl) {
         return {
           baseUrl: baseUrl,
           appsConfig: state.getIn(['tables', '/engine', 'appsConfig']),
-          awsConfig: state.getIn(['tables', '/engine', 'awsConfig'])
+          databaseConfig: state.getIn(['services', 'database']),
+          hostingConfig: state.getIn(['services', 'hosting']),
         }
       }, {
         setAppsConfig: actions.setAppsConfig,
-        setAwsConfig: actions.setAwsConfig
+        setDatabaseConfig: actions.setDatabaseConfig,
+        setHostingConfig: actions.setHostingConfig,
       })(ConfigPanel)
     }
   }

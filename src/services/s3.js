@@ -66,22 +66,6 @@ function _uploader(awsConfig, files, onProgress) {
   }));
 }
 
-export function s3Uploader(store) {
-  let awsConfig = null;
-
-  function listener() {
-    let newAwsConfig = store.getState().getIn(['tables', '/engine', 'awsConfig']);
-    if (awsConfig !== newAwsConfig && newAwsConfig.get('bucket')) {
-      awsConfig = newAwsConfig;
-      let uploader = _.partial(_uploader, awsConfig.toJS());
-
-      store.dispatch({
-        type: 'SET_UPLOADER',
-        uploader
-      });
-    }
-  }
-
-  listener();
-  store.subscribe(listener);
+export default function S3UploaderFactory(config) {
+  return _.partial(_uploader, config);
 }
