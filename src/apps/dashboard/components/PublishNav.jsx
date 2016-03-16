@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import zipPublisher from '~/publishers/zipfile';
-import s3Publisher from '~/publishers/s3';
 import publish from '~/publishers/index';
+import {loadUploader} from '~/middleware/uploader';
 
 import PublishButton from './PublishButton.jsx';
 
@@ -15,9 +15,12 @@ export class PublishNav extends React.Component {
 
   render() {
     let {store} = this.context;
-    let awsConfig = this.props.awsConfig.toJS();
-    let publishS3 = () => {
-      return publish(store, s3Publisher(awsConfig));
+    let hostingConfig = this.props.hostingConfig;
+    hostingConfig = hostingConfig ? hostingConfig.toJS() : null;
+    let publishDefault = () => {
+      return loadUploader(hostingConfig).then(({publisher}) => {
+        return publish(store, publisher);
+      });
     }
     let publishZipfile = () => {
       return publish(store, zipPublisher());
@@ -25,7 +28,7 @@ export class PublishNav extends React.Component {
 
     return <div className="nav navbar-nav navbar-right btn-group" role="group">
       <PublishButton key="zip" publish={publishZipfile}>Export Zipfile</PublishButton>
-      {awsConfig.bucket ? <PublishButton key="s3" publish={publishS3}>Publish to S3</PublishButton> : null}
+      {hostingConfig ? <PublishButton key="publisher" publish={publishDefault}>Publish</PublishButton> : null}
     </div>
   }
 }
@@ -36,6 +39,6 @@ PublishNav.contextTypes = {
 
 export default connect(state => {
   return {
-    awsConfig: state.getIn(['tables', '/engine', 'awsConfig'])
+    hostingConfig: state.getIn(['services', 'hosting'])
   }
 })(PublishNav);

@@ -24,6 +24,7 @@ export default function servicesReducer(state=INITIAL_STATE, action) {
       var config = action.config;
       localStorage.setItem('database-service', JSON.stringify(config));
       return state.set('database', fromJS(config));
+    //CONSIDER: hosting vs publisher vs uploader disambig
     case "SET_HOSTING_SERVICE":
       var config = action.config;
       localStorage.setItem('hosting-service', JSON.stringify(config));
@@ -39,7 +40,7 @@ export function initializeDatabase() {
 export function initializeHosting(store) {
   let hosting_config = store.getState().getIn(['services', 'hosting']);
   if (hosting_config) {
-    return loadUploader(hosting_config.toJS()).then(uploader => {
+    return loadUploader(hosting_config.toJS()).then(({uploader}) => {
       store.dispatch({
         type: 'SET_UPLOADER',
         uploader
