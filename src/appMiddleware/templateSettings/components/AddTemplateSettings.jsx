@@ -1,5 +1,9 @@
 import React from 'react';
 import _ from 'lodash';
+import Codemirror from 'react-codemirror';
+import 'codemirror/mode/javascript/javascript';
+
+import PreviewForm from './PreviewForm.jsx';
 
 
 export default class AddTemplateSettings extends React.Component {
@@ -18,6 +22,13 @@ export default class AddTemplateSettings extends React.Component {
     var changes = {};
     changes[event.target.name] = event.target.value;
     this.setState(changes);
+  }
+
+  //for use with codemirror
+  updateSchema = (code) => {
+    this.setState({
+      schema: code
+    });
   }
 
   renderTemplateOptions() {
@@ -40,8 +51,27 @@ export default class AddTemplateSettings extends React.Component {
             <div className="form-group">
               <label className="control-label">Template</label>
               <select name="path" className="form-control" value={template.path} onChange={this.updateValue}>
+                <option>Select Template</option>
                 {this.renderTemplateOptions()}
               </select>
+            </div>
+
+            <div className="cold-md-6 col-sm-12">
+              <div className="form-group">
+                <label className="control-label">Additional Fields</label>
+                <span className="help-block">Write using <a href="https://json-schema.org/">json-schema</a>.</span>
+                <Codemirror value={template.schema} onChange={this.updateSchema} options={{
+                    mode: 'javascript',
+                    json: true,
+                    lineNumbers: true
+                }} />
+              </div>
+            </div>
+            <div className="cold-md-6 col-sm-12">
+              <div className="form-group">
+                <label className="control-label">Fields Preview</label>
+                <PreviewForm schema={template.schema}/>
+              </div>
             </div>
 
             <div className="form-group">

@@ -53,6 +53,8 @@ export default class EditPage extends React.Component {
 
   render() {
     let page = this.state;
+    let {ExtraForm} = this.props;
+
     return <div>
       <MediaSidebar/>
       <div className="container-fluid">
@@ -89,6 +91,8 @@ export default class EditPage extends React.Component {
                   lineNumbers: true
               }} />
             </div>
+
+            <ExtraForm templatePath={page.template} formData={page}/>
 
             <div className="form-group">
               <button className="btn btn-default" type="button" data-toggle="collapse" data-target="#pageAdvanced" aria-expanded="false" aria-controls="collapseExample">

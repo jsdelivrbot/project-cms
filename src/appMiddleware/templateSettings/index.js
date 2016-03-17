@@ -36,19 +36,17 @@ export default function templateSettingsMiddleware(appFactory, namespace='templa
 
     app.tables.push(tableName);
 
-    function getExtraForm(props, context) {
-      props = {
-        tableName,
-        ...props
-      };
-      return ExtraForm(props, context);
-    }
+    //expose ExtraForm and pass in templatePath & formData as props
+    let ConnectedExtraForm = connect((state, props) => {
+      return {
+        template: state.getIn(['tables', tableName, props.templatePath])
+      }
+    })(ExtraForm);
 
     function getConfiguredTemplates(state) {
-      //only template names or template objects?
       return {
         templates: state.getIn(['tables', tableName]) || Map(),
-        ExtraForm: getExtraForm,
+        ExtraForm: ConnectedExtraForm,
       }
     }
 
@@ -81,7 +79,7 @@ export default function templateSettingsMiddleware(appFactory, namespace='templa
         addTemplateSettings: _.partial(actions.addTemplateSettings, tableName),
       })(AddTemplateSettings)
     }, {
-      path: `${namespace}/**`,
+      path: `${namespace}**`,
       component: connect((state, props) => {
         let path = props.params.splat;
         return {
