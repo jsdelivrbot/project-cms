@@ -7,6 +7,9 @@ export function initial(baseUrl) {
       [baseUrl]: {
         [id]: {path: '/index.html', title: 'Home Page', content: 'Hello World', template:'/page.html', id}
       },
+      [baseUrl+'/templates']: {
+        '/page.html': {path: '/page.html'}
+      },
       '/templates': {
         '/page.html': {path: '/page.html', content: pageTemplate, type:'page'}
       }

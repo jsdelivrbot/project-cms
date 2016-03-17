@@ -11,21 +11,21 @@ console.log("AWS:", AWS)
 const TABLE_SCHEMA = {
     KeySchema: [
       {
-      	"AttributeName": "type",
+      	"AttributeName": "__type__",
       	"KeyType": "HASH"
       },
       {
-      	"AttributeName": "key",
+      	"AttributeName": "__key__",
       	"KeyType": "RANGE"
       },
     ],
     AttributeDefinitions: [
       {
-      	AttributeName: "type",
+      	AttributeName: "__type__",
       	AttributeType: "S"
       },
       {
-      	AttributeName: "key",
+      	AttributeName: "__key__",
       	AttributeType: "S"
       },
     ],

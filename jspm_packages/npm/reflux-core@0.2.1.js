@@ -1,1 +1,0 @@
-module.exports = require("npm:reflux-core@0.2.1/lib/index.js");

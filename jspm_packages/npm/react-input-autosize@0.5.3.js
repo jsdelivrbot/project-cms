@@ -1,1 +1,0 @@
-module.exports = require("npm:react-input-autosize@0.5.3/lib/AutosizeInput.js");

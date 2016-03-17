@@ -28,7 +28,7 @@ export default function TemplateSettingsList({baseUrl, templates}) {
           </tr>
         </thead>
         <tbody>
-          {templates.map(TemplateSettingsRow).toArray()}
+          {templates ? templates.map(TemplateSettingsRow).toArray() : null}
         </tbody>
       </table>
     </div>

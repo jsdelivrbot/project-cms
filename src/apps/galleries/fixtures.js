@@ -7,6 +7,9 @@ export function initial(baseUrl) {
       [baseUrl]: {
         [id]: {path: '/gallery.html', title: 'Gallery', content: 'Hello World', template:'/gallery.html', id}
       },
+      [baseUrl+'/templates']: {
+        '/gallery.html': {path: '/gallery.html'}
+      },
       '/templates': {
         '/gallery.html': {path: '/gallery.html', content: galleryTemplate, type:'page'}
       }

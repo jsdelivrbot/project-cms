@@ -27,7 +27,7 @@ export default class DatabaseConfig extends React.Component {
       case "browser":
         return <BrowserConfig/>
       case "dynamodb":
-        return <DynamoConfig updateValue={this.updateValue} {...this.state} />
+        return <DynamoConfig updateValue={this.updateValue} value={this.state} />
     }
     return null;
   }
@@ -71,7 +71,8 @@ export function BrowserConfig() {
   return <input type="hidden" name="module" value="~/services/localdb"/>
 }
 
-export function DynamoConfig({key, secret, table, updateValue}) {
+export function DynamoConfig({value, updateValue}) {
+  let {key, secret, table} = value;
   return (
     <div className="row">
       <input type="hidden" name="module" value="~/services/dynamodb"/>

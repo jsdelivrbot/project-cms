@@ -9,11 +9,8 @@ import actions from './actions';
 import publish from './publish';
 import fixtures from './fixtures';
 
-import {getTemplates} from '~/plugins';
 import templateSettingsMiddleware from '~/appMiddleware/templateSettings/index';
 
-
-const pageTemplates = getTemplates('page');
 
 export default templateSettingsMiddleware(function PagesApplicationFactory(baseUrl) {
   return {
@@ -38,8 +35,7 @@ export default templateSettingsMiddleware(function PagesApplicationFactory(baseU
         path: 'add',
         component: connect(state => {
           return {
-            baseUrl: baseUrl,
-            templates: pageTemplates(state)
+            baseUrl: baseUrl
           }
         }, {
           addPage: _.partial(actions.addPage, baseUrl),
@@ -51,8 +47,7 @@ export default templateSettingsMiddleware(function PagesApplicationFactory(baseU
           return {
             baseUrl: baseUrl,
             page: state.getIn(['tables', baseUrl, id]),
-            id,
-            templates: pageTemplates(state)
+            id
           }
         }, {
           updatePage: _.partial(actions.updatePage, baseUrl),

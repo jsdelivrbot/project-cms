@@ -10,13 +10,10 @@ import actions from './actions';
 import publish from './publish';
 import fixtures from './fixtures';
 
-import {getTemplates} from '~/plugins';
+import templateSettingsMiddleware from '~/appMiddleware/templateSettings/index';
 
 
-const galleryTemplates = getTemplates('page', ['gallery']);
-
-
-export default function GallerysApplicationFactory(baseUrl) {
+export default templateSettingsMiddleware(function GallerysApplicationFactory(baseUrl) {
   return {
     type: 'application',
     actions,
@@ -39,8 +36,7 @@ export default function GallerysApplicationFactory(baseUrl) {
         path: 'add',
         component: connect(state => {
           return {
-            baseUrl: baseUrl,
-            templates: galleryTemplates(state),
+            baseUrl: baseUrl
           }
         }, {
           addGallery: _.partial(actions.addGallery, baseUrl),
@@ -52,8 +48,7 @@ export default function GallerysApplicationFactory(baseUrl) {
           return {
             baseUrl: baseUrl,
             gallery: state.getIn(['tables', baseUrl, id]),
-            id,
-            templates: galleryTemplates(state),
+            id
           }
         }, {
           updateGallery: _.partial(actions.updateGallery, baseUrl),
@@ -62,4 +57,4 @@ export default function GallerysApplicationFactory(baseUrl) {
       }]
     }
   }
-}
+});

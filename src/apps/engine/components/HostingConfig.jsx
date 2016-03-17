@@ -25,7 +25,7 @@ export default class HostingConfig extends React.Component {
   renderBackendConfig(backend) {
     switch(backend) {
       case "s3":
-        return <S3Config updateValue={this.updateValue} {...this.state} />
+        return <S3Config updateValue={this.updateValue} value={this.state} />
     }
     return null;
   }
@@ -63,8 +63,9 @@ export default class HostingConfig extends React.Component {
   }
 }
 
-export function S3Config({key, secret, bucket, prefix, updateValue}) {
+export function S3Config({value, updateValue}) {
   let origin = window.location.hostname;
+  let {key, secret, bucket, prefix} = value;
 
   return (
     <div className="row">

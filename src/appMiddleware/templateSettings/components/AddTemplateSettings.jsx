@@ -29,7 +29,6 @@ export default class AddTemplateSettings extends React.Component {
   render() {
     let template = this.state;
     return <div className="container-fluid">
-      <MediaSidebar/>
       <div className="row">
         <div className="col-sm-12">
           <h1>Register Template</h1>

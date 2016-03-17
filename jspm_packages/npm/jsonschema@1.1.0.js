@@ -1,0 +1,1 @@
+module.exports = require("npm:jsonschema@1.1.0/lib");

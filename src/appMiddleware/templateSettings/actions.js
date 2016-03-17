@@ -10,7 +10,7 @@ export function addTemplateSettings(baseUrl, path, tpl) {
       object_id: path,
     },
     alert_message: `Registered template ${path}`,
-    next_url: `${baseUrl}/${path}`
+    next_url: `${baseUrl}`
   };
 }
 

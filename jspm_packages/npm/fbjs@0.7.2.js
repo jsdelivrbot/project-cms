@@ -1,1 +1,0 @@
-module.exports = require("npm:fbjs@0.7.2/index.js");

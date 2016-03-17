@@ -1,5 +1,6 @@
 import {connect} from 'react-redux'
 import _ from 'lodash';
+import {Map} from 'immutable';
 
 import EditTemplateSettings from './components/EditTemplateSettings.jsx';
 import AddTemplateSettings from './components/AddTemplateSettings.jsx';
@@ -46,7 +47,7 @@ export default function templateSettingsMiddleware(appFactory, namespace='templa
     function getConfiguredTemplates(state) {
       //only template names or template objects?
       return {
-        templates: state.getIn(['tables', tableName]),
+        templates: state.getIn(['tables', tableName]) || Map(),
         ExtraForm: getExtraForm,
       }
     }
@@ -96,6 +97,8 @@ export default function templateSettingsMiddleware(appFactory, namespace='templa
 
 
     app.routes.childRoutes = extraRoutes.concat(app.routes.childRoutes);
+
+    //TODO app.fixtures.initial {tableName: {}}
 
     return app;
   }

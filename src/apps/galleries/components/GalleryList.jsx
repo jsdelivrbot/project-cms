@@ -17,7 +17,10 @@ export default function GalleryList({baseUrl, galleries}) {
       <div className="col-md-6">
         <h1>Galleries</h1>
       </div>
-      <div className="col-md-6">
+      <div className="col-md-3">
+        <Link type="button" className="btn btn-primary" to={`${baseUrl}/templates`}>Manage Templates</Link>
+      </div>
+      <div className="col-md-3">
         <Link type="button" className="btn btn-primary" to={`${baseUrl}/add`}>Add Gallery</Link>
       </div>
     </div>

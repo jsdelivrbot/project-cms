@@ -23,7 +23,6 @@ export default class EditTemplateSettings extends React.Component {
   render() {
     let template = this.state;
     return <div className="container-fluid">
-      <MediaSidebar/>
       <div className="row">
         <div className="col-sm-12">
           <h1>Edit Template Settings</h1>

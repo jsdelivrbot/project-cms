@@ -1,1 +1,0 @@
-module.exports = require("npm:react-signature-pad@0.0.3/lib/app.js");
