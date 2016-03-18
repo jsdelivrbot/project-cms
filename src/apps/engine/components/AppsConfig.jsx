@@ -22,7 +22,7 @@ export default class AppsConfig extends React.Component {
     event.preventDefault();
     console.log("Submit:", event);
     let apps = _.filter(this.state.apps, config => {
-      return config.baseUrl && config.location;
+      return config.baseUrl && config.location && config.type;
     });
     this.props.setAppsConfig(_.assign(this.state, {apps}), this.context.store);
   }
@@ -66,6 +66,7 @@ export default class AppsConfig extends React.Component {
       <div className="form-group col-sm-3">
         <label>Module Type</label>
         <select name="type" className="form-control" value={app.type} onChange={update}>
+          <option>Select</option>
           <option value="builtin">Built-in</option>
           <option value="github">Github</option>
           <option value="npm">NPM</option>

@@ -19,7 +19,7 @@ export const DEFAULT_APPS_CONFIG = [
   {baseUrl: '/media/assets', type: 'builtin', location: './apps/media/contrib/assets/index'},
   {baseUrl: '/media/pictures', type: 'builtin', location: './apps/media/contrib/pictures/index'},
   {baseUrl: '/snippets', type: 'builtin', location: './apps/snippets/index'},
-  {baseUrl: '/snippets/menus', type: 'builtin', location: './apps/snippets/contrib/menus/index'},
+  {baseUrl: '/snippets/warehouse', type: 'builtin', location: './apps/snippets/contrib/warehouse/index'},
 ]
 
 export function readAppsConfig() {

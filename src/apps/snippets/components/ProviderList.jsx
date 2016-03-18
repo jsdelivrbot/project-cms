@@ -3,13 +3,20 @@ import _ from 'lodash';
 import {Link} from 'react-router';
 
 
-function ProvidersNav({providers}) {
-  function ProviderLink({baseUrl, title, actions}) {
-    return <Link to={baseUrl+"/add"} className="btn btn-primary" key={baseUrl}>Add {title}</Link>
-  }
+function AddSnippet({link, title}) {
+  return <li key={link}>
+    <Link to={link}>{title}</Link>
+  </li>
+}
 
+function AddButton({addLinks}) {
   return <div className="btn-group">
-    {_.map(providers, ProviderLink)}
+    <button type="button" className="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+      Add Snippet <span className="caret"/>
+    </button>
+    <ul className="dropdown-menu">
+      {_.map(addLinks, AddSnippet)}
+    </ul>
   </div>
 }
 
@@ -29,21 +36,14 @@ function SnippetRow({providers, snippet}) {
 }
 
 
-export default function ProviderList({providers, snippets}) {
+export default function ProviderList({providers, snippets, addLinks}) {
   return <div className="container-fluid">
     <div className="row">
       <div className="col-md-6">
-        <h1>Snippet Providers</h1>
-      </div>
-    </div>
-    <div className="row">
-      <div className="col-md-12">
-        <ProvidersNav providers={providers}/>
-      </div>
-    </div>
-    <div className="row">
-      <div className="col-md-6">
         <h1>Snippets</h1>
+      </div>
+      <div className="col-md-12">
+        <AddButton addLinks={addLinks}/>
       </div>
     </div>
     <div className="table-responsive">

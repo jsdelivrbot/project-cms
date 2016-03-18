@@ -35,9 +35,21 @@ export default function snippetsApplicationFactory(baseUrl) {
       component: 'div',
       indexRoute: {
         component: connect(state => {
+          let providers = snippetsProviders(state);
+          let addLinks = _.flatten(_.map(providers, provider => {
+            if (provider.snippetAddLinks) {
+              return provider.snippetAddLinks(state);
+            } else {
+              return {
+                link: `${provider.baseUrl}/add`,
+                title: provider.title,
+              }
+            }
+          }));
           return {
-            baseUrl: baseUrl,
-            providers: snippetsProviders(state),
+            baseUrl,
+            providers,
+            addLinks,
             snippets: state.getIn(['tables', baseUrl])
           }
         })(ProviderList)

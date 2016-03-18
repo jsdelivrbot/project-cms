@@ -32,7 +32,7 @@ export function testAppsConfig(appsConfig) {
   return {
     type: 'TEST_APPS_CONFIG',
     appsConfig,
-    promise: loadAppsConfig(appsConfig)
+    promise: loadAppsConfig(appsConfig.apps)
   }
 }
 
@@ -50,7 +50,7 @@ export function setAppsConfig(appsConfig, store) {
   return {
     type: 'SET_APPS_CONFIG',
     appsConfig,
-    promise: loadAppsConfig(appsConfig).then(apps => {
+    promise: loadAppsConfig(appsConfig.apps).then(apps => {
       console.log("Triggering apps reload", apps, store);
       let reducer = makeReducer(apps);
       let renderer = _.find(apps, {baseUrl: '/templates'}).renderFactory(store);
