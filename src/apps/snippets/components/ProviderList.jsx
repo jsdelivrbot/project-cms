@@ -20,6 +20,16 @@ function AddButton({addLinks}) {
   </div>
 }
 
+function ServiceLinks({serviceLinks}) {
+  function ServiceLink({link, title}) {
+    return <Link to={link} className="btn btn-default" key={link}>{title}</Link>
+  }
+
+  return <div className="btn-group">
+    {_.map(serviceLinks, ServiceLink)}
+  </div>
+}
+
 function SnippetRow({providers, snippet}) {
   let snippet_type = snippet.get('snippet_type');
   let provider = _.find(providers, {baseUrl: snippet_type});
@@ -36,14 +46,17 @@ function SnippetRow({providers, snippet}) {
 }
 
 
-export default function ProviderList({providers, snippets, addLinks}) {
+export default function ProviderList({providers, snippets, addLinks, serviceLinks}) {
   return <div className="container-fluid">
     <div className="row">
-      <div className="col-md-6">
+      <div className="col-md-12">
         <h1>Snippets</h1>
       </div>
-      <div className="col-md-12">
+      <div className="col-md-6">
         <AddButton addLinks={addLinks}/>
+      </div>
+      <div className="col-md-6">
+        <ServiceLinks serviceLinks={serviceLinks}/>
       </div>
     </div>
     <div className="table-responsive">

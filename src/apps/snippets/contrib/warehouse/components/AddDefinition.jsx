@@ -54,7 +54,7 @@ export default class AddDefinition extends React.Component {
           <form onSubmit={this.receiveSubmit}>
             <div className="form-group">
               <label className="control-label">Description</label>
-              <input value={definition.description} type="text" name="description" onChange={this.updateValue} placeholder="ie: Contact Form, Image Slider, Menu"/>
+              <input value={definition.description} type="text" name="description" onChange={this.updateValue} placeholder="ie: Contact Form, Image Slider, Menu" className="form-control"/>
             </div>
 
             <div className="form-group">
@@ -65,22 +65,19 @@ export default class AddDefinition extends React.Component {
               }} />
             </div>
 
-            <div className="cold-md-6 col-sm-12">
-              <div className="form-group">
-                <label className="control-label">Form</label>
-                <span className="help-block">Write using <a href="https://json-schema.org/">json-schema</a>.</span>
-                <Codemirror value={definition.schema} onChange={this.updateSchema} options={{
-                    mode: 'javascript',
-                    json: true,
-                    lineNumbers: true
-                }} />
-              </div>
+            <div className="form-group">
+              <label className="control-label">Form</label>
+              <span className="help-block">Write using <a href="https://json-schema.org/">json-schema</a>.</span>
+              <Codemirror value={definition.schema} onChange={this.updateSchema} options={{
+                  mode: 'javascript',
+                  json: true,
+                  lineNumbers: true
+              }} />
             </div>
-            <div className="cold-md-6 col-sm-12">
-              <div className="form-group">
-                <label className="control-label">Form Preview</label>
-                <PreviewForm schema={definition.schema}/>
-              </div>
+            
+            <div className="form-group">
+              <label className="control-label">Form Preview</label>
+              <PreviewForm schema={definition.schema}/>
             </div>
 
             <div className="form-group">

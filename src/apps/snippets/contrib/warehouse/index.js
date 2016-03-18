@@ -25,6 +25,16 @@ export default function SnippetsApplicationFactory(baseUrl) {
     }).toArray();
   }
 
+  function snippetServiceLinks() {
+    return [{
+      link: baseUrl+'/import-definition',
+      title: 'Import Snippet Type',
+    }, {
+      link: baseUrl+'/add-definition',
+      title: 'Create Snippet Type',
+    }];
+  }
+
   return {
     type: 'snippets provider',
     actions,
@@ -33,6 +43,7 @@ export default function SnippetsApplicationFactory(baseUrl) {
     fixtures,
     tables: [baseUrl],
     snippetAddLinks,
+    snippetServiceLinks,
     routes: {
       path: baseUrl,
       component: 'div',

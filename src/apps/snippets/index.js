@@ -46,10 +46,16 @@ export default function snippetsApplicationFactory(baseUrl) {
               }
             }
           }));
+          let serviceLinks = _.flatten(_.filter(_.map(providers, provider => {
+            if (provider.snippetServiceLinks) {
+              return provider.snippetServiceLinks(state);
+            }
+          })));
           return {
             baseUrl,
             providers,
             addLinks,
+            serviceLinks,
             snippets: state.getIn(['tables', baseUrl])
           }
         })(ProviderList)
