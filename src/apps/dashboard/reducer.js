@@ -22,6 +22,10 @@ function craftAlert(state, type, message) {
 
 export default function dashboard(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case 'SHOW_SIGNUP':
+      return state.setIn(['signup-modal', 'visible'], true);
+    case 'DISMISS_SIGNUP':
+      return state.setIn(['signup-modal', 'visible'], false);
     case 'ADD_ALERT':
       return craftAlert(state, action.alert_type, action.message);
     case 'DISMISS_ALERT':

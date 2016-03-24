@@ -1,4 +1,7 @@
 import _modernJS from 'core-js';
+import _process from 'process';
+window.process = _process;
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';

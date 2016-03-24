@@ -28,10 +28,10 @@ export default function SnippetsApplicationFactory(baseUrl) {
   function snippetServiceLinks() {
     return [{
       link: baseUrl+'/import-definition',
-      title: 'Import Snippet Type',
+      title: 'Import Type',
     }, {
       link: baseUrl+'/add-definition',
-      title: 'Create Snippet Type',
+      title: 'Create Type',
     }];
   }
 
@@ -49,7 +49,7 @@ export default function SnippetsApplicationFactory(baseUrl) {
       component: 'div',
       indexRoute: null,
       childRoutes: [{
-        path: 'definition-list',
+        path: 'definition-list', //TODO indexRoute?
         component: connect((state, props) => {
           return {
             baseUrl: baseUrl,

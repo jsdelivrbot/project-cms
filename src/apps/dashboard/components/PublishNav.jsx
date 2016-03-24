@@ -7,28 +7,41 @@ import {loadUploader} from '~/middleware/uploader';
 
 import PublishButton from './PublishButton.jsx';
 
+import {showSignup} from '../actions';
+
 
 export class PublishNav extends React.Component {
   constructor(props, context) {
     super(props, context);
   }
 
-  render() {
+  publishZipFile = (event) => {
+    event.preventDefault()
     let {store} = this.context;
+    return publish(store, zipPublisher());
+  }
+
+  publishDefault = (event) => {
+    let {store} = this.context;
+    let {hostingConfig} = this.props;
+    return loadUploader(hostingConfig.toJS()).then(({publisher}) => {
+      return publish(store, publisher);
+    });
+  }
+
+  displaySignup = (event) => {
+    event.preventDefault()
+    this.props.showSignup();
+  }
+
+  render() {
     let hostingConfig = this.props.hostingConfig;
-    hostingConfig = hostingConfig ? hostingConfig.toJS() : null;
-    let publishDefault = () => {
-      return loadUploader(hostingConfig).then(({publisher}) => {
-        return publish(store, publisher);
-      });
-    }
-    let publishZipfile = () => {
-      return publish(store, zipPublisher());
-    }
 
     return <div className="nav navbar-nav navbar-right btn-group" role="group">
-      <PublishButton key="zip" publish={publishZipfile}>Export Zipfile</PublishButton>
-      {hostingConfig ? <PublishButton key="publisher" publish={publishDefault}>Publish</PublishButton> : null}
+      {hostingConfig
+        ? <PublishButton key="publisher" publish={this.publishDefault}>Publish</PublishButton>
+        : <button type="button" className="btn btn-primary" onClick={this.displaySignup}>Signup</button>}
+      <PublishButton key="zip" publish={this.publishZipfile}>Export Zipfile</PublishButton>
     </div>
   }
 }
@@ -41,4 +54,4 @@ export default connect(state => {
   return {
     hostingConfig: state.getIn(['services', 'hosting'])
   }
-})(PublishNav);
+}, {showSignup})(PublishNav);

@@ -27,4 +27,20 @@ export function setPlugins(plugins) {
   }
 }
 
-export default {addAlert, dismissAlert, pageTransition, setPlugins}
+export function showSignup() {
+  return {
+    type: 'SHOW_SIGNUP'
+  }
+}
+
+export function dismissSignup() {
+  return {
+    type: 'DISMISS_SIGNUP'
+  }
+}
+
+export function completeSignup() {
+  //TODO
+}
+
+export default {addAlert, dismissAlert, pageTransition, setPlugins, showSignup, dismissSignup}

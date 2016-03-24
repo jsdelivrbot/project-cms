@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import Form from "react-jsonschema-form";
+import FieldSet from "zbyte64/react-jsonschema-form/src/components/FieldSet";
 
 
 export default function ExtraForm({template, formData}) {
@@ -14,5 +14,5 @@ export default function ExtraForm({template, formData}) {
   } catch (e) {
     return <div>Invalid Extra Form JSON: <pre><code>{e.toString()}</code></pre></div>
   }
-  return <Form schema={schema} formData={formData}>{" "}</Form>
+  return <FieldSet schema={schema} formData={formData}/>
 }

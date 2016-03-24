@@ -37,10 +37,12 @@ System.config({
     "babel-preset-stage-0": "npm:babel-preset-stage-0@6.5.0",
     "babel-runtime": "npm:babel-runtime@5.8.35",
     "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+    "buffertools": "@empty",
     "codemirror": "npm:codemirror@5.11.0",
     "core-js": "npm:core-js@1.2.6",
     "create-hmac": "npm:create-hmac@1.1.4",
     "css": "npm:systemjs-plugin-css@0.1.20",
+    "deeper": "npm:deeper@2.1.0",
     "dynamo-down": "npm:dynamo-down@1.0.5",
     "eligrey/FileSaver.js": "github:eligrey/FileSaver.js@master",
     "fetch": "github:github/fetch@0.11.0",
@@ -54,10 +56,12 @@ System.config({
     "levelup": "npm:levelup@0.19.0",
     "localstorage-down": "npm:localstorage-down@0.6.6",
     "lodash": "npm:lodash@4.4.0",
+    "montagedata": "npm:montagedata@2.1.0",
     "mozilla/nunjucks": "github:mozilla/nunjucks@2.3.0",
     "node-uuid": "npm:node-uuid@1.4.7",
     "nunjucks": "github:mozilla/nunjucks@2.3.0",
     "path": "npm:path@0.12.7",
+    "process": "github:jspm/nodelibs-process@0.1.2",
     "react": "npm:react@0.14.7",
     "react-addons-shallow-compare": "npm:react-addons-shallow-compare@0.14.7",
     "react-codemirror": "npm:react-codemirror@0.2.5",
@@ -75,6 +79,7 @@ System.config({
     "stream-browserify": "npm:stream-browserify@2.0.1",
     "systemjs-json": "github:systemjs/plugin-json@0.1.0",
     "text": "github:systemjs/plugin-text@0.0.4",
+    "zbyte64/react-jsonschema-form": "github:zbyte64/react-jsonschema-form@component-FieldSet",
     "zone.js": "npm:zone.js@0.5.14",
     "~": "/project-cms/src",
     "github:floatdrop/plugin-jsx@1.2.1": {
@@ -151,6 +156,16 @@ System.config({
     },
     "github:jspm/nodelibs-vm@0.1.0": {
       "vm-browserify": "npm:vm-browserify@0.0.4"
+    },
+    "github:jspm/nodelibs-zlib@0.1.0": {
+      "browserify-zlib": "npm:browserify-zlib@0.1.4"
+    },
+    "github:zbyte64/react-jsonschema-form@component-FieldSet": {
+      "deeper": "npm:deeper@2.1.0",
+      "jsonschema": "npm:jsonschema@1.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "react": "npm:react@0.14.7",
+      "react-dom": "npm:react-dom@0.14.7"
     },
     "npm:abstract-leveldown@0.12.3": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -467,6 +482,14 @@ System.config({
       "parse-asn1": "npm:parse-asn1@5.0.0",
       "stream": "github:jspm/nodelibs-stream@0.1.0"
     },
+    "npm:browserify-zlib@0.1.4": {
+      "assert": "github:jspm/nodelibs-assert@0.1.0",
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "pako": "npm:pako@0.2.8",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "readable-stream": "npm:readable-stream@2.0.5",
+      "util": "github:jspm/nodelibs-util@0.1.0"
+    },
     "npm:buffer-xor@1.0.3": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
@@ -596,6 +619,9 @@ System.config({
       "tty": "github:jspm/nodelibs-tty@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
+    "npm:deeper@2.1.0": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0"
+    },
     "npm:deferred-leveldown@0.2.0": {
       "abstract-leveldown": "npm:abstract-leveldown@0.12.3",
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -631,6 +657,10 @@ System.config({
       "hash.js": "npm:hash.js@1.0.3",
       "inherits": "npm:inherits@2.0.1",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    },
+    "npm:encoding@0.1.12": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "iconv-lite": "npm:iconv-lite@0.4.13"
     },
     "npm:errno@0.1.4": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -737,6 +767,10 @@ System.config({
     "npm:isarray@1.0.0": {
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
+    "npm:isomorphic-fetch@2.2.1": {
+      "node-fetch": "npm:node-fetch@1.4.0",
+      "whatwg-fetch": "npm:whatwg-fetch@0.11.0"
+    },
     "npm:jsonschema@1.1.0": {
       "url": "github:jspm/nodelibs-url@0.1.0"
     },
@@ -825,6 +859,23 @@ System.config({
       "minimist": "npm:minimist@0.0.8",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:montagedata@2.1.0": {
+      "babel-runtime": "npm:babel-runtime@5.8.35",
+      "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1",
+      "lodash": "npm:lodash@4.4.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "querystring": "github:jspm/nodelibs-querystring@0.1.0"
+    },
+    "npm:node-fetch@1.4.0": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
+      "encoding": "npm:encoding@0.1.12",
+      "http": "github:jspm/nodelibs-http@1.7.1",
+      "https": "github:jspm/nodelibs-https@0.1.0",
+      "is-stream": "npm:is-stream@1.0.1",
+      "stream": "github:jspm/nodelibs-stream@0.1.0",
+      "url": "github:jspm/nodelibs-url@0.1.0",
+      "zlib": "github:jspm/nodelibs-zlib@0.1.0"
     },
     "npm:node-uuid@1.4.7": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",

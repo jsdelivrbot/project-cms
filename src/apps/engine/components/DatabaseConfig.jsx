@@ -28,6 +28,8 @@ export default class DatabaseConfig extends React.Component {
         return <BrowserConfig/>
       case "dynamodb":
         return <DynamoConfig updateValue={this.updateValue} value={this.state} />
+      case "montage":
+        return <MontageConfig updateValue={this.updateValue} value={this.state} />
     }
     return null;
   }
@@ -51,6 +53,7 @@ export default class DatabaseConfig extends React.Component {
               <option>Select Database Backend</option>
               <option value="browser">Browser</option>
               <option value="dynamodb">DynamoDB</option>
+              <option value="montage">Montage</option>
             </select>
           </div>
         </div>
@@ -88,6 +91,31 @@ export function DynamoConfig({value, updateValue}) {
       </div>
       <div className="form-group col-sm-12">
         <label>DynamoDB Table</label>
+        <span className="help-block">Ensure that you have permissions to read & write</span>
+        <input name="table" value={table} onChange={updateValue}
+          type="text" className="form-control" placeholder="tableName"/>
+      </div>
+    </div>
+  )
+}
+
+export function MontageConfig({value, updateValue}) {
+  let {token, domain, table} = value;
+  return (
+    <div className="row">
+      <input type="hidden" name="module" value="~/services/montage"/>
+      <div className="form-group col-sm-6">
+        <label>API Token</label>
+        <input name="token" value={token} onChange={updateValue}
+          type="text" className="form-control" placeholder="XXXXX"/>
+      </div>
+      <div className="form-group col-sm-6">
+        <label>Domain</label>
+        <input name="domain" value={domain} onChange={updateValue}
+          type="text" className="form-control" placeholder="XXXXX"/>
+      </div>
+      <div className="form-group col-sm-12">
+        <label>Montage Table</label>
         <span className="help-block">Ensure that you have permissions to read & write</span>
         <input name="table" value={table} onChange={updateValue}
           type="text" className="form-control" placeholder="tableName"/>

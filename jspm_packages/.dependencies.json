@@ -1062,5 +1062,46 @@
   },
   "npm:fbjs@0.6.1": {
     "process": "github:jspm/nodelibs-process@^0.1.0"
+  },
+  "npm:isomorphic-fetch@2.2.1": {
+    "node-fetch": "npm:node-fetch@^1.0.1",
+    "whatwg-fetch": "npm:whatwg-fetch"
+  },
+  "npm:whatwg-fetch@0.11.0": {},
+  "npm:montagedata@2.1.0": {
+    "babel-runtime": "npm:babel-runtime@5.6.15",
+    "isomorphic-fetch": "npm:isomorphic-fetch@^2.1.0",
+    "lodash": "npm:lodash@3.10.0",
+    "process": "github:jspm/nodelibs-process@^0.1.0",
+    "querystring": "github:jspm/nodelibs-querystring@^0.1.0"
+  },
+  "npm:encoding@0.1.12": {
+    "iconv-lite": "npm:iconv-lite@~0.4.13",
+    "buffer": "github:jspm/nodelibs-buffer@^0.1.0"
+  },
+  "npm:node-fetch@1.4.0": {
+    "encoding": "npm:encoding@^0.1.11",
+    "is-stream": "npm:is-stream@^1.0.1",
+    "stream": "github:jspm/nodelibs-stream@^0.1.0",
+    "buffer": "github:jspm/nodelibs-buffer@^0.1.0",
+    "http": "github:jspm/nodelibs-http@^1.7.0",
+    "url": "github:jspm/nodelibs-url@^0.1.0",
+    "https": "github:jspm/nodelibs-https@^0.1.0",
+    "zlib": "github:jspm/nodelibs-zlib@^0.1.0"
+  },
+  "npm:is-stream@1.0.1": {},
+  "github:jspm/nodelibs-zlib@0.1.0": {
+    "browserify-zlib": "npm:browserify-zlib@^0.1.4"
+  },
+  "npm:browserify-zlib@0.1.4": {
+    "readable-stream": "npm:readable-stream@^2.0.2",
+    "pako": "npm:pako@~0.2.0",
+    "buffer": "github:jspm/nodelibs-buffer@^0.1.0",
+    "process": "github:jspm/nodelibs-process@^0.1.0",
+    "util": "github:jspm/nodelibs-util@^0.1.0",
+    "assert": "github:jspm/nodelibs-assert@^0.1.0"
+  },
+  "npm:deeper@2.1.0": {
+    "buffer": "github:jspm/nodelibs-buffer@^0.1.0"
   }
 }

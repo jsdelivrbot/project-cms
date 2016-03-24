@@ -1,5 +1,5 @@
 import React from 'react';
-import Form from "react-jsonschema-form";
+import FieldSet from "zbyte64/react-jsonschema-form/src/components/FieldSet";
 
 
 export default function FormPreview({schema}) {
@@ -9,5 +9,5 @@ export default function FormPreview({schema}) {
   } catch (e) {
     return <div>Invalid JSON: <pre><code>{e.toString()}</code></pre></div>
   }
-  return <Form schema={schema}>{" "}</Form>
+  return <FieldSet schema={schema}/>
 }

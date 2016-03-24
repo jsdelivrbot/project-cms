@@ -1,11 +1,27 @@
-Project Description
 
-https://gist.github.com/zbyte64/95f47669667fa5aff94f
+Static site generator.
 
-Currently an experimentation in jspm, Systemjs, redux with immutable state, and client side CMS rendering
+# Getting Started
+
+```
+  npm install -g project-cms
+
+  project-cms start
+```
 
 
-# Getting started
+1. Open browser to localhost
+2. Sign up
+3. Publish
+
+# Installing apps
+
+```
+  project-cms install github:zbyte64/gallery
+```
+
+
+# Development
 
 Install dependencies:
 
