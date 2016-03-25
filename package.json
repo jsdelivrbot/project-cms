@@ -34,6 +34,7 @@
       "react": "npm:react@^0.14.3",
       "react-addons-shallow-compare": "npm:react-addons-shallow-compare@^0.14.6",
       "react-codemirror": "npm:react-codemirror@^0.2.2",
+      "react-cropper": "npm:react-cropper@^0.6.2",
       "react-dom": "npm:react-dom@^0.14.3",
       "react-form-builder": "github:blackjk3/react-form-builder@master",
       "react-jsonschema-form": "npm:react-jsonschema-form@^0.15.0",
@@ -48,7 +49,7 @@
       "remarkable": "npm:remarkable@^1.6.1",
       "stream-browserify": "npm:stream-browserify@2.0.1",
       "text": "github:systemjs/plugin-text@^0.0.4",
-      "zbyte64/react-jsonschema-form": "github:zbyte64/react-jsonschema-form@component%2525252525252525252FFieldSet",
+      "zbyte64/react-jsonschema-form": "github:zbyte64/react-jsonschema-form@component%252525252525252525252FFieldSet",
       "zone.js": "npm:zone.js@^0.5.8"
     },
     "devDependencies": {

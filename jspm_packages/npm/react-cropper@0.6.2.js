@@ -1,0 +1,1 @@
+module.exports = require("npm:react-cropper@0.6.2/dist/react-cropper.js");

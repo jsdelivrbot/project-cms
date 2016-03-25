@@ -34,6 +34,11 @@ export default class AddPage extends React.Component {
     this.setState(changes);
   }
 
+  updateFormData = (state) => {
+    //What about state.errors?
+    this.setState(state.formData);
+  }
+
   //for use with codemirror
   updateCode = (name, code) => {
     var changes = {};
@@ -49,6 +54,8 @@ export default class AddPage extends React.Component {
 
   render() {
     let page = this.state;
+    let {ExtraForm} = this.props;
+    
     return <div className="container-fluid">
       <MediaSidebar/>
       <div className="row">
@@ -83,6 +90,8 @@ export default class AddPage extends React.Component {
                   lineNumbers: true
               }} />
             </div>
+
+            <ExtraForm templatePath={page.template} formData={page} onChange={this.updateFormData}/>
 
             <div className="form-group">
               <button className="btn btn-default" type="button" data-toggle="collapse" data-target="#pageAdvanced" aria-expanded="false" aria-controls="collapseExample">

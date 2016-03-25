@@ -6,11 +6,12 @@ export function uploadFile(file, onProgress) {
   }
 }
 
-export function replaceFile(file, path) {
+export function replaceFile(file, path, onProgress) {
   file.path = path;
   return {
     type: 'REPLACE_FILE',
-    file
+    file,
+    onProgress
   }
 }
 

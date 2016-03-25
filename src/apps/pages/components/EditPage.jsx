@@ -34,6 +34,11 @@ export default class EditPage extends React.Component {
     this.setState(changes);
   }
 
+  updateFormData = (state) => {
+    //What about state.errors?
+    this.setState(state.formData);
+  }
+
   //for use with codemirror
   updateCode = (name, code) => {
     var changes = {};
@@ -92,7 +97,7 @@ export default class EditPage extends React.Component {
               }} />
             </div>
 
-            <ExtraForm templatePath={page.template} formData={page}/>
+            <ExtraForm templatePath={page.template} formData={page} onChange={this.updateFormData}/>
 
             <div className="form-group">
               <button className="btn btn-default" type="button" data-toggle="collapse" data-target="#pageAdvanced" aria-expanded="false" aria-controls="collapseExample">

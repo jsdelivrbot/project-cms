@@ -1,6 +1,52 @@
 import React from 'react';
 import _ from 'lodash';
+import Cropper from 'react-cropper';
 
+
+//TODO click thumbnail -> modal to crop
+//ASK_FOR_CROP ?
+//Cropper Dashboard Plugin?
+//Cant it just be embedded?
+
+export class Thumbnail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cropping: false
+    };
+  }
+
+  startNewCrop = (event) => {
+    event.preventDefault();
+    this.setState({cropping: true});
+  }
+
+  cancelCrop = (event) => {
+    event.preventDefault();
+    this.setState({cropping: false});
+  }
+
+  doCrop = (event) => {
+    event.preventDefault();
+    //TODO upload replace or request thumbnail?
+    this.refs.cropper.getCroppedCanvas().toDataURL();
+    //this.props.replaceFile(dataURLToBlob(canvasDataUrl), thumbnail.path, onProgress)
+    this.setState({cropping: false});
+  }
+
+  render() {
+    let {thumbnail, aspectRatio, original} = this.props;
+    let {cropping} = this.state;
+    if (cropping) {
+      return <div>
+        <Cropper aspectRatio={aspectRatio} src={original} ref="cropper"/>
+        <button type="button" className="btn btn-primary" onClick={this.doCrop}>Crop</button>
+        <button type="button" className="btn btn-default" onClick={this.cancelCrop}>Cancel</button>
+      </div>
+    }
+    return <img src={thumbnail.url} width={thumbnail.width} onClick={this.startNewCrop}/>
+  }
+}
 
 export default class EditPicture extends React.Component {
   constructor(props) {
@@ -71,7 +117,7 @@ export default class EditPicture extends React.Component {
             {_.map(picture.thumbnails, (thumbnail, key) => (
               <div className="form-group" key={key}>
                 <label className="control-label">{key}</label>
-                <img src={thumbnail.url} width="50"/>
+                <Thumbnail thumbnail={thumbnail} aspectRatio={thumbnail.width/thumbnail.height} original={picture.url}/>
               </div>
             ))}
             <div className="form-group">

@@ -65,6 +65,7 @@ System.config({
     "react": "npm:react@0.14.7",
     "react-addons-shallow-compare": "npm:react-addons-shallow-compare@0.14.7",
     "react-codemirror": "npm:react-codemirror@0.2.5",
+    "react-cropper": "npm:react-cropper@0.6.2",
     "react-dom": "npm:react-dom@0.14.7",
     "react-jsonschema-form": "npm:react-jsonschema-form@0.15.0",
     "react-redux": "npm:react-redux@4.4.0",
@@ -965,6 +966,11 @@ System.config({
       "codemirror": "npm:codemirror@5.11.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
       "react": "npm:react@0.14.7"
+    },
+    "npm:react-cropper@0.6.2": {
+      "cropperjs": "npm:cropperjs@0.5.6",
+      "react": "npm:react@0.14.7",
+      "react-dom": "npm:react-dom@0.14.7"
     },
     "npm:react-dom@0.14.7": {
       "react": "npm:react@0.14.7"
