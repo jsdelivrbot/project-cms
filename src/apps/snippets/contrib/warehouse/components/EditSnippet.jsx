@@ -19,6 +19,10 @@ export default class EditSnippet extends React.Component {
     this.setState(changes);
   }
 
+  updateForm = (state) => {
+    this.setState(state.formData);
+  }
+
   render() {
     let snippet = this.state;
     let {snippetDefinition, Form} = this.props;
@@ -38,7 +42,7 @@ export default class EditSnippet extends React.Component {
                 placeholder="snippet-name"/>
             </div>
 
-            <Form formData={snippet} onChange={this.updateForm}/>
+            <Form formData={snippet} onChange={this.updateForm} schema={snippetDefinition.get('schema')}/>
             <div className="form-group">
               <button type="submit" className="btn btn-primary">Save</button>
             </div>
