@@ -21,6 +21,8 @@ import {initializeHosting} from './reducers/services';
 import {appsLoader, loadAppsTables, makeReducer, sendLoadingMessage} from './appsLoader';
 import AppRouter from './components/AppRouter.jsx';
 
+import rjsfStyling from "zbyte64/react-jsonschema-form/css/react-jsonschema-form.css!";
+
 
 var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, uploaderMiddleware, thumbnailerMiddleware, promiseMiddleware, askForMiddleware)(createStore);
 

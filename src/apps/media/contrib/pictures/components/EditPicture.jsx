@@ -2,17 +2,23 @@ import React from 'react';
 import _ from 'lodash';
 import Cropper from 'react-cropper';
 
+import {dataURLToBlob} from '~/middleware/thumbnailer';
+
 
 //TODO click thumbnail -> modal to crop
 //ASK_FOR_CROP ?
 //Cropper Dashboard Plugin?
 //Cant it just be embedded?
+function Uploading({percent}) {
+  return <progress value={percent} max={100}>{percent} %</progress>
+}
 
 export class Thumbnail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cropping: false
+      cropping: false,
+      uploading: false
     };
   }
 
@@ -29,17 +35,53 @@ export class Thumbnail extends React.Component {
   doCrop = (event) => {
     event.preventDefault();
     //TODO upload replace or request thumbnail?
-    this.refs.cropper.getCroppedCanvas().toDataURL();
-    //this.props.replaceFile(dataURLToBlob(canvasDataUrl), thumbnail.path, onProgress)
-    this.setState({cropping: false});
+    let canvasDataUrl = this.refs.cropper.getCroppedCanvas().toDataURL();
+    let {thumbnail} = this.props;
+    this.setState({
+      uploading: true,
+      percentUploaded: 0
+    });
+    this.props.replaceFile(dataURLToBlob(canvasDataUrl), thumbnail.path, this.onProgress).then(result => {
+      this.setState({
+        uploading: false,
+        cropping: false,
+      });
+    }, error => {
+      console.error("Error while attempting to replace file:")
+      console.error(error);
+      this.setState({
+        uploading: false,
+        error: error
+      });
+    });
+  }
+
+  onProgress = (event) => {
+    this.setState({
+      percentUploaded: Math.round(event.loaded / event.total * 100)
+    });
+  }
+
+  resetError = (event) => {
+    event.preventDefault();
+    this.setState({
+      error: null
+    });
   }
 
   render() {
-    let {thumbnail, aspectRatio, original} = this.props;
-    let {cropping} = this.state;
+    let {thumbnail, original} = this.props;
+    let aspectRatio = thumbnail.width/thumbnail.height;
+    let {cropping, uploading, percentUploaded, error} = this.state;
+    if (error) {
+      return <pre onClick={this.resetError}>Error: <code>{error.toString()}</code></pre>
+    }
+    if (uploading) {
+      return <Uploading percent={percentUploaded}/>
+    }
     if (cropping) {
       return <div>
-        <Cropper aspectRatio={aspectRatio} src={original} ref="cropper"/>
+        <Cropper aspectRatio={aspectRatio} src={original} width={thumbnail.width} ref="cropper"/>
         <button type="button" className="btn btn-primary" onClick={this.doCrop}>Crop</button>
         <button type="button" className="btn btn-default" onClick={this.cancelCrop}>Cancel</button>
       </div>
@@ -97,6 +139,7 @@ export default class EditPicture extends React.Component {
   }
 
   render() {
+    let {replaceFile} = this.props;
     let {picture, uploading} = this.state;
 
     return <div className="container-fluid">
@@ -117,7 +160,7 @@ export default class EditPicture extends React.Component {
             {_.map(picture.thumbnails, (thumbnail, key) => (
               <div className="form-group" key={key}>
                 <label className="control-label">{key}</label>
-                <Thumbnail thumbnail={thumbnail} aspectRatio={thumbnail.width/thumbnail.height} original={picture.url}/>
+                <Thumbnail thumbnail={thumbnail} original={picture.url} replaceFile={replaceFile}/>
               </div>
             ))}
             <div className="form-group">

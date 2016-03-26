@@ -58,9 +58,20 @@ export default class AddTemplateSettings extends React.Component {
 
             <div className="cold-md-6 col-sm-12">
               <div className="form-group">
-                <label className="control-label">Additional Fields</label>
+                <label className="control-label">Fields</label>
                 <span className="help-block">Write using <a href="https://json-schema.org/">json-schema</a>.</span>
                 <Codemirror value={template.schema} onChange={this.updateSchema} options={{
+                    mode: 'javascript',
+                    json: true,
+                    lineNumbers: true
+                }} />
+              </div>
+            </div>
+            <div className="cold-md-6 col-sm-12">
+              <div className="form-group">
+                <label className="control-label">UI Schema for Fields</label>
+                <span className="help-block">Write using <a href="https://mozilla-services.github.io/react-jsonschema-form/">ui-schema</a>.</span>
+                <Codemirror value={template.uiSchema} onChange={this.updateUiSchema} options={{
                     mode: 'javascript',
                     json: true,
                     lineNumbers: true

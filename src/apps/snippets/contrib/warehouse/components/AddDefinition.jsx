@@ -35,6 +35,12 @@ export default class AddDefinition extends React.Component {
     });
   }
 
+  updateUiSchema = (code) => {
+    this.setState({
+      uiSchema: code
+    });
+  }
+
   updateTemplateSource = (code) => {
     this.setState({
       templateSource: code
@@ -74,10 +80,20 @@ export default class AddDefinition extends React.Component {
                   lineNumbers: true
               }} />
             </div>
-            
+
+            <div className="form-group">
+              <label className="control-label">UI Schema</label>
+              <span className="help-block">UI Definitions: <a href="https://mozilla-services.github.io/react-jsonschema-form/">ui-schema</a>.</span>
+              <Codemirror value={definition.uiSchema} onChange={this.updateUiSchema} options={{
+                  mode: 'javascript',
+                  json: true,
+                  lineNumbers: true
+              }} />
+            </div>
+
             <div className="form-group">
               <label className="control-label">Form Preview</label>
-              <PreviewForm schema={definition.schema}/>
+              <PreviewForm schema={definition.schema} uiSchema={definition.uiSchema}/>
             </div>
 
             <div className="form-group">

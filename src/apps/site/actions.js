@@ -7,7 +7,8 @@ export function updateSite(baseUrl, site) {
       update_object: site,
       table_name: baseUrl,
       object_id: 'site'
-    }
+    },
+    alert_message: `Updated Site`,
   };
 }
 

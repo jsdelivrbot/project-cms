@@ -135,7 +135,7 @@ export default function thumbnailerMiddleware({getState}) {
 
 
 //TODO finalize options
-function thumb(img, width, height, quality, resolve) {
+export function thumb(img, width, height, quality, resolve) {
   var canvas = document.createElement('canvas');
   var ctx = canvas.getContext('2d');
 
@@ -166,7 +166,7 @@ function thumb(img, width, height, quality, resolve) {
   }
 }
 
-function dataURLToBlob(dataURL) {
+export function dataURLToBlob(dataURL) {
   var BASE64_MARKER = ';base64,';
   if (dataURL.indexOf(BASE64_MARKER) == -1) {
     var parts = dataURL.split(',');
