@@ -54,7 +54,7 @@ export default class EditDefinition extends React.Component {
         </div>
       </div>
       <div className="row">
-        <div className="col-md-6 col-sm-12">
+        <div className="col-md-12 col-sm-12">
           <form onSubmit={this.receiveSubmit}>
             <div className="form-group">
               <label className="control-label">Description</label>

@@ -19,8 +19,9 @@ export default function DefinitionList({definitions, baseUrl}) {
       <div className="col-md-6">
         <h1>Definitions</h1>
       </div>
-      <div className="col-md-12">
+      <div className="col-md-12 btn-group">
         <Link to={baseUrl+"/add-definition"} className="btn btn-primary">Add Definition</Link>
+        <Link to={baseUrl+"/import-definition"} className="btn btn-primary">Import Definition</Link>
       </div>
     </div>
     <div className="table-responsive">

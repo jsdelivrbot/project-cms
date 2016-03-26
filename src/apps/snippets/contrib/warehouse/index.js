@@ -27,11 +27,8 @@ export default function SnippetsApplicationFactory(baseUrl) {
 
   function snippetServiceLinks() {
     return [{
-      link: baseUrl+'/import-definition',
-      title: 'Import Type',
-    }, {
-      link: baseUrl+'/add-definition',
-      title: 'Create Type',
+      link: baseUrl,
+      title: 'Warehouse',
     }];
   }
 
@@ -47,16 +44,15 @@ export default function SnippetsApplicationFactory(baseUrl) {
     routes: {
       path: baseUrl,
       component: 'div',
-      indexRoute: null,
-      childRoutes: [{
-        path: 'definition-list', //TODO indexRoute?
+      indexRoute: {
         component: connect((state, props) => {
           return {
             baseUrl: baseUrl,
             definitions: state.getIn(['tables', baseUrl]),
           }
         })(DefinitionList)
-      }, {
+      },
+      childRoutes: [{
         path: 'import-definition',
         component: connect((state, props) => {
           return {
