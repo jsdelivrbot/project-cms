@@ -1,7 +1,7 @@
 
 Static site generator.
 
-# Getting Started
+# Getting Started [TODO]
 
 ```
   npm install -g project-cms
@@ -14,7 +14,7 @@ Static site generator.
 2. Sign up
 3. Publish
 
-# Installing apps
+# Installing apps [TODO]
 
 ```
   project-cms install github:zbyte64/gallery
@@ -44,3 +44,4 @@ Run project:
 * support markdown classes
 * tagging for templates (for application filtering and selecting default template)
 * fixture management (when adding a new app ask to load specific fixtures, allow table purge of apps)
+* cli
