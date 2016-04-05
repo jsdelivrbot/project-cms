@@ -40,7 +40,7 @@ export class PublishNav extends React.Component {
     return <div className="nav navbar-nav navbar-right btn-group" role="group">
       {hostingConfig
         ? <PublishButton key="publisher" publish={this.publishDefault}>Publish</PublishButton>
-        : <button type="button" className="btn btn-primary" onClick={this.displaySignup}>Signup</button>}
+        : <button type="button" className="btn btn-primary navbar-btn" onClick={this.displaySignup}>Signup</button>}
       <PublishButton key="zip" publish={this.publishZipfile}>Export Zipfile</PublishButton>
     </div>
   }
