@@ -1,5 +1,6 @@
 import request from 'request';
 import express from 'express';
+import process from 'process';
 import _ from 'lodash';
 
 export var app = express();
@@ -12,8 +13,6 @@ function getOnly(req, res, next) {
   }
   next();
 }
-
-app.use(getOnly);
 
 //host app code
 app.use('/project-cms', express.static(__dirname + '/../'));
@@ -28,11 +27,25 @@ function serveGithub(res, username, repository, path, version="master") {
   return r;
 }
 
+function serveIPFS(res, path) {
+  var url = `${process.env.IPFS_API_ADDRESS}/${path}`;
+
+  var r = request(url);
+  r.on('response', function(resp) {
+    r.pipe(res);
+  });
+  return r;
+}
+
 //github proxy view
-app.use('/github/:username/:repository', function(req, res) {
+app.use('/github/:username/:repository', getOnly, function(req, res) {
   var {username, repository} = req.params;
 
   return serveGithub(res, username, repository, req.path);
+});
+
+app.use('/ipfs', function(req, res) {
+  return serveIPFS(res, '/ipfs'+req.path)
 });
 
 app.get('/', function(req, res) {
