@@ -1,0 +1,1 @@
+module.exports = require("npm:base-x@1.0.4/index.js");

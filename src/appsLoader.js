@@ -106,6 +106,9 @@ export function makeReducer(apps) {
     if (app.reducer) {
       col[app.baseUrl] = app.reducer;
     }
+    if (app.reducers) {
+      col = _.assign(col, app.reducers);
+    }
     return col;
   }, {
     tables: tablesReducer,

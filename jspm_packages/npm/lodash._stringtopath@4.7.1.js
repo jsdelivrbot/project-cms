@@ -1,0 +1,1 @@
+module.exports = require("npm:lodash._stringtopath@4.7.1/index");

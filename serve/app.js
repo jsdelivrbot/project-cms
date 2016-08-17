@@ -28,6 +28,16 @@ function serveGithub(res, username, repository, path, version="master") {
 }
 
 function serveIPFS(res, path) {
+  var url = `${process.env.IPFS_SERVE_ADDRESS}/${path}`;
+
+  var r = request(url);
+  r.on('response', function(resp) {
+    r.pipe(res);
+  });
+  return r;
+}
+
+function serveIPFSApi(res, path) {
   var url = `${process.env.IPFS_API_ADDRESS}/${path}`;
 
   var r = request(url);
@@ -48,8 +58,16 @@ app.use('/ipfs', function(req, res) {
   return serveIPFS(res, '/ipfs'+req.path)
 });
 
+app.use('/ipns', function(req, res) {
+  return serveIPFS(res, '/ipns'+req.path)
+});
+
 app.get('/', function(req, res) {
   return res.redirect('/project-cms/index.html');
+});
+
+app.use(function(req, res) {
+  return serveIPFSApi(res, req.path);
 });
 
 
