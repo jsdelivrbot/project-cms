@@ -1,9 +1,11 @@
-import request from 'request';
-import express from 'express';
-import process from 'process';
-import _ from 'lodash';
+const request = require('request');
+const express = require('express');
+const process = require('process');
+const _ = require('lodash');
 
-export var app = express();
+
+var app = express();
+exports.app = app;
 
 /* GET only requests */
 function getOnly(req, res, next) {
@@ -27,26 +29,6 @@ function serveGithub(res, username, repository, path, version="master") {
   return r;
 }
 
-function serveIPFS(res, path) {
-  var url = `${process.env.IPFS_SERVE_ADDRESS}/${path}`;
-
-  var r = request(url);
-  r.on('response', function(resp) {
-    r.pipe(res);
-  });
-  return r;
-}
-
-function serveIPFSApi(res, path) {
-  var url = `${process.env.IPFS_API_ADDRESS}/${path}`;
-
-  var r = request(url);
-  r.on('response', function(resp) {
-    r.pipe(res);
-  });
-  return r;
-}
-
 //github proxy view
 app.use('/github/:username/:repository', getOnly, function(req, res) {
   var {username, repository} = req.params;
@@ -54,27 +36,6 @@ app.use('/github/:username/:repository', getOnly, function(req, res) {
   return serveGithub(res, username, repository, req.path);
 });
 
-app.use('/ipfs', function(req, res) {
-  return serveIPFS(res, '/ipfs'+req.path)
-});
-
-app.use('/ipns', function(req, res) {
-  return serveIPFS(res, '/ipns'+req.path)
-});
-
 app.get('/', function(req, res) {
   return res.redirect('/project-cms/index.html');
-});
-
-app.use(function(req, res) {
-  return serveIPFSApi(res, req.path);
-});
-
-
-
-var server = app.listen(8080, function() {
-  var host = server.address().address;
-  var port = server.address().port;
-
-  console.log(`Listening at http://${host}:${port}`)
 });
