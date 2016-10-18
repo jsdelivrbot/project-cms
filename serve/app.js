@@ -2,6 +2,8 @@ import request from 'request';
 import express from 'express';
 import process from 'process';
 import _ from 'lodash';
+const ipfsDaemon = require('ipfs-daemon');
+
 
 export var app = express();
 
@@ -12,6 +14,19 @@ function getOnly(req, res, next) {
     return res.sendStatus(400);
   }
   next();
+}
+
+function constructIPFSService() {
+  console.log("Starting IPFS deamon...");
+  const conf = {
+    //IpfsDataDir: `/tmp/ipfs-session-${sessionId}`,
+    Addresses: {
+      API: '/ip4/127.0.0.1/tcp/0',
+      Swarm: ['/ip4/0.0.0.0/tcp/0'],
+      Gateway: '/ip4/0.0.0.0/tcp/0'
+    },
+  };
+  return ipfsDaemon(conf)
 }
 
 //host app code
@@ -27,18 +42,8 @@ function serveGithub(res, username, repository, path, version="master") {
   return r;
 }
 
-function serveIPFS(res, path) {
-  var url = `${process.env.IPFS_SERVE_ADDRESS}/${path}`;
-
-  var r = request(url);
-  r.on('response', function(resp) {
-    r.pipe(res);
-  });
-  return r;
-}
-
-function serveIPFSApi(res, path) {
-  var url = `${process.env.IPFS_API_ADDRESS}/${path}`;
+function pipeRequest(address, res, path) {
+  var url = `${address}/${path}`;
 
   var r = request(url);
   r.on('response', function(resp) {
@@ -54,27 +59,35 @@ app.use('/github/:username/:repository', getOnly, function(req, res) {
   return serveGithub(res, username, repository, req.path);
 });
 
-app.use('/ipfs', function(req, res) {
-  return serveIPFS(res, '/ipfs'+req.path)
-});
-
-app.use('/ipns', function(req, res) {
-  return serveIPFS(res, '/ipns'+req.path)
-});
-
 app.get('/', function(req, res) {
   return res.redirect('/project-cms/index.html');
 });
 
-app.use(function(req, res) {
-  return serveIPFSApi(res, req.path);
-});
+
+constructIPFSService().then(res => {
+  //console.log("IPFS daemon result:", res)
+  let {daemon} = res;
+  console.log(daemon.apiAddr, daemon.gatewayAddr)
+  let apiAddr = 'http://127.0.0.1:'+_.last(daemon.apiAddr.split('/'));
+  let gatewayAddr = 'http://127.0.0.1:'+_.last(daemon.gatewayAddr.split(':'));
 
 
+  app.use('/ipfs', getOnly, function(req, res) {
+    return pipeRequest(gatewayAddr, res, '/ipfs'+req.path)
+  });
 
-var server = app.listen(8080, function() {
-  var host = server.address().address;
-  var port = server.address().port;
+  app.use('/ipns', getOnly, function(req, res) {
+    return pipeRequest(gatewayAddr, res, '/ipns'+req.path)
+  });
 
-  console.log(`Listening at http://${host}:${port}`)
-});
+  app.use(function(req, res) {
+    return pipeRequest(apiAddr, res, req.path);
+  });
+
+  var server = app.listen(8080, function() {
+    var host = server.address().address;
+    var port = server.address().port;
+
+    console.log(`Listening at http://${host}:${port}`)
+  });
+}).catch(error => console.error(error));

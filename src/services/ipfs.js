@@ -4,10 +4,17 @@ import _ from 'lodash';
 
 //CONSIDER: there is no replace unless using ipns
 
-export var IPFS_CLIENT = ipfsAPI({host: 'ipfs', port: '5001', procotol: 'http'});
+export var IPFS_CLIENT = ipfsAPI({
+    host: window.location.hostname,
+    port: window.location.port,
+    procotol: window.location.protocol.substr(0, window.location.protocol.length-1),
+});
 
 function put(ipfsClient, {path, content, mimetype}, onProgress) {
-
+    //no onProgress unless maybe:
+    //https://github.com/ipfs/interface-ipfs-core/tree/master/API/files#createaddstream
+    //TODO path does what?
+    return ipfsClient.files.add({path, content})
 }
 
 function _uploader(ipfsClient, files, overwrite, onProgress) {
@@ -26,21 +33,17 @@ function _uploader(ipfsClient, files, overwrite, onProgress) {
 
   return Promise.all(_.map(files, (file, index) => {
     total += file.size;
-    //TODO awsConfig.prefix
-    //we only want to prepend prefix if it is a new upload, mot a replace action
-    //TODO what sort of path can we specify?
+    //we only want to prepend prefix if it is a new upload, not a replace action
+    //TODO path does nothing, track internally
     let path = file.path;
     if (!path) {
       let id = v4();
       let extension = _.last(file.name.split('.'));
       path = `/media/${id}.${extension}`;
     }
-    if (!overwrite && awsConfig.prefix) {
-      path = awsConfig.prefix + path;
-    }
     let content = file;
     let mimetype = file.type;
-    return put(awsConfig, {
+    return put(IPFS_CLIENT, {
       path,
       content,
       mimetype
@@ -63,7 +66,7 @@ export function publisherFactory(awsConfig) {
     return window.open(url, '_blank');
   }
 
-  let pushContent = _.partial(put, ipfs);
+  let pushContent = _.partial(put, IPFS_CLIENT);
 
   return {
     pushContent,
