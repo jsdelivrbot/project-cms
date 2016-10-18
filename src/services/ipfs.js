@@ -1,4 +1,5 @@
 import ipfsAPI from 'ipfs-api';
+import {v4} from 'node-uuid';
 import _ from 'lodash';
 
 

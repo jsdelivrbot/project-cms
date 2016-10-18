@@ -64,6 +64,8 @@ export class LevelupMultiplexer {
         .on('data', function(data) {
           if (typeof data.value !== 'undefined') {
             if (!key_values) key_values = {};
+            //all objects have an id attribute
+            if (!data.value.id) data.value.id = data.key;
             key_values[data.key] = data.value;
           }
         })
@@ -151,6 +153,12 @@ function toImmut(obj) {
   return fromJS(obj);
 }
 
+function setAttribute(obj, key, value) {
+  if (_.isFunction(obj.toJS)) return obj.set(key, value);
+  obj[key] = value;
+  return obj;
+}
+
 
 const INITIAL_STATE = Map();
 
@@ -178,9 +186,11 @@ export function tablesReducer(state=INITIAL_STATE, action) {
 }
 
 export function recordChange(state, record_change) {
-  const { new_object, update_object, remove_object, table_name, object_id } = record_change;
+  let { new_object, update_object, remove_object, table_name, object_id } = record_change;
   if (new_object) {
     console.log("New object:", table_name, object_id);
+    //all objects have an id attribute
+    new_object = setAttribute(new_object, 'id', object_id);
     storage.putObject(table_name, object_id, toJS(new_object));
     return state.setIn([table_name, object_id], toImmut(new_object));
   } else if (update_object) {
@@ -188,7 +198,7 @@ export function recordChange(state, record_change) {
     storage.putObject(table_name, object_id, toJS(update_object));
     return state.setIn([table_name, object_id], toImmut(update_object));
   } else if (remove_object) {
-    storage.deleteObject(table_name, object_Id)
+    storage.deleteObject(table_name, object_id)
     return state.deleteIn([table_name, object_id]);
   }
   console.warn("Received invalid record_change:", record_change);
