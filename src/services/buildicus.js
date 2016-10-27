@@ -2,6 +2,7 @@ import _ from 'lodash';
 import levelup from 'levelup';
 import querystring from 'querystring';
 import {AbstractLevelDOWN, AbstractIterator} from 'abstract-leveldown';
+import {v4} from 'node-uuid';
 
 
 export class BuildicusIterator extends AbstractIterator {
@@ -140,3 +141,83 @@ export class BuildicusStorage {
 export function datastoreFactory() {
   return new BuildicusStorage();
 };
+
+
+function futch(url, opts={}, onProgress) {
+    return new Promise( (res, rej)=>{
+        var xhr = new XMLHttpRequest();
+        xhr.open(opts.method || 'get', url);
+        xhr.send(opts.body);
+        for (var k in opts.headers||{})
+            xhr.setRequestHeader(k, opts.headers[k]);
+        xhr.onload = e => res(e.target.responseText);
+        xhr.onerror = rej;
+        if (xhr.upload && onProgress)
+            xhr.upload.onprogress = onProgress; // event.loaded / event.total * 100 ; //event.lengthComputable
+    });
+}
+
+//TODO upload & publish
+
+export function upload(config, files, overwrite, onProgress) {
+  //TODO overwrite, implement or ditch
+  let formData = new FormData();
+  files.foreach(file => {
+    let path = file.path;
+    if (!path) {
+      let id = v4();
+      let extension = _.last(file.name.split('.'));
+      path = `/media/${id}.${extension}`;
+    }
+    formData.append(path, file, file.name);
+  });
+  return futch('/site/upload', {
+    method: 'POST',
+    body: formData,
+  }, onProgress).then(responseText => {
+    //response = [{path, hash, size}]
+    let response = JSON.parse(responseText);
+    return response.map((value, index) => {
+      let file = files[index];
+      return _.assign(value, {
+        name: file.name,
+        type: file.type,
+      });
+    });
+  });
+}
+
+export function uploaderFactory(config) {
+  return _.partial(upload, config);
+}
+
+export function publisherFactory(config) {
+  let formData = new FormData();
+
+  function send() {
+    return futch('/site/publish', {
+      method: 'POST',
+      body: formData,
+    }
+  }
+
+  function view() {
+    return send().then(x => {
+      let url = `http://localhost/`;
+      return window.open(url, '_blank');
+    });
+  }
+
+  function pushContent(path, content, mimetype) {
+    let name = _.last(path.split('/'));
+    if (config.prefix) {
+      path = config.prefix + path;
+    }
+    formData.append(path, new Buffer(content), name);
+  }
+
+  return {
+    pushContent,
+    view
+  }
+}
