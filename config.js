@@ -58,7 +58,6 @@ System.config({
     "levelup": "npm:levelup@0.19.0",
     "localstorage-down": "npm:localstorage-down@0.6.6",
     "lodash": "npm:lodash@4.4.0",
-    "montagedata": "npm:montagedata@2.1.0",
     "mozilla/nunjucks": "github:mozilla/nunjucks@2.3.0",
     "node-uuid": "npm:node-uuid@1.4.7",
     "nunjucks": "github:mozilla/nunjucks@2.3.0",
@@ -941,13 +940,6 @@ System.config({
       "minimist": "npm:minimist@1.2.0",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:montagedata@2.1.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.35",
-      "isomorphic-fetch": "npm:isomorphic-fetch@2.2.1",
-      "lodash": "npm:lodash@4.4.0",
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "querystring": "github:jspm/nodelibs-querystring@0.1.0"
     },
     "npm:multiaddr@1.4.1": {
       "babel-runtime": "npm:babel-runtime@5.8.35",

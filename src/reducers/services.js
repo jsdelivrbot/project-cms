@@ -1,14 +1,22 @@
 import {Map, fromJS} from 'immutable';
+//import querystring from 'querystring';
 import {setStorage} from './tables';
 import {loadUploader} from '~/middleware/uploader';
 
+
 function loadItem(itemKey, defaultValue) {
-  //TODO support gathering from query params
+  //detects service setting from storage or from query params
   //CONSIDER: password protected token that acts as a sharing url
-  //console.log("query params:", getQueryParams(window.location.href.split('?')[1]))
   let item = localStorage.getItem(itemKey);
   if (item) {
     item = fromJS(JSON.parse(item));
+  }
+  if (!item && false) {
+    let queryParamsStr = window.location.href.split('?')[1];
+    let queryParams = querystring.parse(queryParamsStr)
+    if (queryParams[itemKey]) {
+      item = {module: queryParams[itemKey]};
+    }
   }
   return item ? item : fromJS(defaultValue);
 }

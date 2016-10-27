@@ -26,7 +26,6 @@
       "levelup": "npm:levelup@0.19.0",
       "localstorage-down": "npm:localstorage-down@^0.6.4",
       "lodash": "npm:lodash@^3.10.1",
-      "montagedata": "npm:montagedata@^2.1.0",
       "mozilla/nunjucks": "github:mozilla/nunjucks@^2.3.0",
       "node-uuid": "npm:node-uuid@^1.4.7",
       "nunjucks": "github:mozilla/nunjucks@^2.3.0",
@@ -37,7 +36,6 @@
       "react-codemirror": "npm:react-codemirror@^0.2.2",
       "react-cropper": "npm:react-cropper@^0.6.2",
       "react-dom": "npm:react-dom@^0.14.3",
-      "react-form-builder": "github:blackjk3/react-form-builder@master",
       "react-jsonschema-form": "npm:react-jsonschema-form@^0.15.0",
       "react-redux": "npm:react-redux@^4.0.0",
       "react-remarkable": "npm:react-remarkable@^1.1.1",
@@ -61,7 +59,7 @@
   },
   "dependencies": {
     "ipfs-daemon": "0.0.3",
-    "jspm": "0.16.27"
+    "jspm": "0.16.47"
   },
   "devDependencies": {
     "babel": "^5.8.34",
