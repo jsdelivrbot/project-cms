@@ -60,6 +60,7 @@
     }
   },
   "dependencies": {
+    "ipfs-daemon": "0.0.3",
     "jspm": "0.16.27"
   },
   "devDependencies": {

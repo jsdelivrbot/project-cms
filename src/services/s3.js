@@ -49,8 +49,7 @@ function _uploader(awsConfig, files, overwrite, onProgress) {
 
   return Promise.all(_.map(files, (file, index) => {
     total += file.size;
-    //TODO awsConfig.prefix
-    //we only want to prepend prefix if it is a new upload, mot a replace action
+    //we only want to prepend prefix if it is a new upload, not a replace action
     let path = file.path;
     if (!path) {
       let id = v4();

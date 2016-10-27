@@ -15,7 +15,7 @@ function loadItem(itemKey, defaultValue) {
 
 export const INITIAL_STATE = Map({
   'database': loadItem('database-service', {module: '~/services/localdb'}),
-  'hosting': loadItem('hosting-service')
+  'hosting': loadItem('hosting-service', {module: '~/services/ipfs'}),
 });
 
 export default function servicesReducer(state=INITIAL_STATE, action) {
