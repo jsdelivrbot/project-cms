@@ -129,11 +129,11 @@ export function loadStorage(storage_config) {
   if (storage_config) {
     module_path = storage_config.module || '~/services/dynamodb';
     factory_promise = System.import(module_path, __moduleName).then(module => {
-      return module.default(storage_config)
+      return module.datastoreFactory(storage_config);
     })
   } else {
     factory_promise = System.import('~/services/localdb', __moduleName).then(module => {
-      return module.default()
+      return module.datastoreFactory();
     })
   }
 

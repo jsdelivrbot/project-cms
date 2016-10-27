@@ -80,7 +80,7 @@ export class DynamoStorage {
   }
 }
 
-export default function serviceFactory(settings) {
+export function datastoreFactory(settings) {
   let storage = new DynamoStorage(settings);
   return storage.dynamoTableExists().then(exists => {
     if (!exists) return storage.createDynamoTable();

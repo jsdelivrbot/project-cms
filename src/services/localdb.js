@@ -24,6 +24,6 @@ export class LocalStorage {
   }
 }
 
-export default function serviceFactory() {
+export function datastoreFactory() {
   return new LocalStorage();
 };
