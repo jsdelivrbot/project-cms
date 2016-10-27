@@ -32,6 +32,7 @@ System.config({
   map: {
     "@empty/package": "@empty",
     "FileSaver.js": "github:eligrey/FileSaver.js@master",
+    "abstract-leveldown": "npm:abstract-leveldown@2.6.0",
     "aws-sdk": "npm:aws-sdk@2.2.36",
     "babel": "npm:babel-core@5.8.35",
     "babel-preset-stage-0": "npm:babel-preset-stage-0@6.5.0",
