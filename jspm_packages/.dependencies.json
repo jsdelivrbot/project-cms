@@ -10,19 +10,12 @@
     "systemjs-json": "github:systemjs/plugin-json@^0.1.0",
     "process": "github:jspm/nodelibs-process@^0.1.0"
   },
-  "npm:ieee754@1.1.6": {},
   "npm:base64-js@0.0.8": {},
-  "npm:process@0.11.2": {
-    "assert": "github:jspm/nodelibs-assert@^0.1.0"
-  },
   "github:jspm/nodelibs-buffer@0.1.0": {
     "buffer": "npm:buffer@^3.0.1"
   },
   "github:jspm/nodelibs-process@0.1.2": {
     "process": "npm:process@^0.11.0"
-  },
-  "npm:assert@1.3.0": {
-    "util": "npm:util@0.10.3"
   },
   "github:jspm/nodelibs-assert@0.1.0": {
     "assert": "npm:assert@^1.3.0"
@@ -548,9 +541,6 @@
     "process": "github:jspm/nodelibs-process@^0.1.0",
     "assert": "github:jspm/nodelibs-assert@^0.1.0"
   },
-  "npm:babel-runtime@5.8.35": {
-    "process": "github:jspm/nodelibs-process@^0.1.0"
-  },
   "npm:zone.js@0.5.14": {
     "es6-promise": "npm:es6-promise@^3.0.2",
     "process": "github:jspm/nodelibs-process@^0.1.0"
@@ -574,7 +564,6 @@
     "fbjs": "npm:fbjs@^0.6.1",
     "process": "github:jspm/nodelibs-process@^0.1.0"
   },
-  "npm:babel-core@5.8.35": {},
   "github:floatdrop/plugin-jsx@1.2.1": {
     "react-tools": "npm:react-tools@^0.13.0"
   },
@@ -1159,7 +1148,6 @@
     "constants": "github:jspm/nodelibs-constants@^0.1.0",
     "buffer": "github:jspm/nodelibs-buffer@^0.1.0"
   },
-  "github:systemjs/plugin-json@0.1.1": {},
   "npm:sha.js@2.4.5": {
     "inherits": "npm:inherits@^2.0.1",
     "fs": "github:jspm/nodelibs-fs@^0.1.0",
@@ -1178,10 +1166,28 @@
     "assert": "github:jspm/nodelibs-assert@^0.1.0",
     "fs": "github:jspm/nodelibs-fs@^0.1.0"
   },
-  "npm:core-js@2.3.0": {
+  "npm:core-js@1.2.7": {
     "systemjs-json": "github:systemjs/plugin-json@^0.1.0",
     "process": "github:jspm/nodelibs-process@^0.1.0",
     "fs": "github:jspm/nodelibs-fs@^0.1.0",
     "path": "github:jspm/nodelibs-path@^0.1.0"
-  }
+  },
+  "github:systemjs/plugin-json@0.1.2": {},
+  "npm:process@0.11.9": {
+    "assert": "github:jspm/nodelibs-assert@^0.1.0",
+    "vm": "github:jspm/nodelibs-vm@^0.1.0",
+    "fs": "github:jspm/nodelibs-fs@^0.1.0"
+  },
+  "npm:assert@1.4.1": {
+    "util": "npm:util@0.10.3",
+    "assert": "github:jspm/nodelibs-assert@^0.1.0",
+    "buffer": "github:jspm/nodelibs-buffer@^0.1.0",
+    "process": "github:jspm/nodelibs-process@^0.1.0"
+  },
+  "npm:ieee754@1.1.8": {},
+  "npm:babel-core@5.8.38": {},
+  "npm:babel-runtime@5.8.38": {
+    "process": "github:jspm/nodelibs-process@^0.1.0"
+  },
+  "github:zbyte64/react-jsonschema-form@component-FieldSet": {}
 }

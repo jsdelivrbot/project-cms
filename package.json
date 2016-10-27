@@ -31,6 +31,7 @@
       "nunjucks": "github:mozilla/nunjucks@^2.3.0",
       "path": "npm:path@^0.12.7",
       "process": "github:jspm/nodelibs-process@^0.1.2",
+      "querystring": "npm:querystring@0.2.0",
       "react": "npm:react@^0.14.3",
       "react-addons-shallow-compare": "npm:react-addons-shallow-compare@^0.14.6",
       "react-codemirror": "npm:react-codemirror@^0.2.2",
@@ -48,13 +49,13 @@
       "remarkable": "npm:remarkable@^1.6.1",
       "stream-browserify": "npm:stream-browserify@2.0.1",
       "text": "github:systemjs/plugin-text@^0.0.4",
-      "zbyte64/react-jsonschema-form": "github:zbyte64/react-jsonschema-form@component%25252525252525252525252525252525252525252FFieldSet",
+      "zbyte64/react-jsonschema-form": "github:zbyte64/react-jsonschema-form@component%252525252525252525252525252525252525252525252525252FFieldSet",
       "zone.js": "npm:zone.js@^0.5.8"
     },
     "devDependencies": {
-      "babel": "npm:babel-core@^5.8.34",
-      "babel-runtime": "npm:babel-runtime@^5.8.34",
-      "core-js": "npm:core-js@^1.2.6"
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
     }
   },
   "dependencies": {
@@ -62,8 +63,8 @@
     "jspm": "0.16.47"
   },
   "devDependencies": {
-    "babel": "^5.8.34",
-    "babel-core": "^5.8.34",
+    "babel": "^5.8.35",
+    "babel-core": "^5.8.35",
     "express": "^4.13.4",
     "lodash": "^4.3.0",
     "request": "^2.69.0"

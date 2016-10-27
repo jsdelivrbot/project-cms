@@ -10,15 +10,14 @@ import {
 
 class ObjectField extends Component {
   static defaultProps = {
-    uiSchema: {}
+    uiSchema: {},
+    errorSchema: {},
+    idSchema: {},
   }
 
   constructor(props) {
     super(props);
     this.state = this.getStateFromProps(props);
-    // Caching bound instance methods for rendering perf optimization.
-    this._onChange = this.onChange.bind(this);
-    this._onPropertyChange = (name) => this._onChange.bind(this, name);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,12 +44,14 @@ class ObjectField extends Component {
     this.setState(state, _ => this.props.onChange(this.state));
   }
 
-  onChange(name, value) {
-    this.asyncSetState({[name]: value});
-  }
+  onPropertyChange = (name) => {
+    return (value) => {
+      this.asyncSetState({[name]: value});
+    };
+  };
 
   render() {
-    const {uiSchema, name} = this.props;
+    const {uiSchema, errorSchema, idSchema, name} = this.props;
     const {definitions, fields} = this.props.registry;
     const {SchemaField, TitleField} = fields;
     const schema = retrieveSchema(this.props.schema, definitions);
@@ -83,8 +84,10 @@ class ObjectField extends Component {
               required={this.isRequired(name)}
               schema={schema.properties[name]}
               uiSchema={uiSchema[name]}
+              errorSchema={errorSchema[name]}
+              idSchema={idSchema[name]}
               formData={this.state[name]}
-              onChange={this._onPropertyChange(name)}
+              onChange={this.onPropertyChange(name)}
               registry={this.props.registry} />
           );
         })
@@ -97,6 +100,8 @@ if (process.env.NODE_ENV !== "production") {
   ObjectField.propTypes = {
     schema: PropTypes.object.isRequired,
     uiSchema: PropTypes.object,
+    errorSchema: PropTypes.object,
+    idSchema: PropTypes.object,
     onChange: PropTypes.func.isRequired,
     formData: PropTypes.object,
     required: PropTypes.bool,

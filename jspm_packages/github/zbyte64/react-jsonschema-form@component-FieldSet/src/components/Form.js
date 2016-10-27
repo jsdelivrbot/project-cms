@@ -1,22 +1,24 @@
 import React, { Component, PropTypes } from "react";
 import { Validator } from "jsonschema";
 
-import SchemaField from "./fields/SchemaField";
-import TitleField from "./fields/TitleField";
-import { getDefaultFormState, shouldRender } from "../utils";
+import FieldSet from "./FieldSet";
+import {
+  toErrorSchema,
+  getDefaultFormState,
+  shouldRender
+} from "../utils";
 import ErrorList from "./ErrorList";
+
 
 export default class Form extends Component {
   static defaultProps = {
-    uiSchema: {}
+    uiSchema: {},
+    liveValidate: false,
   }
 
   constructor(props) {
     super(props);
     this.state = this.getStateFromProps(props);
-    // Caching bound instance methods for rendering perf optimization.
-    this._onChange = this.onChange.bind(this);
-    this._onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -27,13 +29,10 @@ export default class Form extends Component {
     const schema = "schema" in props ? props.schema : this.props.schema;
     const edit = !!props.formData;
     const {definitions} = schema;
-    const formData = getDefaultFormState(schema, props.formData, definitions) || null;
-    return {
-      status: "initial",
-      formData,
-      edit,
-      errors: edit ? this.validate(formData, schema) : []
-    };
+    const formData = getDefaultFormState(schema, props.formData, definitions);
+    const errors = edit ? this.validate(formData, schema) : [];
+    const errorSchema = toErrorSchema(errors);
+    return {status: "initial", formData, edit, errors, errorSchema};
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -53,24 +52,30 @@ export default class Form extends Component {
     return null;
   }
 
-  onChange(formData, options={validate: true}) {
+  onChange = (formData, options={validate: false}) => {
+    const liveValidate = this.props.liveValidate || options.validate;
+    const errors = liveValidate ? this.validate(formData) :
+                                  this.state.errors;
+    const errorSchema = toErrorSchema(errors);
     this.setState({
       status: "editing",
       formData,
-      errors: options.validate ? this.validate(formData) : this.state.errors
+      errors,
+      errorSchema
     }, _ => {
       if (this.props.onChange) {
         this.props.onChange(this.state);
       }
     });
-  }
+  };
 
-  onSubmit(event) {
+  onSubmit = (event) => {
     event.preventDefault();
     this.setState({status: "submitted"});
     const errors = this.validate(this.state.formData);
     if (Object.keys(errors).length > 0) {
-      this.setState({errors}, _ => {
+      const errorSchema = toErrorSchema(errors);
+      this.setState({errors, errorSchema}, _ => {
         if (this.props.onError) {
           this.props.onError(errors);
         } else {
@@ -82,39 +87,28 @@ export default class Form extends Component {
       this.props.onSubmit(this.state);
     }
     this.setState({status: "initial"});
-  }
-
-  getRegistry() {
-    // For BC, accept passed SchemaField and TitleField props and pass them to
-    // the "fields" registry one.
-    const _SchemaField = this.props.SchemaField || SchemaField;
-    const _TitleField = this.props.TitleField || TitleField;
-    const fields = Object.assign({
-      SchemaField: _SchemaField,
-      TitleField: _TitleField,
-    }, this.props.fields);
-    return {
-      fields,
-      widgets: this.props.widgets || {},
-      definitions: this.props.schema.definitions || {},
-    };
-  }
+  };
 
   render() {
-    const {children, schema, uiSchema} = this.props;
-    const {formData} = this.state;
-    const registry = this.getRegistry();
-    const _SchemaField = registry.fields.SchemaField;
+    const {children, schema, uiSchema, TitleField, SchemaField, fields, widgets} = this.props;
+    const {formData, errorSchema} = this.state;
     return (
-      <form className="rjsf" onSubmit={this._onSubmit}>
+      <form className="rjsf" onSubmit={this.onSubmit}>
         {this.renderErrors()}
-        <_SchemaField
+        <FieldSet
           schema={schema}
           uiSchema={uiSchema}
+          TitleField={TitleField}
+          SchemaField={SchemaField}
+          fields={fields}
+          widgets={widgets}
+          errorSchema={errorSchema}
           formData={formData}
-          onChange={this._onChange}
-          registry={registry}/>
-        { children ? children : <p><button type="submit">Submit</button></p> }
+          onChange={this.onChange}/>
+        { children ? children :
+          <p>
+            <button type="submit" className="btn btn-info">Submit</button>
+          </p> }
       </form>
     );
   }
@@ -124,12 +118,15 @@ if (process.env.NODE_ENV !== "production") {
   Form.propTypes = {
     schema: PropTypes.object.isRequired,
     uiSchema: PropTypes.object,
+    TitleField: React.PropTypes.element,
+    SchemaField: React.PropTypes.element,
     formData: PropTypes.any,
     widgets: PropTypes.objectOf(PropTypes.func),
     fields: PropTypes.objectOf(PropTypes.func),
     onChange: PropTypes.func,
     onError: PropTypes.func,
     onSubmit: PropTypes.func,
+    liveValidate: PropTypes.bool,
   };
 }
 

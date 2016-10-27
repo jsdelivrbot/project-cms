@@ -6,6 +6,7 @@ import BooleanField from "./BooleanField";
 import NumberField from "./NumberField";
 import ObjectField from "./ObjectField";
 import StringField from "./StringField";
+import TitleField from "./TitleField";
 import UnsupportedField from "./UnsupportedField";
 
 const REQUIRED_FIELD_SYMBOL = "*";
@@ -30,34 +31,54 @@ function getFieldComponent(schema, uiSchema, fields) {
   return COMPONENT_TYPES[schema.type] || UnsupportedField;
 }
 
-function getLabel(label, required) {
+function getLabel(label, required, id) {
   if (!label) {
     return null;
   }
-  if (required) {
-    return label + REQUIRED_FIELD_SYMBOL;
-  }
-  return label;
-}
-
-function getContent({type, label, required, children, displayLabel}) {
-  if (!displayLabel) {
-    return children;
-  }
-
   return (
-    <label>
-      {getLabel(label, required)}
-      {children}
+    <label className="control-label" htmlFor={id}>
+      {required ? label + REQUIRED_FIELD_SYMBOL : label}
     </label>
   );
 }
 
-function Wrapper(props) {
-  const {type, classNames} = props;
+function ErrorList({errors}) {
   return (
-    <div className={`field field-${type} ${classNames}`}>
-      {getContent(props)}
+    <div>
+      <p/>
+      <ul className="error-detail bs-callout bs-callout-info">{
+        (errors || []).map((error, index) => {
+          return <li className="text-danger" key={index}>{error}</li>;
+        })
+      }</ul>
+    </div>
+  );
+}
+
+function Wrapper({
+    type,
+    classNames,
+    errorSchema,
+    label,
+    required,
+    displayLabel,
+    id,
+    children,
+  }) {
+  const {errors} = errorSchema;
+  const isError = errors && errors.length > 0;
+  const classList = [
+    "form-group",
+    "field",
+    `field-${type}`,
+    isError ? "field-error has-error" : "",
+    classNames,
+  ].join(" ").trim();
+  return (
+    <div className={classList}>
+      {displayLabel && label ? getLabel(label, required, id) : null}
+      {children}
+      {isError ? <ErrorList errors={errors} /> : <div/>}
     </div>
   );
 }
@@ -65,20 +86,24 @@ function Wrapper(props) {
 if (process.env.NODE_ENV !== "production") {
   Wrapper.propTypes = {
     type: PropTypes.string.isRequired,
+    id: PropTypes.string,
+    classNames: React.PropTypes.string,
     label: PropTypes.string,
     required: PropTypes.bool,
     displayLabel: PropTypes.bool,
     children: React.PropTypes.node.isRequired,
-    classNames: React.PropTypes.string,
   };
 }
 
 Wrapper.defaultProps = {
-  classNames: ""
+  classNames: "",
+  errorSchema: {errors: []},
+  required: false,
+  displayLabel: true,
 };
 
 function SchemaField(props) {
-  const {uiSchema, name, required, registry} = props;
+  const {uiSchema, errorSchema, idSchema, name, required, registry} = props;
   const {definitions, fields} = registry;
   const schema = retrieveSchema(props.schema, definitions);
   const FieldComponent = getFieldComponent(schema, uiSchema, fields);
@@ -98,9 +123,11 @@ function SchemaField(props) {
   return (
     <Wrapper
       label={schema.title || name}
+      errorSchema={errorSchema}
       required={required}
       type={schema.type}
       displayLabel={displayLabel}
+      id={idSchema.id}
       classNames={uiSchema.classNames}>
       <FieldComponent {...props} />
     </Wrapper>
@@ -108,16 +135,27 @@ function SchemaField(props) {
 }
 
 SchemaField.defaultProps = {
-  uiSchema: {}
+  uiSchema: {},
+  errorSchema: {},
+  idSchema: {},
+  registry: {
+    fields: {SchemaField, TitleField},
+    widgets: {},
+    definitions: {},
+  }
 };
 
 if (process.env.NODE_ENV !== "production") {
   SchemaField.propTypes = {
     schema: PropTypes.object.isRequired,
     uiSchema: PropTypes.object,
+    idSchema: PropTypes.object,
+    formData: PropTypes.any,
+    errorSchema: PropTypes.object,
     registry: PropTypes.shape({
       widgets: PropTypes.objectOf(PropTypes.func).isRequired,
       fields: PropTypes.objectOf(PropTypes.func).isRequired,
+      definitions: PropTypes.object.isRequired,
     })
   };
 }

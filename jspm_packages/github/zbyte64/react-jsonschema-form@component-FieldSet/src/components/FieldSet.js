@@ -1,68 +1,16 @@
 import React, { Component, PropTypes } from "react";
-import { Validator } from "jsonschema";
 
 import SchemaField from "./fields/SchemaField";
 import TitleField from "./fields/TitleField";
-import { getDefaultFormState, shouldRender } from "../utils";
-import ErrorList from "./ErrorList";
+import {
+  toIdSchema
+} from "../utils";
 
-//Basically Form but without submit
+
 export default class FieldSet extends Component {
   static defaultProps = {
-    uiSchema: {}
-  }
-
-  constructor(props) {
-    super(props);
-    this.state = this.getStateFromProps(props);
-    // Caching bound instance methods for rendering perf optimization.
-    this._onChange = this.onChange.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState(this.getStateFromProps(nextProps));
-  }
-
-  getStateFromProps(props) {
-    const schema = "schema" in props ? props.schema : this.props.schema;
-    const edit = !!props.formData;
-    const {definitions} = schema;
-    const formData = getDefaultFormState(schema, props.formData, definitions) || null;
-    return {
-      status: "initial",
-      formData,
-      edit,
-      errors: edit ? this.validate(formData, schema) : []
-    };
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return shouldRender(this, nextProps, nextState);
-  }
-
-  validate(formData, schema) {
-    const validator = new Validator();
-    return validator.validate(formData, schema || this.props.schema).errors;
-  }
-
-  renderErrors() {
-    const {status, errors} = this.state;
-    if (status !== "editing" && errors.length) {
-      return <ErrorList errors={errors} />;
-    }
-    return null;
-  }
-
-  onChange(formData, options={validate: true}) {
-    this.setState({
-      status: "editing",
-      formData,
-      errors: options.validate ? this.validate(formData) : this.state.errors
-    }, _ => {
-      if (this.props.onChange) {
-        this.props.onChange(this.state);
-      }
-    });
+    uiSchema: {},
+    errorSchema: {}
   }
 
   getRegistry() {
@@ -82,21 +30,21 @@ export default class FieldSet extends Component {
   }
 
   render() {
-    const {children, schema, uiSchema} = this.props;
-    const {formData} = this.state;
+    const {schema, uiSchema, formData, errorSchema, onChange} = this.props;
+    const {definitions} = schema;
+    const idSchema = toIdSchema(schema, uiSchema["ui:rootFieldId"], definitions);
+
     const registry = this.getRegistry();
     const _SchemaField = registry.fields.SchemaField;
     return (
-      <fieldset className="rjsf">
-        {this.renderErrors()}
         <_SchemaField
           schema={schema}
           uiSchema={uiSchema}
+          errorSchema={errorSchema}
+          idSchema={idSchema}
           formData={formData}
-          onChange={this._onChange}
+          onChange={onChange}
           registry={registry}/>
-        { children ? children : null }
-      </fieldset>
     );
   }
 }
@@ -105,10 +53,13 @@ if (process.env.NODE_ENV !== "production") {
   FieldSet.propTypes = {
     schema: PropTypes.object.isRequired,
     uiSchema: PropTypes.object,
+    TitleField: React.PropTypes.element,
+    SchemaField: React.PropTypes.element,
     formData: PropTypes.any,
+    errorSchema: PropTypes.object,
     widgets: PropTypes.objectOf(PropTypes.func),
     fields: PropTypes.objectOf(PropTypes.func),
-    onChange: PropTypes.func,
+    onChange: PropTypes.func
   };
 }
 

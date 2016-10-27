@@ -5,7 +5,6 @@ import { renderIntoDocument } from "react-addons-test-utils";
 import { findDOMNode } from "react-dom";
 
 import Form from "../src";
-import FieldSet from "../src/components/FieldSet";
 
 export function createComponent(Component, props) {
   const comp = renderIntoDocument(<Component {...props} />);
@@ -15,10 +14,6 @@ export function createComponent(Component, props) {
 
 export function createFormComponent(props) {
   return createComponent(Form, props);
-}
-
-export function createFieldSetComponent(props) {
-  return createComponent(FieldSet, props);
 }
 
 export function d(node) {

@@ -1,5 +1,5 @@
 import {Map, fromJS} from 'immutable';
-//import querystring from 'querystring';
+import querystring from 'querystring';
 import {setStorage} from './tables';
 import {loadUploader} from '~/middleware/uploader';
 
@@ -11,7 +11,7 @@ function loadItem(itemKey, defaultValue) {
   if (item) {
     item = fromJS(JSON.parse(item));
   }
-  if (!item && false) {
+  if (!item) {
     let queryParamsStr = window.location.href.split('?')[1];
     let queryParams = querystring.parse(queryParamsStr)
     if (queryParams[itemKey]) {
