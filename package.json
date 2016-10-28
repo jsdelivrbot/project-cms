@@ -6,6 +6,7 @@
       "lib": "."
     },
     "dependencies": {
+      "assert": "github:jspm/nodelibs-assert@^0.1.0",
       "aws-sdk": "npm:aws-sdk@^2.2.36",
       "babel-preset-stage-0": "npm:babel-preset-stage-0@^6.5.0",
       "buffer": "github:jspm/nodelibs-buffer@^0.1.0",
@@ -26,6 +27,7 @@
       "levelup": "npm:levelup@0.19.0",
       "localstorage-down": "npm:localstorage-down@^0.6.4",
       "lodash": "npm:lodash@^3.10.1",
+      "mocha": "npm:mocha@^3.1.2",
       "mozilla/nunjucks": "github:mozilla/nunjucks@^2.3.0",
       "node-uuid": "npm:node-uuid@^1.4.7",
       "nunjucks": "github:mozilla/nunjucks@^2.3.0",
