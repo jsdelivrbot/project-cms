@@ -21,17 +21,6 @@ var allowedMochaGlobals = [
 
 
 //
-// Mocha needs a <div id="mocha"></div> for the browser
-// test reporter to inject test results in to the U.I.
-// Below just injects it at the bottom of the page. (You can get fancy here)
-// Maybe you create a button in your website and allow anyone to run tests.
-// Check out http://staxmanade.com/2015/03/in-app-unit-tests/ for more on the thought
-//
-var mochaDiv = document.createElement('div');
-mochaDiv.id = "mocha";
-document.body.appendChild(mochaDiv);
-
-//
 // Importing mocha with JSPM and ES6 doesn't expose the usual mocha globals.
 // I found this is one way to manually expose the globals, however if you know of a better way please let me know...
 //

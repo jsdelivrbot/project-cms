@@ -40,8 +40,8 @@ export class BuildicusIterator extends AbstractIterator {
 
 export class BuildicusDOWN extends AbstractLevelDOWN {
   constructor(location) {
-    this._tableName = location;
     super(location);
+    this._tableName = location;
   }
 
   _generate_headers() {
@@ -96,7 +96,7 @@ export class BuildicusDOWN extends AbstractLevelDOWN {
       params,
     }).then(responseData => {
       callback(null, responseData[0].value);
-    }.catch(error => {
+    }).catch(error => {
       callback(error);
     });
   }
@@ -108,7 +108,7 @@ export class BuildicusDOWN extends AbstractLevelDOWN {
       params,
     }).then(responseData => {
       callback(null, null);
-    }.catch(error => {
+    }).catch(error => {
       callback(error);
     });
   }
@@ -128,7 +128,10 @@ export class BuildicusStorage {
   }
 
   getTable = (baseUrl) => {
-    return BuildicusDOWN(baseUrl);
+    let table_key = encodeURIComponent(baseUrl);
+    let db = (location) => new BuildicusDOWN(location);
+    let options = { db: db, valueEncoding: "json" };
+    return levelup(table_key, options);
   }
 
   destroy = () => {
@@ -198,7 +201,7 @@ export function publisherFactory(config) {
     return futch('/site/publish', {
       method: 'POST',
       body: formData,
-    }
+    });
   }
 
   function view() {

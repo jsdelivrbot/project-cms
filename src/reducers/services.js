@@ -15,7 +15,7 @@ function loadItem(itemKey, defaultValue) {
     let queryParamsStr = window.location.href.split('?')[1];
     let queryParams = querystring.parse(queryParamsStr)
     if (queryParams[itemKey]) {
-      item = {module: queryParams[itemKey]};
+      item = fromJS({ module: queryParams[itemKey] });
     }
   }
   return item ? item : fromJS(defaultValue);
