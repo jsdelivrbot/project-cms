@@ -3,12 +3,13 @@
 // and allows us to interact with the library below.
 //
 import mocha from 'mocha';
+import _modernize from '~/shims';
 
 //
 // This defines the list of test files we want to load and run tests against.
 //
 var mochaTestScripts = [
-  './test/example_test.js',
+  './test/appsLoader_test.js',
 ];
 
 //
@@ -16,8 +17,12 @@ var mochaTestScripts = [
 // tests that is expected you can include them here
 //
 var allowedMochaGlobals = [
-  //'jQuery'
-]
+  'jQuery',
+  'require',
+  'module_path',
+  'nunjucks',
+  'resample_hermite',
+];
 
 
 //

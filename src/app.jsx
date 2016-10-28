@@ -1,6 +1,4 @@
-import _modernJS from 'core-js';
-import _process from 'process';
-window.process = _process;
+import _modernize from './shims';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
