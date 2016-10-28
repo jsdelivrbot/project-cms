@@ -2,6 +2,7 @@ import assert from 'assert';
 import {Map} from 'immutable';
 import {appsLoader, loadAppsTables, loadAppsConfig, readAppsConfig, DEFAULT_APPS_CONFIG} from '~/appsLoader';
 import {getStorage, destroy} from '~/reducers/tables';
+import {initializeDatabase} from '~/reducers/services';
 
 
 describe("appsLoader module", function() {
@@ -14,6 +15,19 @@ describe("appsLoader module", function() {
     it("default settings returns a successful promise", function() {
       this.timeout(9000);
       return appsLoader();
+    });
+
+    it("handles faulty config by loading defaults", function() {
+      this.timeout(9000);
+      return initializeDatabase().then(storage => {
+        storage.putObject('/engine', 'appsConfig', {apps: [
+          {baseUrl: '/', type: 'builtin', location: './apps/doesnot-exist'},
+          {baseUrl: '/engine', type: 'builtin', location: './apps/engine/index'},
+        ]});
+        return appsLoader().then(apps => {
+          assert.equal(apps.length, DEFAULT_APPS_CONFIG.length);
+        })
+      });
     });
   });
 
