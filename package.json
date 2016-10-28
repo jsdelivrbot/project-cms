@@ -49,7 +49,7 @@
       "remarkable": "npm:remarkable@^1.6.1",
       "stream-browserify": "npm:stream-browserify@2.0.1",
       "text": "github:systemjs/plugin-text@^0.0.4",
-      "zbyte64/react-jsonschema-form": "github:zbyte64/react-jsonschema-form@component%252525252525252525252525252525252525252525252525252FFieldSet",
+      "zbyte64/react-jsonschema-form": "github:zbyte64/react-jsonschema-form@component-FieldSet",
       "zone.js": "npm:zone.js@^0.5.8"
     },
     "devDependencies": {
