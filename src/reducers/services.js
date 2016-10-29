@@ -1,5 +1,4 @@
 import {Map, fromJS} from 'immutable';
-import querystring from 'querystring';
 import {setStorage} from './tables';
 import {loadUploader} from '~/middleware/uploader';
 
@@ -10,13 +9,6 @@ function loadItem(itemKey, defaultValue) {
   let item = localStorage.getItem(itemKey);
   if (item) {
     item = fromJS(JSON.parse(item));
-  }
-  if (!item) {
-    let queryParamsStr = window.location.href.split('?')[1];
-    let queryParams = querystring.parse(queryParamsStr)
-    if (queryParams[itemKey]) {
-      item = fromJS({ module: queryParams[itemKey] });
-    }
   }
   return item ? item : fromJS(defaultValue);
 }
@@ -41,7 +33,10 @@ export default function servicesReducer(state=INITIAL_STATE, action) {
   return state
 }
 
-export function initializeDatabase() {
+export function initializeDatabase(cmsConfig) {
+  if (cmsConfig && cmsConfig.getIn(['services', 'database'])) {
+    return setStorage(cmsConfig.getIn(['services', 'database']));
+  }
   return setStorage(INITIAL_STATE.get('database').toJS());
 }
 

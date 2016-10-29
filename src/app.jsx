@@ -3,7 +3,7 @@ import _modernize from './shims';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import _ from 'lodash';
-import {Map} from 'immutable';
+import {Map, fromJS} from 'immutable';
 import {compose, createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 
@@ -26,55 +26,58 @@ var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, uploaderMiddl
 
 var history = createHistory();
 
-sendLoadingMessage('Core Imported')
-//TODO load sysinfo from get params or from localstorage
-//sysinfo sets storage service
-appsLoader().then(apps => {
-  console.log("apps:", apps);
-  sendLoadingMessage("Loading app data...");
-  return loadAppsTables(apps).then(tables => {
-    var initialState = Map({
-      tables
-    });
-    console.log("Initial State:", initialState);
-    return {apps, initialState};
-  })
-}).then(({apps, initialState}) => {
-  sendLoadingMessage("Booting UX")
-  function getApp(baseUrl) {
-    return _.find(apps, {baseUrl});
-  }
+sendLoadingMessage('Core Imported');
 
-  /* set up reducer & store */
+export default function(cmsConfig) {
+  if (cmsConfig && !Map.isMap(cmsConfig)) cmsConfig = fromJS(cmsConfig);
+  return appsLoader(cmsConfig).then(apps => {
+    console.log("apps:", apps);
+    sendLoadingMessage("Loading app data...");
+    return loadAppsTables(apps).then(tables => {
+      var initialState = Map({
+        tables
+      });
+      if (cmsConfig) initialState = initialState.mergeDeep(cmsConfig);
+      console.log("Initial State:", initialState);
+      return {apps, initialState};
+    })
+  }).then(({apps, initialState}) => {
+    sendLoadingMessage("Booting UX")
+    function getApp(baseUrl) {
+      return _.find(apps, {baseUrl});
+    }
 
-  var reducer = makeReducer(apps);
-  var store = createStoreWithMiddleware(reducer, initialState);
-  console.log("store:", store);
+    /* set up reducer & store */
 
-  var engine = getApp('/engine');
+    var reducer = makeReducer(apps);
+    var store = createStoreWithMiddleware(reducer, initialState);
+    console.log("store:", store);
 
-  store.dispatch(engine.actions.setApps(apps));
-  initializeHosting(store);
+    var engine = getApp('/engine');
 
-  //CONSIDER: we are storing core functions in the engine domain - probably not using the redux as intended
-  //this is because publish & render need to access state to run
+    store.dispatch(engine.actions.setApps(apps));
+    initializeHosting(store);
 
-  /* set up renderer */
-  var renderer = getApp('/templates').renderFactory(store);
-  console.log("renderer:", renderer);
-  store.dispatch(engine.actions.setRenderer(renderer));
+    //CONSIDER: we are storing core functions in the engine domain - probably not using the redux as intended
+    //this is because publish & render need to access state to run
 
-  sendLoadingMessage("Rendering UX");
-  /* mount application to DOM */
-  ReactDOM.render(
-    <Provider store={store}>
-      <AppRouter history={history}/>
-    </Provider>,
-    document.getElementById('app')
-  );
+    /* set up renderer */
+    var renderer = getApp('/templates').renderFactory(store);
+    console.log("renderer:", renderer);
+    store.dispatch(engine.actions.setRenderer(renderer));
 
-  sendLoadingMessage(true);
-}).catch(error => {
-  sendLoadingMessage("Error starting application, check console log");
-  console.error(error);
-});
+    sendLoadingMessage("Rendering UX");
+    /* mount application to DOM */
+    ReactDOM.render(
+      <Provider store={store}>
+        <AppRouter history={history}/>
+      </Provider>,
+      document.getElementById('app')
+    );
+
+    sendLoadingMessage(true);
+  }).catch(error => {
+    sendLoadingMessage("Error starting application, check console log");
+    console.error(error);
+  });
+}

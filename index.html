@@ -31,7 +31,7 @@
 			console.log(event.data)
 		}
 	}
-		System.import('./src/app.jsx');
+		System.import('./src/app.jsx').then(x => x.default({}));
 	</script>
 
 	<!-- Latest compiled and minified CSS -->

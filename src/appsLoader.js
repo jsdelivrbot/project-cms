@@ -22,7 +22,7 @@ export const DEFAULT_APPS_CONFIG = [
   {baseUrl: '/snippets/warehouse', type: 'builtin', location: './apps/snippets/contrib/warehouse/index'},
 ]
 
-export function readAppsConfig() {
+export function readAppsConfig(cmsConfig) {
   return readTable('/engine').then(tableState => {
     if (!tableState) return DEFAULT_APPS_CONFIG;
     let apps = tableState.getIn(['appsConfig', 'apps']);
@@ -116,11 +116,11 @@ export function makeReducer(apps) {
   }));
 }
 
-export function appsLoader() {
+export function appsLoader(cmsConfig) {
   sendLoadingMessage("Connecting database");
-  return initializeDatabase().then(storage => {
+  return initializeDatabase(cmsConfig).then(storage => {
     sendLoadingMessage("Loading configuration");
-    return readAppsConfig();
+    return readAppsConfig(cmsConfig);
   }).then(appsConfig => {
     sendLoadingMessage("Importing apps...")
     return loadAppsConfig(appsConfig).catch(error => {
