@@ -125,19 +125,13 @@ export function setStorage(config) {
 
 
 export function loadStorage(storage_config) {
-  let factory_promise = null;
+  let module_path = '~/services/localdb';
   if (storage_config) {
-    module_path = storage_config.module || '~/services/dynamodb';
-    factory_promise = System.import(module_path, __moduleName).then(module => {
-      return module.datastoreFactory(storage_config);
-    })
-  } else {
-    factory_promise = System.import('~/services/localdb', __moduleName).then(module => {
-      return module.datastoreFactory();
-    })
+    module_path = storage_config.module;
   }
-
-  return factory_promise.then(backend => {
+  return factory_promise = System.import(module_path, __moduleName).then(module => {
+    return module.datastoreFactory(storage_config);
+  }).then(backend => {
     storage = new LevelupMultiplexer(backend);
     return storage;
   });

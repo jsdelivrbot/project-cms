@@ -30,14 +30,17 @@ export default function servicesReducer(state=INITIAL_STATE, action) {
       localStorage.setItem('hosting-service', JSON.stringify(config));
       return state.set('hosting', fromJS(config));
   }
-  return state
+  return state;
 }
 
 export function initializeDatabase(cmsConfig) {
+  let config = null;
   if (cmsConfig && cmsConfig.getIn(['services', 'database'])) {
-    return setStorage(cmsConfig.getIn(['services', 'database']));
+    config = cmsConfig.getIn(['services', 'database']);
+  } else {
+    config = INITIAL_STATE.get('database');
   }
-  return setStorage(INITIAL_STATE.get('database').toJS());
+  return setStorage(config.toJS());
 }
 
 export function initializeHosting(store) {
