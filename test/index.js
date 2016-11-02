@@ -5,18 +5,12 @@
 import mocha from 'mocha';
 import _modernize from '~/shims';
 
-//
-// This defines the list of test files we want to load and run tests against.
-//
-var mochaTestScripts = [
-  './test/appsLoader_test.js',
-];
 
 //
 // If you have a global or two that get exposed from your
 // tests that is expected you can include them here
 //
-var allowedMochaGlobals = [
+const allowedMochaGlobals = [
   'jQuery',
   'require',
   'module_path',
@@ -45,10 +39,13 @@ mocha.suite.on('pre-require', function(context) {
   exports.teardown = context.teardown || context.afterEach;
   exports.test = context.test || context.it;
   exports.run = context.run;
+});
 
+export default function(testScripts) {
+  mocha.setup('bdd');
   // now use SystemJS to load all test files
-  Promise
-    .all(mochaTestScripts.map(function(testScript) {
+  return Promise
+    .all(testScripts.map(function(testScript) {
       return System.import(testScript);
     })).then(function() {
       mocha.checkLeaks();
@@ -58,7 +55,4 @@ mocha.suite.on('pre-require', function(context) {
       console.error("Error loading test modules");
       console.error(err);
     });
-
-});
-
-mocha.setup('bdd');
+}

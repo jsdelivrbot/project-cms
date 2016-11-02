@@ -4,10 +4,14 @@
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<title>Tests</title>
-		<script src="./jspm_packages/system.src.js"></script>
-	<script src="./config.js"></script>
+		<script src="../jspm_packages/system.src.js"></script>
+	<script src="../config.js"></script>
 	<script>
-		System.import('./test/index.js');
+		System.import('./index.js').then(module => {
+      module.default([
+        './appsLoader_test.js',
+      ]);
+    });
 	</script>
 
 	<!-- Latest compiled and minified CSS -->

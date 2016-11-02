@@ -19,22 +19,27 @@ import {initializeHosting} from './reducers/services';
 import {appsLoader, loadAppsTables, makeReducer, sendLoadingMessage} from './appsLoader';
 import AppRouter from './components/AppRouter.jsx';
 
-import rjsfStyling from "zbyte64/react-jsonschema-form/css/react-jsonschema-form.css!";
-
-
-var createStoreWithMiddleware = applyMiddleware(nextUrlMiddleware, uploaderMiddleware, thumbnailerMiddleware, promiseMiddleware, askForMiddleware)(createStore);
-
-var history = createHistory();
 
 sendLoadingMessage('Core Imported');
 
+
 export default function(cmsConfig) {
+  sendLoadingMessage('Booting CMS');
+  const createStoreWithMiddleware = applyMiddleware(
+    nextUrlMiddleware,
+    uploaderMiddleware,
+    thumbnailerMiddleware,
+    promiseMiddleware,
+    askForMiddleware
+  )(createStore);
+  const history = createHistory();
+
   if (cmsConfig && !Map.isMap(cmsConfig)) cmsConfig = fromJS(cmsConfig);
   return appsLoader(cmsConfig).then(apps => {
     console.log("apps:", apps);
     sendLoadingMessage("Loading app data...");
     return loadAppsTables(apps).then(tables => {
-      var initialState = Map({
+      let initialState = Map({
         tables
       });
       if (cmsConfig) initialState = initialState.mergeDeep(cmsConfig);
@@ -49,11 +54,11 @@ export default function(cmsConfig) {
 
     /* set up reducer & store */
 
-    var reducer = makeReducer(apps);
-    var store = createStoreWithMiddleware(reducer, initialState);
+    let reducer = makeReducer(apps);
+    let store = createStoreWithMiddleware(reducer, initialState);
     console.log("store:", store);
 
-    var engine = getApp('/engine');
+    let engine = getApp('/engine');
 
     store.dispatch(engine.actions.setApps(apps));
     initializeHosting(store);
@@ -62,7 +67,7 @@ export default function(cmsConfig) {
     //this is because publish & render need to access state to run
 
     /* set up renderer */
-    var renderer = getApp('/templates').renderFactory(store);
+    let renderer = getApp('/templates').renderFactory(store);
     console.log("renderer:", renderer);
     store.dispatch(engine.actions.setRenderer(renderer));
 

@@ -16,12 +16,19 @@ System.config({
   },
 
   packages: {
-    ".": {
+    "/project-cms/src": {
       "defaultExtension": "js",
       "meta": {
         "*.jsx": {
           "format": "esm"
         },
+        "*.css": {
+          "loader": "css"
+        }
+      }
+    },
+    "/project-cms": {
+      "meta": {
         "*.css": {
           "loader": "css"
         }

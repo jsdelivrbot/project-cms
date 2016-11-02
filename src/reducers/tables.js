@@ -129,7 +129,7 @@ export function loadStorage(storage_config) {
   if (storage_config) {
     module_path = storage_config.module;
   }
-  return factory_promise = System.import(module_path, __moduleName).then(module => {
+  return System.import(module_path, __moduleName).then(module => {
     return module.datastoreFactory(storage_config);
   }).then(backend => {
     storage = new LevelupMultiplexer(backend);

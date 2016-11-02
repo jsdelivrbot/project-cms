@@ -9,6 +9,8 @@ import ExtraForm from './components/ExtraForm.jsx';
 
 import actions from './actions';
 
+//import rjsfStyling from "zbyte64/react-jsonschema-form/css/react-jsonschema-form.css!";
+
 import {getTemplates} from '~/plugins';
 
 /*
