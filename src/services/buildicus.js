@@ -24,6 +24,7 @@ export class BuildicusIterator extends AbstractIterator {
 
     if (item === null) {
       process.nextTick(cb);
+      return;
     }
 
     this.db._call_store({ method: 'GET' }).then(responseData => {
@@ -63,6 +64,7 @@ export class BuildicusDOWN extends AbstractLevelDOWN {
     return fetch(url, {
       method: method,
       headers: headers,
+      credentials: 'include',
       body: body
     }).then(response => {
       if (!response.ok) return Promise.reject(response.statusText);
@@ -149,6 +151,7 @@ export function datastoreFactory() {
 function futch(url, opts={}, onProgress) {
     return new Promise( (res, rej)=>{
         var xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
         xhr.open(opts.method || 'get', url);
         xhr.send(opts.body);
         for (var k in opts.headers||{})
@@ -160,10 +163,9 @@ function futch(url, opts={}, onProgress) {
     });
 }
 
-//TODO upload & publish
 
 export function upload(config, files, overwrite, onProgress) {
-  //TODO overwrite, implement or ditch
+  //TODO overwrite, implement or ditch (if not overwrite then generate uuid name)
   let formData = new FormData();
   files.foreach(file => {
     let path = file.path;
@@ -194,6 +196,7 @@ export function uploaderFactory(config) {
   return _.partial(upload, config);
 }
 
+//TODO introduce an optional `end` method for putting a bow on a publish
 export function publisherFactory(config) {
   let formData = new FormData();
 
