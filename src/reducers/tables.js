@@ -49,6 +49,10 @@ export class LevelupMultiplexer {
               storage.putObject(table_name, data.key, data.value);
             }
           })
+          .on('error', function(error) {
+            console.error(error);
+            reject(error);
+          })
           .on('end', function () {
             resolve(key_values);
           });
@@ -69,6 +73,10 @@ export class LevelupMultiplexer {
             key_values[data.key] = data.value;
           }
         })
+        .on('error', function(error) {
+          console.error(error);
+          reject(error);
+        })
         .on('end', function () {
           resolve(key_values);
         });
@@ -82,6 +90,10 @@ export class LevelupMultiplexer {
       table.createKeyStream()
         .on('data', function(key) {
           ops.push({ type: 'del', key });
+        })
+        .on('error', function(error) {
+          console.error(error);
+          reject(error);
         })
         .on('end', function () {
           var batchJob = table.batch(ops, function(err) {

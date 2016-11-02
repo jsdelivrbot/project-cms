@@ -16,7 +16,7 @@ export class BuildicusIterator extends AbstractIterator {
     const item = this._items[this._cursor];
 
     if (item) {
-      process.nextTick(() => cb(item.key, item.value));
+      process.nextTick(() => cb(null, item.key, item.value));
       delete this._items[this._cursor];
       this._cursor++;
       return;
@@ -33,6 +33,7 @@ export class BuildicusIterator extends AbstractIterator {
       this._next(cb);
     }).catch(error => {
       console.error(error);
+      cb(error);
       this._ended = true; //now what?
     });
   }
