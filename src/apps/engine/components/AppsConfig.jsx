@@ -12,9 +12,9 @@ export default class AppsConfig extends React.Component {
     this.state = props.appsConfig.toJS();
   }
 
-  componentWillUpdate(nextProps, nextState) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.appsConfig !== this.props.appsConfig) {
-      nextState = nextProps.appsConfig.toJS();
+      this.setState(nextProps.appsConfig.toJS());
     }
   }
 

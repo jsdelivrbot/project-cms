@@ -42,7 +42,7 @@ export default function(cmsConfig) {
       let initialState = Map({
         tables
       });
-      if (cmsConfig) initialState = initialState.mergeDeep(cmsConfig);
+      if (cmsConfig) initialState = cmsConfig.mergeDeep(initialState);
       console.log("Initial State:", initialState);
       return {apps, initialState};
     })
