@@ -26,10 +26,8 @@ export default class HostingConfig extends React.Component {
     switch(backend) {
       case "s3":
         return <S3Config updateValue={this.updateValue} value={this.state} />
-      case "ipfs":
-        return <IPFSConfig updateValue={this.updateValue} value={this.state} />
     }
-    return null;
+    return <input type="hidden" name="module" value={backend} />;
   }
 
   render() {
@@ -50,6 +48,7 @@ export default class HostingConfig extends React.Component {
               <option>Select Hosting Backend</option>
               <option value="s3">AWS S3</option>
               <option value="ipfs">IPFS</option>
+              <option value="~/mods/hosted">Hosted</option>
             </select>
           </div>
         </div>
@@ -95,14 +94,6 @@ export function S3Config({value, updateValue}) {
         <input name="prefix" value={prefix} onChange={updateValue}
           type="text" className="form-control" placeholder="prefix"/>
       </div>
-    </div>
-  )
-}
-
-export function IPFSConfig({value, updateValue}) {
-  return (
-    <div className="row">
-      <input type="hidden" name="module" value="~/services/ipfs"/>
     </div>
   )
 }

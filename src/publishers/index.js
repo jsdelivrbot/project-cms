@@ -23,7 +23,9 @@ export default function publish(store, publisher) {
 
   return store.dispatch({
     type: 'PUBLISH',
-    promise: Promise.all(appPublishes).then(done => {
+    promise: Promise.all(appPublishes).then(() => {
+      return publisher.done ? publisher.done() : Promise.resolve(null);
+    }).then(() => {
       return publisher.view();
     })
   }).catch(error => {

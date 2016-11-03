@@ -28,10 +28,8 @@ export default class DatabaseConfig extends React.Component {
         return <BrowserConfig/>
       case "dynamodb":
         return <DynamoConfig updateValue={this.updateValue} value={this.state} />
-      case "montage":
-        return <MontageConfig updateValue={this.updateValue} value={this.state} />
     }
-    return null;
+    return <input type="hidden" name="module" value={backend} />;
   }
 
   render() {
@@ -53,7 +51,7 @@ export default class DatabaseConfig extends React.Component {
               <option>Select Database Backend</option>
               <option value="browser">Browser</option>
               <option value="dynamodb">DynamoDB</option>
-              <option value="montage">Montage</option>
+              <option value="~/mods/hosted">Hosted</option>
             </select>
           </div>
         </div>
