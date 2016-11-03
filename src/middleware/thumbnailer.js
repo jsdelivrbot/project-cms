@@ -4,19 +4,20 @@ import resample_hermite from 'hermimg/hermite.js'
 
 
 export default function thumbnailerMiddleware({getState}) {
-  let promises = {};
-  let changes = Map();
+  //tracks ongoing thumbnail processing
+  let promises = {}; // {thumbnailRequest: [(resolve, reject)]}
+  let changes = Map(); // queued updates to media state
 
   function uploader(...args) {
     return getState().getIn(['/engine', 'uploader'])(...args);
   }
 
 
-
   function rejectfill(pictureId, thumbnailKey) {
     let index = `${pictureId}::${thumbnailKey}`;
     let commitments = promises[index];
     if (commitments) {
+      //send a rejection to all those who requested this thumbnail
       _.each(commitments, ([r,e]) => e());
       delete promises[index];
     }
@@ -30,6 +31,7 @@ export default function thumbnailerMiddleware({getState}) {
         commitments.push([r,e]);
       });
     } else {
+      //first thumbnail request on a picture is reolved by the action's promise
       promises[index] = [];
     }
   }
@@ -94,6 +96,7 @@ export default function thumbnailerMiddleware({getState}) {
         };
 
         promise =  new Promise(function(resolve, reject) {
+          //fetch the target image
           let original = new Image();
           original.crossOrigin = "Anonymous";
           original.onload = function() {
