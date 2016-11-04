@@ -48,7 +48,7 @@ export function initializeHosting(store) {
   if (hosting_config) {
     return loadUploader(hosting_config.toJS()).then(methods => {
       let {publisher, uploader, resolver} = methods;
-      return next({
+      return store.dispatch({
         type: 'SET_PUBLISHER',
         publisher,
         uploader,
