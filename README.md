@@ -20,7 +20,7 @@ A Content Management System that publishes static websites.
 3. `npm install jspm -g`
 4. `jspm install`
 5. `npm start`
-6. Open browser to `localhost:8080`
+6. Open browser to `localhost:8000`
 
 
 # [TODO]

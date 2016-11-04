@@ -43,7 +43,6 @@ System.config({
     "assert": "github:jspm/nodelibs-assert@0.1.0",
     "aws-sdk": "npm:aws-sdk@2.2.36",
     "babel": "npm:babel-core@5.8.38",
-    "babel-preset-stage-0": "npm:babel-preset-stage-0@6.5.0",
     "babel-runtime": "npm:babel-runtime@5.8.38",
     "buffer": "github:jspm/nodelibs-buffer@0.1.0",
     "buffertools": "@empty",
@@ -58,7 +57,6 @@ System.config({
     "hermimg": "github:viliusle/Hermite-resize@master",
     "history": "npm:history@1.17.0",
     "immutable": "npm:immutable@3.7.6",
-    "immutable-reducers": "npm:immutable-reducers@1.1.0",
     "ipfs-api": "npm:ipfs-api@3.0.2",
     "jsx": "github:floatdrop/plugin-jsx@1.2.1",
     "jszip": "npm:jszip@2.5.0",
@@ -80,11 +78,9 @@ System.config({
     "react-dom": "npm:react-dom@0.14.7",
     "react-jsonschema-form": "npm:react-jsonschema-form@0.15.0",
     "react-redux": "npm:react-redux@4.4.0",
-    "react-remarkable": "npm:react-remarkable@1.1.1",
     "react-router": "npm:react-router@1.0.3",
     "readable-stream": "npm:readable-stream@2.0.5",
     "redux": "npm:redux@3.3.1",
-    "redux-immutable": "npm:redux-immutable@1.3.10",
     "redux-immutablejs": "npm:redux-immutablejs@0.0.7",
     "reflect-metadata": "npm:reflect-metadata@0.1.3",
     "remarkable": "npm:remarkable@1.6.2",
@@ -232,190 +228,7 @@ System.config({
       "xml2js": "npm:xml2js@0.4.16",
       "xmlbuilder": "npm:xmlbuilder@4.2.1"
     },
-    "npm:babel-code-frame@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "chalk": "npm:chalk@1.1.1",
-      "esutils": "npm:esutils@2.0.2",
-      "js-tokens": "npm:js-tokens@1.0.2",
-      "line-numbers": "npm:line-numbers@0.2.0",
-      "repeating": "npm:repeating@1.1.3"
-    },
-    "npm:babel-helper-bindify-decorators@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "babel-traverse": "npm:babel-traverse@6.5.0",
-      "babel-types": "npm:babel-types@6.5.2"
-    },
-    "npm:babel-helper-builder-binary-assignment-operator-visitor@6.5.0": {
-      "babel-helper-explode-assignable-expression": "npm:babel-helper-explode-assignable-expression@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "babel-types": "npm:babel-types@6.5.2"
-    },
-    "npm:babel-helper-define-map@6.5.0": {
-      "babel-helper-function-name": "npm:babel-helper-function-name@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "babel-types": "npm:babel-types@6.5.2",
-      "lodash": "npm:lodash@4.4.0"
-    },
-    "npm:babel-helper-explode-assignable-expression@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "babel-traverse": "npm:babel-traverse@6.5.0",
-      "babel-types": "npm:babel-types@6.5.2"
-    },
-    "npm:babel-helper-explode-class@6.5.0": {
-      "babel-helper-bindify-decorators": "npm:babel-helper-bindify-decorators@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "babel-traverse": "npm:babel-traverse@6.5.0",
-      "babel-types": "npm:babel-types@6.5.2"
-    },
-    "npm:babel-helper-function-name@6.5.0": {
-      "babel-helper-get-function-arity": "npm:babel-helper-get-function-arity@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "babel-template": "npm:babel-template@6.5.0",
-      "babel-traverse": "npm:babel-traverse@6.5.0",
-      "babel-types": "npm:babel-types@6.5.2"
-    },
-    "npm:babel-helper-get-function-arity@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "babel-types": "npm:babel-types@6.5.2"
-    },
-    "npm:babel-helper-remap-async-to-generator@6.5.0": {
-      "babel-helper-function-name": "npm:babel-helper-function-name@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "babel-template": "npm:babel-template@6.5.0",
-      "babel-traverse": "npm:babel-traverse@6.5.0",
-      "babel-types": "npm:babel-types@6.5.2"
-    },
-    "npm:babel-messages@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "util": "github:jspm/nodelibs-util@0.1.0"
-    },
-    "npm:babel-plugin-syntax-async-functions@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-syntax-class-constructor-call@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-syntax-class-properties@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-syntax-decorators@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-syntax-do-expressions@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-syntax-exponentiation-operator@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-syntax-export-extensions@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-syntax-function-bind@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-syntax-object-rest-spread@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-syntax-trailing-function-commas@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-transform-async-to-generator@6.5.0": {
-      "babel-helper-remap-async-to-generator": "npm:babel-helper-remap-async-to-generator@6.5.0",
-      "babel-plugin-syntax-async-functions": "npm:babel-plugin-syntax-async-functions@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-transform-class-constructor-call@6.5.0": {
-      "babel-plugin-syntax-class-constructor-call": "npm:babel-plugin-syntax-class-constructor-call@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "babel-template": "npm:babel-template@6.5.0"
-    },
-    "npm:babel-plugin-transform-class-properties@6.5.2": {
-      "babel-plugin-syntax-class-properties": "npm:babel-plugin-syntax-class-properties@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-transform-decorators@6.5.0": {
-      "babel-helper-define-map": "npm:babel-helper-define-map@6.5.0",
-      "babel-helper-explode-class": "npm:babel-helper-explode-class@6.5.0",
-      "babel-plugin-syntax-decorators": "npm:babel-plugin-syntax-decorators@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "babel-template": "npm:babel-template@6.5.0",
-      "babel-types": "npm:babel-types@6.5.2"
-    },
-    "npm:babel-plugin-transform-do-expressions@6.5.0": {
-      "babel-plugin-syntax-do-expressions": "npm:babel-plugin-syntax-do-expressions@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-transform-exponentiation-operator@6.5.0": {
-      "babel-helper-builder-binary-assignment-operator-visitor": "npm:babel-helper-builder-binary-assignment-operator-visitor@6.5.0",
-      "babel-plugin-syntax-exponentiation-operator": "npm:babel-plugin-syntax-exponentiation-operator@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-transform-export-extensions@6.5.0": {
-      "babel-plugin-syntax-export-extensions": "npm:babel-plugin-syntax-export-extensions@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-transform-function-bind@6.5.2": {
-      "babel-plugin-syntax-function-bind": "npm:babel-plugin-syntax-function-bind@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-plugin-transform-object-rest-spread@6.5.0": {
-      "babel-plugin-syntax-object-rest-spread": "npm:babel-plugin-syntax-object-rest-spread@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.38"
-    },
-    "npm:babel-preset-stage-0@6.5.0": {
-      "babel-plugin-transform-do-expressions": "npm:babel-plugin-transform-do-expressions@6.5.0",
-      "babel-plugin-transform-function-bind": "npm:babel-plugin-transform-function-bind@6.5.2",
-      "babel-preset-stage-1": "npm:babel-preset-stage-1@6.5.0"
-    },
-    "npm:babel-preset-stage-1@6.5.0": {
-      "babel-plugin-transform-class-constructor-call": "npm:babel-plugin-transform-class-constructor-call@6.5.0",
-      "babel-plugin-transform-class-properties": "npm:babel-plugin-transform-class-properties@6.5.2",
-      "babel-plugin-transform-decorators": "npm:babel-plugin-transform-decorators@6.5.0",
-      "babel-plugin-transform-export-extensions": "npm:babel-plugin-transform-export-extensions@6.5.0",
-      "babel-preset-stage-2": "npm:babel-preset-stage-2@6.5.0"
-    },
-    "npm:babel-preset-stage-2@6.5.0": {
-      "babel-plugin-syntax-trailing-function-commas": "npm:babel-plugin-syntax-trailing-function-commas@6.5.0",
-      "babel-plugin-transform-object-rest-spread": "npm:babel-plugin-transform-object-rest-spread@6.5.0",
-      "babel-preset-stage-3": "npm:babel-preset-stage-3@6.5.0"
-    },
-    "npm:babel-preset-stage-3@6.5.0": {
-      "babel-plugin-transform-async-to-generator": "npm:babel-plugin-transform-async-to-generator@6.5.0",
-      "babel-plugin-transform-exponentiation-operator": "npm:babel-plugin-transform-exponentiation-operator@6.5.0"
-    },
     "npm:babel-runtime@5.8.38": {
-      "process": "github:jspm/nodelibs-process@0.1.2"
-    },
-    "npm:babel-template@6.5.0": {
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "babel-traverse": "npm:babel-traverse@6.5.0",
-      "babel-types": "npm:babel-types@6.5.2",
-      "babylon": "npm:babylon@6.5.2",
-      "lodash": "npm:lodash@4.4.0"
-    },
-    "npm:babel-traverse@6.5.0": {
-      "babel-code-frame": "npm:babel-code-frame@6.5.0",
-      "babel-messages": "npm:babel-messages@6.5.0",
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "babel-types": "npm:babel-types@6.5.2",
-      "babylon": "npm:babylon@6.5.2",
-      "debug": "npm:debug@2.2.0",
-      "globals": "npm:globals@8.18.0",
-      "invariant": "npm:invariant@2.2.0",
-      "lodash": "npm:lodash@4.4.0",
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "repeating": "npm:repeating@1.1.3"
-    },
-    "npm:babel-types@6.5.2": {
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "babel-traverse": "npm:babel-traverse@6.5.0",
-      "esutils": "npm:esutils@2.0.2",
-      "lodash": "npm:lodash@4.4.0",
-      "to-fast-properties": "npm:to-fast-properties@1.0.1"
-    },
-    "npm:babylon@6.5.2": {
-      "babel-runtime": "npm:babel-runtime@5.8.38",
-      "fs": "github:jspm/nodelibs-fs@0.1.2",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:balanced-match@0.3.0": {
@@ -507,17 +320,6 @@ System.config({
     "npm:bytewise@1.1.0": {
       "bytewise-core": "npm:bytewise-core@1.2.3",
       "typewise": "npm:typewise@1.0.3"
-    },
-    "npm:canonical-reducer-composition-validator@1.3.1": {
-      "lodash": "npm:lodash@4.4.0"
-    },
-    "npm:chalk@1.1.1": {
-      "ansi-styles": "npm:ansi-styles@2.1.0",
-      "escape-string-regexp": "npm:escape-string-regexp@1.0.4",
-      "has-ansi": "npm:has-ansi@2.0.0",
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "strip-ansi": "npm:strip-ansi@3.0.0",
-      "supports-color": "npm:supports-color@2.0.0"
     },
     "npm:cipher-base@1.0.2": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -683,9 +485,6 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
-    "npm:globals@8.18.0": {
-      "systemjs-json": "github:systemjs/plugin-json@0.1.2"
-    },
     "npm:graceful-fs@4.1.3": {
       "assert": "github:jspm/nodelibs-assert@0.1.0",
       "constants": "github:jspm/nodelibs-constants@0.1.0",
@@ -696,9 +495,6 @@ System.config({
     },
     "npm:graceful-readlink@1.0.1": {
       "fs": "github:jspm/nodelibs-fs@0.1.2"
-    },
-    "npm:has-ansi@2.0.0": {
-      "ansi-regex": "npm:ansi-regex@2.0.0"
     },
     "npm:has-localstorage@1.0.1": {
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
@@ -774,9 +570,6 @@ System.config({
       "systemjs-json": "github:systemjs/plugin-json@0.1.2",
       "wreck": "npm:wreck@7.2.0"
     },
-    "npm:is-finite@1.0.1": {
-      "number-is-nan": "npm:number-is-nan@1.0.0"
-    },
     "npm:isarray@1.0.0": {
       "systemjs-json": "github:systemjs/plugin-json@0.1.2"
     },
@@ -821,9 +614,6 @@ System.config({
       "systemjs-json": "github:systemjs/plugin-json@0.1.2",
       "util": "github:jspm/nodelibs-util@0.1.0",
       "xtend": "npm:xtend@4.0.1"
-    },
-    "npm:line-numbers@0.2.0": {
-      "left-pad": "npm:left-pad@0.0.3"
     },
     "npm:localstorage-down@0.6.6": {
       "abstract-leveldown": "npm:abstract-leveldown@0.12.3",
@@ -1043,9 +833,6 @@ System.config({
       "react": "npm:react@0.14.7",
       "redux": "npm:redux@3.3.1"
     },
-    "npm:react-remarkable@1.1.1": {
-      "remarkable": "npm:remarkable@1.6.2"
-    },
     "npm:react-router@1.0.3": {
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
@@ -1084,11 +871,6 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "source-map": "npm:source-map@0.5.3"
     },
-    "npm:redux-immutable@1.3.10": {
-      "canonical-reducer-composition-validator": "npm:canonical-reducer-composition-validator@1.3.1",
-      "immutable": "npm:immutable@3.7.6",
-      "lodash": "npm:lodash@4.4.0"
-    },
     "npm:redux-immutablejs@0.0.7": {
       "immutable": "npm:immutable@3.7.6",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -1113,11 +895,6 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "systemjs-json": "github:systemjs/plugin-json@0.1.2",
       "util": "github:jspm/nodelibs-util@0.1.0"
-    },
-    "npm:repeating@1.1.3": {
-      "is-finite": "npm:is-finite@1.0.1",
-      "process": "github:jspm/nodelibs-process@0.1.2",
-      "systemjs-json": "github:systemjs/plugin-json@0.1.2"
     },
     "npm:ripemd160@1.0.1": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0",
@@ -1152,12 +929,6 @@ System.config({
     },
     "npm:string_decoder@0.10.31": {
       "buffer": "github:jspm/nodelibs-buffer@0.1.0"
-    },
-    "npm:strip-ansi@3.0.0": {
-      "ansi-regex": "npm:ansi-regex@2.0.0"
-    },
-    "npm:supports-color@2.0.0": {
-      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:through2@0.6.5": {
       "process": "github:jspm/nodelibs-process@0.1.2",

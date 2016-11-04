@@ -16,6 +16,7 @@ const allowedMochaGlobals = [
   'module_path',
   'nunjucks',
   'resample_hermite',
+  'Hermite_class',
 ];
 
 
