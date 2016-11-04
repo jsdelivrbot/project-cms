@@ -1,7 +1,7 @@
 import nunjucks from 'nunjucks/browser/nunjucks.js';
 import Obj from 'nunjucks/src/object';
 import _ from 'lodash';
-import {markdownFilter, refFilter, thumbnailFilter} from './filters';
+import {markdownFilter, refFilter, thumbnailFilter, urlFilter} from './filters';
 
 console.log("nunjucks:", nunjucks)
 
@@ -135,8 +135,9 @@ export default function renderFactory(store) {
   });
 
   env.addFilter('markdown', markdownFilter);
-  env.addFilter('ref', _.partial(refFilter, store.getState));
-  env.addFilter('thumbnail', _.partial(thumbnailFilter, store.dispatch), true);
+  env.addFilter('ref', _.partial(refFilter, store));
+  env.addFilter('thumbnail', _.partial(thumbnailFilter, store), true);
+  env.addFilter('url', _.partial(urlFilter, store), true);
 
   var templatesCache = {}; // path: {content, template}
 

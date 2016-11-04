@@ -15,6 +15,10 @@ export class RenderPreview extends React.Component {
     if (this.props.template) this.renderFrameContents();
   }
 
+  getContext() {
+    return this.props.context;
+  }
+
   renderFrameContents() {
     var doc = ReactDOM.findDOMNode(this).contentDocument;
     if(doc && doc.readyState === 'complete') {

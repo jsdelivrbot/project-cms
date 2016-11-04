@@ -20,3 +20,9 @@ export default function zipPublisher() {
     view
   }
 }
+
+export function publisherFactory() {
+  return {
+    publisher: zipPublisher,
+  };
+}

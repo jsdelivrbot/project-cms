@@ -17,10 +17,13 @@ export default function uploaderMiddleware({getState}) {
         action.promise = uploader(action.files, false, action.onProgress);
         break;
       case 'SET_HOSTING_CONFIG':
-        action.promise = loadUploader(action.config).then(({uploader}) => {
+        action.promise = loadUploader(action.config).then(methods => {
+          let {publisher, uploader, resolver} = methods;
           return next({
-            type: 'SET_UPLOADER',
-            uploader
+            type: 'SET_PUBLISHER',
+            publisher,
+            uploader,
+            resolver,
           });
         })
         break;
@@ -31,9 +34,6 @@ export default function uploaderMiddleware({getState}) {
 
 export function loadUploader(config) {
   return System.import(config.module, __moduleName).then(module => {
-    return {
-      uploader: module.uploaderFactory(config),
-      publisher: module.publisherFactory ? module.publisherFactory(config) : null,
-    }
+    return module.publisherFactory(config);
   });
 }

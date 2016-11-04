@@ -56,11 +56,8 @@ function _uploader(ipfsClient, files, overwrite, onProgress) {
   }));
 }
 
-export function uploaderFactory(config) {
-  return _.partial(_uploader, config);
-}
 
-export function publisherFactory(awsConfig) {
+export function publish() {
   function view() {
     let hash = 'DEADBEAF'
     let url = `/ipfs/${hash}`;
@@ -73,4 +70,11 @@ export function publisherFactory(awsConfig) {
     pushContent,
     view
   }
+}
+
+export function publisherFactory() {
+  return {
+    publisher: publish,
+    uploader: _.partial(_uploader, IPFS_CLIENT),
+  };
 }

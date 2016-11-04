@@ -46,10 +46,13 @@ export function initializeDatabase(cmsConfig) {
 export function initializeHosting(store) {
   let hosting_config = store.getState().getIn(['services', 'hosting']);
   if (hosting_config) {
-    return loadUploader(hosting_config.toJS()).then(({uploader}) => {
-      store.dispatch({
-        type: 'SET_UPLOADER',
-        uploader
+    return loadUploader(hosting_config.toJS()).then(methods => {
+      let {publisher, uploader, resolver} = methods;
+      return next({
+        type: 'SET_PUBLISHER',
+        publisher,
+        uploader,
+        resolver,
       });
     });
   }

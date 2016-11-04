@@ -40,8 +40,8 @@ export class LevelupMultiplexer {
   };
 
   replicateToStorage = (storage) => {
-    return new Promise(function(resolve, reject) {
-      _.each(this.tables, function(table_name, table) {
+    return new Promise((resolve, reject) => {
+      _.each(this.tables, function(table, table_name) {
         //TODO bulk data transfer
         table.createReadStream()
           .on('data', function(data) {
@@ -54,7 +54,7 @@ export class LevelupMultiplexer {
             reject(error);
           })
           .on('end', function () {
-            resolve(key_values);
+            resolve();
           });
       });
     });

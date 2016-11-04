@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 
 import zipPublisher from '~/publishers/zipfile';
 import publish from '~/publishers/index';
-import {loadUploader} from '~/middleware/uploader';
 
 import PublishButton from './PublishButton.jsx';
 
@@ -23,10 +22,8 @@ export class PublishNav extends React.Component {
 
   publishDefault = (event) => {
     let {store} = this.context;
-    let {hostingConfig} = this.props;
-    return loadUploader(hostingConfig.toJS()).then(({publisher}) => {
-      return publish(store, publisher);
-    });
+    let {publisher} = this.props;
+    return publish(store, publisher());
   }
 
   displaySignup = (event) => {
@@ -52,6 +49,6 @@ PublishNav.contextTypes = {
 
 export default connect(state => {
   return {
-    hostingConfig: state.getIn(['services', 'hosting'])
+    publisher: state.getIn(['/engine', 'publisher'])
   }
 }, {showSignup})(PublishNav);

@@ -74,13 +74,9 @@ function _uploader(awsConfig, files, overwrite, onProgress) {
   }));
 }
 
-export function uploaderFactory(config) {
-  return _.partial(_uploader, config);
-}
 
-export function publisherFactory(awsConfig) {
+export function publish(awsConfig) {
   function view() {
-    //TODO region
     let region = awsConfig.region || 'us-east-1';
     let url = `http://${awsConfig.bucket}.s3-website-${region}.amazonaws.com/`;
     return window.open(url, '_blank');
@@ -96,5 +92,12 @@ export function publisherFactory(awsConfig) {
   return {
     pushContent,
     view
+  }
+}
+
+epxort function publisherFactory(awsConfig) {
+  return {
+    publisher: _.partial(publish, awsConfig),
+    uploader: _.partial(_uploader, awsConfig),
   }
 }

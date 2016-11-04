@@ -11,8 +11,11 @@ export default function engine(state = INITIAL_STATE, action) {
       return state.set('renderer', action.renderer);
     case 'SET_APPS':
       return state.set('apps', action.apps);
-    case 'SET_UPLOADER':
-      return state.set('uploader', action.uploader);
+    case 'SET_PUBLISHER':
+      state = state.set('uploader', action.uploader);
+      state = state.set('publisher', action.publisher);
+      state = state.set('resolver', action.resolver);
+      return state;
     case 'PUBLISH_REQUEST':
       return state.set('publishing', true).remove('publish_error');
     case 'PUBLISH':

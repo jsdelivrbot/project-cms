@@ -42,6 +42,9 @@ export default function dashboard(state = INITIAL_STATE, action) {
         return col;
       }, {});
       return state.set('plugins', Map(dashboardPlugins));
+    case 'PUBLISH_FAILED':
+      let message = `Publish Failed: ${action.error}`;
+      return craftAlert(state, 'error', message);
   }
 
   //auto detect alerts
