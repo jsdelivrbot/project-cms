@@ -1,7 +1,30 @@
 
-Static site generator.
+A Content Management System that publishes static websites.
 
-# Getting Started [TODO]
+# Features
+
+* Runs locally
+* Live previews
+* Publish for free to IPFS
+* Publish directly to AWS S3
+* Configurable DB backends: Local Storage or DynamoDB
+* Pluggable Apps
+* Markdown pages & Galleries
+* Jinja/Nunjucks templating
+
+
+# Running it
+
+1. Clone the repository
+2. `git submodule init`
+3. `npm install`
+4. `npm start`
+5. Open browser to `localhost:8080`
+
+
+# [TODO]
+
+## Getting Started
 
 ```
   npm install -g project-cms
@@ -14,29 +37,14 @@ Static site generator.
 2. Sign up
 3. Publish
 
-# Installing apps [TODO]
+## Installing apps
 
 ```
   project-cms install github:zbyte64/gallery
 ```
 
 
-# Development
-
-Install dependencies:
-
-```
-  npm install
-```
-
-Run project:
-
-```
-  npm start
-```
-
-
-# TODO
+## Technical TODO
 
 * new version of babel 6
 * fix bundle
