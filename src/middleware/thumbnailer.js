@@ -1,7 +1,9 @@
 import _ from 'lodash';
 import {fromJS, Map} from 'immutable';
-import resample_hermite from 'hermimg/hermite.js'
+import __Hermite_import from 'hermimg/src/hermite.js'
 
+
+const HERMITE = new Hermite_class();
 
 export default function thumbnailerMiddleware({getState}) {
   //tracks ongoing thumbnail processing
@@ -159,14 +161,14 @@ export function thumb(img, width, height, quality, resolve) {
   canvas.height = img.height;
   ctx.drawImage(img, 0, 0);
 
-  resample_hermite(canvas, img.width, img.height, width, height);
-
-  if (canvas.toBlob) {
-    canvas.toBlob(resolve, 'image/jpeg', quality);
-  } else {
-    console.log("fall back to data url")
-    resolve(dataURLToBlob(canvas.toDataURL('image/jpeg', quality)));
-  }
+  HERMITE.resample(canvas, width, height, true, () => {
+    if (canvas.toBlob) {
+      canvas.toBlob(resolve, 'image/jpeg', quality);
+    } else {
+      console.log("fall back to data url")
+      resolve(dataURLToBlob(canvas.toDataURL('image/jpeg', quality)));
+    }
+  });
 }
 
 export function dataURLToBlob(dataURL) {

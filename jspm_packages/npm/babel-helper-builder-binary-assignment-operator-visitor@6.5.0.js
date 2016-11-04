@@ -1,1 +1,0 @@
-module.exports = require("npm:babel-helper-builder-binary-assignment-operator-visitor@6.5.0/lib/index.js");

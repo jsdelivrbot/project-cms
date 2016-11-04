@@ -1,1 +1,0 @@
-module.exports = require("npm:babel-plugin-syntax-class-properties@6.5.0/lib/index.js");

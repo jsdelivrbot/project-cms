@@ -1,1 +1,0 @@
-module.exports = require("npm:babel-plugin-transform-class-properties@6.5.2/lib/index.js");

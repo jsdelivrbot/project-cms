@@ -1,1 +1,0 @@
-module.exports = require("npm:react-remarkable@1.1.1/dist/index.js");

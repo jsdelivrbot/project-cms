@@ -16,10 +16,11 @@ A Content Management System that publishes static websites.
 # Running it
 
 1. Clone the repository
-2. `git submodule init`
-3. `npm install`
-4. `npm start`
-5. Open browser to `localhost:8080`
+2. `npm install`
+3. `npm install jspm -g`
+4. `jspm install`
+5. `npm start`
+6. Open browser to `localhost:8080`
 
 
 # [TODO]

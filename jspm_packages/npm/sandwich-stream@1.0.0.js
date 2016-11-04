@@ -1,1 +1,0 @@
-module.exports = require("npm:sandwich-stream@1.0.0/lib/sandwich-stream.js");

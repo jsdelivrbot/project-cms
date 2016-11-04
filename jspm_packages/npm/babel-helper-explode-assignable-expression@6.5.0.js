@@ -1,1 +1,0 @@
-module.exports = require("npm:babel-helper-explode-assignable-expression@6.5.0/lib/index.js");

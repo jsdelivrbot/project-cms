@@ -1,1 +1,0 @@
-module.exports = require("npm:canonical-reducer-composition-validator@1.3.1/dist/index.js");

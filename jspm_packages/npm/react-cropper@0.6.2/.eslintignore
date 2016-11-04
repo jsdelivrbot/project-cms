@@ -1,4 +1,0 @@
-dist/**
-node_modules/**
-**/bundle.js
-webpack.config.js

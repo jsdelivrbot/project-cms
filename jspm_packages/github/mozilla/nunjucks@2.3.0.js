@@ -1,1 +1,0 @@
-module.exports = require("github:mozilla/nunjucks@2.3.0/browser/nunjucks-slim");

@@ -1,1 +1,0 @@
-module.exports = require("npm:deeper@2.1.0/index");

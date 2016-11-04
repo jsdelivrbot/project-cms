@@ -1,1 +1,0 @@
-module.exports = require("npm:varint@4.0.0/index.js");

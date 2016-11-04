@@ -1,1 +1,0 @@
-module.exports = require("npm:babel-plugin-syntax-object-rest-spread@6.5.0/lib/index.js");

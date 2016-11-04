@@ -1,1 +1,0 @@
-module.exports = require("npm:cropperjs@0.5.6/dist/cropper.js");

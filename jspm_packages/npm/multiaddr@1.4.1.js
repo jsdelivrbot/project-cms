@@ -1,1 +1,0 @@
-module.exports = require("npm:multiaddr@1.4.1/lib/index.js");

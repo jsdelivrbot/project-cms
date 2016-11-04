@@ -1,1 +1,0 @@
-module.exports = require("npm:autolinker@0.15.3/dist/Autolinker.js");

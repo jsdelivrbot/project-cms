@@ -1,1 +1,0 @@
-module.exports = require("npm:babel-plugin-transform-do-expressions@6.5.0/lib/index.js");

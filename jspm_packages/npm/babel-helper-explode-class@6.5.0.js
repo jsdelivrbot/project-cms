@@ -1,1 +1,0 @@
-module.exports = require("npm:babel-helper-explode-class@6.5.0/lib/index.js");
