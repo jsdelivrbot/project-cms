@@ -85,11 +85,11 @@ const themes = {
     stylesheet: "http://bootswatch.com/spacelab/bootstrap.min.css"
   },
   "solarized-dark": {
-    stylesheet: "https://cdn.rawgit.com/aalpern/bootstrap-solarized/master/bootstrap-solarized-dark.css",
+    stylesheet: "https://cdn.jsdelivr.net/gh/aalpern/bootstrap-solarized@master/bootstrap-solarized-dark.css",
     editor: "dracula",
   },
   "solarized-light": {
-    stylesheet: "https://cdn.rawgit.com/aalpern/bootstrap-solarized/master/bootstrap-solarized-light.css",
+    stylesheet: "https://cdn.jsdelivr.net/gh/aalpern/bootstrap-solarized@master/bootstrap-solarized-light.css",
     editor: "solarized",
   },
   superhero: {
